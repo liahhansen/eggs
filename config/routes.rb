@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pickups
+
   map.resources :products
 
   map.resources :farms

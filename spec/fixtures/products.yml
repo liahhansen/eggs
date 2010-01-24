@@ -9,63 +9,63 @@
 sf_chickenreg:
   name: Chicken, REGULAR
   description: A medium-large, pasture-raised chicken.  ($6.50/lb., 3.75-4.5 lbs)
-  farm_id: 1
+  farm: soulfood
   price: 26
   estimated: true
 
 sf_chickenlg:
   name: Chicken, LARGE
   description: Large chickens come from the farm next door, also pasture-raised. Good meat/bone ratio.  ($6/lb., 4.5-5.5lbs)
-  farm_id: 1
+  farm: soulfood
   price: 33
   estimated: true
 
 sf_chickenxxl:
   name: Chicken, XXL
   description: ($6/lb., 7-7.25 lbs)
-  farm_id: 1
+  farm: soulfood
   price: 42
   estimated:true
 
 sf_eggs:
   name: Eggs
   description: 1 dozen of the best eggs you'll ever eat.
-  farm_id: 1
-  price: $6.50
+  farm: soulfood
+  price: 6.50
   estimated: false
 
 sf_oliveoil:
   name: Terra Sole olive oil
   description: 500ml
-  farm_id: 1
+  farm: soulfood
   price: 18
   estimated: false
 
 cs_hamsm:
   name: Ham SM
   description: 2.5-4 lbs, $9/lb
-  farm_id: 2
+  farm: clarksummit
   price: 22.50
   estimated: true
 
 cs_hamlg:
   name: Ham LG
   description: 5-7 lbs, $8/lb
-  farm_id: 2
+  farm: clarksummit
   price: 40
   estimated: true
 
 cs_bacon:
   name: Bacon
   description: .75-1 lb, $12/lb
-  farm_id: 2
+  farm: clarksummit
   price: 12
   estimated: true
 
 cs_hogshead:
   name: Hog's Head
   description: SALE!
-  farm_id: 2
+  farm: clarksummit
   price: 10
   estimated: false
   

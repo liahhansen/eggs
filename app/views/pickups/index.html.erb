@@ -1,0 +1,38 @@
+<h1>Listing pickups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Farm</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Host</th>
+    <th>Location</th>
+    <th>Opening at</th>
+    <th>Closing at</th>
+    <th>Notes</th>
+  </tr>
+
+<% @pickups.each do |pickup| %>
+  <tr>
+    <td><%=h pickup.name %></td>
+    <td><%=h pickup.description %></td>
+    <td><%=h pickup.farm_id %></td>
+    <td><%=h pickup.date %></td>
+    <td><%=h pickup.status %></td>
+    <td><%=h pickup.host %></td>
+    <td><%=h pickup.location %></td>
+    <td><%=h pickup.opening_at %></td>
+    <td><%=h pickup.closing_at %></td>
+    <td><%=h pickup.notes %></td>
+    <td><%= link_to 'Show', pickup %></td>
+    <td><%= link_to 'Edit', edit_pickup_path(pickup) %></td>
+    <td><%= link_to 'Destroy', pickup, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pickup', new_pickup_path %>

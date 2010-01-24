@@ -1,0 +1,53 @@
+<p>
+  <b>Name:</b>
+  <%=h @pickup.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @pickup.description %>
+</p>
+
+<p>
+  <b>Farm:</b>
+  <%=h @pickup.farm_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h @pickup.date %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @pickup.status %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%=h @pickup.host %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%=h @pickup.location %>
+</p>
+
+<p>
+  <b>Opening at:</b>
+  <%=h @pickup.opening_at %>
+</p>
+
+<p>
+  <b>Closing at:</b>
+  <%=h @pickup.closing_at %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @pickup.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_pickup_path(@pickup) %> |
+<%= link_to 'Back', pickups_path %>

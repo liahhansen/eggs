@@ -9,10 +9,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124203149) do
+ActiveRecord::Schema.define(:version => 20100124211808) do
 
   create_table "farms", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pickups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "farm_id"
+    t.date     "date"
+    t.string   "status"
+    t.string   "host"
+    t.string   "location"
+    t.datetime "opening_at"
+    t.datetime "closing_at"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
