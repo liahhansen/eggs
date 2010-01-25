@@ -13,7 +13,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :products
 
-  map.resources :farms
+  map.resources :farms do |farm|
+    farm.resources :pickups
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

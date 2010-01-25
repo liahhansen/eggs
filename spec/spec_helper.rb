@@ -17,7 +17,7 @@ Spec::Runner.configure do |config|
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
   config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
+  config.use_instantiated_fixtures  = true
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   # == Fixtures
@@ -30,7 +30,7 @@ Spec::Runner.configure do |config|
   # do so right here. Just uncomment the next line and replace the fixture
   # names with your fixtures.
   #
-  # config.global_fixtures = :table_a, :table_b
+  config.global_fixtures = :all
   #
   # If you declare global fixtures, be aware that they will be declared
   # for all of your examples, even those that don't use them.

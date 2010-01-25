@@ -20,3 +20,10 @@
       <%= link_to "#{p.name}", product_path(p)%>
     </p>
 <% end %>
+
+<h2>Members:</h2>
+<% @farm.members.each do |m|%>
+    <p>
+      <%= link_to "#{m.first_name} #{m.last_name}", member_path(m)%>
+    </p>
+<% end %>

@@ -1,7 +1,28 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+kathryn:
+  first_name: Kathryn
+  last_name: Aaker
+  email_address: blah@kathrynaaker.com
+  phone_number: 111-333-4444
+  neighborhood: Mission Potrero
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+jenny:
+  first_name: Jenny
+  last_name: Jones
+  email_address: foo@bar.com
+  phone_number: 222-333-4444
+  neighborhood: Mission District
+
+ben:
+  first_name: Ben
+  last_name: Brown
+  email_address: brown@bar.com
+  phone_number: 333-444-5555
+  neighborhood: Emeryville
+
+sue:
+  first_name: Sue
+  last_name: Smith
+  email_address: sue@bar.com
+  phone_number: 444-555-3939
+  neighborhood: Emeryville
+  

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= controller_name() %>: <%= controller.action_name %></title>
+  <link rel="stylesheet" href="/stylesheets/reset.css" />
+  <link rel="stylesheet" href="/stylesheets/text.css" />
+  <link rel="stylesheet" href="/stylesheets/960.css" />
+
+</head>
+<body>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<div id="content" class="container_12">
+
+<div id="" class="grid_1 ">
+  &nbsp;
+</div>
+
+<div id="" class="grid_10 ">
+    <%= yield %>
+</div>
+
+<div id="" class="grid_1 ">
+</div>
+
+</div>
+
+
+</body>
+</html>

@@ -56,3 +56,26 @@ sf_mission_feb10:
   opening_at: '2010-01-28 00:01:00'
   closing_at: '2010-02-06 00:01:00'
   
+
+cs_farm_feb3:
+  name: Farm Pickup
+  description: For Clark Summiit
+  farm: clarksummit
+  date: '2010-02-03'
+  status: open
+  host: Alexis Anderson
+  location: 29 Farmville Ave, Boondocks, CA 94035
+  opening_at: '2010-01-08 00:01:00'
+  closing_at: '2010-01-29 00:01:00'
+
+cs_mission_feb10:
+  name: Mission / Potrero
+  description: Kathryn's house!  5:30-7:30pm Wednesday night, Clark Summit Farm delivery
+  farm: clarksummit
+  date: '2010-02-10'
+  status: notyetopen
+  host: Kathryn Aaker
+  location: 963 Hampshire St. San Francisco, CA 94110
+  opening_at: '2010-01-28 00:01:00'
+  closing_at: '2010-02-06 00:01:00'
+

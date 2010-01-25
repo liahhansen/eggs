@@ -1,7 +1,23 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+ben_sf:
+  member: ben
+  farm: soulfood
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+kathryn_sf:
+  member: kathryn
+  farm: soulfood
+
+jenny_sf:
+  member: jenny
+  farm: soulfood
+
+sue_sf:
+  member: sue
+  farm: soulfood
+
+ben_cs:
+  member: ben
+  farm: clarksummit
+
+kathryn_cs:
+  member: kathryn
+  farm: clarksummit
