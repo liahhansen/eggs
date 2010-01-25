@@ -1,19 +1,9 @@
-<h1>Listing farms</h1>
+<h1>Farms in the EGGS system:</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
 
 <% @farms.each do |farm| %>
-  <tr>
-    <td><%=h farm.name %></td>
-    <td><%= link_to 'Show', farm %></td>
-    <td><%= link_to 'Edit', edit_farm_path(farm) %></td>
-    <td><%= link_to 'Destroy', farm, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <p><%= link_to farm.name, farm%></p>
 <% end %>
-</table>
 
 <br />
 

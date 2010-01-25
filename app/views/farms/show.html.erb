@@ -1,13 +1,6 @@
-<p>
-  <b>Name:</b>
-  <%=h @farm.name %>
-</p>
+<h1>Welcome to <%=h @farm.name %>! </h1>
 
-
-<%= link_to 'Edit', edit_farm_path(@farm) %> |
-<%= link_to 'Back', farms_path %>
-
-<h2>Pickups:</h2>
+<h2><%= link_to "Pickups:", farm_pickups_path(@farm)%></h2>
 <% @farm.pickups.each do |p|%>
     <p>
       <%= link_to "#{p.name} - #{p.date}", pickup_path(p)%>

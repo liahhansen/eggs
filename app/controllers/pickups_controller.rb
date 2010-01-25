@@ -3,6 +3,7 @@ class PickupsController < ApplicationController
   # GET /pickups.xml
   def index
     @pickups = Pickup.find_all_by_farm_id(params[:farm_id])
+    @farm = Farm.find(params[:farm_id])
 
     respond_to do |format|
       format.html # index.html.erb
