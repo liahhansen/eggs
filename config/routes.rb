@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :subscriptions
+
+  map.resources :members
+
   map.resources :stock_items
 
   map.resources :pickups
