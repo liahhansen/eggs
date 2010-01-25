@@ -1,0 +1,33 @@
+<p>
+  <b>Pickup:</b>
+  <%=h @stock_item.pickup_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%=h @stock_item.product_id %>
+</p>
+
+<p>
+  <b>Max quantity per member:</b>
+  <%=h @stock_item.max_quantity_per_member %>
+</p>
+
+<p>
+  <b>Quantity available:</b>
+  <%=h @stock_item.quantity_available %>
+</p>
+
+<p>
+  <b>Substitutions available:</b>
+  <%=h @stock_item.substitutions_available %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @stock_item.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_item_path(@stock_item) %> |
+<%= link_to 'Back', stock_items_path %>

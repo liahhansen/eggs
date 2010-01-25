@@ -1,0 +1,30 @@
+<h1>Listing stock_items</h1>
+
+<table>
+  <tr>
+    <th>Pickup</th>
+    <th>Product</th>
+    <th>Max quantity per member</th>
+    <th>Quantity available</th>
+    <th>Substitutions available</th>
+    <th>Notes</th>
+  </tr>
+
+<% @stock_items.each do |stock_item| %>
+  <tr>
+    <td><%=h stock_item.pickup_id %></td>
+    <td><%=h stock_item.product_id %></td>
+    <td><%=h stock_item.max_quantity_per_member %></td>
+    <td><%=h stock_item.quantity_available %></td>
+    <td><%=h stock_item.substitutions_available %></td>
+    <td><%=h stock_item.notes %></td>
+    <td><%= link_to 'Show', stock_item %></td>
+    <td><%= link_to 'Edit', edit_stock_item_path(stock_item) %></td>
+    <td><%= link_to 'Destroy', stock_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New stock_item', new_stock_item_path %>

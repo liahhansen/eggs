@@ -1,0 +1,36 @@
+<h1>Editing stock_item</h1>
+
+<% form_for(@stock_item) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :pickup_id %><br />
+    <%= f.text_field :pickup_id %>
+  </p>
+  <p>
+    <%= f.label :product_id %><br />
+    <%= f.text_field :product_id %>
+  </p>
+  <p>
+    <%= f.label :max_quantity_per_member %><br />
+    <%= f.text_field :max_quantity_per_member %>
+  </p>
+  <p>
+    <%= f.label :quantity_available %><br />
+    <%= f.text_field :quantity_available %>
+  </p>
+  <p>
+    <%= f.label :substitutions_available %><br />
+    <%= f.text_field :substitutions_available %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @stock_item %> |
+<%= link_to 'Back', stock_items_path %>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124211808) do
+ActiveRecord::Schema.define(:version => 20100124234920) do
 
   create_table "farms", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20100124211808) do
     t.float    "price"
     t.boolean  "estimated"
     t.integer  "farm_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stock_items", :force => true do |t|
+    t.integer  "pickup_id"
+    t.integer  "product_id"
+    t.integer  "max_quantity_per_member"
+    t.integer  "quantity_available"
+    t.integer  "substitutions_available"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
