@@ -4,12 +4,11 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :pickup_id %><br />
-    <%= f.text_field :pickup_id %>
+    <%= select("stock_item", "pickup_id", Pickup.all.map {|o| [ "#{o.name} - #{o.date}", o.id ]})%>    
   </p>
   <p>
-    <%= f.label :product_id %><br />
-    <%= f.text_field :product_id %>
+    <%= select("stock_item", "product_id", Product.all.map {|o| [ o.name, o.id ]})%>
+
   </p>
   <p>
     <%= f.label :max_quantity_per_member %><br />

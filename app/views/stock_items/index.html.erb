@@ -12,8 +12,8 @@
 
 <% @stock_items.each do |stock_item| %>
   <tr>
-    <td><%=h stock_item.pickup_id %></td>
-    <td><%=h stock_item.product_id %></td>
+    <td><%=h stock_item.pickup.name %></td>
+    <td><%=h stock_item.product.name %></td>
     <td><%=h stock_item.max_quantity_per_member %></td>
     <td><%=h stock_item.quantity_available %></td>
     <td><%=h stock_item.substitutions_available %></td>
