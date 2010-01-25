@@ -9,8 +9,8 @@
 
 <% @orders.each do |order| %>
   <tr>
-    <td><%=h order.member_id %></td>
-    <td><%=h order.pickup_id %></td>
+    <td><%=h order.member.first_name %></td>
+    <td><%=h order.pickup.name %></td>
     <td><%=h order.notes %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>
