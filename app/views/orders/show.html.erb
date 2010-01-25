@@ -1,0 +1,23 @@
+<p>
+  <b>Member:</b>
+  <%=h @order.member_id %>
+</p>
+
+<p>
+  <b>Pickup:</b>
+  <%=h @order.pickup_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @order.quantity %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @order.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

@@ -9,10 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124234920) do
+ActiveRecord::Schema.define(:version => 20100125002908) do
 
   create_table "farms", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email_address"
+    t.string   "phone_number"
+    t.string   "neighborhood"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "pickup_id"
+    t.integer  "quantity"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,6 +68,13 @@ ActiveRecord::Schema.define(:version => 20100124234920) do
     t.integer  "quantity_available"
     t.boolean  "substitutions_available"
     t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

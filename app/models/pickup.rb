@@ -3,6 +3,7 @@ class Pickup < ActiveRecord::Base
   has_many :pickups
   has_many :stock_items
   has_many :products, :through => :stock_items
+  has_many :orders
 
   validates_presence_of :farm_id
 end
