@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20100125002908) do
   create_table "orders", :force => true do |t|
     t.integer  "member_id"
     t.integer  "pickup_id"
-    t.integer  "quantity"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

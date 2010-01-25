@@ -4,7 +4,6 @@
   <tr>
     <th>Member</th>
     <th>Pickup</th>
-    <th>Quantity</th>
     <th>Notes</th>
   </tr>
 
@@ -12,7 +11,6 @@
   <tr>
     <td><%=h order.member_id %></td>
     <td><%=h order.pickup_id %></td>
-    <td><%=h order.quantity %></td>
     <td><%=h order.notes %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>

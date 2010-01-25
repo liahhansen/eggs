@@ -3,7 +3,6 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.integer :member_id
       t.integer :pickup_id
-      t.integer :quantity
       t.text :notes
 
       t.timestamps
