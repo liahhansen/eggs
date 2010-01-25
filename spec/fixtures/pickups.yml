@@ -4,7 +4,7 @@ sf_berkeley_jan20:
   name: Berkeley
   description:
   farm: soulfood
-  date: '2010-01-20 00:01:00'
+  date: '2010-01-20'
   status: archived
   host: Bonnie Brown
   location: 3598 East Bay Street, Oakland, CA 94105
@@ -16,7 +16,7 @@ sf_hayesvalley_jan27:
   name: Hayes Valley
   description:
   farm: soulfood
-  date: '2010-01-27 00:01:00'
+  date: '2010-01-27'
   status: closed
   host: Mary McSmith
   location: 38 Penn Street, San Francisco, CA 94110
@@ -27,7 +27,7 @@ sf_emeryville_feb3:
   name: Emeryville
   description:
   farm: soulfood
-  date: '2010-02-03 00:01:00'
+  date: '2010-02-03'
   status: open
   host: Jenny James
   location: 64 Regular Ave, Emeryville, CA 94305
@@ -38,7 +38,7 @@ sf_farm_feb3:
   name: Farm Pickup
   description:
   farm: soulfood
-  date: '2010-02-03 00:01:00'
+  date: '2010-02-03'
   status: open
   host: Alexis Anderson
   location: 29 Farmville Ave, Boondocks, CA 94035
@@ -49,7 +49,7 @@ sf_mission_feb10:
   name: Mission / Potrero
   description: Kathryn's house!  5:30-7:30pm Wednesday night.
   farm: soulfood
-  date: '2010-02-10 00:01:00'
+  date: '2010-02-10'
   status: notyetopen
   host: Kathryn Aaker
   location: 963 Hampshire St. San Francisco, CA 94110

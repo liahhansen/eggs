@@ -25,11 +25,11 @@ sf_chickenxxl:
   description: ($6/lb., 7-7.25 lbs)
   farm: soulfood
   price: 42
-  estimated:true
+  estimated: true
 
 sf_eggs:
   name: Eggs
-  description: 1 dozen of the best eggs you'll ever eat.
+  description: "1 dozen of the best eggs you'll ever eat."
   farm: soulfood
   price: 6.50
   estimated: false

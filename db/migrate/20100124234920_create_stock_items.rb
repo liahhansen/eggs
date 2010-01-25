@@ -5,7 +5,7 @@ class CreateStockItems < ActiveRecord::Migration
       t.integer :product_id
       t.integer :max_quantity_per_member
       t.integer :quantity_available
-      t.integer :substitutions_available
+      t.boolean :substitutions_available
       t.text :notes
 
       t.timestamps

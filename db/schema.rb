@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20100124234920) do
     t.integer  "product_id"
     t.integer  "max_quantity_per_member"
     t.integer  "quantity_available"
-    t.integer  "substitutions_available"
+    t.boolean  "substitutions_available"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

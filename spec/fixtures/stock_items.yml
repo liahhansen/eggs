@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-feb3_chickenreg
+feb3_chickenreg:
   pickup: sf_emeryville_feb3
   product: sf_chickenreg
   max_quantity_per_member: 3
@@ -8,7 +8,7 @@ feb3_chickenreg
   substitutions_available: false
   notes: We have lots of regular chickens!
 
-feb3_eggs
+feb3_eggs:
   pickup: sf_emeryville_feb3
   product: sf_chickenlg
   max_quantity_per_member: 1
