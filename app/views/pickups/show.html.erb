@@ -49,5 +49,13 @@
 </p>
 
 
+<p><h2>Stock Items:</h2></p>
+<p>
+<% @pickup.stock_items.each do |s|%>
+      <%= link_to "#{s.product.name}", stock_item_path(s)%><br/>
+<% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_pickup_path(@pickup) %> |
 <%= link_to 'Back', pickups_path %>

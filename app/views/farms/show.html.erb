@@ -6,3 +6,10 @@
 
 <%= link_to 'Edit', edit_farm_path(@farm) %> |
 <%= link_to 'Back', farms_path %>
+
+<% @farm.pickups.each do |p|%>
+    <p>
+      <%= link_to "#{p.name} - #{p.date}", pickup_path(p)%>
+    </p>
+<% end %>
+
