@@ -9,4 +9,4 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-task :test => [:spec, :cucumber]
+task :default => [:spec, :cucumber]
