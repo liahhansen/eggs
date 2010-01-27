@@ -11,17 +11,7 @@
   </tr>
 
 <% @stock_items.each do |stock_item| %>
-  <tr>
-    <td><%=h stock_item.pickup.name %></td>
-    <td><%=h stock_item.product.name %></td>
-    <td><%=h stock_item.max_quantity_per_member %></td>
-    <td><%=h stock_item.quantity_available %></td>
-    <td><%=h stock_item.substitutions_available %></td>
-    <td><%=h stock_item.notes %></td>
-    <td><%= link_to 'Show', stock_item %></td>
-    <td><%= link_to 'Edit', edit_stock_item_path(stock_item) %></td>
-    <td><%= link_to 'Destroy', stock_item, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <%= render :partial => 'stock_item' %>
 <% end %>
 </table>
 

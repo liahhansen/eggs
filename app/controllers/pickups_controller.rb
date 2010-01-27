@@ -2,6 +2,12 @@ class PickupsController < ApplicationController
   # GET /pickups
   # GET /pickups.xml
   def index
+
+    if !params[:farm_id]
+      redirect_to farms_path
+      return
+    end
+
     @pickups = Pickup.find_all_by_farm_id(params[:farm_id])
     @farm = Farm.find(params[:farm_id])
 
