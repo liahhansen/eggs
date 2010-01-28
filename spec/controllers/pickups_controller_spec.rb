@@ -13,4 +13,11 @@ describe PickupsController do
 
   end
 
+  it "should redirect index if no farm id is given" do
+    get :index
+
+    response.should be_redirect
+    
+  end
+
 end

@@ -4,7 +4,7 @@ class PickupsController < ApplicationController
   def index
 
     if !params[:farm_id]
-      redirect_to farms_path
+      redirect_to root_path
       return
     end
 
