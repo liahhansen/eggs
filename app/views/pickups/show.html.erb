@@ -1,8 +1,9 @@
-<h1><%= "Pickup: #{@pickup.name} -  #{@pickup.pretty_date}" %></h1>
+<h1><%= "Pickup: #{@pickup.name}" %><br/>
+<%= "#{@pickup.pretty_date}" %></h1>
 <h3>Status: <%= "#{@pickup.status.upcase}"%></h3>
 
 <p>
-  <b>Location:</b>          <%=h @pickup.location %><br/>
+  <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", "http://mapof.it/#{@pickup.location}", :target => "_blank"%><br/>
   <b>Host:</b>              <%=h @pickup.host %><br/>
   <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
