@@ -10,16 +10,27 @@
 </p>
 
 
+<% if @pickup.description != nil %>
 <p>
   <b>Description:</b>
   <%=h @pickup.description %>
 </p>
+<% end %>
 
+<% if @pickup.notes != nil %>
 <p>
   <b>Notes:</b>
   <%=h @pickup.notes %>
 </p>
+<% end %>
 
+<h2>Orders:</h2>
+
+<p>
+<% @pickup.orders.each do |o|%>
+      <%= link_to "#{o.member.first_name} #{o.member.last_name} - #{o.order_items.size} items in order", order_path(o)%><br/>
+<% end %>
+</p>
 
 
 <h2>Stock Items:</h2>
