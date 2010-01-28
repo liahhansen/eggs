@@ -1,7 +1,9 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+kathryn_feb3_chickenreg:
+  stock_item: feb3_chickenreg
+  order: kathryn_sf_emeryville_feb3
+  quantity: 3
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+kathryn_feb3_eggs:
+  stock_item: feb3_eggs
+  order: kathryn_sf_emeryville_feb3
+  quantity: 2
