@@ -1,46 +1,17 @@
+<h1><%= "Pickup: #{@pickup.name} -  #{@pickup.pretty_date}" %></h1>
+<h3>Status: <%= "#{@pickup.status.upcase}"%></h3>
+
 <p>
-  <b>Name:</b>
-  <%=h @pickup.name %>
+  <b>Location:</b>          <%=h @pickup.location %><br/>
+  <b>Host:</b>              <%=h @pickup.host %><br/>
+  <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
+  <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
 </p>
+
 
 <p>
   <b>Description:</b>
   <%=h @pickup.description %>
-</p>
-
-<p>
-  <b>Farm:</b>
-  <%=h @pickup.farm_id %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%=h @pickup.date %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%=h @pickup.status %>
-</p>
-
-<p>
-  <b>Host:</b>
-  <%=h @pickup.host %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%=h @pickup.location %>
-</p>
-
-<p>
-  <b>Opening at:</b>
-  <%=h @pickup.opening_at %>
-</p>
-
-<p>
-  <b>Closing at:</b>
-  <%=h @pickup.closing_at %>
 </p>
 
 <p>
