@@ -2,12 +2,7 @@ class StockItemsController < ApplicationController
   # GET /stock_items
   # GET /stock_items.xml
   def index
-    @stock_items = StockItem.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @stock_items }
-    end
+    redirect_to root_path
   end
 
   # GET /stock_items/1
