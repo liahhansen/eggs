@@ -2,7 +2,19 @@ class StockItemsController < ApplicationController
   # GET /stock_items
   # GET /stock_items.xml
   def index
-    redirect_to root_path
+    if(params[:pickup_id] == nil)
+      redirect_to root_path
+      return
+    else
+      @stock_items = StockItem.find_all_by_pickup_id params[:pickup_id]
+      puts @stock_items.inspect
+    end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @stock_item }
+    end
+
   end
 
   # GET /stock_items/1
