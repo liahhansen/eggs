@@ -1,11 +1,12 @@
 <p>
   <b>Member:</b>
-  <%=h @order.member_id %>
+  <%= link_to "#{@order.member.first_name} #{@order.member.last_name}", member_path(@order.member) %>
+
 </p>
 
 <p>
   <b>Pickup:</b>
-  <%=h @order.pickup_id %>
+  <%= link_to "#{@order.pickup.name} - #{@order.pickup.pretty_date}", pickup_path(@order.pickup) %>
 </p>
 
 <p>
@@ -13,6 +14,13 @@
   <%=h @order.notes %>
 </p>
 
+<p>
+  <b>order items:</b><br/>
+<% @order.order_items.each do |item| %>
+  <%= link_to "#{item.stock_item.product.name}", stock_item_path(item.stock_item) %><%= ", quantity: #{item.quantity}"%><br/>  
+
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

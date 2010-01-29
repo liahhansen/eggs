@@ -11,7 +11,7 @@
   </tr>
 
 <% @stock_items.each do |stock_item| %>
-  <%= render :partial => 'stock_item' %>
+  <%= render :partial => 'stock_item', :locals => {:stock_item => stock_item} %>
 <% end %>
 </table>
 
