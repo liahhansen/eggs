@@ -21,4 +21,8 @@ class Pickup < ActiveRecord::Base
     total
   end
 
+  def map_link
+    "http://mapof.it/#{location}"
+  end
+
 end
