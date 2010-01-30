@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe OrdersController do
 
-  it "should respond when requesting new with no pickup id" do
+  it "should render a pickup picker when requesting with no pickup id" do
     get :new
-    response.should be_success
+    response.should render_template("pickups/pickup_selector_for_orders")
   end
 
   it "should respond when requesting new with a pickup id" do

@@ -27,6 +27,9 @@ class OrdersController < ApplicationController
 
     if params[:pickup_id]
       @pickup = Pickup.find(params[:pickup_id])
+    else
+      render :template => "pickups/pickup_selector_for_orders"
+      return
     end
 
     @order = Order.new
