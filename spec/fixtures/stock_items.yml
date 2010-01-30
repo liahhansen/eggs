@@ -10,7 +10,7 @@ feb3_chickenreg:
 
 feb3_eggs:
   pickup: sf_emeryville_feb3
-  product: sf_chickenlg
+  product: sf_eggs
   max_quantity_per_member: 1
   quantity_available: 5
   substitutions_available: false

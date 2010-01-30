@@ -7,6 +7,7 @@
   <b>Host:</b>              <%=h @pickup.host %><br/>
   <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+  <b>Current total:</b>     <%=h "#{number_to_currency @pickup.estimated_total}" %><br/>
 </p>
 
 
@@ -26,11 +27,19 @@
 
 <h2>Orders:</h2>
 
-<p>
-<% @pickup.orders.each do |o|%>
-      <%= link_to "#{o.member.first_name} #{o.member.last_name} - #{o.order_items.size} items in order", order_path(o)%><br/>
-<% end %>
-</p>
+
+<table class="simple">
+  <tr class="hed">
+    <th>Name</th>
+    <th>Items (num)</th>
+    <th>Total (est)</th>
+  </tr>
+
+  <% @pickup.orders.each do |o|%>
+      <%= render :partial => 'orders/order_mini', :locals => { :o => o} %>
+  <% end %>
+
+</table>
 
 
 <h2><%= link_to "Stock Items:", stock_items_path(:pickup_id => @pickup.id)%></h2>

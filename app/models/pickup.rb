@@ -12,4 +12,13 @@ class Pickup < ActiveRecord::Base
     format_for :opening_at, :format => "%I:%M%p, %m/%d/%y" 
     format_for :closing_at, :format => "%I:%M%p, %m/%d/%y"
   end
+
+  def estimated_total
+    total = 0
+    orders.each do |order|
+      total += order.estimated_total
+    end
+    total
+  end
+
 end

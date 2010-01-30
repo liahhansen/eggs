@@ -1,7 +1,7 @@
 <h1>Pickups for <%= @farm.name%></h1>
 <% @pickups.each do |pickup| %>
 
-<%= render :partial => "pickup", :locals => { :pickup => pickup } %>
+<%= render :partial => "pickup_expanded", :locals => { :pickup => pickup } %>
     
 <% end %>
 
