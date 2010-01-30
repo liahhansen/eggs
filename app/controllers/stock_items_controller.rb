@@ -7,7 +7,6 @@ class StockItemsController < ApplicationController
       return
     else
       @stock_items = StockItem.find_all_by_pickup_id params[:pickup_id]
-      puts @stock_items.inspect
     end
 
     respond_to do |format|
