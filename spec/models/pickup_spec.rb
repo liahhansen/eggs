@@ -15,4 +15,9 @@ describe Pickup do
     pickup = pickups(:sf_emeryville_feb3)
     pickup.estimated_total.should == 91 
   end
+
+  it "should have an available list of members for its related farm" do
+    pickup = pickups(:sf_emeryville_feb3)
+    pickup.farm.members.size.should == 4
+  end
 end
