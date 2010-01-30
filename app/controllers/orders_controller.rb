@@ -24,6 +24,11 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.xml
   def new
+
+    if params[:pickup_id]
+      @pickup = Pickup.find(params[:pickup_id])
+    end
+
     @order = Order.new
 
     respond_to do |format|

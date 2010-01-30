@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :farms do |farm|
     farm.resources :pickups
+    farm.resources :order
   end
 
   map.root :controller => 'farms'
