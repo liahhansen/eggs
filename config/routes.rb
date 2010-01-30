@@ -9,13 +9,16 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :stock_items
 
-  map.resources :pickups
+  map.resources :pickups do |pickup|
+    pickup.resources :orders
+  end
 
   map.resources :products
 
   map.resources :farms do |farm|
-    farm.resources :pickups
-    farm.resources :order
+    farm.resources :pickups do |pickup|
+      pickup.resources :orders
+    end
   end
 
   map.root :controller => 'farms'

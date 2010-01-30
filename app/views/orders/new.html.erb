@@ -1,16 +1,46 @@
 <h1>New order</h1>
 
+<p>
+  <b><%= "#{@pickup.name} - #{@pickup.pretty_date}"%></b><br/>
+  <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", @pickup.map_link, :target => "_blank"%><br/>
+  <b>Host:</b>              <%=h @pickup.host %><br/>
+  <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
+  <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+</p>
+
 <% form_for(@order) do |f| %>
   <%= f.error_messages %>
+  <%= f.hidden_field :pickup_id %>
 
   <p>
-    <%= f.label :member_id %><br />
-    <%= f.text_field :member_id %>
+    <%# select("member", "member_id", Member.find_all_by_farm_id(@pickup.farm.id).map {|m| [ m.name, m.id ]})%>
+    <%= select("member", "member_id", @pickup.farm.members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
   </p>
-  <p>
-    <%= f.label :pickup_id %><br />
-    <%= f.text_field :pickup_id %>
-  </p>
+
+  <table class="order_form">
+    <tr class="hed">
+      <th>Quantity</th>
+      <th>Item Name</th>
+      <th>Item Description</th>
+      <th>Price</th>
+      <th>Total number available</th>
+      <th>Number p/p</th>
+      <th>Sold out?</th>
+    </tr>
+
+    <% @pickup.stock_items.each do |item| %>
+      <tr>
+        <td></td>
+        <td><%= item.product.name %><br/></td>
+        <td><%= item.product.description %></td>
+        <td><%= number_to_currency item.product.price %><%= "*" if item.product.estimated %></td>
+        <td><%= item.quantity_available%></td>
+        <td><%= item.max_quantity_per_member%></td>
+        <td><%= item.sold_out%></td>
+      </tr>
+    <% end %>
+  </table>
+
   <p>
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
