@@ -12,7 +12,7 @@ feb3_eggs:
   pickup: sf_emeryville_feb3
   product: sf_eggs
   max_quantity_per_member: 1
-  quantity_available: 5
+  quantity_available: 2
   substitutions_available: false
   notes: Sorry about the low production right now.  First come first served!
 
