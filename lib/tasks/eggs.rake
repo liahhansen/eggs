@@ -20,7 +20,7 @@ namespace :eggs do
 
       @do_save = ENV['SAVE'] == "true"
 
-      clear_tables [Product,Member,Order,OrderItem,StockItem] if @do_save
+      clear_tables [Product,Member,Order,OrderItem,StockItem,Subscription] if @do_save
       create_products @orders.first
       create_members
       puts "Finished with save: #{@do_save}"
@@ -49,8 +49,17 @@ namespace :eggs do
         member.phone_number = r[4]
         member.neighborhood = r[6]
         member.save if @do_save
+        create_subscription member
+        
         create_orders r, member
       end
+    end
+
+    def create_subscription(member)
+      sub = Subscription.new
+      sub.farm_id = Farm.find_by_name("Soul Food Farm").id
+      sub.member_id = member.id
+      sub.save if @do_save
     end
 
     def create_orders(row, member)
