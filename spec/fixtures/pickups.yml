@@ -31,6 +31,7 @@ sf_emeryville_feb3:
   status: open
   host: Jenny James
   location: 64 Regular Ave, Emeryville, CA 94305
+  minimum_order_total: 20
   opening_at: '2010-01-08 00:01:00'
   closing_at: '2010-01-29 00:01:00'
 
