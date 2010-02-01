@@ -17,5 +17,9 @@ describe OrdersController do
     assigns(:pickup).should == pickups(:sf_emeryville_feb3)
   end
 
+  it "should create new order_items when rendering 'new'" do
+    get :new, :pickup_id => pickups(:sf_emeryville_feb3).id
+    assigns(:order).order_items.size.should == 2
+  end
 
 end

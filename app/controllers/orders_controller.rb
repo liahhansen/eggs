@@ -33,6 +33,9 @@ class OrdersController < ApplicationController
     end
 
     @order = Order.new
+    StockItem.find_all_by_pickup_id(params[:pickup_id]).each do |item|
+      @order.order_items.build(:stock_item_id => item.id, :quantity => 0)
+    end
 
     respond_to do |format|
       format.html # new.html.erb
