@@ -15,7 +15,7 @@ describe OrderItem do
     OrderItem.create!(@valid_attributes)
   end
 
-  it "should not be valid unless it has valid order_id, stock_item_id and quantity" do    
+  it "should not be valid unless it has valid stock_item_id and quantity" do
     lambda {OrderItem.new(:stock_item_id => 2353135, :order_id => 125125).valid?}.should raise_error
     OrderItem.new(:stock_item_id => @s_item.id, :order_id => @k_order.id,:quantity=>1).valid?.should == true
   end
