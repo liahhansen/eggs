@@ -20,4 +20,9 @@ describe OrderItem do
     OrderItem.new(:stock_item_id => @s_item.id, :order_id => @k_order.id,:quantity=>1).valid?.should == true
   end
 
+  it "should not have a quantity of zero" do
+    OrderItem.new(:stock_item_id => @s_item.id, :order_id => @k_order.id,:quantity=>0).valid?.should == false
+    OrderItem.new(:stock_item_id => @s_item.id, :order_id => @k_order.id,:quantity=>1).valid?.should == true
+  end
+
 end
