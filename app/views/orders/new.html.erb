@@ -9,7 +9,8 @@
 </p>
 
 <% form_for @order do |f| %>
-  <%= f.hidden_field :pickup_id, :value => params[:pickup_id]  %>
+  <%= hidden_field_tag :pickup_id, @pickup.id %>
+  <%= f.hidden_field :pickup_id, :value => @pickup.id  %>
   <%= f.error_messages %>
 
   <p>
