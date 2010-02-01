@@ -8,13 +8,14 @@
   <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
 </p>
 
-<% form_for(@order) do |f| %>
+<% form_for @order do |f| %>
+  <%# hidden_field_tag :pickup_id, params[:pickup_id] %>
+  <%= f.hidden_field :pickup_id, :value => params[:pickup_id]  %>
+
   <%= f.error_messages %>
-  <%= f.hidden_field :pickup_id %>
 
   <p>
-    <%# select("member", "member_id", Member.find_all_by_farm_id(@pickup.farm.id).map {|m| [ m.name, m.id ]})%>
-    <%= select("member", "member_id", @pickup.farm.members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
+    <%= select("order", "member_id", @pickup.farm.members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
   </p>
 
   <table class="order_form">
@@ -28,17 +29,28 @@
       <th>Sold out?</th>
     </tr>
 
-    <% @pickup.stock_items.each do |item| %>
-      <tr>
-        <td></td>
-        <td><%= item.product.name %><br/></td>
-        <td><%= item.product.description %></td>
-        <td><%= number_to_currency item.product.price %><%= "*" if item.product.estimated %></td>
-        <td><%= item.quantity_available%></td>
-        <td><%= item.max_quantity_per_member%></td>
-        <td><%= item.sold_out%></td>
-      </tr>
+
+    <% @order.order_items.each do |item| %>
+        <tr>
+          <% f.fields_for :order_items, item do |builder| %>
+            <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id  %>
+            <td><%= builder.text_field :quantity, :size => 1 %></td>
+          <% end %>
+          
+          <td><%= item.stock_item.product.name %></td>
+          <td><%= item.stock_item.product.description %></td>
+          <td><%= number_to_currency item.stock_item.product.price %><%= "*" if item.stock_item.product.estimated %></td>
+          <td><%= item.stock_item.quantity_available%></td>
+          <td><%= item.stock_item.max_quantity_per_member%></td>
+          <td><%= item.stock_item.sold_out?%></td>
+        </tr>
+
     <% end %>
+
+  
+    
+
+
   </table>
 
   <p>

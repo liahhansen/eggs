@@ -6,6 +6,8 @@ class Order < ActiveRecord::Base
   validates_presence_of :member_id, :pickup_id
   validate :member_must_exist, :pickup_must_exist
 
+  accepts_nested_attributes_for :order_items, :reject_if => lambda {|item| item["quantity"].to_i == 0 || item["quantity"].to_i == nil}
+
   def estimated_total
     total = 0
     order_items.each do |item|     
