@@ -5,7 +5,6 @@ class StockItem < ActiveRecord::Base
 
 
   def sold_out?
-    # total += item.stock_item.product.price * item.quantity
 
     items = OrderItem.find_all_by_stock_item_id(id)
 
