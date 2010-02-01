@@ -9,9 +9,7 @@
 </p>
 
 <% form_for @order do |f| %>
-  <%# hidden_field_tag :pickup_id, params[:pickup_id] %>
   <%= f.hidden_field :pickup_id, :value => params[:pickup_id]  %>
-
   <%= f.error_messages %>
 
   <p>
@@ -34,7 +32,9 @@
         <tr>
           <% f.fields_for :order_items, item do |builder| %>
             <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id  %>
-            <td><%= builder.text_field :quantity, :size => 1 %></td>
+            <td>
+                <%= builder.select :quantity, 0..item.stock_item.max_quantity_per_member %>
+            </td>
           <% end %>
           
           <td><%= item.stock_item.product.name %></td>
