@@ -1,2 +1,5 @@
 <h2>For which pickup would you like to place an order?</h2>
 
+<% Pickup.find(:all).each do |p| %>
+    <p><%= link_to "#{p.name} - #{p.pretty_date}", new_order_path(:pickup_id => p.id) %></p>
+<% end %>
