@@ -27,3 +27,10 @@ Scenario: Submit Order Form with Success
   And I press "Create"
   Then I should see "Order was successfully created."
   
+Scenario: Edit an Order
+  When I go to farms
+  And I follow "Soul Food Farm"
+  And I follow "Emeryville"
+  And I follow "Ben Brown"
+  And I follow "edit"
+  Then I should see "Emeryville"

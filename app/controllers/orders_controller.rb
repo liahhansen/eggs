@@ -44,13 +44,15 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
+    @pickup = @order.pickup
+    @order.add_order_items_for_pickup(@pickup)        
   end
 
   # POST /orders
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
-
+    
     respond_to do |format|
       if @order.save
         flash[:notice] = 'Order was successfully created.'
@@ -70,6 +72,7 @@ class OrdersController < ApplicationController
   # PUT /orders/1.xml
   def update
     @order = Order.find(params[:id])
+    @pickup = @order.pickup
 
     respond_to do |format|
       if @order.update_attributes(params[:order])
@@ -77,6 +80,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to(@order) }
         format.xml  { head :ok }
       else
+        @order.add_order_items_for_pickup(@pickup)        
         format.html { render :action => "edit" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end

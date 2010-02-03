@@ -1,0 +1,28 @@
+<p>
+  <b><%= "#{@pickup.name} - #{@pickup.pretty_date}"%></b><br/>
+  <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", @pickup.map_link, :target => "_blank"%><br/>
+  <b>Host:</b>              <%=h @pickup.host %><br/>
+  <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
+  <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+</p>
+
+
+<% form_for @order do |f| %>
+  <%= hidden_field_tag :pickup_id, @pickup.id %>
+  <%= f.hidden_field :pickup_id, :value => @pickup.id  %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= select("order", "member_id", @pickup.farm.members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
+  </p>
+
+  <%= render :partial => 'order_items_fields', :locals => {:f => f} %>
+
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </p>
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>

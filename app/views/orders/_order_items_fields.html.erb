@@ -1,0 +1,33 @@
+<table class="order_form">
+  <tr class="hed">
+    <th>Quantity</th>
+    <th>Item Name</th>
+    <th>Item Description</th>
+    <th>Price *estimated</th>
+    <th>Total number available</th>
+    <th>Number p/p</th>
+    <th>Sold out?</th>
+  </tr>
+
+
+  <% @order.order_items.each do |item| %>
+      <tr>
+        <% f.fields_for :order_items, item do |builder| %>
+            <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id %>
+            <td>
+              <%= builder.select :quantity, 0..item.stock_item.max_quantity_per_member %>
+            </td>
+        <% end %>
+
+        <td><%= item.stock_item.product.name %></td>
+        <td><%= item.stock_item.product.description %></td>
+        <td><%= number_to_currency item.stock_item.product.price %><%= "*" if item.stock_item.product.estimated %></td>
+        <td><%= item.stock_item.quantity_available %></td>
+        <td><%= item.stock_item.max_quantity_per_member %></td>
+        <td><%= item.stock_item.sold_out? %></td>
+      </tr>
+
+  <% end %>
+
+
+</table>
