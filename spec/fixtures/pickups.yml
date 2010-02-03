@@ -43,6 +43,7 @@ sf_farm_feb3:
   status: open
   host: Alexis Anderson
   location: 29 Farmville Ave, Boondocks, CA 94035
+  minimum_order_total: 25
   opening_at: '2010-01-08 00:01:00'
   closing_at: '2010-01-29 00:01:00'
 
@@ -54,6 +55,7 @@ sf_mission_feb10:
   status: notyetopen
   host: Kathryn Aaker
   location: 963 Hampshire St. San Francisco, CA 94110
+  minimum_order_total: 25
   opening_at: '2010-01-28 00:01:00'
   closing_at: '2010-02-06 00:01:00'
   
@@ -66,6 +68,7 @@ cs_farm_feb3:
   status: open
   host: Alexis Anderson
   location: 29 Garden Ave, Sausalito, CA 94035
+  minimum_order_total: 25
   opening_at: '2010-01-08 00:01:00'
   closing_at: '2010-01-29 00:01:00'
 
@@ -77,6 +80,7 @@ cs_mission_feb10:
   status: notyetopen
   host: Kathryn Aaker
   location: 326 Sumthin St. San Jose, CA 94110
+  minimum_order_total: 25  
   opening_at: '2010-01-28 00:01:00'
   closing_at: '2010-02-06 00:01:00'
 
