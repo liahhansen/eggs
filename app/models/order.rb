@@ -8,6 +8,20 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_items, :reject_if => lambda {|item| item["quantity"].to_i == 0 || item["quantity"].to_i == nil}
 
+  # if the order already has order_items,
+  # rebuild them using stock_items and insert the right quantity
+  def add_order_items_for_pickup(pickup)
+    if order_items
+      items = order_items.clone
+      order_items.clear
+    end
+    
+    pickup.stock_items.each do |item|
+      oi = order_items.build(:stock_item_id => item.id, :quantity => 0)
+      items.each {|i| oi.quantity = i["quantity"] if i["stock_item_id"] == item.id} if items
+    end
+  end
+
   def estimated_total
     total = 0
     order_items.each do |item|     
@@ -16,6 +30,9 @@ class Order < ActiveRecord::Base
     total
   end
 
+
+  # VALIDATIONS
+  
   def member_must_exist
     errors.add(:member_id, "this member must exist") if member_id && !Member.find(member_id)
   end

@@ -22,4 +22,8 @@ describe OrdersController do
     assigns(:order).order_items.size.should == 2
   end
 
+  it "should create new order_items when rendering 'create" do
+    get :create, :pickup_id => pickups(:sf_emeryville_feb3).id
+    assigns(:order).order_items.size.should == 2
+  end
 end

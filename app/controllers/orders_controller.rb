@@ -33,9 +33,7 @@ class OrdersController < ApplicationController
     end
 
     @order = Order.new
-    StockItem.find_all_by_pickup_id(params[:pickup_id]).each do |item|
-      @order.order_items.build(:stock_item_id => item.id, :quantity => 0)
-    end
+    @order.add_order_items_for_pickup(@pickup)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -60,14 +58,8 @@ class OrdersController < ApplicationController
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
         @pickup = Pickup.find params[:pickup_id]
-        items = @order.order_items.clone
-        @order.order_items.clear
+        @order.add_order_items_for_pickup(@pickup)
 
-        # create our order_items hash again but replace quantities with params
-        StockItem.find_all_by_pickup_id(params[:pickup_id]).each do |item|
-          oi = @order.order_items.build(:stock_item_id => item.id, :quantity => 0)
-          items.each {|i| oi.quantity = i["quantity"] if i["stock_item_id"] == item.id}
-        end
         format.html { render :action => "new" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end
