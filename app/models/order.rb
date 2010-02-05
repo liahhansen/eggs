@@ -1,10 +1,10 @@
 class Order < ActiveRecord::Base
-  belongs_to :member
+  belongs_to :user
   belongs_to :pickup
   has_many :order_items, :dependent => :destroy
 
-  validates_presence_of :member_id, :pickup_id
-  validate :member_must_exist, :pickup_must_exist, :total_meets_minimum
+  validates_presence_of :user_id, :pickup_id
+  validate :user_must_exist, :pickup_must_exist, :total_meets_minimum
 
   accepts_nested_attributes_for :order_items, :reject_if => lambda {|item| item["quantity"].to_i == 0 || item["quantity"].to_i == nil}
 
@@ -33,8 +33,8 @@ class Order < ActiveRecord::Base
 
   # VALIDATIONS
   
-  def member_must_exist
-    errors.add(:member_id, "this member must exist") if member_id && !Member.find(member_id)
+  def user_must_exist
+    errors.add(:user_id, "this user must exist") if user_id && !User.find(user_id)
   end
 
   def pickup_must_exist

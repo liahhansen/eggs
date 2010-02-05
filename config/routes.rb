@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :subscriptions
 
-  map.resources :members
+  map.resources :users
 
   map.resources :stock_items
 
@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products
 
   # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
+  #   map.resources :products, :user => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller

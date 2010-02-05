@@ -2,7 +2,7 @@ require "csv"
 
 # Loads a single-pickup CSV file (exported from gDocs)
 # and saves the following to the database:
-#   * members (no subscription yet)
+#   * users (no subscription yet)
 #   * products
 #   * stock_items
 #   * orders
@@ -20,9 +20,9 @@ namespace :eggs do
 
       @do_save = ENV['SAVE'] == "true"
 
-      clear_tables [Product,Member,Order,OrderItem,StockItem,Subscription] if @do_save
+      clear_tables [Product,User,Order,OrderItem,StockItem,Subscription] if @do_save
       create_products @orders.first
-      create_members
+      create_users
       puts "Finished with save: #{@do_save}"
     end
 
@@ -34,39 +34,39 @@ namespace :eggs do
       end
     end
 
-    def create_members
+    def create_users
       lines = @orders.find_all do |row|
         row[1] != "Last name" && row[3] != "TOTALS"
       end
 
-      puts "Creating members... (#{lines.size})"      
+      puts "Creating users... (#{lines.size})"
 
       lines.each do |r|
-        member = Member.new
-        member.first_name = r[2]
-        member.last_name = r[1]
-        member.email_address = r[3]
-        member.phone_number = r[4]
-        member.neighborhood = r[6]
-        member.save if @do_save
-        create_subscription member
+        user = User.new
+        user.first_name = r[2]
+        user.last_name = r[1]
+        user.email_address = r[3]
+        user.phone_number = r[4]
+        user.neighborhood = r[6]
+        user.save if @do_save
+        create_subscription user
         
-        create_orders r, member
+        create_orders r, user
       end
     end
 
-    def create_subscription(member)
+    def create_subscription(user)
       sub = Subscription.new
       sub.farm_id = Farm.find_by_name("Soul Food Farm").id
-      sub.member_id = member.id
+      sub.user_id = user.id
       sub.save if @do_save
     end
 
-    def create_orders(row, member)
-      puts "Creating order for (#{member.last_name})"      
+    def create_orders(row, user)
+      puts "Creating order for (#{user.last_name})"
 
       order = Order.new
-      order.member_id = member.id
+      order.user_id = user.id
       order.pickup_id = Pickup.find_by_name("Emeryville").id
       order.save if @do_save
       create_order_items row, order

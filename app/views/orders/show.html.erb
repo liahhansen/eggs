@@ -1,6 +1,6 @@
 <p>
   <b>Member:</b>
-  <%= link_to "#{@order.member.first_name} #{@order.member.last_name}", member_path(@order.member) %>
+  <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %>
 
 </p>
 

@@ -5,11 +5,11 @@ describe Order do
   before(:each) do
 
     @kathryn_order = orders(:kathryn_sf_emeryville_feb3)
-    @kathryn = members(:kathryn)
+    @kathryn = users(:kathryn)
     @emeryville_pickup = pickups(:sf_emeryville_feb3)
 
     @valid_attributes = {
-      :member_id => @kathryn.id,
+      :user_id => @kathryn.id,
       :pickup_id => @emeryville_pickup.id,
       :order_items => get_order_items
     }
@@ -17,7 +17,7 @@ describe Order do
 
 
   def get_order_core
-    return Order.new(:member_id => @kathryn.id, :pickup_id => @emeryville_pickup.id)
+    return Order.new(:user_id => @kathryn.id, :pickup_id => @emeryville_pickup.id)
   end
 
   def get_order_items
@@ -35,15 +35,15 @@ describe Order do
     Order.create!(@valid_attributes)
   end
 
-  it "should raise errors when saving when no member or pickup is specified" do
+  it "should raise errors when saving when no user or pickup is specified" do
     Order.new.valid?.should == false
     lambda {Order.create!}.should raise_error
-    lambda {Order.create!(:member_id => 1)}.should raise_error
+    lambda {Order.create!(:user_id => 1)}.should raise_error
     lambda {Order.create!(:pickup_id => 2)}.should raise_error
   end
 
-  it "should only accept valid member and pickup ids" do
-    lambda {Order.new(:member_id => 235, :pickup_id => 235).valid?}.should raise_error
+  it "should only accept valid user and pickup ids" do
+    lambda {Order.new(:user_id => 235, :pickup_id => 235).valid?}.should raise_error
     get_valid_order.valid?.should == true    
   end
 

@@ -14,9 +14,9 @@
     </p>
 <% end %>
 
-<h2>Members:</h2>
-<% @farm.members.each do |m|%>
+<h2>Users:</h2>
+<% @farm.users.each do |m|%>
     <p>
-      <%= link_to "#{m.first_name} #{m.last_name}", member_path(m)%>
+      <%= link_to "#{m.first_name} #{m.last_name}", user_path(m)%>
     </p>
 <% end %>

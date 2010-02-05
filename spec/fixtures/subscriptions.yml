@@ -1,23 +1,23 @@
 ben_sf:
-  member: ben
+  user: ben
   farm: soulfood
 
 kathryn_sf:
-  member: kathryn
+  user: kathryn
   farm: soulfood
 
 jenny_sf:
-  member: jenny
+  user: jenny
   farm: soulfood
 
 sue_sf:
-  member: sue
+  user: sue
   farm: soulfood
 
 ben_cs:
-  member: ben
+  user: ben
   farm: clarksummit
 
 kathryn_cs:
-  member: kathryn
+  user: kathryn
   farm: clarksummit

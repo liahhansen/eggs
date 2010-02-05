@@ -1,24 +1,24 @@
 #  create_table "orders", :force => true do |t|
-#    t.integer  "member_id"
+#    t.integer  "user_id"
 #    t.integer  "pickup_id"
 #    t.text     "notes"
 #    t.datetime "created_at"
 #    t.datetime "updated_at"
 
 kathryn_sf_emeryville_feb3:
-  member: kathryn
+  user: kathryn
   pickup: sf_emeryville_feb3
 
 
 kathryn_sf_farm_feb3:
-  member: kathryn
+  user: kathryn
   pickup: sf_farm_feb3
 
 jenny_sf_emeryville_feb3:
-  member: jenny
+  user: jenny
   pickup: sf_emeryville_feb3
 
 ben_sf_emeryville_feb3:
-  member: ben
+  user: ben
   pickup: sf_emeryville_feb3
   
