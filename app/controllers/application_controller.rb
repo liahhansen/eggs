@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     unless current_user
       flash[:notice] = "You must log in to access this page"
-      redirect_to new_user_session_url
+      redirect_to login_url
       return false
     end
   end
