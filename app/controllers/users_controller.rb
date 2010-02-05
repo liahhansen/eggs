@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  skip_before_filter :authenticate  
+
   # GET /users
   # GET /users.xml
   def index

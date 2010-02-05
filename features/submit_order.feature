@@ -2,6 +2,12 @@ Feature: Submit Order
   In order for customers to create orders
   They have to submit an order form
 
+Background:
+  Given I am the registered user jennyjones
+  And I am on login
+  When I login with valid credentials
+  Then I should see "Successfully logged in"  
+
 Scenario: View Order Form
   When I go to orders/new
   Then I should see "Emeryville - Wednesday"

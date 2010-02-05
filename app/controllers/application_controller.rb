@@ -6,8 +6,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
 
+  before_filter :authenticate
 
   helper_method :current_user
 
@@ -21,5 +22,13 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined? @current_user
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def authenticate
+    unless current_user
+      flash[:notice] = "You must log in to access this page"
+      redirect_to new_user_session_url
+      return false
+    end
   end
 end

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe PickupsController do
+  before(:each) do
+    activate_authlogic
+    UserSession.create users(:kathryn)
+  end  
 
   it "should list pickups only for soul food farm" do
     get :index, :farm_id => farms(:soulfood).id
