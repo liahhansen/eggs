@@ -10,6 +10,11 @@ h1 {
 	font-size: 32px;
 }
 
+div#user_nav {
+    float: right;
+    font-size: 0.9em;
+}
+
 table.simple {
     text-align: center;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;

@@ -14,7 +14,12 @@
 <body>
 
 <div class="container_12 topGutter">
-    <div class="grid12">&nbsp;</div>  
+   <div class="grid12">
+     <div id="user_nav">
+       <%= link_to "Register", new_member_path %> |
+       <%= link_to "Log in", login_path %>
+     </div>
+   </div>  
 </div>
 
 <div id="header" class="container_12 topSection">

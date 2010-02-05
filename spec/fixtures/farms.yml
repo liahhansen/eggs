@@ -8,6 +8,8 @@
 
 soulfood:
   name: Soul Food Farm
+  key: sff
 
 clarksummit:
   name: Clark Summit Farm
+  key: csf
