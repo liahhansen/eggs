@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :username, :email_address, :phone_number, :neighborhood, :password
 
+  acts_as_authorization_subject  
   acts_as_authentic
 end
