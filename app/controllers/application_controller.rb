@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
+  rescue_from 'Acl9::AccessDenied', :with => :access_denied
+  
   before_filter :authenticate
 
   helper_method :current_user
@@ -29,6 +31,15 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "You must log in to access this page"
       redirect_to login_url
       return false
+    end
+  end
+
+  def access_denied
+    if current_user
+      render :template => 'home/access_denied'
+    else
+      flash[:notice] = 'Access denied. Try to log in first.'
+      redirect_to login_path
     end
   end
 end

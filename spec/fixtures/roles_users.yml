@@ -2,6 +2,10 @@ kathryn_admin:
   user: kathryn
   role: admin
 
-jenny_member:
+jenny_admin:
   user: jenny
+  role: admin
+
+ben_member:
+  user: ben
   role: member

@@ -4,11 +4,11 @@ require 'spec_helper'
 describe FarmsController do
   before(:each) do
     activate_authlogic
-    UserSession.create Factory(:user)
+    UserSession.create Factory(:admin_user)
   end
 
 
-  it "should succeed if we are not authenticated" do
+  it "should suceed if we are authenticated" do
     get :index
     response.should be_success
   end

@@ -109,3 +109,14 @@ Factory.define :farm_with_members, :parent => :farm do |f|
   end
 end
 
+Factory.define :admin_user, :parent => :user do |user|
+  user.after_create do |u|
+      Factory(:roles_user, :role => Factory(:role, :name => 'admin'), :user => u)
+  end
+end
+
+Factory.define :member_user, :parent => :user do |user|
+  user.after_create do |u|
+    Factory(:roles_user, :role => Factory(:role, :name => 'member'), :user => u)
+  end
+end
