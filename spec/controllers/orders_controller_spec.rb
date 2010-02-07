@@ -12,22 +12,26 @@ describe OrdersController do
   end
 
   it "should respond when requesting new with a pickup id" do
-    get :new, :pickup_id => pickups(:sf_emeryville_feb3).id
+    get :new, :pickup_id => Factory(:pickup).id
     response.should be_success
   end
 
   it "should set a pickup when requesting new with a pickup id" do
-    get :new, :pickup_id => pickups(:sf_emeryville_feb3).id
-    assigns(:pickup).should == pickups(:sf_emeryville_feb3)
+    p = Factory(:pickup)
+    get :new, :pickup_id => p.id
+    assigns(:pickup).should == p
   end
 
   it "should create new order_items when rendering 'new'" do
-    get :new, :pickup_id => pickups(:sf_emeryville_feb3).id
-    assigns(:order).order_items.size.should == 2
+    p = Factory(:pickup_with_stock_items)
+    get :new, :pickup_id => p.id
+
+    assigns(:order).order_items.size.should == p.stock_items.size
   end
 
   it "should create new order_items when rendering 'create" do
-    get :create, :pickup_id => pickups(:sf_emeryville_feb3).id
-    assigns(:order).order_items.size.should == 2
+    p = Factory(:pickup_with_stock_items)
+    get :create, :pickup_id => p.id
+    assigns(:order).order_items.size.should == p.stock_items.size
   end
 end

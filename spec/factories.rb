@@ -79,6 +79,19 @@ Factory.define :pickup_with_orders, :parent => :pickup do |p|
   end
 end
 
+Factory.define :pickup_with_stock_items, :parent => :pickup do |pickup|
+  pickup.after_create do |p|
+    3.times {p.stock_items << Factory(:stock_item, :pickup => p)}
+  end
+
+# TODO: Figure out why association doesn't set the stock_item pickup_id to be this id automatically
+#  p.stock_items do |s|
+#    items = []
+#    3.times{items << s.association(:stock_item)}
+#    items
+#  end
+end
+
 Factory.define :farm_with_members, :parent => :farm do |f|
   f.users do |u|
     members = []

@@ -12,7 +12,7 @@ describe StockItemsController do
   end
 
   it "should render index when a pickup id is given" do
-    get :index, :pickup_id => Pickup.find_by_name("Emeryville")
+    get :index, :pickup_id => Factory(:pickup)
     response.should be_success
   end
 
