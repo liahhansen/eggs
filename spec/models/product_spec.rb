@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Product do
   before(:each) do
     @valid_attributes = {
-      :farm_id => 1,
+      :farm_id => Factory(:farm).id,
       :name => "Extra Large Chicken"
     }
   end

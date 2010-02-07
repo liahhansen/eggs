@@ -21,5 +21,5 @@ Then /^I should be on ([^\"]*)$/ do |page_name|
 end
 
 Given /^I am a registered user $/ do
-  UserSession.create users(:kathryn)
+  UserSession.create Factory(:user)
 end

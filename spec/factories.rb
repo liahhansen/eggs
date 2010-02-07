@@ -17,13 +17,13 @@ Factory.define :farm do |f|
 end
 
 Factory.define :subscription do |s|
-  s.association :farm, :factory => :farm
-  s.association :user, :factory => :user
+  s.association :farm
+  s.association :user
 end
 
 Factory.define :pickup do |p|
   p.name 'Emeryville'
-  p.association :farm, :factory => :farm
+  p.association :farm
   p.date '2010-01-28'
   p.status 'closed'
   p.host 'Tami Taylor'
@@ -58,7 +58,7 @@ end
 Factory.define :order_with_items, :parent => :order do |o|
   o.order_items do |i|
     items = []
-    2.times{|f| items << i.association(:order_item)}
+    2.times{items << i.association(:order_item)}
     items
   end
 end
@@ -69,5 +69,21 @@ end
 
 Factory.define :expensive_order_item, :parent => :order_item do |i|
   i.stock_item {Factory(:stock_item, :product => Factory(:product, :price => 100))}
+end
+
+Factory.define :pickup_with_orders, :parent => :pickup do |p|
+  p.orders do |o|
+    arr = []
+    3.times{arr << o.association(:order_with_items)}
+    arr
+  end
+end
+
+Factory.define :farm_with_members, :parent => :farm do |f|
+  f.users do |u|
+    members = []
+    4.times{members << u.association(:user)}
+    members
+  end
 end
 

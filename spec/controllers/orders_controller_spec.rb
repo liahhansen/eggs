@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OrdersController do
   before(:each) do
     activate_authlogic
-    UserSession.create users(:kathryn)
+    UserSession.create Factory(:user)
   end
 
   it "should render a pickup picker when requesting with no pickup id" do

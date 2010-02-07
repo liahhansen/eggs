@@ -3,7 +3,7 @@ require 'spec_helper'
 describe StockItemsController do
   before(:each) do
     activate_authlogic
-    UserSession.create users(:kathryn)
+    UserSession.create Factory(:user)
   end  
 
   it "should redirect index when there is no pickup id" do

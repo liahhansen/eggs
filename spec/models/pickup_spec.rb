@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Pickup do
   before(:each) do
     @valid_attributes = {
-      :farm_id => 1
+      :farm_id => Factory(:farm).id
     }
   end
 
@@ -12,12 +12,12 @@ describe Pickup do
   end
 
   it "should return an estimated total for all orders" do
-    pickup = pickups(:sf_emeryville_feb3)
-    pickup.estimated_total.should == 91 
+    pickup = Factory(:pickup_with_orders)
+    pickup.estimated_total.should == pickup.orders.inject(0){|total, o| total + o.estimated_total}
   end
 
   it "should have an available list of users for its related farm" do
-    pickup = pickups(:sf_emeryville_feb3)
+    pickup = Factory(:pickup, :farm => Factory(:farm_with_members))
     pickup.farm.users.size.should == 4
   end
 end

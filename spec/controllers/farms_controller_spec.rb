@@ -4,7 +4,7 @@ require 'spec_helper'
 describe FarmsController do
   before(:each) do
     activate_authlogic
-    UserSession.create users(:kathryn)
+    UserSession.create Factory(:user)
   end
 
 

@@ -12,11 +12,11 @@ describe StockItem do
   end
 
   it "should return sold out status" do
-    eggs = stock_items(:feb3_eggs)
-    chicken = stock_items(:feb3_chickenreg)
+    eggs = Factory(:stock_item, :quantity_available => 2)
+    eggs.sold_out?.should == false
 
+    2.times {Factory(:order_item, :stock_item => eggs)}
     eggs.sold_out?.should == true
-    chicken.sold_out?.should == false
   end
 
 end

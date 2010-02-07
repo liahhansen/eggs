@@ -3,32 +3,11 @@ require 'spec_helper'
 
 describe Order do
   before(:each) do
-
-    @kathryn_order = orders(:kathryn_sf_emeryville_feb3)
-    @kathryn = users(:kathryn)
-    @emeryville_pickup = pickups(:sf_emeryville_feb3)
-
     @valid_attributes = {
-      :user_id => @kathryn.id,
-      :pickup_id => @emeryville_pickup.id,
-      :order_items => get_order_items
+      :user_id => Factory(:user).id,
+      :pickup_id => Factory(:pickup).id,
+      :order_items => Factory(:order_with_items).order_items
     }
-  end
-
-
-  def get_order_core
-    return Order.new(:user_id => @kathryn.id, :pickup_id => @emeryville_pickup.id)
-  end
-
-  def get_order_items
-    return [order_items(:kathryn_feb3_chickenreg),order_items(:kathryn_feb3_eggs)]
-  end
-
-  def get_valid_order
-    o = get_order_core
-    o.order_items << get_order_items[0]
-    o.order_items << get_order_items[1]
-    return o
   end
 
   it "should create a new instance given valid attributes" do
@@ -44,16 +23,24 @@ describe Order do
 
   it "should only accept valid user and pickup ids" do
     lambda {Order.new(:user_id => 235, :pickup_id => 235).valid?}.should raise_error
-    get_valid_order.valid?.should == true    
+    Factory(:order_with_items).valid?.should == true    
+  end
+
+  it "should be able to have order_items" do
+    # actually a test for the factory
+    order = Factory.build(:order_with_items)
+    order.order_items.size.should >= 1
   end
 
   it "should return an estimated order total" do
-    order= @kathryn_order
-    order.estimated_total.should == 91
+    order = Factory.build(:order)
+    order.order_items << Factory(:order_item)
+    order.order_items << Factory(:order_item)
+    order.estimated_total.should == 60
   end
 
   it "should destroy order_items when destroying order" do
-    order = @kathryn_order
+    order = Factory.build(:order_with_items)
     order.destroy.frozen?.should == true
 
     order.order_items.each do |item|
@@ -62,14 +49,14 @@ describe Order do
   end
 
   it "should not be valid unless the order total is greater than the pickup minimum" do
-    o = get_order_core
-    o.order_items << order_items(:kathryn_feb3_eggs)
+    p = Factory(:pickup, :minimum_order_total => 25)
+    o = Factory.build(:order, :pickup => Factory(:pickup, :minimum_order_total => 25))
+    o.order_items << Factory(:cheap_order_item)
     o.valid?.should == false
     o.errors.on_base.should == "your order does not meet the minimum"
 
-    o.order_items << order_items(:kathryn_feb3_chickenreg)
+    o.order_items << Factory(:expensive_order_item)
     o.valid?.should == true
-
   end
 
 end
