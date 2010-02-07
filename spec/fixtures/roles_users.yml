@@ -9,3 +9,8 @@ jenny_admin:
 ben_member:
   user: ben
   role: member
+
+sue_member:
+  user: sue
+  role: member
+  

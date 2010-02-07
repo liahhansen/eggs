@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :authenticate  
+  access_control do
+    allow :admin
+    allow :member, :to => [:show, :edit, :update]
+  end
 
   # GET /users
   # GET /users.xml
