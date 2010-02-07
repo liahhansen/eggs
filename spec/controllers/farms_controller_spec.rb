@@ -12,4 +12,5 @@ describe FarmsController do
     get :index
     response.should be_success
   end
+
 end

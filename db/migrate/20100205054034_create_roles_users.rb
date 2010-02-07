@@ -1,6 +1,6 @@
-class CreateRollsUsers < ActiveRecord::Migration
+class CreateRolesUsers < ActiveRecord::Migration
   def self.up
-    create_table :roles_users, :id => false, :force => true do |t|
+    create_table :roles_users do |t|
       t.references  :user
       t.references  :role
       t.timestamps

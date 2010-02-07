@@ -1,4 +1,10 @@
 class FarmsController < ApplicationController
+
+  access_control do
+    allow :admin
+    deny  :member
+  end
+  
   # GET /farms
   # GET /farms.xml
   def index

@@ -1,0 +1,7 @@
+kathryn_admin:
+  user: kathryn
+  role: admin
+
+jenny_member:
+  user: jenny
+  role: member

@@ -12,6 +12,15 @@ Factory.define :user do |u|
   u.password_confirmation 'gopanthers'
 end
 
+Factory.define :role do |r|
+  r.name 'admin'
+end
+
+Factory.define :roles_user do |r|
+  r.association :user
+  r.association :role
+end
+
 Factory.define :farm do |f|
   f.name 'Soul Food Farm'
 end
