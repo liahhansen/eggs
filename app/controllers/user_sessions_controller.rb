@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       flash[:notice] = "Successfully logged in."
       if(current_user.has_role?(:admin))
-        redirect_to root_url
+        redirect_to farms_url
       else
         redirect_to current_user
       end

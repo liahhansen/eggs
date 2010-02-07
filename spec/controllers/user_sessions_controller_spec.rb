@@ -9,7 +9,7 @@ describe UserSessionsController do
     u = Factory(:admin_user)
 
     post :create, :user_session => {:username => u.username, :password => u.password}
-    response.should redirect_to(root_path)
+    response.should redirect_to(farms_path)
   end
 
   it "should send a member to their user page after login" do
