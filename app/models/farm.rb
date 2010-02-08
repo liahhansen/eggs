@@ -7,4 +7,13 @@ class Farm < ActiveRecord::Base
 
   acts_as_authorization_object
 
+  # TODO: Figure out why this relationship is broken!
+  def users
+    user_arr = []
+    subscriptions.each do |s|
+      user_arr << User.find(s.user.id)
+    end
+    user_arr
+  end
+
 end
