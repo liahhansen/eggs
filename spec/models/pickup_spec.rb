@@ -19,5 +19,12 @@ describe Pickup do
   it "should have an available list of users for its related farm" do
     pickup = Factory(:pickup, :farm => Factory(:farm_with_members))
     pickup.farm.users.size.should == 4
+    pickup.farm.users.each do |u|
+      thisfarm = false
+      u.farms.each do |f|
+        thisfarm = true if f.id == pickup.farm.id
+      end
+      thisfarm.should == true
+    end
   end
 end

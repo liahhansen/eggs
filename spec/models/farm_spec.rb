@@ -16,4 +16,9 @@ describe Farm do
     f = Farm.new
     f.valid?.should == false
   end
+
+  it "should have a list of users for that farm" do
+    f = Factory(:farm_with_members)
+    f.users.length.should >= 1
+  end
 end
