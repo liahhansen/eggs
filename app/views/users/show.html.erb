@@ -1,6 +1,6 @@
 <p>
-  <b>First name:</b>
-  <%=h @user.first_name %>
+  <b>Welcome, </b>
+  <%=h "#{@user.first_name} #{@user.last_name}!" %>
 </p>
 
 <p>
@@ -25,4 +25,3 @@
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

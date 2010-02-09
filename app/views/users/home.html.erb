@@ -1,0 +1,50 @@
+<h1>Welcome, <%= "#{@user.first_name}!"%></h1>
+
+<h3>Your current orders (for editing or verification):</h3>
+<% current_orders = Order.find_all_by_user_id(@user.id) %>
+<table class="order_form">
+  <tr class="hed">
+    <th>Date</th>
+    <th>Farm</th>
+    <th>Name</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+
+ <% current_orders.each do |order| %>
+    <% if order.pickup.status == 'open' || order.pickup.status == 'closed'%>
+
+      <tr>
+        <td><%= order.pickup.date %></td>
+        <td><%= order.pickup.farm.name %></td>
+        <td><%= order.pickup.name %></td>
+        <td><%= order.pickup.status %></td>
+        <td><%= link_to "edit order", edit_order_path(order) %></td>
+      </tr>
+
+    <% end %>
+  <% end %>
+
+</table>
+
+<% @user.farms.each do |farm| %>
+
+  <h3><%= "#{farm.name}"%></h3>
+  <h5>Pickups currently open for orders:</h5>
+  <ul>
+    <%
+      open_pickups = Pickup.find_all_by_farm_id_and_status(farm.id, "open")
+      open_pickups.each do |pickup|
+    %>
+    <li><%= "#{pickup.name} - #{pickup.date}"%></li>
+    <% end %>
+  </ul>
+
+
+
+
+
+
+
+  
+<% end %>

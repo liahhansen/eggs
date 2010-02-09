@@ -10,7 +10,7 @@ describe UsersController do
     UserSession.create member
     get :show, :id => member.id
     response.should be_success
-    response.should render_template('show')
+    response.should render_template('home')
   end
 
   it "should deny a non-admin member from seeing the index of users" do
