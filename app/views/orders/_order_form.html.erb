@@ -4,17 +4,15 @@
   <b>Host:</b>              <%=h @pickup.host %><br/>
   <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+  <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
 </p>
 
 
 <% form_for @order do |f| %>
   <%= hidden_field_tag :pickup_id, @pickup.id %>
   <%= f.hidden_field :pickup_id, :value => @pickup.id  %>
+  <%= f.hidden_field :user_id, :value => @member.id %>
   <%= f.error_messages %>
-
-  <p>
-    <%= select("order", "user_id", @pickup.farm.users.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
-  </p>
 
   <%= render :partial => 'order_items_fields', :locals => {:f => f} %>
 

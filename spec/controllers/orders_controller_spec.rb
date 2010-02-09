@@ -34,4 +34,39 @@ describe OrdersController do
     get :create, :pickup_id => p.id
     assigns(:order).order_items.size.should == p.stock_items.size
   end
+
+  it "should set @member from current user when rendering new and there is no user_id in params" do
+    p = Factory(:pickup_with_stock_items)
+    get :new, :pickup_id => p.id
+    assigns(:member).should == UserSession.find.user
+  end
+
+  it "should set @member from params if set when rendering new" do
+    p = Factory(:pickup_with_stock_items)
+    u = Factory(:member_user)
+    get :new, :pickup_id => p.id, :user_id => u.id
+    assigns(:member).should == u
+  end
+
+  it "should set @member from order when rendering edit" do
+    p = Factory(:pickup_with_stock_items)
+    u = Factory(:member_user)
+    o = Factory(:order_with_items, :user => u)
+
+    get :edit, :id => o.id, :pickup_id => p.id
+    assigns(:member).should == u
+  end
+
+  it "should only allow a member to create / edit orders for themselves" do
+    pending
+  end
+
+  it "should render edit instead of new if an order for this pickup and user already exists" do
+    pending
+  end
+
+  it "should require a user id when rendering any action except index" do
+    pending
+  end
+
 end
