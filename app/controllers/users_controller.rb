@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    @farm = @user.farms[0]
 
     if(current_user == @user)
       render :template => "users/home"

@@ -1,6 +1,9 @@
+<h1><%= @farm.name %></h1>
+<h6><a href="">(change)</a></h6>
+
 <h1>Welcome, <%= "#{@user.first_name}!"%></h1>
 
-<h3>Your current orders (for editing or verification):</h3>
+<h3>Your current orders:</h3>
 <% current_orders = Order.find_all_by_user_id(@user.id) %>
 <table class="order_form">
   <tr class="hed">
@@ -27,18 +30,15 @@
 
 </table>
 
-<% @user.farms.each do |farm| %>
-
-  <h3><%= "#{farm.name}"%></h3>
-  <h5>Pickups currently open for orders:</h5>
-  <ul>
-    <%
-      open_pickups = Pickup.find_all_by_farm_id_and_status(farm.id, "open")
-      open_pickups.each do |pickup|
-    %>
-    <li><%= "#{pickup.name} - #{pickup.date}"%></li>
-    <% end %>
-  </ul>
+<h5>Pickups currently open for orders:</h5>
+<ul>
+  <%
+    open_pickups = Pickup.find_all_by_farm_id_and_status(@farm.id, "open")
+    open_pickups.each do |pickup|
+  %>
+  <li><%= link_to "#{pickup.name} - #{pickup.date}", new_order_path(:pickup_id => pickup.id) %></li>
+  <% end %>
+</ul>
 
 
 
@@ -47,4 +47,4 @@
 
 
   
-<% end %>
+
