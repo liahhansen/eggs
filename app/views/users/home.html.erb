@@ -12,7 +12,7 @@
   </tr>
 
  <% current_orders.each do |order| %>
-    <% if order.pickup.status == 'open' || order.pickup.status == 'closed'%>
+    <% if order.pickup.status == 'open' || order.pickup.status == 'inprogress'%>
 
       <tr>
         <td><%= order.pickup.date %></td>

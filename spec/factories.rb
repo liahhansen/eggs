@@ -34,7 +34,7 @@ Factory.define :pickup do |p|
   p.name 'Emeryville'
   p.association :farm
   p.date '2010-01-28'
-  p.status 'closed'
+  p.status 'inprogress'
   p.host 'Tami Taylor'
   p.location '38 Panther Street, Dillon, TX 59285'
   p.opening_at '2010-01-08 00:01:00'
