@@ -19,7 +19,7 @@
           <td><%= order.pickup.farm.name %></td>
           <td><%= order.pickup.name %></td>
           <td><%= order.pickup.status %></td>
-          <td><%= link_to "edit order", edit_order_path(order) %></td>
+          <td><%= link_to "view/edit order", order_path(order) %></td>
         </tr>
 
       <% end %>
