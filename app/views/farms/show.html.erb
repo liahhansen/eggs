@@ -1,22 +1,47 @@
-<h1>Welcome to <%=h @farm.name %>! </h1>
+<div id="" class="grid_8 ">
 
-<h2><%= link_to "Pickups:", farm_pickups_path(@farm)%></h2>
+  <p style="color: green"><%= flash[:notice] %></p>
+
+<div class="box_header"><h5>Your current orders:</h5></div>
+<table class="box_table">
 <% @farm.pickups.each do |p|%>
-    <p>
-      <%= link_to "#{p.name} - #{p.date}", pickup_path(p)%>
-    </p>
-<% end %>
+    <tr>
+      <%# link_to "#{p.name} - #{p.date}", pickup_path(p)%>
+      <td><%= "#{p.date}"%></td>
+      <td><%= "#{p.name}"%></td>
+      <td><%= pluralize(p.orders.size, "Order" ) %></td>
 
-<h2>Products:</h2>
-<% @farm.products.each do |p|%>
-    <p>
-      <%= link_to "#{p.name}", product_path(p)%>
-    </p>
+    </tr>
 <% end %>
+</table>
 
-<h2>Users:</h2>
-<% @farm.users.each do |m|%>
-    <p>
-      <%= link_to "#{m.first_name} #{m.last_name}", user_path(m)%>
-    </p>
-<% end %>
+
+</div>
+
+<div class="grid_4">
+  <p></p>
+  <div class="box_header"><h5>Manage Farm</h5></div>
+    <div class="box_content">
+      <p>
+        <%= link_to "View / Manage Products", products_path %><br/>
+        <%= link_to "View / Manage Members", users_path %>
+      </p>
+
+
+  <% @farm.products.each do |p|%>
+      <p>
+        <%= link_to "#{p.name}", product_path(p)%>
+      </p>
+  <% end %>
+  </div>
+  <p></p>
+
+  <div class="box_header"><h5>Users</h5></div>
+  <div class="box_content">
+  <% @farm.users.each do |m|%>
+      <p>
+        <%= link_to "#{m.first_name} #{m.last_name}", user_path(m)%>
+      </p>
+  <% end %>
+  </div>
+</div>
