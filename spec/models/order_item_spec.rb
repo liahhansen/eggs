@@ -18,8 +18,8 @@ describe OrderItem do
     OrderItem.new(:stock_item_id => Factory(:stock_item).id, :order_id => Factory(:order).id,:quantity=>1).valid?.should == true
   end
 
-  it "should not have a quantity of zero" do
-    OrderItem.new(:stock_item_id => Factory(:stock_item).id, :order_id => Factory(:order).id,:quantity=>0).valid?.should == false
+  it "should have a quantity of 0 to 99" do
+    OrderItem.new(:stock_item_id => Factory(:stock_item).id, :order_id => Factory(:order).id,:quantity=>100).valid?.should == false
     OrderItem.new(:stock_item_id => Factory(:stock_item).id, :order_id => Factory(:order).id,:quantity=>1).valid?.should == true
   end
 

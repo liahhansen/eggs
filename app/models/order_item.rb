@@ -3,7 +3,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
 
   validates_presence_of :stock_item_id,:quantity
-  validates_inclusion_of :quantity, :in => 1..99
+  validates_inclusion_of :quantity, :in => 0..99
   validate :stock_item_must_exist
 
   def stock_item_must_exist

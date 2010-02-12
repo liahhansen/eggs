@@ -31,8 +31,14 @@ describe OrdersController do
 
   it "should create new order_items when rendering 'create" do
     p = Factory(:pickup_with_stock_items)
-    get :create, :pickup_id => p.id
-    assigns(:order).order_items.size.should == p.stock_items.size
+    s1 = Factory(:stock_item)
+    s2 = Factory(:stock_item)
+    get :create, :pickup_id => p.id, :order => { :pickup_id => p.id,
+            :order_items_attributes => {
+                    "0" => {:stock_item_id => s1.id, :quantity => "2"},
+                    "1" => {:stock_item_id => s2.id, :quantity => "0"}}}
+    
+    assigns(:order).order_items.size.should == 2
   end
 
   it "should set @member from current user when rendering new and there is no user_id in params" do

@@ -59,4 +59,12 @@ describe Order do
     o.valid?.should == true
   end
 
+  it "should generate with order_items when a pickup is passed to new" do
+    pickup = Factory(:pickup_with_stock_items)
+    order = Order.new_from_pickup(pickup)
+    pickup.stock_items.size.should_not == 0
+    order.order_items.size.should_not == 0
+    order.order_items.size.should == pickup.stock_items.size
+  end
+
 end

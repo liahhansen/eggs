@@ -34,8 +34,7 @@ class OrdersController < ApplicationController
       return
     end
 
-    @order = Order.new
-    @order.add_order_items_for_pickup(@pickup)
+    @order = Order.new_from_pickup(@pickup)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,7 +46,6 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @pickup = @order.pickup
-    @order.add_order_items_for_pickup(@pickup)
     @member = @order.user
   end
 
@@ -64,8 +62,6 @@ class OrdersController < ApplicationController
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
         @pickup = Pickup.find params[:pickup_id]
-        @order.add_order_items_for_pickup(@pickup)
-
         format.html { render :action => "new" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end
@@ -85,7 +81,6 @@ class OrdersController < ApplicationController
         format.html { redirect_to(@order) }
         format.xml  { head :ok }
       else
-        @order.add_order_items_for_pickup(@pickup)        
         format.html { render :action => "edit" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end

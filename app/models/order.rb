@@ -6,20 +6,14 @@ class Order < ActiveRecord::Base
   validates_presence_of :user_id, :pickup_id
   validate :user_must_exist, :pickup_must_exist, :total_meets_minimum
 
-  accepts_nested_attributes_for :order_items, :reject_if => lambda {|item| item["quantity"].to_i == 0 || item["quantity"].to_i == nil}
+  accepts_nested_attributes_for :order_items
 
-  # if the order already has order_items,
-  # rebuild them using stock_items and insert the right quantity
-  def add_order_items_for_pickup(pickup)
-    if order_items
-      items = order_items.clone
-      order_items.clear
-    end
-    
+  def self.new_from_pickup(pickup)
+    order = Order.new
     pickup.stock_items.each do |item|
-      oi = order_items.build(:stock_item_id => item.id, :quantity => 0)
-      items.each {|i| oi.quantity = i["quantity"] if i["stock_item_id"] == item.id} if items
+      order.order_items.build(:stock_item_id => item.id, :quantity => 0)
     end
+    return order
   end
 
   def estimated_total
