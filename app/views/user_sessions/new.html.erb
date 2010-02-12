@@ -1,17 +1,18 @@
+<div id="" class="grid_12 ">
+<p style="color: green"><%= flash[:notice] %></p>
 
 <% form_for @user_session do |form| %>
 <%= form.error_messages %>
-<ol class="formList">
-  <li>
+  <p>
     <%= form.label :username, "Username" %>
     <%= form.text_field :username %>
-  </li>
-  <li>
+  </p>
+  <p>
     <%= form.label :password, "Password" %>
     <%= form.password_field :password %>
-  </li>
-  <li>
+  </p>
+  <p>
     <%= form.submit "Login" %>
-  </li>
-</ol>
+  </p>
 <% end %>
+</div>

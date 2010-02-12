@@ -1,8 +1,16 @@
+<div id="" class="grid_12 ">
+<p style="color: green"><%= flash[:notice] %></p>
+
+
 <h1>Editing member</h1>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </p>
   <p>
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
@@ -23,10 +31,20 @@
     <%= f.label :neighborhood %><br />
     <%= f.text_field :neighborhood %>
   </p>
+
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password_confirmation %>
+  </p>
+
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Cancel', @user %>
+</div>

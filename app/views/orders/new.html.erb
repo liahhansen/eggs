@@ -1,5 +1,11 @@
+<div id="" class="grid_12 ">
+<p style="color: green"><%= flash[:notice] %></p>
+
+
 <h1>New order</h1>
 
 <%= render :partial => 'order_form', :locals => {:button_label => 'Create'} %>
 
 <%= link_to 'Back', orders_path %>
+
+</div>

@@ -52,7 +52,7 @@ sf_mission_feb10:
   description: Kathryn's house!  5:30-7:30pm Wednesday night.
   farm: soulfood
   date: '2010-02-10'
-  status: notyetopen
+  status: open
   host: Kathryn Aaker
   location: 963 Hampshire St. San Francisco, CA 94110
   minimum_order_total: 25

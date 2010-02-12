@@ -16,3 +16,19 @@ feb3_eggs:
   substitutions_available: false
   notes: Sorry about the low production right now.  First come first served!
 
+feb10_mission_chickenreg:
+  pickup: sf_mission_feb10
+  product: sf_chickenreg
+  max_quantity_per_member: 5
+  quantity_available: 50
+  substitutions_available: false
+  notes: We have lots of regular chickens!
+
+feb10_mission_eggs:
+  pickup: sf_mission_feb10
+  product: sf_eggs
+  max_quantity_per_member: 2
+  quantity_available: 5
+  substitutions_available: false
+  notes: Sorry about the low production right now.  First come first served!
+  

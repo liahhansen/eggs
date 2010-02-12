@@ -13,10 +13,27 @@
 </head>
 <body>
 
+<div id="headerbg">
+  &nbsp;
+</div>
+
 <div class="container_12 topGutter">
    <div class="grid12">
+
+   </div>
+</div>
+
+<div id="header" class="container_12 topSection">
+
+
+  <div id="title" class="grid_6 ">
+    <h1>Eggs!<%= " - #{@farm.name}" if @farm %></h1>
+  </div>
+
+  <div id="" class="grid_6 ">
      <div id="user_nav">
        <% if current_user %>
+         <%= link_to "Home", root_path %> |
          <%= link_to "Edit profile", edit_user_path(:current) %> |
          <%= link_to "Log out", logout_path %>
        <% else %>
@@ -24,44 +41,18 @@
          <%= link_to "Log in", login_path %>
        <% end %>
      </div>
-   </div>  
-</div>
-
-<div id="header" class="container_12 topSection">
-
-<div id="" class="grid_1 ">
-  &nbsp;
-</div>
-
-<div id="" class="grid_5 ">
-  <h1>Eggs!</h1>
-</div>
-
-<div id="" class="grid_5 ">
-  &nbsp;
-</div>
-
-<div id="" class="grid_1 ">
-  &nbsp;
-</div>
+  </div>
 
 </div>
 
 
 <div id="content" class="container_12">
 
-<div id="" class="grid_1 ">
-  &nbsp;
-</div>
 
-<div id="" class="grid_10 ">
-    <p style="color: green"><%= flash[:notice] %></p>
-    <%= yield %>
-</div>
 
-<div id="" class="grid_1 ">
-  &nbsp;
-</div>
+<%= yield %>
+
+
 
 </div>
 

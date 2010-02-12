@@ -1,3 +1,7 @@
+<div id="" class="grid_12 ">
+<p style="color: green"><%= flash[:notice] %></p>
+
+
 <p>
   <b>Member:</b>
   <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %>
@@ -24,3 +28,4 @@
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+</div>

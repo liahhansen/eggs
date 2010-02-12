@@ -1,49 +1,61 @@
-<h1><%= @farm.name %></h1>
-<h6><a href="">(change)</a></h6>
 
-<h1>Welcome, <%= "#{@user.first_name}!"%></h1>
+<div id="" class="grid_8 ">
 
-<h3>Your current orders:</h3>
-<% current_orders = Order.find_all_by_user_id(@user.id) %>
-<table class="order_form">
-  <tr class="hed">
-    <th>Date</th>
-    <th>Farm</th>
-    <th>Name</th>
-    <th>Status</th>
-    <th></th>
-  </tr>
+  <p style="color: green"><%= flash[:notice] %></p>
 
- <% current_orders.each do |order| %>
-    <% if order.pickup.status == 'open' || order.pickup.status == 'inprogress'%>
 
-      <tr>
-        <td><%= order.pickup.date %></td>
-        <td><%= order.pickup.farm.name %></td>
-        <td><%= order.pickup.name %></td>
-        <td><%= order.pickup.status %></td>
-        <td><%= link_to "edit order", edit_order_path(order) %></td>
-      </tr>
+  <h5>Welcome, <%= "#{@user.first_name} #{@user.last_name}!"%></h5>
+  <p>Your upcoming order (Feb 10 - SF/Potrero) has been finalized with a total of $59.49, leaving your balance at $-21.99.  Please top up your account using PayPal or bring a check for $21.99 when you pick up your order.  Thanks!</p>
 
+  <div class="box_header"><h5>Your current orders:</h5></div>
+  <% current_orders = Order.find_all_by_user_id(@user.id) %>
+  <table class="box_table">
+
+   <% current_orders.each do |order| %>
+      <% if order.pickup.status == 'open' || order.pickup.status == 'inprogress'%>
+
+        <tr>
+          <td><%= order.pickup.date %></td>
+          <td><%= order.pickup.farm.name %></td>
+          <td><%= order.pickup.name %></td>
+          <td><%= order.pickup.status %></td>
+          <td><%= link_to "edit order", edit_order_path(order) %></td>
+        </tr>
+
+      <% end %>
     <% end %>
-  <% end %>
 
-</table>
+  </table>
 
-<h5>Pickups currently open for orders:</h5>
-<ul>
-  <%
-    open_pickups = Pickup.find_all_by_farm_id_and_status(@farm.id, "open")
-    open_pickups.each do |pickup|
-  %>
-  <li><%= link_to "#{pickup.name} - #{pickup.date}", new_order_path(:pickup_id => pickup.id) %></li>
-  <% end %>
-</ul>
+  <div class="box_header"><h5>Pickups currently open for orders:</h5></div>
+  <table class="box_table">
+    <%
+      open_pickups = Pickup.find_all_by_farm_id_and_status(@farm.id, "open")
+      open_pickups.each do |pickup|
+    %>
+    <tr>
+      <td><%= pickup.date %></td>
+      <td><%= pickup.farm.name %></td>
+      <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id)%></td>
+      <td><%= pickup.status %></td>
+      <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id) %></td>
+    </tr>
+    <% end %>
+  </ul>
+  </table>
 
 
+</div>
 
-
-
+<div id="sidebar" class="grid_4">
+  <p></p>
+  <div class="box_header">
+    <h5>Your Account Balance:</h5>
+  </div>
+  <div class="box_content">
+    Your balance here
+  </div>
+</div>
 
 
   

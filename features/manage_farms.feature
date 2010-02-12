@@ -6,7 +6,7 @@ Background:
   Given I am the registered user jennyjones
   And I am on login
   When I login with valid credentials
-  Then I should see "Successfully logged in"
+  Then I should see "Farms"
 
 Scenario: Farms List
   When I go to farms

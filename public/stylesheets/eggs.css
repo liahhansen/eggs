@@ -1,3 +1,40 @@
+body {
+  font-family: Helvetica, Arial, Geneva, sans-serif ;
+  color: #333333;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+div.box_header {
+  background-color: #cccccc;
+  padding-left: 8px;
+  margin-bottom: 2px;
+}
+div.box_content {
+  background-color: #eaeaea;
+  padding: 8px;
+}
+
+div.box_header h5 {
+  margin-bottom: 0px;
+}
+
+
+table.box_table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+
+table.box_table td{
+  background-color: #eaeaea;
+  height: 50px;
+  padding: 8px;
+  vertical-align:middle;
+}
+
 div.topGutter div {
     height: 30px;
 }
@@ -6,13 +43,30 @@ div.topSection div {
    height: 100px;
 }
 
+div#headerbg {
+    background-color: #cccccc;
+    height: 130px;
+    width: 100%;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+}
+
+div#title {
+    position:relative;
+    top:50px;
+}
+
 h1 {
 	font-size: 32px;
 }
 
 div#user_nav {
     float: right;
-    font-size: 0.9em;
+    font-size: 14px;
+    position:relative;
+    top: 75px;
 }
 
 table.simple {

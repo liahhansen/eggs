@@ -9,7 +9,6 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Successfully logged in."
       if(current_user.has_role?(:admin))
         redirect_to farms_url
       else
