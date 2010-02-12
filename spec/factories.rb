@@ -67,7 +67,8 @@ end
 Factory.define :order_with_items, :parent => :order do |o|
   o.order_items do |i|
     items = []
-    2.times{items << i.association(:order_item)}
+    items << i.association(:order_item, :quantity => 2)
+    items << i.association(:order_item, :quantity => 0)
     items
   end
 end

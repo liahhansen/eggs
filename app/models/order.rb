@@ -1,7 +1,11 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :pickup
-  has_many :order_items, :dependent => :destroy
+  has_many :order_items, :dependent => :destroy do
+    def with_quantity
+      self.select {|item| item.quantity > 0 }
+    end
+  end
 
   validates_presence_of :user_id, :pickup_id
   validate :user_must_exist, :pickup_must_exist, :total_meets_minimum
