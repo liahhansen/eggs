@@ -4,13 +4,13 @@
 
 <p>
   <b>Member:</b>
-  <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %>
+  <%= "#{@order.user.first_name} #{@order.user.last_name}" %>
 
 </p>
 
 <p>
   <b>Pickup:</b>
-  <%= link_to "#{@order.pickup.name} - #{@order.pickup.pretty_date}", pickup_path(@order.pickup) %>
+  <%= "#{@order.pickup.name} - #{@order.pickup.pretty_date}" %>
 </p>
 
 <p>
@@ -21,7 +21,7 @@
 <p>
   <b>order items:</b><br/>
 <% @order.order_items.each do |item| %>
-  <%= link_to "#{item.stock_item.product.name}", stock_item_path(item.stock_item) %><%= ", quantity: #{item.quantity}"%><br/>  
+  <%= "#{item.stock_item.product.name}" %><%= ", quantity: #{item.quantity}"%><br/>  
 
 <% end %>
 </p>
