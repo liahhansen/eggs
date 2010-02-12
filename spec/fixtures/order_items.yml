@@ -7,3 +7,13 @@ kathryn_feb3_eggs:
   stock_item: feb3_eggs
   order: kathryn_sf_emeryville_feb3
   quantity: 2
+
+ben_feb3_chickenreg:
+  stock_item: feb3_chickenreg
+  order: ben_sf_emeryville_feb3
+  quantity: 3
+
+kathryn_feb3_eggs:
+  stock_item: feb3_eggs
+  order: ben_sf_emeryville_feb3
+  quantity: 0
