@@ -15,7 +15,6 @@ describe FarmsController do
 
   it "should create sets of pickups when showing a single farm" do
     farm = Factory(:farm_with_pickups)
-    puts "farm: #{farm.id}"
 
     get :show, :id => farm.id
     response.should be_success
