@@ -1,0 +1,72 @@
+<% form_for(@pickup) do |f| %>
+  <%= hidden_field_tag :farm_id, @farm.id %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :farm_id, :value => @farm.id  %>
+  <%= f.hidden_field :status, :value => "notyetopen" %>
+
+  <p>
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
+    <%= f.label :name ,"Name: (Emeryville, Farm, etc.)" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :size => "60x3" %>
+  </p>
+
+  <p>
+    <%= f.label :host %><br />
+    <%= f.text_field :host %>
+  </p>
+  <p>
+    <%= f.label :location %><br />
+    <%= f.text_area :location, :size => "40x3" %>
+  </p>
+  <p>
+    <%= f.label :opening_at %><br />
+    <%= f.datetime_select :opening_at %>
+  </p>
+  <p>
+    <%= f.label :closing_at %><br />
+    <%= f.datetime_select :closing_at %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes, :size => "60x5" %>
+  </p>
+
+  <table class="simple">
+    <tr>
+      <th>name</th>
+      <th>total available</th>
+      <th>max per member</th>
+      <th>description</th>
+      <th>price</th>
+      <th>is estimated</th>
+      <th>notes</th>
+    </tr>
+  <% @pickup.stock_items.each do |item| %>
+
+        <% f.fields_for :stock_items, item do |builder| %>
+        <tr>
+          <%= builder.hidden_field :product_id, :value => item.product.id %>
+          <td><%= builder.text_field :product_name, :size => "18" %></td>
+          <td><%= builder.text_field :quantity_available, :size => "3" %></td>
+          <td><%= builder.text_field :max_quantity_per_member, :size => "3" %></td>
+          <td><%= builder.text_area :product_description, :size => "30x3" %></td>
+          <td><%= builder.text_field :product_price, :size => "3" %></td>
+          <td><%= builder.select :product_estimated, ["true", "false"] %></td>
+          <td><%= builder.text_area :notes, :size => "30x3" %></td>
+        </tr>
+        <% end %>
+
+  <% end %>
+  </table>
+
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>

@@ -35,7 +35,7 @@ class PickupsController < ApplicationController
   # GET /pickups/new
   # GET /pickups/new.xml
   def new
-    @pickup = Pickup.new
+    @pickup = Pickup.new_from_farm(@farm)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,7 +56,7 @@ class PickupsController < ApplicationController
     respond_to do |format|
       if @pickup.save
         flash[:notice] = 'Pickup was successfully created.'
-        format.html { redirect_to(@pickup) }
+        format.html { redirect_to :action => "show", :id => @pickup.id, :farm_id => @farm.id }
         format.xml  { render :xml => @pickup, :status => :created, :location => @pickup }
       else
         format.html { render :action => "new" }
@@ -73,7 +73,7 @@ class PickupsController < ApplicationController
     respond_to do |format|
       if @pickup.update_attributes(params[:pickup])
         flash[:notice] = 'Pickup was successfully updated.'
-        format.html { redirect_to(@pickup) }
+        format.html { redirect_to :action => "show", :id => @pickup.id, :farm_id => @farm.id }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -89,7 +89,7 @@ class PickupsController < ApplicationController
     @pickup.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pickups_url) }
+      format.html { redirect_to(@farm) }
       format.xml  { head :ok }
     end
   end
