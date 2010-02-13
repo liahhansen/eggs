@@ -1,0 +1,6 @@
+<tr>
+  <%# link_to "#{p.name} - #{p.date}", pickup_path(p)%>
+  <td><%= "#{p.date}" %></td>
+  <td><%= link_to "#{p.name}", pickup_path(p, :farm_id => @farm) %></td>
+  <td><%= pluralize(p.orders.size, "Order" ) %></td>
+</tr>

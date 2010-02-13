@@ -20,6 +20,10 @@ class FarmsController < ApplicationController
   # GET /farms/1.xml
   def show
     @farm = Farm.find(params[:id])
+    @pickups_inprogress = Pickup.find_all_by_farm_id_and_status(@farm.id, "inprogress")
+    @pickups_open       = Pickup.find_all_by_farm_id_and_status(@farm.id, "open")
+    @pickups_notyetopen = Pickup.find_all_by_farm_id_and_status(@farm.id, "notyetopen")
+    @pickups_archived   = Pickup.find_all_by_farm_id_and_status(@farm.id, "archived")
 
     respond_to do |format|
       format.html # show.html.erb

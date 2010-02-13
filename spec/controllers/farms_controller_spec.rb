@@ -8,9 +8,23 @@ describe FarmsController do
   end
 
 
-  it "should suceed if we are authenticated" do
+  it "should succeed if we are authenticated" do
     get :index
     response.should be_success
+  end
+
+  it "should create sets of pickups when showing a single farm" do
+    farm = Factory(:farm_with_pickups)
+    puts "farm: #{farm.id}"
+
+    get :show, :id => farm.id
+    response.should be_success
+
+    assigns(:pickups_inprogress).size.should == 2
+    assigns(:pickups_open).size.should == 1
+    assigns(:pickups_notyetopen).size.should == 1
+    assigns(:pickups_archived).size.should == 1
+    
   end
 
 end

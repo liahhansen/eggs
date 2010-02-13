@@ -2,16 +2,31 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-<div class="box_header"><h5>Your current orders:</h5></div>
+<div class="box_header"><h5>In Process Pickups (not accepting orders):</h5></div>
 <table class="box_table">
-<% @farm.pickups.each do |p|%>
-    <tr>
-      <%# link_to "#{p.name} - #{p.date}", pickup_path(p)%>
-      <td><%= "#{p.date}"%></td>
-      <td><%= "#{p.name}"%></td>
-      <td><%= pluralize(p.orders.size, "Order" ) %></td>
+<% @pickups_inprogress.each do |p|%>
+    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+<% end %>
+</table>
 
-    </tr>
+<div class="box_header"><h5>Open Pickups (currently accepting orders):</h5></div>
+<table class="box_table">
+<% @pickups_open.each do |p|%>
+    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+<% end %>
+</table>
+
+<div class="box_header"><h5>Not Yet Open Pickups:</h5></div>
+<table class="box_table">
+<% @pickups_notyetopen.each do |p|%>
+    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+<% end %>
+</table>
+
+<div class="box_header"><h5>Archived Pickups:</h5></div>
+<table class="box_table">
+<% @pickups_archived.each do |p|%>
+    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
 <% end %>
 </table>
 
@@ -19,29 +34,14 @@
 </div>
 
 <div class="grid_4">
-  <p></p>
   <div class="box_header"><h5>Manage Farm</h5></div>
     <div class="box_content">
       <p>
-        <%= link_to "View / Manage Products", products_path %><br/>
-        <%= link_to "View / Manage Members", users_path %>
+        <%= link_to "Schedule new Pickup", new_pickup_path(:farm_id => @farm.id) %><br/>
+        <%= link_to "View / Manage Products", products_path(:farm_id => @farm.id) %><br/>
+        <%= link_to "View / Manage Members", users_path(:farm_id => @farm.id) %><br/>
+        <%= link_to "View Combined Order Summary" %>
       </p>
-
-
-  <% @farm.products.each do |p|%>
-      <p>
-        <%= link_to "#{p.name}", product_path(p)%>
-      </p>
-  <% end %>
   </div>
-  <p></p>
 
-  <div class="box_header"><h5>Users</h5></div>
-  <div class="box_content">
-  <% @farm.users.each do |m|%>
-      <p>
-        <%= link_to "#{m.first_name} #{m.last_name}", user_path(m)%>
-      </p>
-  <% end %>
-  </div>
 </div>
