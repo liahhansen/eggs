@@ -21,10 +21,18 @@ class StockItem < ActiveRecord::Base
   end
 
   def copy_product_attributes
-    self.product_name = product.name
-    self.product_description = product.description
-    self.product_price = product.price
-    self.product_estimated = product.estimated
+    self.product_name         = product.name
+    self.product_description  = product.description
+    self.product_price        = product.price
+    self.product_estimated    = product.estimated
+  end
+
+  def quantity_ordered
+    OrderItem.find_all_by_stock_item_id(id).inject(0){|total, item| total + item.quantity}
+  end
+
+  def quantity_remaining
+    quantity_available - quantity_ordered
   end
 
 end

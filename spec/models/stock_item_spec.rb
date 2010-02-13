@@ -22,12 +22,21 @@ describe StockItem do
   end
 
   it "should have product attributes after save" do
-    stockitem = StockItem.create!(@valid_attributes)
+    stock_item = StockItem.create!(@valid_attributes)
 
-    stockitem.product_description.should  == @product.description
-    stockitem.product_name.should         == @product.name
-    stockitem.product_price.should        == @product.price
-    stockitem.product_estimated.should    == @product.estimated
+    stock_item.product_description.should  == @product.description
+    stock_item.product_name.should         == @product.name
+    stock_item.product_price.should        == @product.price
+    stock_item.product_estimated.should    == @product.estimated
+  end
+
+  it "should return quantity ordered" do
+    stock_item = Factory(:stock_item, :quantity_available => 10)
+    Factory(:order_item, :stock_item => stock_item, :quantity => 4)
+
+    stock_item.quantity_ordered.should == 4
+    stock_item.quantity_remaining.should == 6
+
   end
 
 end
