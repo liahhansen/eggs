@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
 
   def estimated_total
     total = 0
-    order_items.each do |item|     
+    order_items.each do |item|
       total += item.stock_item.product_price * item.quantity
     end
     total

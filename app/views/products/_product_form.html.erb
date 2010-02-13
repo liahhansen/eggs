@@ -1,0 +1,27 @@
+<% form_for(@product) do |f| %>
+  <%= hidden_field_tag :farm_id, @farm.id %>
+  <%= f.hidden_field :farm_id, :value => @farm.id %>
+
+  <%= f.error_messages %>
+
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :size => "50x5" %>
+  </p>
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price, :size => "5" %>
+  </p>
+  <p>
+    <%= f.label :estimated %><br />
+    <%= f.check_box :estimated %>
+  </p>
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>
