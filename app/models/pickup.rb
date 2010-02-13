@@ -1,9 +1,21 @@
 class Pickup < ActiveRecord::Base
   belongs_to :farm
-  has_many :stock_items
-  has_many :orders
+  has_many :stock_items, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
 
   validates_presence_of :farm_id
+
+  accepts_nested_attributes_for :stock_items
+
+  def self.new_from_farm(farm)
+    pickup = Pickup.new
+    farm.products.each do |product|
+      stock_item = pickup.stock_items.build(:product_id => product.id)
+      stock_item.copy_product_attributes
+    end
+    return pickup
+  end
+
 
   define_easy_dates do
     format_for :date, :format => "%A, %b%e, %Y", :as => "pretty_date"

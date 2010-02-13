@@ -27,4 +27,13 @@ describe Pickup do
       thisfarm.should == true
     end
   end
+
+  it "should generate with stock_items when a farm is passed to new" do
+    farm = Factory(:farm_with_products)
+    pickup = Pickup.new_from_farm(farm)
+    
+    pickup.stock_items.size.should_not == 0
+    farm.products.size.should_not == 0
+    pickup.stock_items.size.should == farm.products.size
+  end
 end
