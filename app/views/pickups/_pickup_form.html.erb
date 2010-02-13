@@ -29,6 +29,10 @@
     <%= f.text_area :location, :size => "40x3" %>
   </p>
   <p>
+    <%= f.label :minimum_order_total %><br/>
+    <%= f.text_field :minimum_order_total, :size=> 5 %>
+  </p>
+  <p>
     <%= f.label :opening_at %><br />
     <%= f.datetime_select :opening_at %>
   </p>
