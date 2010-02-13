@@ -53,6 +53,10 @@ div#headerbg {
     z-index:-1;
 }
 
+div#header_gutter div{
+  height: 20px;
+}
+
 div#title {
     position:relative;
     top:50px;
@@ -75,7 +79,7 @@ table.simple {
     font-weight: normal;
     font-size: 11px;
     color: #fff;
-    width: 280px;
+    width: 100%;
     background-color: #666;
     border: 0px;
     border-collapse: collapse;
