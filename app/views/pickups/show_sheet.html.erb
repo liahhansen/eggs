@@ -19,7 +19,7 @@
     <th>Phone</th>
     <th>Pickup</th>
     <% @pickup.stock_items.each do |item| %>
-      <th><%= item.product.name %><br/><%= item.quantity_ordered %></th>
+      <th><%= item.product_name %><br/><%= item.quantity_ordered %></th>
     <% end %>
 
     <th>Notes</th>

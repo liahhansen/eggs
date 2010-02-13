@@ -7,6 +7,10 @@ feb3_chickenreg:
   quantity_available: 50
   substitutions_available: false
   notes: We have lots of regular chickens!
+  product_name: Chicken, REGULAR
+  product_description: We've got chicken!
+  product_price: 26
+  product_estimated: true
 
 feb3_eggs:
   pickup: sf_emeryville_feb3
@@ -15,6 +19,10 @@ feb3_eggs:
   quantity_available: 2
   substitutions_available: false
   notes: Sorry about the low production right now.  First come first served!
+  product_name: 1 doz Eggs
+  product_description: The best eggs you'll ever eat
+  product_price: 6.5
+  product_estimated: false
 
 feb10_mission_chickenreg:
   pickup: sf_mission_feb10
@@ -23,6 +31,10 @@ feb10_mission_chickenreg:
   quantity_available: 50
   substitutions_available: false
   notes: We have lots of regular chickens!
+  product_name: Chicken, REGULAR
+  product_description: We've got chicken!
+  product_price: 26
+  product_estimated: true
 
 feb10_mission_eggs:
   pickup: sf_mission_feb10
@@ -31,4 +43,8 @@ feb10_mission_eggs:
   quantity_available: 5
   substitutions_available: false
   notes: Sorry about the low production right now.  First come first served!
+  product_name: 1 doz Eggs
+  product_description: The best eggs you'll ever eat
+  product_price: 6.5
+  product_estimated: false  
   

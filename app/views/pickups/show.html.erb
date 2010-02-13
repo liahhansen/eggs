@@ -55,7 +55,7 @@
   </tr>
     <% @pickup.stock_items.each do |s|%>
       <tr>
-          <td><%= s.product.name %></td>
+          <td><%= s.product_name %></td>
           <td><%= s.quantity_ordered %></td>
           <td><%= s.quantity_available %></td>
           <td><%= s.quantity_remaining %></td>

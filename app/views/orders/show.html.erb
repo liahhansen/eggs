@@ -21,7 +21,7 @@
 <p>
   <b>order items:</b><br/>
 <% @order.order_items.with_quantity.each do |item| %>
-  <%= "#{item.stock_item.product.name}" %><%= ", quantity: #{item.quantity}"%><br/>  
+  <%= "#{item.stock_item.product_name}" %><%= ", quantity: #{item.quantity}"%><br/>  
 
 <% end %>
 </p>
