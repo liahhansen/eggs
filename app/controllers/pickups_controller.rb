@@ -28,6 +28,10 @@ class PickupsController < ApplicationController
     end
   end
 
+  def show_sheet
+    @pickup = Pickup.find(params[:id])
+  end
+
   # GET /pickups/new
   # GET /pickups/new.xml
   def new
