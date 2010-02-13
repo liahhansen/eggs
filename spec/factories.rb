@@ -97,7 +97,19 @@ end
 
 Factory.define :farm_with_members, :parent => :farm do |farm|
   farm.after_create do |f|
-    4.times {Factory(:subscription, :farm => f, :user => Factory(:user))}
+    4.times do
+      s = Factory(:subscription, :farm => f, :user => Factory(:user))
+    end
+  end
+end
+
+Factory.define :farm_with_pickups, :parent => :farm do |farm|
+  farm.after_create do |f|
+    f.pickups << Factory(:pickup, :farm => f, :status => "inprogress")
+    f.pickups << Factory(:pickup, :farm => f, :status => "inprogress")
+    f.pickups << Factory(:pickup, :farm => f, :status => "open")
+    f.pickups << Factory(:pickup, :farm => f, :status => "notyetopen")
+    f.pickups << Factory(:pickup, :farm => f, :status => "archived")
   end
 end
 
