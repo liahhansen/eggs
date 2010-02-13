@@ -1,14 +1,15 @@
-<h1><%= "Pickup: #{@pickup.name}" %><br/>
-<%= "#{@pickup.pretty_date}" %></h1>
-<h3>Status: <%= "#{@pickup.status.upcase}"%></h3>
+<div id="" class="grid_8 ">
 
-<p>
-  <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", @pickup.map_link, :target => "_blank"%><br/>
-  <b>Host:</b>              <%=h @pickup.host %><br/>
-  <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
-  <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
-  <b>Current total:</b>     <%=h "#{number_to_currency @pickup.estimated_total}" %><br/>
-</p>
+<p><%= link_to "< Back to Pickups list", @farm %></p>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+
+<h2><%= "Pickup: #{@pickup.name}" %><br/>
+<%= "#{@pickup.pretty_date}" %></h2>
+<h5>Current Status: <%= "#{@pickup.status.upcase}"%></h5>
+
+
 
 
 <% if @pickup.description != nil %>
@@ -25,7 +26,7 @@
 </p>
 <% end %>
 
-<h2>Orders:</h2>
+<div class="box_header"><h5>Orders:</h5></div>
 
 
 <table class="simple">
@@ -33,6 +34,8 @@
     <th>Name</th>
     <th>Items (num)</th>
     <th>Total (est)</th>
+    <th>Balance</th>
+    <th>Joined</th>
   </tr>
 
   <% @pickup.orders.each do |o|%>
@@ -42,15 +45,45 @@
 </table>
 
 
-<h2><%= link_to "Stock Items:", stock_items_path(:pickup_id => @pickup.id)%></h2>
+<div class="box_header"><h5>Stock Items:</h5></div>
+<table class="simple">
+  <tr class="hed">
+    <th>Name</th>
+    <th>Ordered</th>
+    <th>Available</th>
+    <th>Remaining</th>
+  </tr>
+    <% @pickup.stock_items.each do |s|%>
+      <tr>
+          <td><%= s.product.name %></td>
+          <td><%= s.quantity_ordered %></td>
+          <td><%= s.quantity_available %></td>
+          <td><%= s.quantity_remaining %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
+<div class="grid_4">
+  <p></p>
+  <div class="box_header"><h5>Pickup Details: <%= link_to "(edit)", edit_pickup_path(@pickup)%></h5></div>
+    <div class="box_content">
+      <p>
+        <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", @pickup.map_link, :target => "_blank"%><br/>
+        <b>Host:</b>              <%=h @pickup.host %><br/>
+        <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
+        <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+        <b>Current total:</b>     <%=h "#{number_to_currency @pickup.estimated_total}" %><br/>
+      </p>
+  </div>
 
-<p>
-<% @pickup.stock_items.each do |s|%>
-      <%= link_to "#{s.product.name}", stock_item_path(s)%><br/>
-<% end %>
-</p>
+  <p></p>
+  <div class="box_header"><h5>Manage Pickup:</h5></div>
+    <div class="box_content">
+      <p>
+        <%= link_to "View Worksheet", :controller => 'pickups', :action => 'show_sheet', :id => @pickup.id, :farm_id => @farm.id %>
+      </p>
+  </div>
 
+</div>
 
-<%= link_to 'Edit', edit_pickup_path(@pickup) %> |
-<%= link_to 'Back', pickups_path %>
