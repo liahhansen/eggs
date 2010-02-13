@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+    @users = User.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
 
     respond_to do |format|
       format.html # index.html.erb

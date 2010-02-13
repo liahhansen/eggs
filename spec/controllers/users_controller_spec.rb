@@ -23,8 +23,22 @@ describe UsersController do
   it "should allow an admin to see the index" do
     admin = Factory(:admin_user)
     UserSession.create admin
-    get :index
+    get :index, :farm_id => Factory(:farm).id
     response.should render_template('index')
+  end
+
+  it "should only have users from the specified farm in index" do
+    admin = Factory(:admin_user)
+    UserSession.create admin
+
+    farm1 = Factory(:farm_with_members)
+    farm2 = Factory(:farm_with_members)
+
+    get :index, :farm_id => farm1.id
+
+    assigns(:users).each do |user|
+      user.farms.include?(farm1).should == true
+    end
   end
 
 end
