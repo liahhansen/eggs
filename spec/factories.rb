@@ -103,6 +103,12 @@ Factory.define :farm_with_members, :parent => :farm do |farm|
   end
 end
 
+Factory.define :farm_with_products, :parent => :farm do |farm|
+  farm.after_create do |f|
+    3.times {f.products << Factory(:product, :farm => f)}
+  end
+end
+
 Factory.define :farm_with_pickups, :parent => :farm do |farm|
   farm.after_create do |f|
     f.pickups << Factory(:pickup, :farm => f, :status => "inprogress")
