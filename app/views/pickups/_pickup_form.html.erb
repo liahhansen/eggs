@@ -2,11 +2,14 @@
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.error_messages %>
   <%= f.hidden_field :farm_id, :value => @farm.id  %>
-  <%= f.hidden_field :status, :value => "notyetopen" %>
 
   <p>
     <%= f.label :date %><br />
     <%= f.date_select :date %>
+  </p>
+  <p>
+    <%= f.label :status %><br/>
+    <%= f.select :status, ["notyetopen", "open", "inprogress", "archived"] %>
   </p>
   <p>
     <%= f.label :name ,"Name: (Emeryville, Farm, etc.)" %><br />
