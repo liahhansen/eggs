@@ -2,10 +2,14 @@ class StockItem < ActiveRecord::Base
   belongs_to :pickup
   belongs_to :product
 
-  validates_presence_of :product_id, :pickup_id
+  validates_presence_of :product_id
 
   before_create :copy_product_attributes
 
+  def after_initialize
+    self.max_quantity_per_member = 4 if !self.max_quantity_per_member
+    self.quantity_available = 50 if !self.quantity_available
+  end
 
   def sold_out?
 
@@ -21,10 +25,10 @@ class StockItem < ActiveRecord::Base
   end
 
   def copy_product_attributes
-    self.product_name         = product.name
-    self.product_description  = product.description
-    self.product_price        = product.price
-    self.product_estimated    = product.estimated
+    self.product_name         = product.name          if !self.product_name
+    self.product_description  = product.description   if !self.product_description
+    self.product_price        = product.price         if !self.product_price
+    self.product_estimated    = product.estimated     if !self.product_estimated
   end
 
   def quantity_ordered
