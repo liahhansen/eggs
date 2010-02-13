@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   rescue_from 'Acl9::AccessDenied', :with => :access_denied
   
   before_filter :authenticate
+  before_filter :set_farm
 
   helper_method :current_user
 
@@ -24,6 +25,10 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined? @current_user
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def set_farm
+    @farm = Farm.find(params[:farm_id]) if params[:farm_id]
   end
 
   def authenticate
