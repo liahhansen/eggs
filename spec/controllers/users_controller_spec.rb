@@ -7,8 +7,10 @@ describe UsersController do
 
   it "should let a member view their own page" do
     member = Factory(:member_user)
+    farm = Factory(:farm)
+    Factory(:subscription, :farm => farm, :user => member)
     UserSession.create member
-    get :show, :id => member.id
+    get :show, :id => member.id, :farm_id => farm.id
     response.should be_success
     response.should render_template('home')
   end
