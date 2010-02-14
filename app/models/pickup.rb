@@ -6,6 +6,7 @@ class Pickup < ActiveRecord::Base
   validates_presence_of :farm_id
 
   accepts_nested_attributes_for :stock_items
+  accepts_nested_attributes_for :orders
 
   def self.new_from_farm(farm)
     pickup = Pickup.new

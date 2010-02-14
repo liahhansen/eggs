@@ -32,6 +32,10 @@ class PickupsController < ApplicationController
     @pickup = Pickup.find(params[:id])
   end
 
+  def edit_order_totals
+    @pickup = Pickup.find(params[:id])
+  end
+
   # GET /pickups/new
   # GET /pickups/new.xml
   def new
