@@ -131,3 +131,14 @@ Factory.define :member_user, :parent => :user do |user|
     Factory(:roles_user, :role => Factory(:role, :name => 'member'), :user => u)
   end
 end
+
+Factory.define :user_with_orders_from_2_farms, :parent => :member_user do |user|
+  user.after_create do |u|
+    u.farms << Factory(:farm)
+    u.farms << Factory(:farm)
+    pickup1 = Factory(:pickup, :farm => u.farms[0])
+    pickup2 = Factory(:pickup, :farm => u.farms[1])
+    order1 = Factory(:order, :pickup => pickup1, :user => u)
+    order2 = Factory(:order, :pickup => pickup2, :user => u)
+  end
+end
