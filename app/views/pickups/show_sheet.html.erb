@@ -24,7 +24,8 @@
 
     <th>Notes</th>
     <th>Old Account Balance</th>
-    <th>Bag Total</th>
+    <th>Estimated Bag Total</th>
+    <th>Finalized Bag Total</th>
     <th>Updated Balance</th>
   </tr>
 
@@ -44,6 +45,7 @@
       <td><%= order.notes %></td>
       <td>$59.59</td>
       <td><%= number_to_currency order.estimated_total %></td>
+      <td><%= number_to_currency order.finalized_total %></td>
       <td>$29.62</td>
 
     </tr>
