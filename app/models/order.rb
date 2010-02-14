@@ -28,6 +28,9 @@ class Order < ActiveRecord::Base
     total
   end
 
+  def total_items_quantity
+    order_items.inject(0){|total, item|total + item.quantity}
+  end
 
   # VALIDATIONS
   

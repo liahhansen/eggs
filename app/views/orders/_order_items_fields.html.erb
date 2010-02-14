@@ -6,6 +6,7 @@
     <th>Price *estimated</th>
     <th>Total number available</th>
     <th>Number p/p</th>
+    <th>Number remaining</th>
     <th>Sold out?</th>
   </tr>
 
@@ -24,6 +25,7 @@
         <td><%= number_to_currency item.stock_item.product_price %><%= "*" if item.stock_item.product_estimated %></td>
         <td><%= item.stock_item.quantity_available %></td>
         <td><%= item.stock_item.max_quantity_per_member %></td>
+        <td><%= item.stock_item.quantity_remaining %></td>
         <td><%= item.stock_item.sold_out? %></td>
       </tr>
 

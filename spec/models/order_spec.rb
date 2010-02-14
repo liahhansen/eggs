@@ -81,4 +81,15 @@ describe Order do
     order.finalized_total.should == 53.55
   end
 
+  it "should return total items * quantity ordered" do
+    order = Factory(:order)
+    order.order_items << Factory(:order_item, :order => order, :quantity => 1)
+    order.order_items << Factory(:order_item, :order => order, :quantity => 3)
+
+    order.total_items_quantity.should == 4
+    order.order_items << Factory(:order_item, :order => order, :quantity => 2)
+    order.total_items_quantity.should == 6
+
+  end
+
 end
