@@ -19,7 +19,7 @@ class Pickup < ActiveRecord::Base
 
 
   define_easy_dates do
-    format_for :date, :format => "%A, %b%e, %Y", :as => "pretty_date"
+    format_for :date, :format => "%A, %b %e, %Y", :as => "pretty_date"
     format_for :opening_at, :format => "%I:%M%p, %m/%d/%y" 
     format_for :closing_at, :format => "%I:%M%p, %m/%d/%y"
   end
