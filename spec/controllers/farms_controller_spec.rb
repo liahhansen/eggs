@@ -23,6 +23,7 @@ describe FarmsController do
     assigns(:pickups_open).size.should == 1
     assigns(:pickups_notyetopen).size.should == 1
     assigns(:pickups_archived).size.should == 1
+    assigns(:pickups_finalized).size.should == 1
     
   end
 

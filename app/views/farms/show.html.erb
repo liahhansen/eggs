@@ -2,6 +2,13 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
+<div class="box_header"><h5>Finalized Pickups (ready for pickup!):</h5></div>
+<table class="box_table">
+<% @pickups_finalized.each do |p|%>
+    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+<% end %>
+</table>
+
 <div class="box_header"><h5>In Progress Pickups (not accepting orders):</h5></div>
 <table class="box_table">
 <% @pickups_inprogress.each do |p|%>

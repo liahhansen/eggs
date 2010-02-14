@@ -116,6 +116,7 @@ Factory.define :farm_with_pickups, :parent => :farm do |farm|
     f.pickups << Factory(:pickup, :farm => f, :status => "open")
     f.pickups << Factory(:pickup, :farm => f, :status => "notyetopen")
     f.pickups << Factory(:pickup, :farm => f, :status => "archived")
+    f.pickups << Factory(:pickup, :farm => f, :status => "finalized")
   end
 end
 
