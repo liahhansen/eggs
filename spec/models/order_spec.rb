@@ -76,4 +76,9 @@ describe Order do
     end
   end
 
+  it "should be able to have a finalized_total amount assigned" do
+    order = Factory(:order_with_items, :finalized_total => 53.55)
+    order.finalized_total.should == 53.55
+  end
+
 end
