@@ -17,4 +17,10 @@ describe User do
   it "should create a new instance given valid attributes" do
     User.create!(@valid_attributes)
   end
+
+  it "should return only the orders for a specific farm" do
+    user = Factory(:user_with_orders_from_2_farms)
+    user.orders.size.should == 2
+    user.orders.filter_by_farm(user.farms.first).size.should == 1
+  end
 end

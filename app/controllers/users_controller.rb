@@ -23,6 +23,22 @@ class UsersController < ApplicationController
     @farm = @user.farms.first
 
     if(current_user == @user)
+      orders = @user.orders.filter_by_farm(@farm)
+      @open_orders = orders.select {|order| order.pickup.status == "open"}
+      @finalized_orders = orders.select {|order|order.pickup.status == "finalized"}
+      @inprogress_orders = orders.select {|order|order.pickup.status == "inprogress"}
+
+      @open_pickups = Pickup.find_all_by_farm_id_and_status(@farm.id, "open").reject do |pickup|
+        has_order = false
+        @open_orders.each do |order|
+          if order.pickup == pickup
+            has_order = true
+            break
+          end
+        end
+        has_order
+      end
+
       render :template => "users/home"
       return
     end
