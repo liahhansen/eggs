@@ -23,4 +23,28 @@ describe OrderItem do
     OrderItem.new(:stock_item_id => Factory(:stock_item).id, :order_id => Factory(:order).id,:quantity=>1).valid?.should == true
   end
 
+  it "should throw error if sold out on create" do
+    stock_item = Factory(:stock_item, :quantity_available => 4)
+    Factory(:order_item, :stock_item => stock_item, :quantity => 3)
+    stock_item.sold_out?.should == false
+
+    Factory(:order_item, :stock_item => stock_item, :quantity => 1)
+    stock_item.sold_out?.should == true
+
+    order_item = Factory.build(:order_item, :stock_item => stock_item, :quantity => 1)
+    order_item.valid?.should == false
+    order_item.errors.on("quantity").downcase.should include "sold out"
+  end
+
+  it "should allow you to update an order_item with your last quantity regardless of inventory" do
+    stock_item = Factory(:stock_item, :quantity_available => 4)
+    order_item = Factory(:order_item, :stock_item => stock_item, :quantity => 4)
+
+    order_item.quantity = 4
+    order_item.valid?.should == true
+    order_item.quantity = 5
+    order_item.valid?.should == false
+
+  end
+
 end
