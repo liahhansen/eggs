@@ -9,14 +9,6 @@ describe Importer do
   it "should list pickup files" do
     @importer.pickups.empty?.should == false
   end
-
-  it "should list file headers" do
-    @importer.pickups.each do |pickup|
-      puts "Pickup for #{pickup.pickup_date}:"
-      puts "  Headers (#{pickup.headers.size}): #{pickup.headers.join '  |  '}"
-      puts "  Products (#{pickup.products.size}): #{pickup.products.join '  |  '}"
-    end
-  end
 end
 
 describe PickupImporter do

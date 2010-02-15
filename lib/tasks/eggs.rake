@@ -127,5 +127,20 @@ namespace :eggs do
       end
     end
 
+  namespace :import do
+
+    desc "Dry run import prints data to import but saves no changes.\n  DIR=[path to pickup csv]"
+    task :dry => :environment do
+      dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
+      puts "Importing from #{dir}."
+      importer = Importer.new dir
+      importer.pickups.each do |pickup|
+        puts "Pickup for #{pickup.pickup_date}:"
+        puts "  Headers (#{pickup.headers.size}): #{pickup.headers.join '  |  '}"
+        puts "  Products (#{pickup.products.size}): #{pickup.products.join '  |  '}"
+      end
+    end
+  end
+
 end
 
