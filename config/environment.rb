@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem "acl9", :source => "http://gemcutter.org", :lib => "acl9"
   config.gem "factory_girl", :source => "http://gemcutter.org"
+  config.gem "annotate"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).

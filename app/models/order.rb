@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: orders
+#
+#  id              :integer         not null, primary key
+#  user_id         :integer
+#  pickup_id       :integer
+#  notes           :text
+#  created_at      :datetime
+#  updated_at      :datetime
+#  finalized_total :float
+#
+
 class Order < ActiveRecord::Base
   belongs_to :member
   belongs_to :pickup

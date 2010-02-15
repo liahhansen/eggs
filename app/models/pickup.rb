@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: pickups
+#
+#  id                  :integer         not null, primary key
+#  name                :string(255)
+#  description         :text
+#  farm_id             :integer
+#  date                :date
+#  status              :string(255)
+#  host                :string(255)
+#  location            :string(255)
+#  opening_at          :datetime
+#  closing_at          :datetime
+#  notes               :text
+#  created_at          :datetime
+#  updated_at          :datetime
+#  minimum_order_total :integer
+#
+
 class Pickup < ActiveRecord::Base
   belongs_to :farm
   has_many :stock_items, :dependent => :destroy
