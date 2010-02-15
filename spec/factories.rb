@@ -2,11 +2,13 @@ require 'factory_girl'
 
 # BASE FACTORIES
 
-Factory.define :user do |u|
-  u.sequence(:email_address) {|n| "qb#{n}@dillonfootball.com" }
-  u.sequence(:username) {|n| "DillonFootballRules#{n}"}
-  u.password 'gopanthers'
-  u.password_confirmation 'gopanthers'
+Factory.define :user do |user|
+  user.sequence(:username) {|n| "DillonFootballRules#{n}"}
+  user.password 'gopanthers'
+  user.password_confirmation 'gopanthers'
+  user.after_create do |u|
+    u.member = Factory(:member)
+  end
 end
 
 Factory.define :member do |m|

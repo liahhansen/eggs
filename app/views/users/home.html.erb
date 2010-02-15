@@ -4,7 +4,7 @@
   <p style="color: green"><%= flash[:notice] %></p>
 
 
-  <h5>Welcome, <%= "#{@user.first_name} #{@user.last_name}!"%></h5>
+  <h5>Welcome, <%= "#{@user.member.first_name} #{@user.member.last_name}!"%></h5>
   <% if @finalized_orders.size >= 1
       next_order = @finalized_orders.first %>
     <p>Your upcoming order (<%= "#{next_order.pickup.pretty_date} - #{next_order.pickup.name}" %>) has been finalized with a total

@@ -8,7 +8,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
+     members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
+     @users = User.all :conditions => ["member_id IN (?)", members]
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,10 +22,10 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    @farm = @user.farms.first
+    @farm = @user.member.farms.first
 
     if(current_user == @user)
-      orders = @user.orders.filter_by_farm(@farm)
+      orders = @user.member.orders.filter_by_farm(@farm)
       @open_orders = orders.select {|order| order.pickup.status == "open"}
       @finalized_orders = orders.select {|order|order.pickup.status == "finalized"}
       @inprogress_orders = orders.select {|order|order.pickup.status == "inprogress"}

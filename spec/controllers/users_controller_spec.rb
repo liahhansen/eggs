@@ -6,18 +6,18 @@ describe UsersController do
   end
 
   it "should let a member view their own page" do
-    member = Factory(:member_user)
+    user = Factory(:member_user)
     farm = Factory(:farm)
-    Factory(:subscription, :farm => farm, :user => member)
-    UserSession.create member
-    get :show, :id => member.id, :farm_id => farm.id
+    Factory(:subscription, :farm => farm, :member => user.member)
+    UserSession.create user
+    get :show, :id => user.member.id, :farm_id => farm.id
     response.should be_success
     response.should render_template('home')
   end
 
   it "should deny a non-admin member from seeing the index of users" do
-    member = Factory(:member_user)
-    UserSession.create member
+    user = Factory(:member_user)
+    UserSession.create user
     get :index
     response.should render_template('home/access_denied')
   end
@@ -29,7 +29,7 @@ describe UsersController do
     response.should render_template('index')
   end
 
-  it "should only have users from the specified farm in index" do
+  it "should only have members from the specified farm in index" do
     admin = Factory(:admin_user)
     UserSession.create admin
 
@@ -39,7 +39,7 @@ describe UsersController do
     get :index, :farm_id => farm1.id
 
     assigns(:users).each do |user|
-      user.farms.include?(farm1).should == true
+      user.member.farms.include?(farm1).should == true
     end
   end
 

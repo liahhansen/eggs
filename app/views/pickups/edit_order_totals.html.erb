@@ -28,8 +28,8 @@
     <% @pickup.orders.each do |order| %>
       <% f.fields_for :orders, order do |builder| %>
         <tr>
-          <td><%= order.user.first_name %></td>
-          <td><%= order.user.last_name %></td>
+          <td><%= order.member.first_name %></td>
+          <td><%= order.member.last_name %></td>
 
           <% order.order_items.each do |item| %>
             <td><%= item.quantity %></td>

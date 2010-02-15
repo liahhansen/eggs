@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
 
-    @member = params[:user_id] ? User.find(params[:user_id]) : current_user
+    @member = params[:member_id] ? Member.find(params[:member_id]) : current_user.member
 
     if params[:pickup_id]
       @pickup = Pickup.find(params[:pickup_id])
@@ -46,14 +46,14 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @pickup = @order.pickup
-    @member = @order.user
+    @member = @order.member
   end
 
   # POST /orders
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
-    @member = @order.user
+    @member = @order.member
     
     respond_to do |format|
       if @order.save
@@ -73,7 +73,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @pickup = @order.pickup
-    @member = @order.user
+    @member = @order.member
 
     respond_to do |format|
       if @order.update_attributes(params[:order])

@@ -11,7 +11,7 @@
 <% form_for @order do |f| %>
   <%= hidden_field_tag :pickup_id, @pickup.id %>
   <%= f.hidden_field :pickup_id, :value => @pickup.id  %>
-  <%= f.hidden_field :user_id, :value => @member.id %>
+  <%= f.hidden_field :member_id, :value => @member.id %>
   <%= f.error_messages %>
 
   <%= render :partial => 'order_items_fields', :locals => {:f => f} %>

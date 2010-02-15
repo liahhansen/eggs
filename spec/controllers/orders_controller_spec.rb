@@ -41,26 +41,26 @@ describe OrdersController do
     assigns(:order).order_items.size.should == 2
   end
 
-  it "should set @member from current user when rendering new and there is no user_id in params" do
+  it "should set @member from current user when rendering new and there is no member_id in params" do
     p = Factory(:pickup_with_stock_items)
     get :new, :pickup_id => p.id
-    assigns(:member).should == UserSession.find.user
+    assigns(:member).should == UserSession.find.user.member
   end
 
   it "should set @member from params if set when rendering new" do
     p = Factory(:pickup_with_stock_items)
     u = Factory(:member_user)
-    get :new, :pickup_id => p.id, :user_id => u.id
-    assigns(:member).should == u
+    get :new, :pickup_id => p.id, :member_id => u.id
+    assigns(:member).should == u.member
   end
 
   it "should set @member from order when rendering edit" do
-    p = Factory(:pickup_with_stock_items)
-    u = Factory(:member_user)
-    o = Factory(:order_with_items, :user => u)
+    pickup = Factory(:pickup_with_stock_items)
+    member = Factory(:member)
+    order = Factory(:order_with_items, :member => member)
 
-    get :edit, :id => o.id, :pickup_id => p.id
-    assigns(:member).should == u
+    get :edit, :id => order.id, :pickup_id => pickup.id
+    assigns(:member).should == member
   end
 
   it "should only allow a member to create / edit orders for themselves" do
