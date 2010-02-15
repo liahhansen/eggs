@@ -13,10 +13,6 @@ describe FarmsController do
     response.should be_success
   end
 
-  it "should fail" do
-    fail
-  end
-
   it "should create sets of pickups when showing a single farm" do
     farm = Factory(:farm_with_pickups)
 
