@@ -2,7 +2,7 @@
 <div id="" class="grid_8 ">
 
   <p style="color: green"><%= flash[:notice] %></p>
-
+  <% title "#{@farm.name} : #{@user.member.first_name} #{@user.member.last_name}"%>
 
   <h5>Welcome, <%= "#{@user.member.first_name} #{@user.member.last_name}!"%></h5>
   <% if @finalized_orders.size >= 1
