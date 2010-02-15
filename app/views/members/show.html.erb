@@ -2,6 +2,8 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
+  <%= link_to 'Edit', edit_member_path(@member, :farm_id => @farm.id) %>
+  
   <p>
     <b>Member:</b>
     <%=h "#{@member.first_name} #{@member.last_name}" %>
@@ -23,7 +25,6 @@
   </p>
 
 
-<%= link_to 'Edit', edit_member_path(@member, :farm_id => @farm.id) %>
 
   <div class="box_header"><h5>Orders:</h5></div>
   <table class="simple">
@@ -37,7 +38,7 @@
     </tr>
     <% @member.orders.each do |order| %>
       <tr>
-        <td><%= order.id %></td>
+        <td><%= link_to order.id, order_path(order, :farm_id => @farm.id) %></td>
         <td><%= order.pickup.name %></td>
         <td><%= order.pickup.date %></td>
         <td><%= order.pickup.status %></td>
