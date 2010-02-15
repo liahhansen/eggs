@@ -8,7 +8,7 @@
 #  email_address :string(255)
 #  phone_number  :string(255)
 #  neighborhood  :string(255)
-#  joined_on     :string(255)
+#  joined_on     :datetime
 #  created_at    :datetime
 #  updated_at    :datetime
 #
