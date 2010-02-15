@@ -25,6 +25,13 @@ class PickupsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pickup }
+      format.csv do
+        csv_string = PickupExporter.get_csv(@pickup)
+
+        send_data csv_string,
+                :type => 'text/csv; charset=iso-8859-1; header=present',
+                :disposition => "attachment; filename=#{@pickup.date}#{@pickup.name}.csv"
+      end
     end
   end
 
