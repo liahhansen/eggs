@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem "acl9", :source => "http://gemcutter.org", :lib => "acl9"
   config.gem "factory_girl", :source => "http://gemcutter.org"
   config.gem "annotate"
+  config.gem "fastercsv"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).
