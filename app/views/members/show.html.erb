@@ -1,33 +1,49 @@
-<p>
-  <b>First name:</b>
-  <%=h @member.first_name %>
-</p>
+<div id="" class="grid_8 ">
 
-<p>
-  <b>Last name:</b>
-  <%=h @member.last_name %>
-</p>
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<p>
-  <b>Neighborhood:</b>
-  <%=h @member.neighborhood %>
-</p>
+  <p>
+    <%=h "#{@member.first_name} #{@member.last_name}" %>
+  </p>
 
-<p>
-  <b>Email address:</b>
-  <%=h @member.email_address %>
-</p>
+  <p>
+    <b>Email address:</b>
+    <%=h @member.email_address %>
+  </p>
 
-<p>
-  <b>Phone number:</b>
-  <%=h @member.phone_number %>
-</p>
+  <p>
+    <b>Phone number:</b>
+    <%=h @member.phone_number %>
+  </p>
 
-<p>
-  <b>Joined on:</b>
-  <%=h @member.joined_on %>
-</p>
+  <p>
+    <b>Neighborhood:</b>
+    <%=h @member.neighborhood %>
+  </p>
 
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Edit', edit_member_path(@member, :farm_id => @farm.id) %>
+
+  <div class="box_header"><h5>Orders:</h5></div>
+  <table class="simple">
+    <tr class="hed">
+      <th>ID</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Pickup Status</th>
+      <th>Estimated Total</th>
+      <th>Actual Total</th>
+    </tr>
+    <% @member.orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.pickup.name %></td>
+        <td><%= order.pickup.date %></td>
+        <td><%= order.pickup.status %></td>
+        <td><%= order.estimated_total %></td>
+        <td><%= order.finalized_total %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

@@ -1,27 +1,27 @@
-<p>
-  <b>Welcome, </b>
-  <%=h "#{@user.first_name} #{@user.last_name}!" %>
-</p>
+<div id="" class="grid_8 ">
 
-<p>
-  <b>Last name:</b>
-  <%=h @user.last_name %>
-</p>
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<p>
-  <b>Email address:</b>
-  <%=h @user.email_address %>
-</p>
+  <p>
+    <%=h "#{@user.first_name} #{@user.last_name}!" %>
+  </p>
 
-<p>
-  <b>Phone number:</b>
-  <%=h @user.phone_number %>
-</p>
+  <p>
+    <b>Email address:</b>
+    <%=h @user.email_address %>
+  </p>
 
-<p>
-  <b>Neighborhood:</b>
-  <%=h @user.neighborhood %>
-</p>
+  <p>
+    <b>Phone number:</b>
+    <%=h @user.phone_number %>
+  </p>
+
+  <p>
+    <b>Neighborhood:</b>
+    <%=h @user.neighborhood %>
+  </p>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
+
+</div>
