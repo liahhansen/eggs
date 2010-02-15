@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.xml
   def index
-    @members = Member.all
+    @members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,8 +44,9 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
+        subscription = Subscription.create!(:farm => @farm, :member => @member )
         flash[:notice] = 'Member was successfully created.'
-        format.html { redirect_to(@member) }
+        format.html { redirect_to :action => "index", :farm_id => @farm.id }
         format.xml  { render :xml => @member, :status => :created, :location => @member }
       else
         format.html { render :action => "new" }
@@ -62,7 +63,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.update_attributes(params[:member])
         flash[:notice] = 'Member was successfully updated.'
-        format.html { redirect_to(@member) }
+        format.html { redirect_to :action => "index", :farm_id => @farm.id }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,9 +77,10 @@ class MembersController < ApplicationController
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
+    flash[:notice] = 'Member was successfully deleted.'
 
     respond_to do |format|
-      format.html { redirect_to(members_url) }
+      format.html { redirect_to :action => "index", :farm_id => @farm.id }
       format.xml  { head :ok }
     end
   end

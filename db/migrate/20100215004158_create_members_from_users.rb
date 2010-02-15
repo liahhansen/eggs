@@ -6,7 +6,7 @@ class CreateMembersFromUsers < ActiveRecord::Migration
       t.string :email_address
       t.string :phone_number
       t.string :neighborhood
-      t.string :joined_on
+      t.datetime :joined_on
 
       t.timestamps
     end

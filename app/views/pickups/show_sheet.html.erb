@@ -32,10 +32,10 @@
   <% @pickup.orders.each do |order| %>
     <tr>
       <td><%= order.created_at %></td>
-      <td><%= order.user.first_name %></td>
-      <td><%= order.user.last_name %></td>
-      <td><%= order.user.email_address %></td>
-      <td><%= order.user.phone_number %></td>
+      <td><%= order.member.first_name %></td>
+      <td><%= order.member.last_name %></td>
+      <td><%= order.member.email_address %></td>
+      <td><%= order.member.phone_number %></td>
       <td><%= order.pickup.name %></td>
 
       <% order.order_items.each do |item| %>

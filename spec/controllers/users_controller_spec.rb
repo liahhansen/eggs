@@ -29,7 +29,7 @@ describe UsersController do
     response.should render_template('index')
   end
 
-  it "should only have members from the specified farm in index" do
+  it "should only have users from the specified farm in index" do
     admin = Factory(:admin_user)
     UserSession.create admin
 

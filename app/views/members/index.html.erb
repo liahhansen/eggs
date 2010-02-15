@@ -1,30 +1,35 @@
-<h1>Listing members</h1>
+<div id="" class="grid_8 ">
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Neighborhood</th>
-    <th>Email address</th>
-    <th>Phone number</th>
-    <th>Joined on</th>
-  </tr>
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<% @members.each do |member| %>
-  <tr>
-    <td><%=h member.first_name %></td>
-    <td><%=h member.last_name %></td>
-    <td><%=h member.neighborhood %></td>
-    <td><%=h member.email_address %></td>
-    <td><%=h member.phone_number %></td>
-    <td><%=h member.joined_on %></td>
-    <td><%= link_to 'Show', member %></td>
-    <td><%= link_to 'Edit', edit_member_path(member) %></td>
-    <td><%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <h1>Listing members</h1>
+
+  <table class="order_form">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Neighborhood</th>
+      <th>Email address</th>
+      <th>Phone number</th>
+      <th>Joined on</th>
+    </tr>
+
+  <% @members.each do |member| %>
+    <tr>
+      <td><%=h member.first_name %></td>
+      <td><%=h member.last_name %></td>
+      <td><%=h member.neighborhood %></td>
+      <td><%=h member.email_address %></td>
+      <td><%=h member.phone_number %></td>
+      <td><%=h member.joined_on %></td>
+      <td><%= link_to 'Edit', edit_member_path(member, :farm_id => @farm.id) %></td>
+      <td><%= link_to 'Destroy', {:action => "destroy", :id => member.id, :farm_id => @farm.id}, :confirm => 'Are you sure?', :method => :delete %></td>
+
+    </tr>
+  <% end %>
+  </table>
 
 <br />
 
-<%= link_to 'New member', new_member_path %>
+<%= link_to 'New member', new_member_path(:farm_id => @farm.id) %>
+</div>

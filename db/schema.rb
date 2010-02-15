@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20100215004158) do
     t.string   "email_address"
     t.string   "phone_number"
     t.string   "neighborhood"
-    t.string   "joined_on"
+    t.datetime "joined_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
