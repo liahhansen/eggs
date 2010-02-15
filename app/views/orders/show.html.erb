@@ -26,6 +26,8 @@
 <% end %>
 </p>
 
+<% if @order.pickup.status == "open" || current_user.has_role?(:admin) %>
 <%= link_to 'Edit', edit_order_path(@order) %> |
+<% end %>
 <%= link_to 'Back', root_path %>
 </div>
