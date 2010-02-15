@@ -52,7 +52,10 @@ describe PickupImporter do
     @importer.products[1].new_record?.should == true
   end
 
-#  it "should create a stock item for each product" do
-#    @importer.pickup.stock_items.size.should == 8
-#  end
+  it "should create a stock item for each product" do
+    product = Factory(:product, :farm => @farm, :name => 'Chicken, REGULAR')
+
+    @importer.pickup.stock_items.size.should == 8
+    @importer.pickup.stock_items[0].product.should == product
+  end
 end
