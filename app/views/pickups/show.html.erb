@@ -33,7 +33,7 @@
   <tr class="hed">
     <th>Name</th>
     <th>Items (num)</th>
-    <th>Total (est)</th>
+    <th><%= (@pickup.orders.first && @pickup.orders.first.finalized_total) ? "Finalized Total" : "Estimated Total" %></th>
     <th>Balance</th>
     <th>Joined</th>
   </tr>
