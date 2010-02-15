@@ -3,7 +3,7 @@ class Farm < ActiveRecord::Base
   has_many :products
   has_many :pickups
   has_many :subscriptions
-  has_many :users, :through => :subscriptions
+  has_many :members, :through => :subscriptions
 
   acts_as_authorization_object
 

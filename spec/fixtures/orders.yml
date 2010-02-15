@@ -6,19 +6,19 @@
 #    t.datetime "updated_at"
 
 kathryn_sf_emeryville_feb3:
-  user: kathryn
+  member: kathryn
   pickup: sf_emeryville_feb3
 
 
 kathryn_sf_farm_feb3:
-  user: kathryn
+  member: kathryn
   pickup: sf_farm_feb3
 
 jenny_sf_emeryville_feb3:
-  user: jenny
+  member: jenny
   pickup: sf_emeryville_feb3
 
 ben_sf_emeryville_feb3:
-  user: ben
+  member: ben
   pickup: sf_emeryville_feb3
   

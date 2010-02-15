@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :member
   belongs_to :pickup
   has_many :order_items, :dependent => :destroy do
     def with_quantity
@@ -7,8 +7,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  validates_presence_of :user_id, :pickup_id
-  validate :user_must_exist, :pickup_must_exist, :total_meets_minimum
+  validates_presence_of :member_id, :pickup_id
+  validate :member_must_exist, :pickup_must_exist, :total_meets_minimum
 
   accepts_nested_attributes_for :order_items
 
@@ -34,8 +34,8 @@ class Order < ActiveRecord::Base
 
   # VALIDATIONS
   
-  def user_must_exist
-    errors.add(:user_id, "this user must exist") if user_id && !User.find(user_id)
+  def member_must_exist
+    errors.add(:member_id, "this member must exist") if member_id && !Member.find(member_id)
   end
 
   def pickup_must_exist

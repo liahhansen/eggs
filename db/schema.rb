@@ -9,13 +9,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214044317) do
+ActiveRecord::Schema.define(:version => 20100215004158) do
 
   create_table "farms", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key"
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email_address"
+    t.string   "phone_number"
+    t.string   "neighborhood"
+    t.string   "joined_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "order_items", :force => true do |t|
@@ -28,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20100214044317) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "member_id"
     t.integer  "pickup_id"
     t.text     "notes"
     t.datetime "created_at"
@@ -94,24 +105,21 @@ ActiveRecord::Schema.define(:version => 20100214044317) do
   end
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "member_id"
     t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email_address"
     t.string   "phone_number"
-    t.string   "neighborhood"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "username"
+    t.integer  "member_id"
   end
 
 end

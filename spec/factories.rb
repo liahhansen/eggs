@@ -3,13 +3,17 @@ require 'factory_girl'
 # BASE FACTORIES
 
 Factory.define :user do |u|
-  u.first_name 'Timothy'
-  u.last_name 'Riggins'
-  u.sequence(:username) {|n| "DillonFootballRules#{n}"}
   u.sequence(:email_address) {|n| "qb#{n}@dillonfootball.com" }
-  u.phone_number '5123533694'
+  u.sequence(:username) {|n| "DillonFootballRules#{n}"}
   u.password 'gopanthers'
   u.password_confirmation 'gopanthers'
+end
+
+Factory.define :member do |m|
+  m.first_name 'Timothy'
+  m.last_name 'Riggins'
+  m.sequence(:email_address) {|n| "qb#{n}@dillonfootball.com" }
+  m.phone_number '5123533694'
 end
 
 Factory.define :role do |r|
@@ -27,7 +31,7 @@ end
 
 Factory.define :subscription do |s|
   s.association :farm
-  s.association :user
+  s.association :member
 end
 
 Factory.define :pickup do |p|
@@ -42,7 +46,7 @@ Factory.define :pickup do |p|
 end
 
 Factory.define :order do |o|
-  o.association :user
+  o.association :member
   o.association :pickup
 end
 
@@ -98,7 +102,7 @@ end
 Factory.define :farm_with_members, :parent => :farm do |farm|
   farm.after_create do |f|
     4.times do
-      s = Factory(:subscription, :farm => f, :user => Factory(:user))
+      s = Factory(:subscription, :farm => f, :member => Factory(:member))
     end
   end
 end
@@ -132,13 +136,13 @@ Factory.define :member_user, :parent => :user do |user|
   end
 end
 
-Factory.define :user_with_orders_from_2_farms, :parent => :member_user do |user|
-  user.after_create do |u|
-    u.farms << Factory(:farm)
-    u.farms << Factory(:farm)
-    pickup1 = Factory(:pickup, :farm => u.farms[0])
-    pickup2 = Factory(:pickup, :farm => u.farms[1])
-    order1 = Factory(:order, :pickup => pickup1, :user => u)
-    order2 = Factory(:order, :pickup => pickup2, :user => u)
+Factory.define :member_with_orders_from_2_farms, :parent => :member do |member|
+  member.after_create do |m|
+    m.farms << Factory(:farm)
+    m.farms << Factory(:farm)
+    pickup1 = Factory(:pickup, :farm => m.farms[0])
+    pickup2 = Factory(:pickup, :farm => m.farms[1])
+    order1 = Factory(:order, :pickup => pickup1, :member => m)
+    order2 = Factory(:order, :pickup => pickup2, :member => m)
   end
 end

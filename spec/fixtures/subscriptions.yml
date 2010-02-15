@@ -1,19 +1,19 @@
 ben_sf:
-  user: ben
+  member: ben
   farm: soulfood
 
 kathryn_sf:
-  user: kathryn
+  member: kathryn
   farm: soulfood
 
 jenny_sf:
-  user: jenny
+  member: jenny
   farm: soulfood
 
 sue_sf:
-  user: sue
+  member: sue
   farm: soulfood
 
 kathryn_cs:
-  user: kathryn
+  member: kathryn
   farm: clarksummit

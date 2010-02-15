@@ -19,6 +19,6 @@ describe Farm do
 
   it "should have a list of users for that farm" do
     f = Factory(:farm_with_members)
-    f.users.length.should >= 1
+    f.members.length.should >= 1
   end
 end

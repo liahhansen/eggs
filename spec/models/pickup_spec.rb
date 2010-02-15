@@ -16,10 +16,10 @@ describe Pickup do
     pickup.estimated_total.should == pickup.orders.inject(0){|total, o| total + o.estimated_total}
   end
 
-  it "should have an available list of users for its related farm" do
+  it "should have an available list of members for its related farm" do
     pickup = Factory(:pickup, :farm => Factory(:farm_with_members))
-    pickup.farm.users.size.should == 4
-    pickup.farm.users.each do |u|
+    pickup.farm.members.size.should == 4
+    pickup.farm.members.each do |u|
       thisfarm = false
       u.farms.each do |f|
         thisfarm = true if f.id == pickup.farm.id

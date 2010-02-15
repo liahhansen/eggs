@@ -1,0 +1,31 @@
+kathryn:
+  first_name: Kathryn
+  last_name: Aaker
+  email_address: blah@kathrynaaker.com
+  phone_number: 111-333-4444
+  neighborhood: Mission Potrero
+  joined_on: '2009-05-20'
+
+jenny:
+  first_name: Jenny
+  last_name: Jones
+  email_address: foo@bar.com
+  phone_number: 222-333-4444
+  neighborhood: Mission District
+  joined_on: '2009-10-03'
+
+ben:
+  first_name: Ben
+  last_name: Brown
+  email_address: brown@bar.com
+  phone_number: 333-444-5555
+  neighborhood: Emeryville
+  joined_on: '2010-01-20'
+
+sue:
+  first_name: Sue
+  last_name: Smith
+  email_address: sue@bar.com
+  phone_number: 444-555-3939
+  neighborhood: Emeryville
+  joined_on: '2010-01-20'

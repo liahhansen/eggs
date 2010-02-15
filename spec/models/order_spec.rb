@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Order do
   before(:each) do
     @valid_attributes = {
-      :user_id => Factory(:user).id,
+      :member_id => Factory(:member).id,
       :pickup_id => Factory(:pickup).id,
       :order_items => Factory(:order_with_items).order_items
     }
@@ -14,15 +14,15 @@ describe Order do
     Order.create!(@valid_attributes)
   end
 
-  it "should raise errors when saving when no user or pickup is specified" do
+  it "should raise errors when saving when no member or pickup is specified" do
     Order.new.valid?.should == false
     lambda {Order.create!}.should raise_error
-    lambda {Order.create!(:user_id => 1)}.should raise_error
+    lambda {Order.create!(:member_id => 1)}.should raise_error
     lambda {Order.create!(:pickup_id => 2)}.should raise_error
   end
 
-  it "should only accept valid user and pickup ids" do
-    lambda {Order.new(:user_id => 235, :pickup_id => 235).valid?}.should raise_error
+  it "should only accept valid member and pickup ids" do
+    lambda {Order.new(:member_id => 235, :pickup_id => 235).valid?}.should raise_error
     Factory(:order_with_items).valid?.should == true    
   end
 

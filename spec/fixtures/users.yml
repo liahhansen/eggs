@@ -1,43 +1,27 @@
 kathryn:
-  first_name: Kathryn
-  last_name: Aaker
-  email_address: blah@kathrynaaker.com
+  member: kathryn
   username: kathrynaaker
-  phone_number: 111-333-4444
-  neighborhood: Mission Potrero
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 jenny:
-  first_name: Jenny
-  last_name: Jones
-  email_address: foo@bar.com
+  member: jenny
   username: jennyjones
-  phone_number: 222-333-4444
-  neighborhood: Mission District
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 ben:
-  first_name: Ben
-  last_name: Brown
-  email_address: brown@bar.com
+  member: ben
   username: benbrown
-  phone_number: 333-444-5555
-  neighborhood: Emeryville
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 sue:
-  first_name: Sue
-  last_name: Smith
-  email_address: sue@bar.com
+  member: sue
   username: suesmith
-  phone_number: 444-555-3939
-  neighborhood: Emeryville
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
