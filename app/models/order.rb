@@ -3,7 +3,7 @@
 # Table name: orders
 #
 #  id              :integer         not null, primary key
-#  user_id         :integer
+#  member_id       :integer
 #  pickup_id       :integer
 #  notes           :text
 #  created_at      :datetime

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id            :integer         not null, primary key
+#  stock_item_id :integer
+#  order_id      :integer
+#  quantity      :integer
+#  notes         :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 require 'spec_helper'
 
 describe OrderItem do

@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: stock_items
+#
+#  id                      :integer         not null, primary key
+#  pickup_id               :integer
+#  product_id              :integer
+#  max_quantity_per_member :integer
+#  quantity_available      :integer
+#  substitutions_available :boolean
+#  notes                   :text
+#  created_at              :datetime
+#  updated_at              :datetime
+#  hide                    :boolean
+#  product_name            :string(255)
+#  product_description     :text
+#  product_price           :float
+#  product_estimated       :boolean
+#
+
 require 'spec_helper'
 
 describe StockItem do

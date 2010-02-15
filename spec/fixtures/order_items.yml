@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id            :integer         not null, primary key
+#  stock_item_id :integer
+#  order_id      :integer
+#  quantity      :integer
+#  notes         :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 kathryn_feb3_chickenreg:
   stock_item: feb3_chickenreg
   order: kathryn_sf_emeryville_feb3
