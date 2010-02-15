@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: farms
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  key        :string(255)
+#
+
 class Farm < ActiveRecord::Base
   validates_presence_of :name
   has_many :products

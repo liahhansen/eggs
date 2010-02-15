@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id            :integer         not null, primary key
+#  stock_item_id :integer
+#  order_id      :integer
+#  quantity      :integer
+#  notes         :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class OrderItem < ActiveRecord::Base
   belongs_to :stock_item
   belongs_to :order
