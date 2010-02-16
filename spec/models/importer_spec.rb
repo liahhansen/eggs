@@ -26,11 +26,13 @@ describe PickupImport do
       kathryn = Factory(:member, :first_name => "Kathryn", :last_name => "Aaker", :email_address => 'kathryn@kathrynaaker.com')
       @import.members.size.should == 2
       @import.members[0].should == kathryn
+      @import.members[0].subscriptions[0].farm.should == @farm
     end
 
     it "should create new member" do
       @import.members[0].first_name.should == "Kathryn"
       @import.members[0].last_name.should == "Aaker"
+      @import.members[0].subscriptions[0].farm.should == @farm
       @import.members[0].new_record?.should == true
     end
 

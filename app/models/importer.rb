@@ -120,6 +120,9 @@ class PickupImport
           member = Member.new :first_name => first_name, :last_name => last_name,
                               :email_address => row[3], :phone_number => row[4]
         end
+        if !member.subscriptions.detect {|item| item.farm == @farm}
+          member.subscriptions << Subscription.new(:farm => @farm)
+        end
         @members << member
       end
 
