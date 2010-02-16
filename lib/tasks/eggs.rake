@@ -131,7 +131,6 @@ namespace :eggs do
 
     desc "Dry run import prints data to import from DIR."
     task :dry => :environment do
-      dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
       puts "Importing from #{dir} (dry run)."
       importer = Importer.new dir
       importer.pickups.each do |pickup|
@@ -147,12 +146,21 @@ namespace :eggs do
 
     desc "Run data import from DIR."
     task :run => :environment do
-      dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
       puts "Importing from #{dir}."
       Pickup.delete_all
       Product.delete_all
       importer = Importer.new(dir)
       importer.import!.each { |pickup| pickup.save! }
+    end
+
+    task :headers => :environment do
+      Importer.new(dir).imports.each do |import|
+        puts import.headers.join '|'
+      end
+    end
+
+    def dir
+      ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
     end
   end
 

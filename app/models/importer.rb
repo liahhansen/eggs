@@ -5,25 +5,23 @@ class Importer
   end
 
   def pickups
-    importers.collect(&:pickups).flatten
+    imports.collect(&:pickups).flatten
   end
 
   def import!
-    importers.collect do |importer|
+    imports.collect do |importer|
       importer.import!
       importer.pickups
     end.flatten
   end
 
-  private
-
-  def importers
-    Dir["#{@dir}/*.csv"].collect {|file|  PickupImporter.new file}
+  def imports
+    Dir["#{@dir}/*.csv"].collect {|file|  PickupImport.new file}
   end
 
 end
 
-class PickupImporter
+class PickupImport
   attr_reader :file, :rows, :farm
 
   def initialize(file)
@@ -102,5 +100,30 @@ class PickupImporter
       end
       product
     end
+  end
+
+  def members
+    return @members if @members
+
+    @members = []
+    @rows[1..-1].each do |row|
+      first_name = row[2]
+      last_name = row[1]
+      next unless first_name && last_name
+
+      member = @members.find {|item| item.first_name == first_name && item.last_name == last_name}
+
+      # Find or create new
+      if !member
+        member = Member.find_by_first_name_and_last_name first_name, last_name
+        if !member
+          member = Member.new :first_name => first_name, :last_name => last_name,
+                              :email_address => row[3], :phone_number => row[4]
+        end
+        @members << member
+      end
+
+    end
+    @members
   end
 end
