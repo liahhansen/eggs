@@ -61,8 +61,15 @@ class PickupImporter
       next unless header
       header.strip!
       header.gsub! 'REG ', 'REGULAR '
+      header.gsub! 'LG ', 'LARGE '
       header.gsub! 'Chicken XXL ', 'Chicken, XXL '
       header.gsub! 'New! ', ''
+      header.gsub! ' SALE', ''
+      header.gsub! 'pound', 'lb'
+      header.gsub! ' ml', 'ml'
+      header.gsub! '.5/', ".50/"
+      header.gsub! ' .5', " 0.5"
+      header.gsub! 'oil ', "oil, "
     end
 
     @headers = @rows[0]

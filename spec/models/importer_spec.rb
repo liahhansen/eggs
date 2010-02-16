@@ -29,7 +29,7 @@ describe PickupImporter do
 
   it "should normalize product names" do
     products = @importer.product_headers
-    products[0].should == "Chicken, REGULAR ($6.5/lb., 3.75-4.5 lbs)"
+    products[0].should == "Chicken, REGULAR ($6.50/lb., 3.75-4.5 lbs)"
     products[7].should == "Terra Sole olive oil 500ml, $18"
   end
 
