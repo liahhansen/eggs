@@ -111,6 +111,9 @@ class PickupImport
       first_name = row[2]
       last_name = row[1]
       next unless first_name && last_name
+      
+      first_name = first_name.titleize
+      last_name = last_name.titleize
       next if @members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Find or create new Member
@@ -134,6 +137,8 @@ class PickupImport
       last_name = row[1]
       next unless first_name && last_name
 
+      first_name = first_name.titleize
+      last_name = last_name.titleize
       member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Create Order
