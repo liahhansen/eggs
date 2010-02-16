@@ -136,7 +136,7 @@ namespace :eggs do
       importer = Importer.new dir
       importer.pickups.each do |pickup|
         puts "\n== Pickup for #{pickup.date} =="
-        puts "== Products:"
+        puts "== Stock Items:"
         pickup.stock_items.each do |item|
           puts "  #{item.product.name}"
           puts "    #{item.product.description}" if item.product.description
@@ -149,9 +149,8 @@ namespace :eggs do
     task :run => :environment do
       dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
       puts "Importing from #{dir}."
+      Pickup.delete_all
       Product.delete_all
-      Order.delete_all
-      StockItem.delete_all
       importer = Importer.new(dir)
       importer.import!.each { |pickup| pickup.save! }
     end

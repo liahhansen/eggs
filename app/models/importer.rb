@@ -75,7 +75,7 @@ class PickupImporter
   end
 
   def location_names
-    @rows[1..-1].collect {|row| row[7]}.uniq.reject {|name| name.nil?}
+    @rows[1..-1].collect {|row| row[7]}.uniq.reject {|name| name.nil? || name == '0'}
   end
 
   def products
