@@ -5,6 +5,19 @@ class Importer
   end
 
   def pickups
+    importers.collect(&:pickups).flatten
+  end
+
+  def import!
+    importers.collect do |importer|
+      importer.import!
+      importer.pickups
+    end.flatten
+  end
+
+  private
+
+  def importers
     Dir["#{@dir}/*.csv"].collect {|file|  PickupImporter.new file}
   end
 
@@ -19,20 +32,26 @@ class PickupImporter
     @farm = Farm.find_by_name('Soul Food Farm') || raise("Unable to find farm with name 'Soul Food Farm'")
   end
 
+  def import!
+    pickups.each {|pickup| pickup.save!}
+  end
+
   def pickup_date
     file =~ /((\d+)-(\d+))/
     Date.civil 2010, $2.to_i, $3.to_i
   end
 
-  def pickup
-    return @pickup if @pickup
+  def pickups
+    return @pickups if @pickups
 
-    @pickup = Pickup.new(:date => pickup_date, :status => 'archived')
-    products.each do |product|
-      @pickup.stock_items << StockItem.new(:product => product)
+    @pickups = location_names.collect do |location|
+      pickup = Pickup.new(:name => location, :date => pickup_date, :status => 'archived', :farm => @farm)
+      products.each do |product|
+        pickup.stock_items << StockItem.new(:product => product)
+      end
+      pickup
     end
-
-    @pickup
+    @pickups
   end
 
   def headers
@@ -40,6 +59,7 @@ class PickupImporter
     
     @rows[0].each do |header|
       next unless header
+      header.strip!
       header.gsub! 'REG ', 'REGULAR '
       header.gsub! 'Chicken XXL ', 'Chicken, XXL '
       header.gsub! 'New! ', ''
@@ -54,11 +74,15 @@ class PickupImporter
     end
   end
 
+  def location_names
+    @rows[1..-1].collect {|row| row[7]}.uniq.reject {|name| name.nil? || name == '0'}
+  end
+
   def products
     return @products if @products
 
     @products = product_headers.collect do |header|
-      if header =~ /^(.+?) ?(\(.+\))/
+      if header =~ /^(.+?) ?\((.+)\)/
         name = $1
         description = $2
       else
@@ -67,7 +91,7 @@ class PickupImporter
       end
       product = Product.find_by_name_and_farm_id name, @farm
       if !product
-        product = Product.new(:name => name, :description => description)
+        product = Product.new(:name => name, :description => description, :farm => @farm)
       end
       product
     end

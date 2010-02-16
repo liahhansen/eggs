@@ -22,7 +22,7 @@ class StockItem < ActiveRecord::Base
   belongs_to :pickup
   belongs_to :product
 
-  validates_presence_of :product_id
+  validates_associated :product
 
   before_create :copy_product_attributes
 

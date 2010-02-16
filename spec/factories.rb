@@ -97,7 +97,9 @@ end
 
 Factory.define :pickup_with_stock_items, :parent => :pickup do |pickup|
   pickup.after_create do |p|
-    3.times {p.stock_items << Factory(:stock_item, :pickup => p)}
+    p.stock_items << Factory(:stock_item, :pickup => p)
+    p.stock_items << Factory(:stock_item, :pickup => p)
+    p.stock_items << Factory(:stock_item, :pickup => p)
   end
 end
 
