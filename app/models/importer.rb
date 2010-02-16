@@ -9,10 +9,9 @@ class Importer
   end
 
   def import!
-    imports.collect do |importer|
-      importer.import!
-      importer.pickups
-    end.flatten
+    imports.collect do |import|
+      import.import!
+    end
   end
 
   def imports
@@ -32,6 +31,8 @@ class PickupImport
 
   def import!
     pickups.each {|pickup| pickup.save!}
+    members.each {|member| member.save(false)}
+    orders.each {|order| order.save!}
   end
 
   def pickup_date
@@ -110,23 +111,40 @@ class PickupImport
       first_name = row[2]
       last_name = row[1]
       next unless first_name && last_name
+      next if @members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
-      member = @members.find {|item| item.first_name == first_name && item.last_name == last_name}
-
-      # Find or create new
+      # Find or create new Member
+      member = Member.find_by_first_name_and_last_name first_name, last_name
       if !member
-        member = Member.find_by_first_name_and_last_name first_name, last_name
-        if !member
-          member = Member.new :first_name => first_name, :last_name => last_name,
-                              :email_address => row[3], :phone_number => row[4]
-        end
-        if !member.subscriptions.detect {|item| item.farm == @farm}
-          member.subscriptions << Subscription.new(:farm => @farm)
-        end
-        @members << member
+        member = Member.new :first_name => first_name, :last_name => last_name,
+                            :email_address => row[3], :phone_number => row[4]
+      end
+      if !member.subscriptions.detect {|item| item.farm == @farm}
+        member.subscriptions << Subscription.new(:farm => @farm)
       end
 
+      @members << member
     end
     @members
   end
+
+  def orders
+    @orders ||= @rows[1..-1].collect do |row|
+      first_name = row[2]
+      last_name = row[1]
+      next unless first_name && last_name
+
+      member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
+
+      # Create Order
+      pickup = pickups.find {|item| item.name == row[7]}
+      begin
+        timestamp = DateTime.parse(row[0])
+      rescue Exception => e
+        timestamp = pickup.date # If timestamp is 'manual' or nil use pickup date
+      end
+      Order.new :pickup => pickup, :member => member, :created_at => timestamp
+    end.reject {|item| item.nil?}
+  end
+
 end

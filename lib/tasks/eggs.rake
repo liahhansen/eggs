@@ -149,8 +149,11 @@ namespace :eggs do
       puts "Importing from #{dir}."
       Pickup.delete_all
       Product.delete_all
+      Member.delete_all
       importer = Importer.new(dir)
-      importer.import!.each { |pickup| pickup.save! }
+      importer.imports.each do |import|
+        import.import!
+      end
     end
 
     task :headers => :environment do

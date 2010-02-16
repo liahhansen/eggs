@@ -20,20 +20,30 @@ describe PickupImport do
   context "Creating Members, Orders and OrderItems" do
 
     before :each do
+      @kathryn = Factory(:member, :first_name => "Kathryn", :last_name => "Aaker", :email_address => 'kathryn@kathrynaaker.com')
     end
 
     it "should find existing member" do
       kathryn = Factory(:member, :first_name => "Kathryn", :last_name => "Aaker", :email_address => 'kathryn@kathrynaaker.com')
       @import.members.size.should == 2
-      @import.members[0].should == kathryn
+      @import.members[0].should == @kathryn
       @import.members[0].subscriptions[0].farm.should == @farm
     end
 
     it "should create new member" do
-      @import.members[0].first_name.should == "Kathryn"
-      @import.members[0].last_name.should == "Aaker"
-      @import.members[0].subscriptions[0].farm.should == @farm
-      @import.members[0].new_record?.should == true
+      @import.members[1].first_name.should == "Alon"
+      @import.members[1].last_name.should == "Salant"
+      @import.members[1].subscriptions[0].farm.should == @farm
+      @import.members[1].new_record?.should == true
+    end
+
+    it "should create new orders" do
+      @import.orders.size.should == 4
+      @import.orders[0].member.should == @kathryn
+      @import.orders[0].pickup.name.should == "SF Potrero"
+
+      @import.orders[1].member.first_name.should == "Alon"
+      @import.orders[1].pickup.name.should == "SF Potrero"
     end
 
   end
@@ -85,13 +95,17 @@ describe PickupImport do
       @import.pickups[0].stock_items.size.should == 8
       @import.pickups[0].stock_items[0].product.should == @chicken_regular
     end
+  end
 
-    it "should save pickups" do
-      importer = PickupImport.new "#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv"
-      importer.import!
+  context "Saving the import" do
+    it "should create everything" do
+      PickupImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv").import!
+
       Pickup.count.should == 2
       StockItem.count.should == 16
       Product.count.should == 8
+      Member.count.should == 2
+      Order.count.should == 4
     end
   end
 end
