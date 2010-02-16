@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.xml
   def index
-    @members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
+    @members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}, :order => 'last_name, first_name'
 
     respond_to do |format|
       format.html # index.html.erb
