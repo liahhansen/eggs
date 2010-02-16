@@ -48,7 +48,7 @@ class StockItem < ActiveRecord::Base
     self.product_name         = product.name          if !self.product_name
     self.product_description  = product.description   if !self.product_description
     self.product_price        = product.price         if !self.product_price
-    self.product_estimated    = product.estimated     if !self.product_estimated
+    self.product_estimated    = product.estimated     if self.product_estimated == nil
   end
 
   def quantity_ordered
