@@ -129,16 +129,31 @@ namespace :eggs do
 
   namespace :import do
 
-    desc "Dry run import prints data to import but saves no changes.\n  DIR=[path to pickup csv]"
+    desc "Dry run import prints data to import from DIR."
     task :dry => :environment do
       dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
-      puts "Importing from #{dir}."
+      puts "Importing from #{dir} (dry run)."
       importer = Importer.new dir
       importer.pickups.each do |pickup|
-        puts "Pickup for #{pickup.pickup_date}:"
-        puts "  Headers (#{pickup.headers.size}): #{pickup.headers.join '  |  '}"
-        puts "  Products (#{pickup.products.size}): #{pickup.products.join '  |  '}"
+        puts "\n== Pickup for #{pickup.date} =="
+        puts "== Products:"
+        pickup.stock_items.each do |item|
+          puts "  #{item.product.name}"
+          puts "    #{item.product.description}" if item.product.description
+        end
       end
+    end
+
+
+    desc "Run data import from DIR."
+    task :run => :environment do
+      dir = ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
+      puts "Importing from #{dir}."
+      Product.delete_all
+      Order.delete_all
+      StockItem.delete_all
+      importer = Importer.new(dir)
+      importer.import!.each { |pickup| pickup.save! }
     end
   end
 
