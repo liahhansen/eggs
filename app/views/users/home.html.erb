@@ -14,59 +14,67 @@
 
   <% end %>
 
-  <div class="box_header"><h5>Finalized Orders - Pickup soon!:</h5></div>
-  <table class="box_table">
-    <% @finalized_orders.each do |order| %>
-      <tr>
-        <td><%= order.pickup.date %></td>
-        <td><%= order.pickup.name %></td>
-        <td><%= "total:  #{number_to_currency order.finalized_total}" %></td>
-        <td><%= link_to "view order", order_path(order) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <% if @finalized_orders.size > 0 %>
+    <div class="box_header"><h5>Finalized Orders - Pickup soon!:</h5></div>
+    <table class="box_table">
+      <% @finalized_orders.each do |order| %>
+        <tr>
+          <td><%= order.pickup.date %></td>
+          <td><%= order.pickup.name %></td>
+          <td><%= "total:  #{number_to_currency order.finalized_total}" %></td>
+          <td><%= link_to "view order", order_path(order) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 
-  <div class="box_header"><h5>Orders that are currently Processing:</h5></div>
-  <table class="box_table">
-    <% @inprogress_orders.each do |order| %>
-      <tr>
-        <td><%= order.pickup.date %></td>
-        <td><%= order.pickup.farm.name %></td>
-        <td><%= order.pickup.name %></td>
-        <td><%= order.pickup.status %></td>
-        <td><%= link_to "view order", order_path(order) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <% if @inprogress_orders.size > 0 %>  
+    <div class="box_header"><h5>Orders that are currently Processing:</h5></div>
+    <table class="box_table">
+      <% @inprogress_orders.each do |order| %>
+        <tr>
+          <td><%= order.pickup.date %></td>
+          <td><%= order.pickup.farm.name %></td>
+          <td><%= order.pickup.name %></td>
+          <td><%= order.pickup.status %></td>
+          <td><%= link_to "view order", order_path(order) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 
-  <div class="box_header"><h5>Your current open orders:</h5></div>
-  <table class="box_table">
-    <% @open_orders.each do |order| %>
-      <tr>
-        <td><%= order.pickup.date %></td>
-        <td><%= order.pickup.farm.name %></td>
-        <td><%= order.pickup.name %></td>
-        <td><%= order.pickup.status %></td>
-        <td><%= link_to "view/edit order", order_path(order) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <% if @open_orders.size > 0 %>    
+    <div class="box_header"><h5>Your current open orders:</h5></div>
+    <table class="box_table">
+      <% @open_orders.each do |order| %>
+        <tr>
+          <td><%= order.pickup.date %></td>
+          <td><%= order.pickup.farm.name %></td>
+          <td><%= order.pickup.name %></td>
+          <td><%= order.pickup.status %></td>
+          <td><%= link_to "view/edit order", order_path(order) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 
-  <div class="box_header"><h5>Pickups currently open for orders:</h5></div>
-  <table class="box_table">
-    <%
-      @open_pickups.each do |pickup|
-    %>
-    <tr>
-      <td><%= pickup.date %></td>
-      <td><%= pickup.farm.name %></td>
-      <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id)%></td>
-      <td><%= pickup.status %></td>
-      <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id) %></td>
-    </tr>
-    <% end %>
-  </ul>
-  </table>
+  <% if @open_orders.size > 0 %>  
+    <div class="box_header"><h5>Pickups currently open for orders:</h5></div>
+    <table class="box_table">
+      <%
+        @open_pickups.each do |pickup|
+      %>
+      <tr>
+        <td><%= pickup.date %></td>
+        <td><%= pickup.farm.name %></td>
+        <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id)%></td>
+        <td><%= pickup.status %></td>
+        <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id) %></td>
+      </tr>
+      <% end %>
+    </ul>
+    </table>
+  <% end %>
 
 
 </div>
