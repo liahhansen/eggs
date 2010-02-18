@@ -4,7 +4,11 @@
 
 <p>
   <b>Order For:</b>
-  <%= "#{@order.member.first_name} #{@order.member.last_name}" %>
+  <% if current_user.has_role?(:admin) %>
+    <%= link_to "#{@order.member.first_name} #{@order.member.last_name}", member_path(@order.member, :farm_id => @farm.id)%>
+  <% else %>
+    <%= "#{@order.member.first_name} #{@order.member.last_name}" %>
+  <% end %>
 </p>
 
 <p>

@@ -20,8 +20,9 @@ describe Transaction do
       :date => Date.today,
       :amount => 1.5,
       :description => "value for description",
-      :member_id => 1,
-      :order_id => 1
+      :subscription_id => 1,
+      :balance => 10,
+      :debit => true
     }
   end
 
@@ -29,6 +30,11 @@ describe Transaction do
     Transaction.create!(@valid_attributes)
   end
 
-  it "should update "
+  it "should calculate a new balance based on the previous" do
+    sub = Factory(:subscription)
+    Factory(:transaction, :subscription => sub, :amount => 100, :debit => false, :balance => 100)
+    Factory(:transaction, :subscription => sub, :amount => 40, :debit => true)
+    sub.current_balance.should == 60;
+  end
 
 end

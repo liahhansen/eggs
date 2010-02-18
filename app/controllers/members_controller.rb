@@ -14,6 +14,7 @@ class MembersController < ApplicationController
   # GET /members/1.xml
   def show
     @member = Member.find(params[:id])
+    @subscription = Subscription.find_by_member_id_and_farm_id(@member.id,@farm.id)    
 
     respond_to do |format|
       format.html # show.html.erb

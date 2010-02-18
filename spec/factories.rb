@@ -154,5 +154,5 @@ end
 Factory.define :transaction do |transaction|
   transaction.amount 24.50
   transaction.debit false
-  transaction.association :member
+  transaction.association :subscription
 end

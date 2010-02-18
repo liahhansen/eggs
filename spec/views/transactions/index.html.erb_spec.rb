@@ -8,21 +8,22 @@ describe "/transactions/index.html.erb" do
     assigns[:farm] = farm
     member = Factory(:member)
     assigns[:member] = member
+    assigns[:subscription] = Factory(:subscription, :farm => farm, :member => member)
 
     assigns[:transactions] = [
       stub_model(Transaction,
         :amount => 1.5,
         :description => "value for description",
-        :member_id => member.id,
         :order_id => 1233,
-        :farm_id => farm.id
+        :subscription_id => 2,
+        :debit => true
       ),
       stub_model(Transaction,
         :amount => 1.5,
         :description => "value for description",
-        :member_id => member.id,
         :order_id => 1234,
-        :farm_id => farm.id
+        :subsrcription_id => 2,
+        :debit => false
       )
     ]
   end

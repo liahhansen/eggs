@@ -11,6 +11,7 @@ describe "/orders/show.html.erb" do
 
   it "should show edit if logged in as admin" do
     UserSession.create Factory(:admin_user)
+    assigns[:farm] = @order.pickup.farm
     render
     response.should include_text("Edit")
   end

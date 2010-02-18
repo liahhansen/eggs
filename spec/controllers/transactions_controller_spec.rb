@@ -17,8 +17,9 @@ describe TransactionsController do
       UserSession.create Factory(:member_user)      
       member = UserSession.find.user.member
       farm = Factory(:farm)
-      Factory(:transaction, :farm => farm)
-      Factory(:transaction, :member => member, :farm => farm)
+      sub = Factory(:subscription, :farm => farm, :member => member)
+      Factory(:transaction)
+      Factory(:transaction, :subscription => sub)
 
       get :index, :member_id => member.id, :farm_id => farm.id
       assigns[:transactions].length.should == 1

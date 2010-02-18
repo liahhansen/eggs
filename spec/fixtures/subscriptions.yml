@@ -12,7 +12,6 @@
 ben_sf:
   member: ben
   farm: soulfood
-  balance: 35
 
 kathryn_sf:
   member: kathryn

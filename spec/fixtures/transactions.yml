@@ -18,31 +18,31 @@ one:
   date: 2010-01-18
   amount: 100
   description: Initial PayPal topup, transaction id 39394943
-  member: ben
   debit: false
-  farm: soulfood
+  balance: 100
+  subscription: ben_sf
 
 two:
   date: 2010-02-03
   amount: 25.20
   description: Order 10/3 Emeryville
-  member: ben
   order: ben_sf_emeryville_feb3
   debit: true
-  farm: soulfood
+  balance: 74.80
+  subscription: ben_sf
 
 three:
   date: 2010-02-05
   amount: 6.5
   description: Balance adjustment for egg mixup
-  member: ben
   debit: false
-  farm: soulfood
+  balance: 81.3
+  subscription: ben_sf
 
 four:
   date: 2010-02-03
   amount: 33
   description:
-  member: kathryn
   debit: false
-  farm: clarksummit
+  balance: 33
+  subscription: kathryn_sf
