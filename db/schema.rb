@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218004209) do
+ActiveRecord::Schema.define(:version => 20100218023841) do
 
   create_table "farms", :force => true do |t|
     t.string   "name"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(:version => 20100218004209) do
     t.datetime "joined_on"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "balance"
   end
 
   create_table "order_items", :force => true do |t|
@@ -112,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20100218004209) do
     t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "balance"
   end
 
   create_table "transactions", :force => true do |t|
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(:version => 20100218004209) do
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "debit"
+    t.integer  "farm_id"
   end
 
   create_table "users", :force => true do |t|

@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @farm = @user.member.farms.first
+    @subscription = Subscription.find_by_member_id_and_farm_id(@user.member.id,@farm.id)
 
     if(current_user == @user)
       orders = @user.member.orders.filter_by_farm(@farm)

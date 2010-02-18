@@ -15,6 +15,7 @@ class Farm < ActiveRecord::Base
   has_many :pickups
   has_many :subscriptions
   has_many :members, :through => :subscriptions
+  has_many :transactions
 
   acts_as_authorization_object
 

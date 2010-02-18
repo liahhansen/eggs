@@ -28,4 +28,7 @@ describe Transaction do
   it "should create a new instance given valid attributes" do
     Transaction.create!(@valid_attributes)
   end
+
+  it "should update "
+
 end

@@ -7,7 +7,7 @@ Factory.define :user do |user|
   user.password 'gopanthers'
   user.password_confirmation 'gopanthers'
   user.after_create do |u|
-    u.member = Factory(:member)
+    u.member = Factory(:member) if !u.member
   end
 end
 
@@ -149,4 +149,10 @@ Factory.define :member_with_orders_from_2_farms, :parent => :member do |member|
     order1 = Factory(:order, :pickup => pickup1, :member => m)
     order2 = Factory(:order, :pickup => pickup2, :member => m)
   end
+end
+
+Factory.define :transaction do |transaction|
+  transaction.amount 24.50
+  transaction.debit false
+  transaction.association :member
 end

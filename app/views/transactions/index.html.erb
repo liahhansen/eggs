@@ -1,28 +1,29 @@
-<h1>Listing transactions</h1>
+<div id="" class="grid_12 ">
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Amount</th>
-    <th>Description</th>
-    <th>Member</th>
-    <th>Order</th>
-  </tr>
+  <h1>Your Balance History</h1>
 
-<% @transactions.each do |transaction| %>
-  <tr>
-    <td><%=h transaction.date %></td>
-    <td><%=h transaction.amount %></td>
-    <td><%=h transaction.description %></td>
-    <td><%=h transaction.member_id %></td>
-    <td><%=h transaction.order_id %></td>
-    <td><%= link_to 'Show', transaction %></td>
-    <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-    <td><%= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <table class="order_form">
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Order</th>
+    </tr>
 
-<br />
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%=h transaction.date %></td>
+      <td><%= "-" if transaction.debit %><%=h number_to_currency transaction.amount %></td>
+      <td><%=h transaction.description %></td>
+      <td><% if transaction.order %>
+            <%= link_to transaction.order_id, order_path(transaction.order, :farm_id => @farm.id) %>
+          <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
 
-<%= link_to 'New transaction', new_transaction_path %>
+</div>
+
+<%# link_to 'New transaction', new_transaction_path %>

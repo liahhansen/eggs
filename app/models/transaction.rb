@@ -14,4 +14,6 @@
 
 class Transaction < ActiveRecord::Base
   belongs_to :member
+  belongs_to :farm
+  belongs_to :order
 end

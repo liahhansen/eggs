@@ -3,8 +3,9 @@ require 'spec_helper'
 describe TransactionsController do
 
   before(:each) do
+    assigns[:farm] = Factory(:farm)
     activate_authlogic
-    UserSession.create Factory(:user)
+    UserSession.create Factory(:admin_user)
   end
 
   def mock_transaction(stubs={})
@@ -12,10 +13,15 @@ describe TransactionsController do
   end
 
   describe "GET index" do
-    it "assigns all transactions as @transactions" do
-      Transaction.stub(:find).with(:all).and_return([mock_transaction])
-      get :index
-      assigns[:transactions].should == [mock_transaction]
+    it "assigns all transactions for a specified user as @transactions" do
+      UserSession.create Factory(:member_user)      
+      member = UserSession.find.user.member
+      farm = Factory(:farm)
+      Factory(:transaction, :farm => farm)
+      Factory(:transaction, :member => member, :farm => farm)
+
+      get :index, :member_id => member.id, :farm_id => farm.id
+      assigns[:transactions].length.should == 1
     end
   end
 

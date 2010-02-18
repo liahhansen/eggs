@@ -14,6 +14,7 @@
 class Order < ActiveRecord::Base
   belongs_to :member
   belongs_to :pickup
+  has_many :transactions
   has_many :order_items, :dependent => :destroy do
     def with_quantity
       self.select {|item| item.quantity > 0 }

@@ -1,8 +1,14 @@
 class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.xml
+
+  access_control do
+    allow :admin
+    allow :member, :to => [:show, :index]
+  end
+
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.find_all_by_member_id_and_farm_id(params[:member_id], @farm.id)
 
     respond_to do |format|
       format.html # index.html.erb
