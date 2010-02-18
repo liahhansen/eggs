@@ -14,6 +14,7 @@ end
 describe PickupImport do
   before :each do
     @farm = Factory(:farm)
+    @chicken_regular = Factory(:product, :farm => @farm, :name => 'Chicken, REGULAR')
     @import = PickupImport.new "#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv"
   end
 
@@ -46,26 +47,29 @@ describe PickupImport do
       @import.orders[1].pickup.name.should == "SF Potrero"
     end
 
+    it "should create order items for each stock item" do
+      @import.orders[0].order_items.size.should == 8
+      @import.orders[0].order_items[0].stock_item.product.should == @chicken_regular
+      @import.orders[0].order_items[0].quantity.should == 1
+    end
+
   end
 
   context "Creating Products, Pickups and StockItems" do
     before :each do
-      @chicken_regular = Factory(:product, :farm => @farm, :name => 'Chicken, REGULAR')
     end
 
-    it "should identify product names" do
-      products = @import.product_headers
-      products.size.should == 8
+    it "should identify columns" do
+      columns = @import.columns
+      p columns
+      columns.size.should == 7
+      columns[:products].size.should == 8
+      columns[:products][@chicken_regular].should == 8
+      columns[:products][@import.products[1]].should == 9
     end
 
     it "should have multiple location names" do
       @import.location_names.should == ['SF Potrero', 'Farm']
-    end
-
-    it "should normalize product names" do
-      products = @import.product_headers
-      products[0].should == "Chicken, REGULAR ($6.50/lb., 3.75-4.5 lbs)"
-      products[7].should == "Terra Sole olive oil, 500ml, $18"
     end
 
     it "should have multiple pickups" do
@@ -88,7 +92,7 @@ describe PickupImport do
       @import.products[1].name.should == 'Chicken, LARGE'
       @import.products[1].description.should == '$6/lb., 4.5-5.5 lbs'
       @import.products[1].farm.should == @farm
-      @import.products[1].new_record?.should == true
+      @import.products[1].new_record?.should == false
     end
 
     it "should create a stock item for each product" do
