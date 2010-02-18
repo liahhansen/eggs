@@ -42,6 +42,7 @@ describe PickupImport do
       @import.orders.size.should == 4
       @import.orders[0].member.should == @kathryn
       @import.orders[0].pickup.name.should == "SF Potrero"
+      @import.orders[0].finalized_total.should == 30.55
 
       @import.orders[1].member.first_name.should == "Alon"
       @import.orders[1].pickup.name.should == "SF Potrero"
@@ -61,11 +62,12 @@ describe PickupImport do
 
     it "should identify columns" do
       columns = @import.columns
-      p columns
-      columns.size.should == 7
+      columns.size.should == 9
       columns[:products].size.should == 8
       columns[:products][@chicken_regular].should == 8
       columns[:products][@import.products[1]].should == 9
+      columns[:notes].should == 18
+      columns[:total].should == 20
     end
 
     it "should have multiple location names" do

@@ -74,21 +74,28 @@ class PickupImport
 
   def read_headers(row = @rows[0])
     columns = {
-            :timestamp => 0,
-            :last_name => 1,
-            :first_name => 2,
-            :email => 3,
-            :phone => 4,
-            :location => 7,
-            :products => {} }
+      :timestamp => 0,
+      :last_name => 1,
+      :first_name => 2,
+      :email => 3,
+      :phone => 4,
+      :location => 7,
+      :products => {} }
 
+    last_product_index = 0
     row.each_with_index do |header, index|
       next unless header
       if header =~ /(\$)/
         normalize_product_header(header)
         columns[:products][find_or_new_product(header)] = index
+        last_product_index = index
       end
     end
+
+    columns.merge!({
+      :notes => last_product_index + 1,
+      :total => last_product_index + 3
+    })
 
     columns
   end
@@ -163,7 +170,9 @@ class PickupImport
         timestamp = pickup.date # If timestamp is 'manual' or nil use pickup date
       end
 
-      order = Order.new :pickup => pickup, :member => member, :created_at => timestamp
+      order = Order.new :pickup => pickup, :member => member, :created_at => timestamp,
+                        :notes => row[columns[:notes]]
+      order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
       pickup.stock_items.each do |stock_item|
         order.order_items << OrderItem.new(:stock_item => stock_item, :quantity => row[columns[:products][stock_item.product]] || 0)
       end
