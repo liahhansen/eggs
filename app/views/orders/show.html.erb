@@ -3,27 +3,34 @@
 
 
 <p>
-  <b>Member:</b>
+  <b>Order For:</b>
   <%= "#{@order.member.first_name} #{@order.member.last_name}" %>
-
 </p>
 
 <p>
   <b>Pickup:</b>
-  <%= "#{@order.pickup.name} - #{@order.pickup.pretty_date}" %>
+  <%= "#{@order.pickup.name} - #{@order.pickup.pretty_date}" %><br/>
+  <b>Host:</b> <%= @order.pickup.host %><br/>
+  <b>Location:</b> <%= @order.pickup.location %><br/>
+  <b>Notes:</b> <%= @order.pickup.notes %><br/>
+
 </p>
 
 <p>
-  <b>Notes:</b>
+  <b>Order Notes:</b>
   <%=h @order.notes %>
 </p>
 
 <p>
   <b>order items:</b><br/>
 <% @order.order_items.with_quantity.each do |item| %>
-  <%= "#{item.stock_item.product_name}" %><%= ", quantity: #{item.quantity}"%><br/>  
-
+  <%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %><br/>
 <% end %>
+</p>
+
+<p>
+  <b>Estimated Total:</b> <%= number_to_currency @order.estimated_total %><br/>
+  <b>Finalized Total:</b> <%= @order.finalized_total ? number_to_currency(@order.finalized_total) : "not yet finalized" %>
 </p>
 
 <% if @order.pickup.status == "open" || current_user.has_role?(:admin) %>
