@@ -45,10 +45,13 @@ class StockItem < ActiveRecord::Base
   end
 
   def copy_product_attributes
-    self.product_name         = product.name          if !self.product_name
-    self.product_description  = product.description   if !self.product_description
-    self.product_price        = product.price         if !self.product_price
-    self.product_estimated    = product.estimated     if self.product_estimated == nil
+    if(product)
+      self.product_name         = product.name          if !self.product_name
+      self.product_description  = product.description   if !self.product_description
+      self.product_price        = product.price         if !self.product_price
+      self.product_estimated    = product.estimated     if self.product_estimated == nil
+      self.product_price_code   = product.price_code    if !self.product_price_code
+    end
   end
 
   def quantity_ordered

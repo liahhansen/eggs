@@ -85,7 +85,7 @@
         <%= link_to "Enter Finalized Totals", :controller => 'pickups', :action => 'edit_order_totals', :id => @pickup.id, :farm_id => @farm.id %><br/>
 
         <%= link_to "Export as CSV", pickup_path(@pickup, :csv, :farm_id => @farm.id) %><br/>
-        <a href="http://docs.google.com/?DocAction=updoc&formsubmitted=true&uploadURL=<%= pickup_url(@pickup, :csv, :farm_id => @farm.id) %>">Export as Google Spreadsheet</a><br/>
+        <%= link_to "Export as TSV", pickup_path(@pickup, :csv, :farm_id => @farm.id, :tabs => true) %> (copy/paste to gDocs)<br/>
         <%= link_to 'Delete Pickup', { :id => @pickup.id,
                                        :farm_id => @farm.id},
                                        :confirm => 'This action will delete all orders associated with this pickup.  Are you sure you want to continue?',

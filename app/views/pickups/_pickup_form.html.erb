@@ -48,9 +48,10 @@
   <table class="simple">
     <tr>
       <th>name</th>
-      <th>total available</th>
-      <th>max per member</th>
+      <th>total avail</th>
+      <th>max p/p</th>
       <th>description</th>
+      <th>price code (for label)</th>
       <th>price</th>
       <th>is estimated</th>
       <th>notes</th>
@@ -61,9 +62,10 @@
         <tr>
           <%= builder.hidden_field :product_id, :value => item.product.id %>
           <td><%= builder.text_field :product_name, :size => "18" %></td>
-          <td><%= builder.text_field :quantity_available, :size => "3" %></td>
-          <td><%= builder.text_field :max_quantity_per_member, :size => "3" %></td>
+          <td><%= builder.text_field :quantity_available, :size => "2" %></td>
+          <td><%= builder.text_field :max_quantity_per_member, :size => "2" %></td>
           <td><%= builder.text_area :product_description, :size => "30x3" %></td>
+          <td><%= builder.text_field :product_price_code, :size => 18 %></td>
           <td><%= builder.text_field :product_price, :size => "3" %></td>
           <td><%= builder.select :product_estimated, [true, false] %></td>
           <td><%= builder.text_area :notes, :size => "30x3" %></td>

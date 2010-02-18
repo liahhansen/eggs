@@ -22,11 +22,12 @@ class PickupsController < ApplicationController
   def show
     @pickup = Pickup.find(params[:id])
 
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pickup }
       format.csv do
-        csv_string = PickupExporter.get_csv(@pickup)
+        csv_string = PickupExporter.get_csv(@pickup, params[:tabs])
 
         send_data csv_string,
                 :type => 'text/csv; charset=iso-8859-1; header=present',

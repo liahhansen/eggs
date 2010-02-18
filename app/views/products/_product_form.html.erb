@@ -6,20 +6,22 @@
 
 
   <p>
-    <%= f.label :name %><br />
+    <%= f.label "Name:  (e.g. 'Chicken, Regular')" %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :description %><br />
+    <%= f.label "Description:  (e.g. 'The best chicken you'll ever eat!')" %><br />
     <%= f.text_area :description, :size => "50x5" %>
   </p>
   <p>
-    <%= f.label :price %><br />
-    <%= f.text_field :price, :size => "5" %>
+    <%= f.label 'Price Code: (e.g. "3-4lbs, $6.50/lb"), for label use:' %><br />
+    <%= f.text_field :price_code, :size => "50x5" %>
   </p>
   <p>
-    <%= f.label :estimated %><br />
-    <%= f.check_box :estimated %>
+    <%= f.label "Price: either set price or calculated approximate" %><br />
+    $<%= f.text_field :price, :size => "5" %>
+    <%= f.check_box :estimated %>    
+    <%= f.label "Estimated?" %>
   </p>
   <p>
     <%= f.submit button_label %>

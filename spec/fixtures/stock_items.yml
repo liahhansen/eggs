@@ -31,6 +31,7 @@ feb3_chickenreg:
   product_description: We've got chicken!
   product_price: 26
   product_estimated: true
+  product_price_code: $6.50/lb., 3.75-4.5 lbs
 
 feb3_eggs:
   pickup: sf_emeryville_feb3
@@ -43,6 +44,7 @@ feb3_eggs:
   product_description: The best eggs you'll ever eat
   product_price: 6.5
   product_estimated: false
+  product_price_code: $6.50
 
 feb10_mission_chickenreg:
   pickup: sf_mission_feb10
@@ -55,6 +57,7 @@ feb10_mission_chickenreg:
   product_description: We've got chicken!
   product_price: 26
   product_estimated: true
+  product_price_code: $6.50/lb., 3.75-4.5 lbs
 
 feb10_mission_eggs:
   pickup: sf_mission_feb10
@@ -66,5 +69,6 @@ feb10_mission_eggs:
   product_name: 1 doz Eggs
   product_description: The best eggs you'll ever eat
   product_price: 6.5
-  product_estimated: false  
+  product_estimated: false
+  product_price_code: $6.50
   

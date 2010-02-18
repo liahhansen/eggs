@@ -10,6 +10,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Price Code</th>
       <th>Price</th>
       <th>Estimated</th>
     </tr>
@@ -18,6 +19,7 @@
     <tr>
       <td><%=h product.name %></td>
       <td><%=h product.description %></td>
+      <td><%=h product.price_code %></td>
       <td><%=h number_to_currency product.price %></td>
       <td><%=h product.estimated %></td>
       <td><%= link_to 'Edit', edit_product_path(product, :farm_id => @farm.id) %></td>

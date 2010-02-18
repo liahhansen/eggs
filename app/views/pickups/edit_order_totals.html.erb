@@ -17,12 +17,22 @@
     <th>First Name</th>
     <th>Last Name</th>
     <% @pickup.stock_items.each do |item| %>
-      <th><%= item.product_name %><br/><%= item.quantity_ordered %></th>
+      <th><%= item.product_name %><br/>
+        <%= item.product_price_code %><br/>
+      </th>
     <% end %>
 
     <th>Notes</th>
     <th>Estimated Total</th>
     <th>Finalized Total</th>
+  </tr>
+
+  <tr class="hed">
+    <th>totals:</th>
+    <th></th>
+    <% @pickup.stock_items.each do |item| %>
+      <th><%= item.quantity_ordered %></th>
+    <% end %>
   </tr>
 
     <% @pickup.orders.each do |order| %>
@@ -37,7 +47,7 @@
 
           <td><%= order.notes %></td>
           <td><%= number_to_currency order.estimated_total %></td>
-          <td><%= builder.text_field :finalized_total, :size => 5 %></td>
+          <td>$<%= builder.text_field :finalized_total, :size => 5 %></td>
 
         </tr>
       <% end %>

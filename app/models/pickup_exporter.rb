@@ -1,11 +1,13 @@
 class PickupExporter < ActiveRecord::Base
-  def self.get_csv(pickup)
+  def self.get_csv(pickup, tabs = false)
     # headers: last name, first name, email, cell, stock_item, notes, balance, bag total, new balance, how paid, last_name
 
-    csv_string = FasterCSV.generate do |csv|
+    col_sep = tabs ? "\t" : ","
+
+    csv_string = FasterCSV.generate(:col_sep => col_sep) do |csv|
 
       headers = ["Last Name", "First Name", "Email", "Cell Phone"]
-      pickup.stock_items.each {|item| headers << item.product_name}
+      pickup.stock_items.each {|item| headers << "#{item.product_name} - #{item.product_price_code}"}
       headers += ["Notes", "Balance", "Bag Total", "New Balance", "How Paid", "Last Name"]
 
       csv << headers

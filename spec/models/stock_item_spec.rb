@@ -48,6 +48,7 @@ describe StockItem do
     stock_item.product_name.should         == @product.name
     stock_item.product_price.should        == @product.price
     stock_item.product_estimated.should    == @product.estimated
+    stock_item.product_price_code.should   == @product.price_code
   end
 
   it "should return quantity ordered" do

@@ -14,7 +14,7 @@ end
 Factory.define :member do |m|
   m.first_name 'Timothy'
   m.last_name 'Riggins'
-  m.sequence(:email_address) {|n| "qb#{n}@dillonfootball.com" }
+  m.sequence(:email_address) {|n| "qb#{n}@example.com" }
   m.phone_number '5123533694'
 end
 

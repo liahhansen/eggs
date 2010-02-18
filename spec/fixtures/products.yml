@@ -22,24 +22,27 @@
 
 sf_chickenreg:
   name: Chicken, REGULAR
-  description: A medium-large, pasture-raised chicken.  ($6.50/lb., 3.75-4.5 lbs)
+  description: A medium-large, pasture-raised chicken.
   farm: soulfood
   price: 26
   estimated: true
+  price_code: $6.50/lb., 3.75-4.5 lbs
 
 sf_chickenlg:
   name: Chicken, LARGE
-  description: Large chickens come from the farm next door, also pasture-raised. Good meat/bone ratio.  ($6/lb., 4.5-5.5lbs)
+  description: Large chickens come from the farm next door, also pasture-raised. Good meat/bone ratio.
   farm: soulfood
   price: 33
   estimated: true
+  price_code: $6/lb., 4.5-5.5lbs
 
 sf_chickenxxl:
   name: Chicken, XXL
-  description: ($6/lb., 7-7.25 lbs)
+  description:
   farm: soulfood
   price: 42
   estimated: true
+  price_code: $6/lb., 7-7.25 lbs
 
 sf_eggs:
   name: Eggs
@@ -47,6 +50,7 @@ sf_eggs:
   farm: soulfood
   price: 6.50
   estimated: false
+  price_code: $6.50
 
 sf_oliveoil:
   name: Terra Sole olive oil
@@ -54,27 +58,31 @@ sf_oliveoil:
   farm: soulfood
   price: 18
   estimated: false
+  price_code: $18
 
 cs_hamsm:
   name: Ham SM
-  description: 2.5-4 lbs, $9/lb
+  description:
   farm: clarksummit
   price: 22.50
   estimated: true
+  price_code: 2.5-4 lbs, $9/lb
 
 cs_hamlg:
   name: Ham LG
-  description: 5-7 lbs, $8/lb
+  description:
   farm: clarksummit
   price: 40
   estimated: true
+  price_code: 5-7 lbs, $8/lb
 
 cs_bacon:
   name: Bacon
-  description: .75-1 lb, $12/lb
+  description:
   farm: clarksummit
   price: 12
   estimated: true
+  price_code: .75-1 lb, $12/lb
 
 cs_hogshead:
   name: Hog's Head
@@ -82,4 +90,4 @@ cs_hogshead:
   farm: clarksummit
   price: 10
   estimated: false
-  
+  price_code: $10
