@@ -8,6 +8,12 @@ set :applicationdir, "/home/#{user}/#{application}"  # The standard Dreamhost se
 set :scm, :git
 set :repository,  "git://github.com/kathrynaaker/eggs.git"
 
+set :git_enable_submodules, 1 # if you have vendored rails
+set :branch, 'master'
+set :git_shallow_clone, 1
+set :scm_verbose, true
+
+
 # roles (servers)
 role :web, domain
 role :app, domain
