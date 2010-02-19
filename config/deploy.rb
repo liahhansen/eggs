@@ -14,7 +14,7 @@ set :git_shallow_clone, 1
 set :scm_verbose, true
 
 set :scm_command, "~/packages/bin/git" #updated version of git on ?server in user directory
-?set :local_scm_command, "git" #correct path to local ?git
+set :local_scm_command, "git" #correct path to local ?git
 
 # roles (servers)
 role :web, domain
