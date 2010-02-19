@@ -43,5 +43,5 @@ namespace :deploy do
 end
 
 after "deploy:symlink" do
-  puts "after deploy:symlink"
+  run "cp #{File.join(shared_path, 'config', 'database.yml')} #{File.join(current_path, 'config', 'database.yml')}"
 end
