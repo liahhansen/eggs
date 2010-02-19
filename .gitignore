@@ -4,5 +4,4 @@ db/*.sqlite3
 .DS_Store
 *.swp
 .idea/
-*.imlconfig/database.yml
-config/database.example.yml
+*.iml
