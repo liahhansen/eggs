@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20100218061340) do
     t.date     "date"
     t.float    "amount"
     t.string   "description"
-    t.integer  "member_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"

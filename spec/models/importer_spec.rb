@@ -63,6 +63,12 @@ describe PickupImport do
     it "should identify columns" do
       columns = @import.columns
       columns.size.should == 9
+      columns[:timestamp].should == 0
+      columns[:first_name].should == 2
+      columns[:last_name].should == 1
+      columns[:email].should == 3
+      columns[:phone].should == 4
+      columns[:location].should == 7
       columns[:products].size.should == 8
       columns[:products][@chicken_regular].should == 8
       columns[:products][@import.products[1]].should == 9

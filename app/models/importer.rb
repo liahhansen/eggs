@@ -73,29 +73,33 @@ class PickupImport
   end
 
   def read_headers(row = @rows[0])
-    columns = {
-      :timestamp => 0,
-      :last_name => 1,
-      :first_name => 2,
-      :email => 3,
-      :phone => 4,
-      :location => 7,
-      :products => {} }
+    columns = { :products => {} }
 
-    last_product_index = 0
     row.each_with_index do |header, index|
       next unless header
-      if header =~ /(\$)/
-        normalize_product_header(header)
-        columns[:products][find_or_new_product(header)] = index
-        last_product_index = index
+
+      case
+        when header =~ /timestamp/i
+          columns[:timestamp] = index
+        when header =~ /first name/i
+          columns[:first_name] = index
+        when header =~ /last name/i && !columns[:last_name]
+          columns[:last_name] = index
+        when header =~ /email/i
+          columns[:email] = index
+        when header =~ /cell/i
+          columns[:phone] = index
+        when header =~ /where/i
+          columns[:location] = index
+        when header =~ /(\$)/
+          normalize_product_header(header)
+          columns[:products][find_or_new_product(header)] = index
+        when header =~ /questions/i
+          columns[:notes] = index
+        when header =~ /total/i
+          columns[:total] = index
       end
     end
-
-    columns.merge!({
-      :notes => last_product_index + 1,
-      :total => last_product_index + 3
-    })
 
     columns
   end
