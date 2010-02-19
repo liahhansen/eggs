@@ -1,6 +1,6 @@
 
 set :user, 'eggbasket'  # Your dreamhost account's username
-set :domain, 'fundip.dreamhost.com'  # Dreamhost servername where your account is located
+set :domain, 'addisababa.dreamhost.com'  # Dreamhost servername where your account is located
 set :application, 'eggbasket.org'  # Your app's location (domain or sub-domain name as setup in panel)
 set :applicationdir, "/home/#{user}/#{application}"  # The standard Dreamhost setup
 
