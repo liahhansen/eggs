@@ -1,11 +1,8 @@
 class Importer
 
-  def initialize(dir = "#{RAILS_ROOT}/db/import")
+  def initialize(dir, farm)
     @dir = dir
-  end
-
-  def pickups
-    imports.collect(&:pickups).flatten
+    @farm = farm
   end
 
   def import!
@@ -15,7 +12,7 @@ class Importer
   end
 
   def imports
-    Dir["#{@dir}/*.csv"].collect {|file|  PickupImport.new file}
+    Dir["#{@dir}/*.csv"].collect {|file|  PickupImport.new(file, @farm)}
   end
 
 end
@@ -23,10 +20,10 @@ end
 class PickupImport
   attr_reader :file, :rows, :columns, :farm
 
-  def initialize(file)
+  def initialize(file, farm)
     @file = file
     @rows = CSV.read file
-    @farm = Farm.find_by_name('Soul Food Farm') || raise("Unable to find farm with name 'Soul Food Farm'")
+    @farm = farm || raise("farm cannot be nil")
     @columns = read_headers @rows[0]
   end
 
@@ -94,7 +91,7 @@ class PickupImport
         when header =~ /(\$)/
           normalize_product_header(header)
           columns[:products][find_or_new_product(header)] = index
-        when header =~ /questions/i
+        when header =~ /questions|notes/i && !columns[:notes]
           columns[:notes] = index
         when header =~ /total/i
           columns[:total] = index
@@ -160,14 +157,15 @@ class PickupImport
     @orders ||= @rows[1..-1].collect do |row|
       first_name = row[columns[:first_name]]
       last_name = row[columns[:last_name]]
-      next unless first_name && last_name
+      location = row[columns[:location]]
+      next unless first_name && last_name && location
 
       first_name = first_name.titleize
       last_name = last_name.titleize
       member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Create Order
-      pickup = pickups.find {|item| item.name == row[columns[:location]]}
+      pickup = pickups.find {|item| item.name == location}
       begin
         timestamp = DateTime.parse(row[columns[:timestamp]])
       rescue Exception => e
