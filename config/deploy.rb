@@ -13,6 +13,7 @@ set :branch, 'master'
 set :git_shallow_clone, 1
 set :scm_verbose, true
 
+set :scm_command, "~/packages/bin/git" #updated version of git on ?server in user directory
 
 # roles (servers)
 role :web, domain
