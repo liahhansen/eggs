@@ -1,6 +1,9 @@
 class PickupsController < ApplicationController
   # GET /pickups
   # GET /pickups.xml
+  require "prawn/measurement_extensions"
+  prawnto :prawn => { :left_margin => 0.18.in, :right_margin => 0.18.in}
+
   def index
 
     if !params[:farm_id]
@@ -33,6 +36,7 @@ class PickupsController < ApplicationController
                 :type => 'text/csv; charset=iso-8859-1; header=present',
                 :disposition => "attachment; filename=#{@pickup.date}#{@pickup.name}.csv"
       end
+      format.pdf {render :layout => false}
     end
   end
 
