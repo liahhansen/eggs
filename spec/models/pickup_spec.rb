@@ -98,4 +98,12 @@ describe Pickup do
 
   end
 
+  it "should calculate a finalized total from orders" do
+    pickup = Factory(:pickup_with_orders)
+    pickup.finalized_total.should == 0
+
+    pickup.orders.each {|order| order.finalized_total = 10 }
+    pickup.finalized_total.should == 10 * pickup.orders.size
+  end
+
 end

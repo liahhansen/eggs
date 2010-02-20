@@ -55,7 +55,7 @@ class Pickup < ActiveRecord::Base
   def finalized_total
     total = 0
     orders.each do |order|
-      total += order.finalized_total
+      total += order.finalized_total if order.finalized_total
     end
     total
   end
