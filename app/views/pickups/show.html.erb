@@ -73,9 +73,14 @@
         <b>Host:</b>              <%=h @pickup.host %><br/>
         <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
         <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
-        <b>Current total:</b>     <%=h "#{number_to_currency @pickup.estimated_total}" %><br/>
+        <b>Current total:</b>
+          <% if @pickup.finalized_total > 0 %>
+            <%=h "#{number_to_currency @pickup.finalized_total}" %> (finalized)<br/>
+          <% else %>
+            <%=h "#{number_to_currency @pickup.estimated_total}" %> (estimated)<br/>
+          <% end %>
       </p>
-  </div>
+    </div>
 
   <p></p>
   <div class="box_header"><h5>Manage Pickup:</h5></div>

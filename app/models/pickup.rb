@@ -52,6 +52,14 @@ class Pickup < ActiveRecord::Base
     total
   end
 
+  def finalized_total
+    total = 0
+    orders.each do |order|
+      total += order.finalized_total
+    end
+    total
+  end
+
   def map_link
     "http://mapof.it/#{location}"
   end
