@@ -41,7 +41,17 @@
       <td><%= order.pickup.name %></td>
 
       <% order.order_items.each do |item| %>
-        <td><%= item.quantity %></td>
+        <td>
+          <% if item.quantity == 0 %>
+            <span class="zero_quantity">
+              <%= item.quantity %>
+            </span>
+          <% else %>
+            <span class="has_quantity">
+              <b><%= item.quantity %></b>
+            </span>
+          <% end %>
+        </td>
       <% end %>
 
       <td><%= order.notes %></td>

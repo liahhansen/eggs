@@ -4,7 +4,7 @@ body {
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 div.box_header {
@@ -19,6 +19,15 @@ div.box_content {
 
 div.box_header h5 {
   margin-bottom: 0px;
+}
+
+span.zero_quantity {
+  color: #cccccc
+}
+span.has_quantity {
+  color: #000000;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 
