@@ -19,7 +19,7 @@ Scenario: View Pickup Details
   And I follow "Soul Food Farm"
   And I follow "Emeryville"
   Then I should see "Pickup: Emeryville"
-  And I should see "Feb  3, 2010"
+  And I should see "Feb 3, 2010"
   And I should see "Status: OPEN"
 
   

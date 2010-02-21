@@ -126,6 +126,7 @@ describe PickupImport do
 
   context "Clark Summit" do
     before :each do
+      pending
       @farm = Factory(:farm, :name => 'Clark Summit')
       @import = PickupImport.new("#{RAILS_ROOT}/db/import/Clark Summit 2-3-10 TEST.csv", @farm)
     end
