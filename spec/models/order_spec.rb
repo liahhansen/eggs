@@ -36,7 +36,7 @@ describe Order do
 
   it "should only accept valid member and pickup ids" do
     lambda {Order.new(:member_id => 235, :pickup_id => 235).valid?}.should raise_error
-    Factory(:order_with_items).valid?.should == true    
+    Factory(:order_with_items).valid?.should == true
   end
 
   it "should be able to have order_items" do

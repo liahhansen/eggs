@@ -126,7 +126,6 @@ describe PickupImport do
 
   context "Clark Summit" do
     before :each do
-      pending
       @farm = Factory(:farm, :name => 'Clark Summit')
       @import = PickupImport.new("#{RAILS_ROOT}/db/import/Clark Summit 2-3-10 TEST.csv", @farm)
     end
@@ -147,6 +146,12 @@ describe PickupImport do
 
     it "should create new orders" do
       @import.orders.size.should == 4
+      @import.orders[0].member.first_name.should == 'Sue'
+      @import.orders[0].finalized_total.should == 154.14
+    end
+
+    it "should have multiple location names" do
+      @import.location_names.should == ['EB','MC']
     end
 
   end

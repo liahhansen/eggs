@@ -55,7 +55,7 @@ class StockItem < ActiveRecord::Base
   end
 
   def quantity_ordered
-    OrderItem.find_all_by_stock_item_id(id).inject(0){|total, item| total + item.quantity}
+    OrderItem.with_quantity.find_all_by_stock_item_id(id).inject(0){|total, item| total + item.quantity}
   end
 
   def quantity_remaining

@@ -65,7 +65,7 @@ end
 
 Factory.define :order_item do |p|
   p.association :stock_item
-  p.association :order
+#  p.association :order
   p.quantity 1
 end
 

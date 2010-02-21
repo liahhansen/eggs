@@ -102,7 +102,7 @@ class PickupImport
   end
 
   def location_names
-    @rows[1..-1].collect {|row| row[7]}.uniq.reject {|name| name.nil? || name == '0'}
+    @rows[1..-1].collect {|row| row[columns[:location]]}.uniq.reject {|name| name.nil? || name == '0' || name.strip.empty?}
   end
 
   def find_or_new_product(header)
@@ -130,9 +130,10 @@ class PickupImport
 
     @members = []
     @rows[1..-1].each do |row|
-      first_name = row[2]
-      last_name = row[1]
-      next unless first_name && last_name
+      first_name = row[columns[:first_name]]
+      last_name = row[columns[:last_name]]
+      location = row[columns[:location]]
+      next unless first_name && last_name && location
       
       first_name = first_name.titleize
       last_name = last_name.titleize
@@ -166,6 +167,7 @@ class PickupImport
 
       # Create Order
       pickup = pickups.find {|item| item.name == location}
+      raise "No pickup found for location '#{location}." unless pickup
       begin
         timestamp = DateTime.parse(row[columns[:timestamp]])
       rescue Exception => e
