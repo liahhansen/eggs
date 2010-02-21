@@ -84,7 +84,8 @@ describe Order do
 
   it "should be able to get only order_items with quantity > 0" do
     order = Factory(:order_with_items)
-    order.order_items.size.should == 2
+    order.order_items.build(:quantity => nil)
+    order.order_items.size.should == 3
     order.order_items.with_quantity.size.should == 1
     order.order_items.with_quantity.each do |item|
       item.quantity.should > 0

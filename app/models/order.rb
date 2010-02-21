@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   has_many :transactions
   has_many :order_items, :dependent => :destroy do
     def with_quantity
-      self.select {|item| item.quantity > 0 }
+      self.select {|item| item.quantity && (item.quantity > 0) }
     end
   end
   belongs_to :location
