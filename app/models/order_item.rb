@@ -17,7 +17,7 @@ class OrderItem < ActiveRecord::Base
 
   named_scope :with_quantity, :conditions => ['quantity > 0']
 
-  validates_presence_of :stock_item_id,:quantity
+  validates_presence_of :stock_item_id, :quantity
   validates_inclusion_of :quantity, :in => 0..99
   validate :stock_item_must_exist, :stock_item_must_not_be_sold_out
 
