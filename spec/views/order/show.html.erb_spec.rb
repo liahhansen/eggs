@@ -19,6 +19,7 @@ describe "/orders/show.html.erb" do
   it "should show edit if logged in as member and order pickup is open" do
     user = Factory(:member_user)
     assigns[:order] = @order = Factory(:order_with_items, :member => user.member, :pickup => Factory(:pickup, :status => "open"))
+    assigns[:farm] = @order.pickup.farm
     UserSession.create user
     render
     response.should include_text("Edit")

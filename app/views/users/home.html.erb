@@ -22,7 +22,7 @@
           <td><%= order.pickup.date %></td>
           <td><%= order.pickup.name %></td>
           <td><%= "total:  #{number_to_currency order.finalized_total}" %></td>
-          <td><%= link_to "view order", order_path(order) %></td>
+          <td><%= link_to "view order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
       <% end %>
     </table>
@@ -37,7 +37,7 @@
           <td><%= order.pickup.farm.name %></td>
           <td><%= order.pickup.name %></td>
           <td><%= order.pickup.status %></td>
-          <td><%= link_to "view order", order_path(order) %></td>
+          <td><%= link_to "view order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
       <% end %>
     </table>
@@ -52,7 +52,7 @@
           <td><%= order.pickup.farm.name %></td>
           <td><%= order.pickup.name %></td>
           <td><%= order.pickup.status %></td>
-          <td><%= link_to "view/edit order", order_path(order) %></td>
+          <td><%= link_to "view/edit order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
       <% end %>
     </table>
