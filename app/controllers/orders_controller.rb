@@ -25,7 +25,6 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
 
-    @member = params[:member_id] ? Member.find(params[:member_id]) : current_user.member
 
     if params[:pickup_id]
       @pickup = Pickup.find(params[:pickup_id])
@@ -35,6 +34,12 @@ class OrdersController < ApplicationController
     end
 
     @order = Order.new_from_pickup(@pickup)
+
+    if(params[:as_admin])
+      @members = @pickup.farm.members
+    else
+      @member = params[:member_id] ? Member.find(params[:member_id]) : current_user.member
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,7 +63,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         flash[:notice] = 'Order was successfully created.'
-        format.html { redirect_to(@order) }
+        format.html { redirect_to order_path(:id => @order, :farm_id => @farm.id) }
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
         @pickup = Pickup.find params[:pickup_id]
@@ -78,7 +83,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.update_attributes(params[:order])
         flash[:notice] = 'Order was successfully updated.'
-        format.html { redirect_to(@order) }
+        format.html { redirect_to order_path(:id => @order, :farm_id => @farm.id) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -94,7 +99,7 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.html { redirect_to(orders_url) }
+      format.html { redirect_to pickup_path(:id => @order.pickup, :farm_id => @farm.id) }
       format.xml  { head :ok }
     end
   end

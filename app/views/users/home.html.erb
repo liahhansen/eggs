@@ -67,9 +67,9 @@
       <tr>
         <td><%= pickup.date %></td>
         <td><%= pickup.farm.name %></td>
-        <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id)%></td>
+        <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id, :farm_id => pickup.farm.id)%></td>
         <td><%= pickup.status %></td>
-        <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id) %></td>
+        <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id, :farm_id => pickup.farm.id) %></td>
       </tr>
       <% end %>
     </ul>

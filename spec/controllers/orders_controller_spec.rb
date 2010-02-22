@@ -54,6 +54,15 @@ describe OrdersController do
     assigns(:member).should == u.member
   end
 
+  it "should set @members from farm when rendering new with as_admin in params" do
+    UserSession.create Factory(:admin_user)
+    farm = Factory(:farm_with_members)
+    pickup = Factory(:pickup_with_stock_items, :farm => farm)
+    get :new, :pickup_id => pickup.id, :as_admin => true
+    assigns(:member).should be_nil
+    assigns(:members).size.should > 0
+  end
+
   it "should set @member from order when rendering edit" do
     pickup = Factory(:pickup_with_stock_items)
     member = Factory(:member)

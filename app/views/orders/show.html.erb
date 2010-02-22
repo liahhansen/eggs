@@ -38,7 +38,12 @@
 </p>
 
 <% if @order.pickup.status == "open" || current_user.has_role?(:admin) %>
-<%= link_to 'Edit', edit_order_path(@order) %> |
+  <%= link_to 'Edit', edit_order_path(:id => @order, :farm_id => @farm.id) %> |
 <% end %>
 <%= link_to 'Back', root_path %>
+
+<% if current_user.has_role?(:admin) %>
+| <%= link_to 'Delete Order', {:action => "destroy", :id => @order.id, :farm_id => @farm.id}, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+
 </div>
