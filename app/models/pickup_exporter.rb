@@ -14,9 +14,10 @@ class PickupExporter < ActiveRecord::Base
 
       # rows
       pickup.orders.each do |order|
+        sub = order.member.subscriptions.select{|item| item.farm.name = order.pickup.farm.name}.first
         row = [order.member.last_name, order.member.first_name, order.member.email_address, order.member.phone_number]
         order.order_items.each{ |item| row << item.quantity }
-        row += [order.notes, order.member.current_balance(order.pickup.farm), order.finalized_total, order.member.current_balance(order.pickup.farm), "", order.member.last_name]
+        row += [order.notes, sub.current_balance, order.finalized_total, sub.current_balance, "", order.member.last_name]
         csv << row
       end
       
