@@ -15,7 +15,7 @@ class Subscription < ActiveRecord::Base
 
   def current_balance
     last_transaction = Transaction.find_all_by_subscription_id(id, :order => 'date').last
-    last_transaction.balance ? last_transaction.balance : 0
+    last_transaction ? last_transaction.balance : 0
   end
 
 end

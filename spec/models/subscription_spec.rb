@@ -24,6 +24,9 @@ describe Subscription do
 
   it "should return the current balance based on the last transaction" do
     subscription = Factory(:subscription)
+
+    subscription.current_balance.should == 0
+
     Factory(:transaction, :amount => 100, :debit => false, :subscription => subscription)
     Factory(:transaction, :amount => 40, :debit => true, :subscription => subscription)
 
