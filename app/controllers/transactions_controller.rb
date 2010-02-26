@@ -33,6 +33,8 @@ class TransactionsController < ApplicationController
   # GET /transactions/new.xml
   def new
     @transaction = Transaction.new
+    @subscription = Subscription.find_by_member_id_and_farm_id(params[:member_id], @farm.id)
+    @member = @subscription.member
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,7 +55,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         flash[:notice] = 'Transaction was successfully created.'
-        format.html { redirect_to(@transaction) }
+        format.html { redirect_to :action => "index", :member_id => params[:member_id], :farm_id => params[:farm_id] }
         format.xml  { render :xml => @transaction, :status => :created, :location => @transaction }
       else
         format.html { render :action => "new" }

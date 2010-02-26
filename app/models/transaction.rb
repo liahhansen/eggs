@@ -16,7 +16,11 @@ class Transaction < ActiveRecord::Base
   belongs_to :subscription
   belongs_to :order
 
-  before_create :calculate_balance
+  before_create :zero_nil_amount, :calculate_balance
+
+  def zero_nil_amount
+    self.amount = 0 if self.amount == nil
+  end
 
   def calculate_balance
     if !balance

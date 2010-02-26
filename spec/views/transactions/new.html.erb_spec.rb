@@ -11,6 +11,7 @@ describe "/transactions/new.html.erb" do
       :member_id => 1,
       :order_id => 1
     )
+    assigns[:member] = stub_model(Member)
   end
 
   it "renders new transaction form" do

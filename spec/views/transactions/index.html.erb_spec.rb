@@ -4,9 +4,11 @@ describe "/transactions/index.html.erb" do
   include TransactionsHelper
 
   before(:each) do
+    activate_authlogic
     farm = Factory(:farm)
     assigns[:farm] = farm
-    member = Factory(:member)
+    member = stub_model(Member)
+    UserSession.create Factory(:user)
     assigns[:member] = member
     assigns[:subscription] = Factory(:subscription, :farm => farm, :member => member)
 

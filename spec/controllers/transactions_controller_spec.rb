@@ -12,6 +12,10 @@ describe TransactionsController do
     @mock_transaction ||= mock_model(Transaction, stubs)
   end
 
+  def mock_member(stubs={})
+    @mock_member ||= mock_model(Member, stubs)
+  end
+
   describe "GET index" do
     it "assigns all transactions for a specified user as @transactions" do
       UserSession.create Factory(:member_user)      
@@ -35,10 +39,16 @@ describe TransactionsController do
   end
 
   describe "GET new" do
-    it "assigns a new transaction as @transaction" do
-      Transaction.stub(:new).and_return(mock_transaction)
-      get :new
-      assigns[:transaction].should equal(mock_transaction)
+    it "assigns a new transaction as @transaction and member as @member" do
+      Member.stub(:find).with("37").and_return(mock_member)
+      get :new, :member_id => 37
+      assigns[:transaction].class.should == Transaction
+    end
+
+    it "assigns a member as @member" do
+      Member.stub(:find).with("37").and_return(mock_member)      
+      get :new, :member_id => 37
+      assigns[:member].should equal(@mock_member)
     end
   end
 
