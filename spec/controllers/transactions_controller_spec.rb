@@ -3,9 +3,12 @@ require 'spec_helper'
 describe TransactionsController do
 
   before(:each) do
-    assigns[:farm] = Factory(:farm)
+    @farm = Factory(:farm)
     activate_authlogic
     UserSession.create Factory(:admin_user)
+
+    @member = UserSession.find.user.member
+    @subscription = Factory(:subscription, :farm => @farm, :member => @member)
   end
 
   def mock_transaction(stubs={})
@@ -40,15 +43,13 @@ describe TransactionsController do
 
   describe "GET new" do
     it "assigns a new transaction as @transaction and member as @member" do
-      Member.stub(:find).with("37").and_return(mock_member)
-      get :new, :member_id => 37
+      get :new, :member_id => @member.id, :farm_id => @farm.id
       assigns[:transaction].class.should == Transaction
     end
 
     it "assigns a member as @member" do
-      Member.stub(:find).with("37").and_return(mock_member)      
-      get :new, :member_id => 37
-      assigns[:member].should equal(@mock_member)
+      get :new, :member_id => @member.id, :farm_id => @farm.id
+      assigns[:member].should == @member
     end
   end
 
@@ -69,10 +70,10 @@ describe TransactionsController do
         assigns[:transaction].should equal(mock_transaction)
       end
 
-      it "redirects to the created transaction" do
+      it "redirects to the index" do
         Transaction.stub(:new).and_return(mock_transaction(:save => true))
         post :create, :transaction => {}
-        response.should redirect_to(transaction_url(mock_transaction))
+        response.should redirect_to(transactions_url)
       end
     end
 
