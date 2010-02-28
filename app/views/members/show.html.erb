@@ -2,24 +2,16 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-  <%= link_to 'Edit', edit_member_path(@member, :farm_id => @farm.id) %>
-  
-  <p>
-    <b>Member:</b>
-    <%=h "#{@member.first_name} #{@member.last_name}" %>
-  </p>
 
+
+  <h4>Member Information <%= link_to '(Edit)', edit_member_path(@member, :farm_id => @farm.id) %></h4>
   <p>
+    <b>Member Name:</b>
+    <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
     <b>Email address:</b>
-    <%=h @member.email_address %>
-  </p>
-
-  <p>
+    <%=h @member.email_address %><br/>
     <b>Phone number:</b>
-    <%=h @member.phone_number %>
-  </p>
-
-  <p>
+    <%=h @member.phone_number %><br/>
     <b>Neighborhood:</b>
     <%=h @member.neighborhood %>
   </p>
