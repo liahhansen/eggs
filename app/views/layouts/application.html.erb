@@ -5,12 +5,9 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>EggBasket : <%= yield(:title) || "#{controller_name()} : #{controller.action_name}" %></title>
-  <title><%= controller_name() %>: <%= controller.action_name %></title>
-  <link rel="stylesheet" href="/stylesheets/reset.css" />
-  <link rel="stylesheet" href="/stylesheets/text.css" />
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
   <link rel="stylesheet" href="/stylesheets/960.css" />
   <link rel="stylesheet" href="/stylesheets/eggs.css" />
-
 </head>
 <body>
 
@@ -18,17 +15,12 @@
   &nbsp;
 </div>
 
-<div class="container_12 topGutter">
-   <div class="grid12">
-
-   </div>
-</div>
 
 <div id="header" class="container_12 topSection">
 
 
   <div id="title" class="grid_6 ">
-    <h1>Eggs!<%= " - #{@farm.name}" if @farm %></h1>
+    <h3>EggBasket<%= " - #{@farm.name}" if @farm %></h3>
   </div>
 
   <div id="" class="grid_6 ">
