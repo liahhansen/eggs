@@ -1,5 +1,8 @@
-<tr>
-  <td><%= link_to "#{p.date}", pickup_path(p, :farm_id => @farm) %></td>
-  <td><%= link_to "#{p.name}", pickup_path(p, :farm_id => @farm) %></td>
-  <td><%= pluralize(p.orders.size, "Order" ) %></td>
-</tr>
+<div class="pickup_summary_box">
+  <div class="date grid_1 alpha">
+    <span class="day"><%= p.date.strftime('%d') %></span>
+    <span class="month"><%= p.date.strftime('%b').upcase %></span>
+  </div>
+  <div class="name grid_5"><%= link_to "#{p.name}", pickup_path(p, :farm_id => @farm) %></div>
+  <div class="details grid_2 omega"><%= pluralize(p.orders.size, "Order" ) %></div>
+</div>

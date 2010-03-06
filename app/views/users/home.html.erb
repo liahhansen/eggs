@@ -11,11 +11,16 @@
     of <%= number_to_currency next_order.finalized_total %>.  Please bring a check or top up your account using
     PayPal if your current balance will not cover the total.</p>
 
+    <h5>Pickup Details:</h5>
+    <p><b>date/time: </b><%= next_order.pickup.pretty_date %>, 5-7pm<br/>
+    <b>host: </b> <%= next_order.pickup.host %><br/>
+    <b>location:  </b><%= next_order.pickup.location %>
+    <%= link_to "(map)", next_order.pickup.map_link, :target => "_blank"%></p>
 
   <% end %>
 
   <% if @finalized_orders.size > 0 %>
-    <div class="box_header"><h5>Finalized Orders - Pickup soon!:</h5></div>
+    <div class="box_header"><h4>Finalized Orders - Pickup soon!:</h4></div>
     <table class="box_table">
       <% @finalized_orders.each do |order| %>
         <tr>
@@ -29,7 +34,7 @@
   <% end %>
 
   <% if @inprogress_orders.size > 0 %>  
-    <div class="box_header"><h5>Orders that are currently Processing:</h5></div>
+    <div class="box_header"><h4>Orders that are currently Processing:</h4></div>
     <table class="box_table">
       <% @inprogress_orders.each do |order| %>
         <tr>
@@ -44,7 +49,7 @@
   <% end %>
 
   <% if @open_orders.size > 0 %>    
-    <div class="box_header"><h5>Your current open orders:</h5></div>
+    <div class="box_header"><h4>Your current open orders:</h4></div>
     <table class="box_table">
       <% @open_orders.each do |order| %>
         <tr>
@@ -59,7 +64,7 @@
   <% end %>
 
   <% if @open_orders.size > 0 %>  
-    <div class="box_header"><h5>Pickups currently open for orders:</h5></div>
+    <div class="box_header"><h4>Pickups currently open for orders:</h4></div>
     <table class="box_table">
       <%
         @open_pickups.each do |pickup|
@@ -82,7 +87,7 @@
 <div id="sidebar" class="grid_4">
   <p></p>
   <div class="box_header">
-    <h5>Your Account Balance:</h5>
+    <h4>Your Account Balance:</h4>
   </div>
   <div class="box_content">
     <h4><%= number_to_currency @subscription.current_balance %></h4>

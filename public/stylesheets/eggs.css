@@ -4,12 +4,37 @@ body {
   font-size: 14px
 }
 
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #41302B;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 h1, h2, h3, h4, h5 {
   font-weight: bold;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 42px;
 }
 
 h2 {
@@ -29,21 +54,29 @@ h5 {
 }
 
 div.box_header {
-  background-color: #948581; /*padding-left: 8px;*/
+  background-color: #948581;
   float: left;
   width: 100%;
   margin-bottom: 2px;
+  padding: 4px 0 4px 0
+}
+
+div.box_header h4 {
+  margin: 0 0 0 8px;
+  color: #ffffff;
+  display: block;
 }
 
 div.box_content {
   background-color: #B4C2BA;
   padding: 8px;
+  margin-top: 2px;
 }
 
-div.box_header h5 {
-  margin: 0 0 0 8px;
-  color: #ffffff;
-  display: block;
+div.box_container {
+  margin-bottom: 10px;
+  float: left;
+  width: 100%;
 }
 
 span.zero_quantity {
@@ -97,10 +130,6 @@ div#title {
   top: 26px;
 }
 
-h1 {
-  font-size: 32px;
-}
-
 div#user_nav {
   float: right;
   font-size: 14px;
@@ -126,7 +155,7 @@ table.simple {
 }
 
 table.simple td {
-  background-color: #eeeeee;
+  background-color: #B4C2BA;
   color: #000;
   padding: 4px;
   text-align: left;
@@ -162,19 +191,53 @@ div.pickup_summary_box {
   background-color: #B4C2BA;
   margin-bottom: 2px;
   float: left;
+  height: 80px;
 }
 
 div.pickup_summary_box .date {
   text-align: center; /*line-height: 2.8em;*/
+  padding-top: 7px;
 }
 
 div.pickup_summary_box span.day {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: bold;
 }
 
 div.pickup_summary_box span.month {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
-  padding-top: 40;
+}
+
+div.pickup_summary_box .name {
+  font-size: 36px;
+  font-weight: bold;
+  height: 100%;
+}
+
+div.pickup_summary_box .name a {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+}
+
+div.nav_divider {
+  width: 100%;
+  height: 3px;
+  background-color: #948581;
+  margin-bottom: 20px;
+}
+
+div.page_header {
+  margin-bottom: 24px;
+}
+
+span.header_link {
+  font-size: 20px;
+  margin-left: 40px;
+  
+}
+
+h2.pickups_header {
+  margin-bottom: 14px;
 }

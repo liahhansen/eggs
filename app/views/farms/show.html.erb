@@ -1,54 +1,65 @@
-<div id="" class="grid_8 ">
+<div id="" class="nav container_12">
+    <%= link_to "< Farm List", farms_path %>
+    <div class="nav_divider"/>
+</div>
+
+<div id="" class="grid_8 alpha">
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-<div class="box_header"><h5>Finalized Pickups (ready for pickup!):</h5></div>
-<table class="box_table">
-<% @pickups_finalized.each do |p|%>
-    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
-<% end %>
-</table>
+  <div class="page_header"><h1><%= "#{@farm.name} - Home" %></h1></div>
+  <h2 class="pickups_header">Pickups: <span class="header_link"><%= link_to "add new pickup", new_pickup_path(:farm_id => @farm.id) %></span></h2>
 
-<div class="box_header"><h5>In Progress Pickups (not accepting orders):</h5></div>
-<table class="box_table">
-<% @pickups_inprogress.each do |p|%>
-    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
-<% end %>
-</table>
 
-<div class="box_header"><h5>Open Pickups (currently accepting orders):</h5></div>
-<table class="box_table">
-<% @pickups_open.each do |p|%>
-    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
-<% end %>
-</table>
+  <div class="box_container">
+  <div class="box_header"><h4>Finalized Pickups (ready for pickup!):</h4></div>
+  <% @pickups_finalized.each do |p|%>
+      <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+  <% end %>
+  </div>
 
-<div class="box_header"><h5>Not Yet Open Pickups:</h5></div>
-<table class="box_table">
-<% @pickups_notyetopen.each do |p|%>
-    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
-<% end %>
-</table>
+  <div class="box_container">
+  <div class="box_header"><h4>In Progress Pickups (not accepting orders):</h4></div>
+  <% @pickups_inprogress.each do |p|%>
+      <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+  <% end %>
+  </div>
 
-<div class="box_header"><h5>Archived Pickups:</h5></div>
-<table class="box_table">
-<% @pickups_archived.each do |p|%>
-    <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
-<% end %>
-</table>
+  <div class="box_container">
+  <div class="box_header"><h4>Open Pickups (currently accepting orders):</h4></div>
+  <% @pickups_open.each do |p|%>
+      <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+  <% end %>
+  </div>
+
+  <div class="box_container">
+  <div class="box_header"><h4>Not Yet Open Pickups:</h4></div>
+  <% @pickups_notyetopen.each do |p|%>
+      <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+  <% end %>
+  </div>
+
+  <div class="box_container">
+  <div class="box_header"><h4>Archived Pickups:</h4></div>
+  <% @pickups_archived.each do |p|%>
+      <%= render :partial => 'pickup_for_farm_list', :locals => {:p => p} %>
+  <% end %>
+  </div>
 
 
 </div>
 
-<div class="grid_4">
-  <div class="box_header"><h5>Manage Farm</h5></div>
-    <div class="box_content">
-      <p>
-        <%= link_to "Schedule new Pickup", new_pickup_path(:farm_id => @farm.id) %><br/>
-        <%= link_to "View / Manage Products", products_path(:farm_id => @farm.id) %><br/>
-        <%= link_to "View / Manage Members", members_path(:farm_id => @farm.id) %><br/>
-        <%= link_to "View In Progress Summary" %>
-      </p>
+<div class="grid_4 omega">
+  <div class="box_container">
+    <div class="box_header"><h4>Manage Farm</h4></div>
+      <div class="box_content">
+        <p>
+          <%= link_to "Schedule new Pickup", new_pickup_path(:farm_id => @farm.id) %><br/>
+          <%= link_to "View / Manage Products", products_path(:farm_id => @farm.id) %><br/>
+          <%= link_to "View / Manage Members", members_path(:farm_id => @farm.id) %><br/>
+          <%= link_to "View In Progress Summary" %>
+        </p>
+    </div>
   </div>
 
 </div>
