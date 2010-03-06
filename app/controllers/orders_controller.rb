@@ -26,17 +26,17 @@ class OrdersController < ApplicationController
   def new
 
 
-    if params[:pickup_id]
-      @pickup = Pickup.find(params[:pickup_id])
+    if params[:delivery_id]
+      @delivery = Delivery.find(params[:delivery_id])
     else
-      render :template => "pickups/pickup_selector_for_orders"
+      render :template => "deliveries/delivery_selector_for_orders"
       return
     end
 
-    @order = Order.new_from_pickup(@pickup)
+    @order = Order.new_from_delivery(@delivery)
 
     if(params[:as_admin])
-      @members = @pickup.farm.members
+      @members = @delivery.farm.members
     else
       @member = params[:member_id] ? Member.find(params[:member_id]) : current_user.member
     end
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @pickup = @order.pickup
+    @delivery = @order.delivery
     @member = @order.member
   end
 
@@ -66,7 +66,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to order_path(:id => @order, :farm_id => @farm.id) }
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
-        @pickup = Pickup.find params[:pickup_id]
+        @delivery = Delivery.find params[:delivery_id]
         format.html { render :action => "new" }
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
   # PUT /orders/1.xml
   def update
     @order = Order.find(params[:id])
-    @pickup = @order.pickup
+    @delivery = @order.delivery
     @member = @order.member
 
     respond_to do |format|
@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.html { redirect_to pickup_path(:id => @order.pickup, :farm_id => @farm.id) }
+      format.html { redirect_to delivery_path(:id => @order.delivery, :farm_id => @farm.id) }
       format.xml  { head :ok }
     end
   end

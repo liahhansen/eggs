@@ -3,7 +3,7 @@
 # Table name: stock_items
 #
 #  id                      :integer         not null, primary key
-#  pickup_id               :integer
+#  delivery_id               :integer
 #  product_id              :integer
 #  max_quantity_per_member :integer
 #  quantity_available      :integer
@@ -25,7 +25,7 @@ describe StockItem do
     @product = Factory(:product)
     @valid_attributes = {
       :product_id => @product.id,
-      :pickup_id => 4
+      :delivery_id => 4
     }
   end
 

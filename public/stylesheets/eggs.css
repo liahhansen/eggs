@@ -187,35 +187,35 @@ table.order_form td.hed {
   border: 1px #eee solid;
 }
 
-div.pickup_summary_box {
+div.delivery_summary_box {
   background-color: #B4C2BA;
   margin-bottom: 2px;
   float: left;
   height: 80px;
 }
 
-div.pickup_summary_box .date {
+div.delivery_summary_box .date {
   text-align: center; /*line-height: 2.8em;*/
   padding-top: 7px;
 }
 
-div.pickup_summary_box span.day {
+div.delivery_summary_box span.day {
   font-size: 42px;
   font-weight: bold;
 }
 
-div.pickup_summary_box span.month {
+div.delivery_summary_box span.month {
   font-size: 24px;
   font-weight: bold;
 }
 
-div.pickup_summary_box .name {
+div.delivery_summary_box .name {
   font-size: 36px;
   font-weight: bold;
   height: 100%;
 }
 
-div.pickup_summary_box .name a {
+div.delivery_summary_box .name a {
   position: absolute;
   top: 50%;
   margin-top: -16px;
@@ -238,6 +238,6 @@ span.header_link {
   
 }
 
-h2.pickups_header {
+h2.deliveries_header {
   margin-bottom: 14px;
 }

@@ -3,7 +3,7 @@
 # Table name: stock_items
 #
 #  id                      :integer         not null, primary key
-#  pickup_id               :integer
+#  delivery_id               :integer
 #  product_id              :integer
 #  max_quantity_per_member :integer
 #  quantity_available      :integer
@@ -19,7 +19,7 @@
 #
 
 class StockItem < ActiveRecord::Base
-  belongs_to :pickup
+  belongs_to :delivery
   belongs_to :product
 
   validates_associated :product

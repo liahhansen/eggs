@@ -11,12 +11,12 @@ describe Importer do
   end
 end
 
-describe PickupImport do
+describe DeliveryImport do
   context "Soul Food Farm" do
     before :each do
       @farm = Factory(:farm)
       @chicken_regular = Factory(:product, :farm => @farm, :name => 'Chicken, REGULAR')
-      @import = PickupImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv", @farm)
+      @import = DeliveryImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv", @farm)
     end
 
     context "Creating Members, Orders and OrderItems" do
@@ -42,11 +42,11 @@ describe PickupImport do
       it "should create new orders" do
         @import.orders.size.should == 4
         @import.orders[0].member.should == @kathryn
-        @import.orders[0].pickup.name.should == "SF Potrero"
+        @import.orders[0].delivery.name.should == "SF Potrero"
         @import.orders[0].finalized_total.should == 30.55
 
         @import.orders[1].member.first_name.should == "Alon"
-        @import.orders[1].pickup.name.should == "SF Potrero"
+        @import.orders[1].delivery.name.should == "SF Potrero"
       end
 
       it "should create order items for each stock item" do
@@ -57,7 +57,7 @@ describe PickupImport do
 
     end
 
-    context "Creating Products, Pickups and StockItems" do
+    context "Creating Products, deliveries and StockItems" do
       before :each do
       end
 
@@ -81,14 +81,14 @@ describe PickupImport do
         @import.location_names.should == ['SF Potrero', 'Farm']
       end
 
-      it "should have multiple pickups" do
-        @import.pickups.size.should == 2
-        @import.pickups[0].name.should == 'SF Potrero'
-        @import.pickups[1].name.should == 'Farm'
+      it "should have multiple deliveries" do
+        @import.deliveries.size.should == 2
+        @import.deliveries[0].name.should == 'SF Potrero'
+        @import.deliveries[1].name.should == 'Farm'
       end
 
-      it "should take pickup date from file name" do
-        @import.pickups.first.date.should == Date.parse("2010-01-13")
+      it "should take delivery date from file name" do
+        @import.deliveries.first.date.should == Date.parse("2010-01-13")
       end
 
       it "should find existing products by header name" do
@@ -105,16 +105,16 @@ describe PickupImport do
       end
 
       it "should create a stock item for each product" do
-        @import.pickups[0].stock_items.size.should == 8
-        @import.pickups[0].stock_items[0].product.should == @chicken_regular
+        @import.deliveries[0].stock_items.size.should == 8
+        @import.deliveries[0].stock_items[0].product.should == @chicken_regular
       end
     end
 
     context "Saving the import" do
       it "should create everything" do
-        PickupImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv", @farm).import!
+        DeliveryImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv", @farm).import!
 
-        Pickup.count.should == 2
+        Delivery.count.should == 2
         StockItem.count.should == 16
         Product.count.should == 8
         Member.count.should == 2
@@ -127,7 +127,7 @@ describe PickupImport do
   context "Clark Summit" do
     before :each do
       @farm = Factory(:farm, :name => 'Clark Summit')
-      @import = PickupImport.new("#{RAILS_ROOT}/db/import/Clark Summit 2-3-10 TEST.csv", @farm)
+      @import = DeliveryImport.new("#{RAILS_ROOT}/db/import/Clark Summit 2-3-10 TEST.csv", @farm)
     end
 
     it "should identify columns" do

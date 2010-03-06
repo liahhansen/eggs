@@ -3,7 +3,7 @@
 # Table name: stock_items
 #
 #  id                      :integer         not null, primary key
-#  pickup_id               :integer
+#  delivery_id               :integer
 #  product_id              :integer
 #  max_quantity_per_member :integer
 #  quantity_available      :integer
@@ -21,7 +21,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 feb3_chickenreg:
-  pickup: sf_emeryville_feb3
+  delivery: sf_emeryville_feb3
   product: sf_chickenreg
   max_quantity_per_member: 3
   quantity_available: 50
@@ -34,7 +34,7 @@ feb3_chickenreg:
   product_price_code: $6.50/lb., 3.75-4.5 lbs
 
 feb3_eggs:
-  pickup: sf_emeryville_feb3
+  delivery: sf_emeryville_feb3
   product: sf_eggs
   max_quantity_per_member: 1
   quantity_available: 2
@@ -47,7 +47,7 @@ feb3_eggs:
   product_price_code: $6.50
 
 feb10_mission_chickenreg:
-  pickup: sf_mission_feb10
+  delivery: sf_mission_feb10
   product: sf_chickenreg
   max_quantity_per_member: 5
   quantity_available: 50
@@ -60,7 +60,7 @@ feb10_mission_chickenreg:
   product_price_code: $6.50/lb., 3.75-4.5 lbs
 
 feb10_mission_eggs:
-  pickup: sf_mission_feb10
+  delivery: sf_mission_feb10
   product: sf_eggs
   max_quantity_per_member: 2
   quantity_available: 5

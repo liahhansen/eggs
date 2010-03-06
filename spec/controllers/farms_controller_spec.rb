@@ -13,17 +13,17 @@ describe FarmsController do
     response.should be_success
   end
 
-  it "should create sets of pickups when showing a single farm" do
-    farm = Factory(:farm_with_pickups)
+  it "should create sets of deliveries when showing a single farm" do
+    farm = Factory(:farm_with_deliveries)
 
     get :show, :id => farm.id
     response.should be_success
 
-    assigns(:pickups_inprogress).size.should == 2
-    assigns(:pickups_open).size.should == 1
-    assigns(:pickups_notyetopen).size.should == 1
-    assigns(:pickups_archived).size.should == 1
-    assigns(:pickups_finalized).size.should == 1
+    assigns(:deliveries_inprogress).size.should == 2
+    assigns(:deliveries_open).size.should == 1
+    assigns(:deliveries_notyetopen).size.should == 1
+    assigns(:deliveries_archived).size.should == 1
+    assigns(:deliveries_finalized).size.should == 1
     
   end
 

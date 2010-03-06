@@ -1,12 +1,12 @@
 class OrderForm
 
-  attr_reader :order_items, :pickup, :errors, :notes
+  attr_reader :order_items, :delivery, :errors, :notes
 
-  def initialize(pickup)
+  def initialize(delivery)
     @order_items = []
-    @pickup = pickup
+    @delivery = delivery
     @errors = {}
-    pickup.stock_items.each do |item|
+    delivery.stock_items.each do |item|
       @order_items << OrderItem.new(:stock_item_id => item.id)
     end
   end

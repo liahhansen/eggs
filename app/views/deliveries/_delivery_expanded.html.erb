@@ -1,0 +1,15 @@
+<div>
+
+  <h3><%= link_to "#{delivery.name} - #{delivery.date}", delivery %></h3>
+  <p><%= "status: #{delivery.status}" %><br/>
+  <%= "location: #{delivery.location}" %><br/>
+  <%= "host: #{delivery.host}"%><br/>
+  <%= "orders: #{delivery.orders.size}"%><br/>
+  <%= "estimated total: #{number_to_currency delivery.estimated_total}"%>
+
+
+  </p>
+
+  
+</div>
+

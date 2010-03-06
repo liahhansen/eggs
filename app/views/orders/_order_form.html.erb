@@ -1,9 +1,9 @@
 <p>
-  <b><%= "#{@pickup.name} - #{@pickup.pretty_date}"%></b><br/>
-  <b>Location:</b>          <%=h @pickup.location %> <%= link_to "(map)", @pickup.map_link, :target => "_blank"%><br/>
-  <b>Host:</b>              <%=h @pickup.host %><br/>
-  <b>Orders open at:</b>    <%=h @pickup.formatted_opening_at %><br/>
-  <b>Orders close at:</b>   <%=h @pickup.formatted_closing_at %><br/>
+  <b><%= "#{@delivery.name} - #{@delivery.pretty_date}"%></b><br/>
+  <b>Location:</b>          <%=h @delivery.location %> <%= link_to "(map)", @delivery.map_link, :target => "_blank"%><br/>
+  <b>Host:</b>              <%=h @delivery.host %><br/>
+  <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
+  <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
 
   <% if @member %>
     <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
@@ -12,9 +12,9 @@
 
 
 <% form_for @order do |f| %>
-  <%= hidden_field_tag :pickup_id, @pickup.id %>
+  <%= hidden_field_tag :delivery_id, @delivery.id %>
   <%= hidden_field_tag :farm_id, @farm.id %>
-  <%= f.hidden_field :pickup_id, :value => @pickup.id  %>
+  <%= f.hidden_field :delivery_id, :value => @delivery.id  %>
 
   <%= f.error_messages %>
 

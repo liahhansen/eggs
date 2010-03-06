@@ -2,11 +2,11 @@ class StockItemsController < ApplicationController
   # GET /stock_items
   # GET /stock_items.xml
   def index
-    if(params[:pickup_id] == nil)
+    if(params[:delivery_id] == nil)
       redirect_to root_path
       return
     else
-      @stock_items = StockItem.find_all_by_pickup_id params[:pickup_id]
+      @stock_items = StockItem.find_all_by_delivery_id params[:delivery_id]
     end
 
     respond_to do |format|

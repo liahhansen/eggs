@@ -4,7 +4,7 @@
 #
 #  id              :integer         not null, primary key
 #  member_id       :integer
-#  pickup_id       :integer
+#  delivery_id       :integer
 #  notes           :text
 #  created_at      :datetime
 #  updated_at      :datetime
@@ -18,7 +18,7 @@ describe Order do
   before(:each) do
     @valid_attributes = {
       :member_id => Factory(:member).id,
-      :pickup_id => Factory(:pickup).id,
+      :delivery_id => Factory(:delivery).id,
       :order_items => Factory(:order_with_items).order_items
     }
   end
@@ -27,15 +27,15 @@ describe Order do
     Order.create!(@valid_attributes)
   end
 
-  it "should raise errors when saving when no member or pickup is specified" do
+  it "should raise errors when saving when no member or delivery is specified" do
     Order.new.valid?.should == false
     lambda {Order.create!}.should raise_error
     lambda {Order.create!(:member_id => 1)}.should raise_error
-    lambda {Order.create!(:pickup_id => 2)}.should raise_error
+    lambda {Order.create!(:delivery_id => 2)}.should raise_error
   end
 
-  it "should only accept valid member and pickup ids" do
-    lambda {Order.new(:member_id => 235, :pickup_id => 235).valid?}.should raise_error
+  it "should only accept valid member and delivery ids" do
+    lambda {Order.new(:member_id => 235, :delivery_id => 235).valid?}.should raise_error
     Factory(:order_with_items).valid?.should == true
   end
 
@@ -61,9 +61,9 @@ describe Order do
     end
   end
 
-  it "should not be valid unless the order total is greater than the pickup minimum" do
-    p = Factory(:pickup, :minimum_order_total => 25)
-    o = Factory.build(:order, :pickup => Factory(:pickup, :minimum_order_total => 25))
+  it "should not be valid unless the order total is greater than the delivery minimum" do
+    p = Factory(:delivery, :minimum_order_total => 25)
+    o = Factory.build(:order, :delivery => Factory(:delivery, :minimum_order_total => 25))
     o.order_items << Factory(:cheap_order_item)
     o.valid?.should == false
     o.errors.on_base.should == "your order does not meet the minimum"
@@ -72,12 +72,12 @@ describe Order do
     o.valid?.should == true
   end
 
-  it "should generate with order_items when a pickup is passed to new" do
-    pickup = Factory(:pickup_with_stock_items)
-    order = Order.new_from_pickup(pickup)
-    pickup.stock_items.size.should_not == 0
+  it "should generate with order_items when a delivery is passed to new" do
+    delivery = Factory(:delivery_with_stock_items)
+    order = Order.new_from_delivery(delivery)
+    delivery.stock_items.size.should_not == 0
     order.order_items.size.should_not == 0
-    order.order_items.size.should == pickup.stock_items.size
+    order.order_items.size.should == delivery.stock_items.size
   end
 
   it "should be able to get only order_items with quantity > 0" do

@@ -4,7 +4,7 @@
   <%= f.error_messages %>
 
   <p>
-    <%= select("stock_item", "pickup_id", Pickup.all.map {|o| [ "#{o.name} - #{o.date}", o.id ]})%>    
+    <%= select("stock_item", "delivery_id", Delivery.all.map {|o| [ "#{o.name} - #{o.date}", o.id ]})%>
   </p>
   <p>
     <%= select("stock_item", "product_id", Product.all.map {|o| [ o.name, o.id ]})%>

@@ -12,7 +12,7 @@
 class Farm < ActiveRecord::Base
   validates_presence_of :name
   has_many :products
-  has_many :pickups
+  has_many :deliveries
   has_many :subscriptions
   has_many :members, :through => :subscriptions
 

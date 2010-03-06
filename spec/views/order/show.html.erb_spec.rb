@@ -11,23 +11,23 @@ describe "/orders/show.html.erb" do
 
   it "should show edit if logged in as admin" do
     UserSession.create Factory(:admin_user)
-    assigns[:farm] = @order.pickup.farm
+    assigns[:farm] = @order.delivery.farm
     render
     response.should include_text("Edit")
   end
 
-  it "should show edit if logged in as member and order pickup is open" do
+  it "should show edit if logged in as member and order delivery is open" do
     user = Factory(:member_user)
-    assigns[:order] = @order = Factory(:order_with_items, :member => user.member, :pickup => Factory(:pickup, :status => "open"))
-    assigns[:farm] = @order.pickup.farm
+    assigns[:order] = @order = Factory(:order_with_items, :member => user.member, :delivery => Factory(:delivery, :status => "open"))
+    assigns[:farm] = @order.delivery.farm
     UserSession.create user
     render
     response.should include_text("Edit")
   end
 
-  it "should not show edit if logged in as member and order pickup status is not open" do
+  it "should not show edit if logged in as member and order delivery status is not open" do
     user = Factory(:member_user)
-    assigns[:order] = @order = Factory(:order_with_items, :member => user.member, :pickup => Factory(:pickup, :status => "finalized"))
+    assigns[:order] = @order = Factory(:order_with_items, :member => user.member, :delivery => Factory(:delivery, :status => "finalized"))
     UserSession.create user
     render
     response.should_not include_text("Edit")

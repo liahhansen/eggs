@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe PickupsController do
+describe DeliveriesController do
   before(:each) do
     activate_authlogic
     UserSession.create Factory(:user)
   end  
 
-  it "should list pickups only for soul food farm" do
+  it "should list deliveries only for soul food farm" do
     get :index, :farm_id => Factory(:farm)
 
     response.should be_success
 
-    assigns(:pickups).each do |p|
+    assigns(:deliveries).each do |p|
       p.farm.should == Factory(:farm)
     end
 

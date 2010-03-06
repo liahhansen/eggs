@@ -1,6 +1,6 @@
 Feature: Manage Orders
   As a CSA Manager
-  In order to manage a pickup
+  In order to manage a delivery
   I should be able to submit an order for a farm's member
 
 Background:
@@ -9,7 +9,7 @@ Background:
   When I login with valid credentials
   Then I should see "Farms"
   When I follow "Soul Food Farm"
-  Then I should see "Open Pickups"
+  Then I should see "Open deliveries"
 
 Scenario: Add a new order as an admin
   When I follow "Emeryville"

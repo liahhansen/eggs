@@ -1,6 +1,6 @@
 require "csv"
 
-# Loads a single-pickup CSV file (exported from gDocs)
+# Loads a single-delivery CSV file (exported from gDocs)
 # and saves the following to the database:
 #   * users (no subscription yet)
 #   * products
@@ -20,12 +20,12 @@ namespace :eggs do
     end
 
 
-    desc "Deletes all Pickups, Products, Members and their dependent models"
+    desc "Deletes all deliveries, Products, Members and their dependent models"
     task :clean => :environment do
-      Pickup.delete_all
+      Delivery.delete_all
       Product.delete_all
       Member.delete_all
-      puts "Deleted all Pickups, Products, Members and their dependent models."
+      puts "Deleted all deliveries, Products, Members and their dependent models."
     end
 
     desc "Run data import from DIR."
@@ -44,10 +44,10 @@ namespace :eggs do
     def import_dry(dir, farm)
       puts "Importing from #{dir} for #{farm.name} (dry run)."
       importer = Importer.new(dir, farm)
-      importer.imports.collect(&:pickups).flatten.each do |pickup|
-        puts "\n== Pickup for #{pickup.date} =="
+      importer.imports.collect(&:deliveries).flatten.each do |delivery|
+        puts "\n== Delivery for #{delivery.date} =="
         puts "== Stock Items:"
-        pickup.stock_items.each do |item|
+        delivery.stock_items.each do |item|
           puts "  #{item.product.name}"
           puts "    #{item.product.description}" if item.product.description
         end

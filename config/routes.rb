@@ -18,15 +18,15 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :stock_items
 
-  map.resources :pickups do |pickup|
-    pickup.resources :orders
+  map.resources :deliveries do |delivery|
+    delivery.resources :orders
   end
 
   map.resources :products
 
   map.resources :farms do |farm|
-    farm.resources :pickups do |pickup|
-      pickup.resources :orders
+    farm.resources :deliveries do |delivery|
+      delivery.resources :orders
     end
   end
 

@@ -1,4 +1,4 @@
-<% form_for(@pickup) do |f| %>
+<% form_for(@delivery) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.error_messages %>
   <%= f.hidden_field :farm_id, :value => @farm.id  %>
@@ -57,7 +57,7 @@
       <th>is estimated</th>
       <th>notes</th>
     </tr>
-  <% @pickup.stock_items.each do |item| %>
+  <% @delivery.stock_items.each do |item| %>
 
         <% f.fields_for :stock_items, item do |builder| %>
         <tr>

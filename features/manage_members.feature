@@ -1,5 +1,5 @@
 Feature: Manage Members
-  In order to manage a CSA pickup
+  In order to manage a CSA delivery
   I want to be able to veiw and manage members
 
 Background:

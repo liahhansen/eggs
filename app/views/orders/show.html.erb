@@ -12,11 +12,11 @@
 </p>
 
 <p>
-  <b>Pickup:</b>
-  <%= "#{@order.pickup.name} - #{@order.pickup.pretty_date}" %><br/>
-  <b>Host:</b> <%= @order.pickup.host %><br/>
-  <b>Location:</b> <%= @order.pickup.location %><br/>
-  <b>Notes:</b> <%= @order.pickup.notes %><br/>
+  <b>delivery:</b>
+  <%= "#{@order.delivery.name} - #{@order.delivery.pretty_date}" %><br/>
+  <b>Host:</b> <%= @order.delivery.host %><br/>
+  <b>Location:</b> <%= @order.delivery.location %><br/>
+  <b>Notes:</b> <%= @order.delivery.notes %><br/>
 
 </p>
 
@@ -37,7 +37,7 @@
   <b>Finalized Total:</b> <%= @order.finalized_total ? number_to_currency(@order.finalized_total) : "not yet finalized" %>
 </p>
 
-<% if @order.pickup.status == "open" || current_user.has_role?(:admin) %>
+<% if @order.delivery.status == "open" || current_user.has_role?(:admin) %>
   <%= link_to 'Edit', edit_order_path(:id => @order, :farm_id => @farm.id) %> |
 <% end %>
 <%= link_to 'Back', root_path %>

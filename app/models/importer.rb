@@ -12,12 +12,12 @@ class Importer
   end
 
   def imports
-    Dir["#{@dir}/*.csv"].collect {|file|  PickupImport.new(file, @farm)}
+    Dir["#{@dir}/*.csv"].collect {|file|  DeliveryImport.new(file, @farm)}
   end
 
 end
 
-class PickupImport
+class DeliveryImport
   attr_reader :file, :rows, :columns, :farm
 
   def initialize(file, farm)
@@ -28,27 +28,27 @@ class PickupImport
   end
 
   def import!
-    pickups.each {|pickup| pickup.save!}
+    deliveries.each {|delivery| delivery.save!}
     members.each {|member| member.save(false)}
     orders.each {|order| order.save(false)}
   end
 
-  def pickup_date
+  def delivery_date
     file =~ /((\d+)-(\d+))/
     Date.civil 2010, $2.to_i, $3.to_i
   end
 
-  def pickups
-    return @pickups if @pickups
+  def deliveries
+    return @deliveries if @deliveries
 
-    @pickups = location_names.collect do |location|
-      pickup = Pickup.new(:name => location, :date => pickup_date, :status => 'archived', :farm => @farm)
+    @deliveries = location_names.collect do |location|
+      delivery = Delivery.new(:name => location, :date => delivery_date, :status => 'archived', :farm => @farm)
       products.each do |product|
-        pickup.stock_items << StockItem.new(:product => product)
+        delivery.stock_items << StockItem.new(:product => product)
       end
-      pickup
+      delivery
     end
-    @pickups
+    @deliveries
   end
 
   def normalize_product_header(header)
@@ -166,18 +166,18 @@ class PickupImport
       member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Create Order
-      pickup = pickups.find {|item| item.name == location}
-      raise "No pickup found for location '#{location}." unless pickup
+      delivery = deliveries.find {|item| item.name == location}
+      raise "No delivery found for location '#{location}." unless delivery
       begin
         timestamp = DateTime.parse(row[columns[:timestamp]])
       rescue Exception => e
-        timestamp = pickup.date # If timestamp is 'manual' or nil use pickup date
+        timestamp = delivery.date # If timestamp is 'manual' or nil use delivery date
       end
 
-      order = Order.new :pickup => pickup, :member => member, :created_at => timestamp,
+      order = Order.new :delivery => delivery, :member => member, :created_at => timestamp,
                         :notes => row[columns[:notes]]
       order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
-      pickup.stock_items.each do |stock_item|
+      delivery.stock_items.each do |stock_item|
         order.order_items << OrderItem.new(:stock_item => stock_item, :quantity => row[columns[:products][stock_item.product]] || 0)
       end
 

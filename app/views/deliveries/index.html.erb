@@ -1,0 +1,12 @@
+<h1>deliveries for <%= @farm.name%></h1>
+<% @deliveries.each do |delivery| %>
+
+<%= render :partial => "delivery_expanded", :locals => { :delivery => delivery } %>
+    
+<% end %>
+
+
+
+<br />
+
+<%= link_to 'New delivery', new_delivery_path(params[:farm_id => @farm.id]) %>

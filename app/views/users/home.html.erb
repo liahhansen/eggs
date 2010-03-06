@@ -7,25 +7,25 @@
   <h5>Welcome, <%= "#{@user.member.first_name} #{@user.member.last_name}!"%></h5>
   <% if @finalized_orders.size >= 1
       next_order = @finalized_orders.first %>
-    <p>Your upcoming order (<%= "#{next_order.pickup.pretty_date} - #{next_order.pickup.name}" %>) has been finalized with a total
+    <p>Your upcoming order (<%= "#{next_order.delivery.pretty_date} - #{next_order.delivery.name}" %>) has been finalized with a total
     of <%= number_to_currency next_order.finalized_total %>.  Please bring a check or top up your account using
     PayPal if your current balance will not cover the total.</p>
 
-    <h5>Pickup Details:</h5>
-    <p><b>date/time: </b><%= next_order.pickup.pretty_date %>, 5-7pm<br/>
-    <b>host: </b> <%= next_order.pickup.host %><br/>
-    <b>location:  </b><%= next_order.pickup.location %>
-    <%= link_to "(map)", next_order.pickup.map_link, :target => "_blank"%></p>
+    <h5>delivery Details:</h5>
+    <p><b>date/time: </b><%= next_order.delivery.pretty_date %>, 5-7pm<br/>
+    <b>host: </b> <%= next_order.delivery.host %><br/>
+    <b>location:  </b><%= next_order.delivery.location %>
+    <%= link_to "(map)", next_order.delivery.map_link, :target => "_blank"%></p>
 
   <% end %>
 
   <% if @finalized_orders.size > 0 %>
-    <div class="box_header"><h4>Finalized Orders - Pickup soon!:</h4></div>
+    <div class="box_header"><h4>Finalized Orders - delivery soon!:</h4></div>
     <table class="box_table">
       <% @finalized_orders.each do |order| %>
         <tr>
-          <td><%= order.pickup.date %></td>
-          <td><%= order.pickup.name %></td>
+          <td><%= order.delivery.date %></td>
+          <td><%= order.delivery.name %></td>
           <td><%= "total:  #{number_to_currency order.finalized_total}" %></td>
           <td><%= link_to "view order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
@@ -38,10 +38,10 @@
     <table class="box_table">
       <% @inprogress_orders.each do |order| %>
         <tr>
-          <td><%= order.pickup.date %></td>
-          <td><%= order.pickup.farm.name %></td>
-          <td><%= order.pickup.name %></td>
-          <td><%= order.pickup.status %></td>
+          <td><%= order.delivery.date %></td>
+          <td><%= order.delivery.farm.name %></td>
+          <td><%= order.delivery.name %></td>
+          <td><%= order.delivery.status %></td>
           <td><%= link_to "view order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
       <% end %>
@@ -53,10 +53,10 @@
     <table class="box_table">
       <% @open_orders.each do |order| %>
         <tr>
-          <td><%= order.pickup.date %></td>
-          <td><%= order.pickup.farm.name %></td>
-          <td><%= order.pickup.name %></td>
-          <td><%= order.pickup.status %></td>
+          <td><%= order.delivery.date %></td>
+          <td><%= order.delivery.farm.name %></td>
+          <td><%= order.delivery.name %></td>
+          <td><%= order.delivery.status %></td>
           <td><%= link_to "view/edit order", order_path(:id => order, :farm_id => @farm.id) %></td>
         </tr>
       <% end %>
@@ -64,17 +64,17 @@
   <% end %>
 
   <% if @open_orders.size > 0 %>  
-    <div class="box_header"><h4>Pickups currently open for orders:</h4></div>
+    <div class="box_header"><h4>deliveries currently open for orders:</h4></div>
     <table class="box_table">
       <%
-        @open_pickups.each do |pickup|
+        @open_deliveries.each do |delivery|
       %>
       <tr>
-        <td><%= pickup.date %></td>
-        <td><%= pickup.farm.name %></td>
-        <td><%= link_to pickup.name, new_order_path(:pickup_id => pickup.id, :farm_id => pickup.farm.id)%></td>
-        <td><%= pickup.status %></td>
-        <td><%= link_to "new order", new_order_path(:pickup_id => pickup.id, :farm_id => pickup.farm.id) %></td>
+        <td><%= delivery.date %></td>
+        <td><%= delivery.farm.name %></td>
+        <td><%= link_to delivery.name, new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id)%></td>
+        <td><%= delivery.status %></td>
+        <td><%= link_to "new order", new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id) %></td>
       </tr>
       <% end %>
     </ul>

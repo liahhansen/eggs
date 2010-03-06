@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218061340) do
+ActiveRecord::Schema.define(:version => 20100306222724) do
+
+  create_table "deliveries", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "farm_id"
+    t.date     "date"
+    t.string   "status"
+    t.string   "host"
+    t.string   "location"
+    t.datetime "opening_at"
+    t.datetime "closing_at"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "minimum_order_total"
+  end
 
   create_table "farms", :force => true do |t|
     t.string   "name"
@@ -40,27 +56,11 @@ ActiveRecord::Schema.define(:version => 20100218061340) do
 
   create_table "orders", :force => true do |t|
     t.integer  "member_id"
-    t.integer  "pickup_id"
+    t.integer  "delivery_id"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "finalized_total"
-  end
-
-  create_table "pickups", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "farm_id"
-    t.date     "date"
-    t.string   "status"
-    t.string   "host"
-    t.string   "location"
-    t.datetime "opening_at"
-    t.datetime "closing_at"
-    t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "minimum_order_total"
   end
 
   create_table "products", :force => true do |t|
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20100218061340) do
   end
 
   create_table "stock_items", :force => true do |t|
-    t.integer  "pickup_id"
+    t.integer  "delivery_id"
     t.integer  "product_id"
     t.integer  "max_quantity_per_member"
     t.integer  "quantity_available"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20100218061340) do
     t.date     "date"
     t.float    "amount"
     t.string   "description"
+    t.integer  "member_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"

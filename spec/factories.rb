@@ -36,7 +36,7 @@ Factory.define :subscription do |s|
   s.association :member
 end
 
-Factory.define :pickup do |p|
+Factory.define :delivery do |p|
   p.name 'Emeryville'
   p.association :farm
   p.date '2010-01-28'
@@ -49,7 +49,7 @@ end
 
 Factory.define :order do |o|
   o.association :member
-  o.association :pickup
+  o.association :delivery
 end
 
 Factory.define :product do |p|
@@ -59,7 +59,7 @@ Factory.define :product do |p|
 end
 
 Factory.define :stock_item do |p|
-  p.association :pickup
+  p.association :delivery
   p.association :product
 end
 
@@ -87,7 +87,7 @@ Factory.define :expensive_order_item, :parent => :order_item do |i|
   i.stock_item {Factory(:stock_item, :product => Factory(:product, :price => 100))}
 end
 
-Factory.define :pickup_with_orders, :parent => :pickup do |p|
+Factory.define :delivery_with_orders, :parent => :delivery do |p|
   p.orders do |o|
     arr = []
     3.times{arr << o.association(:order_with_items)}
@@ -95,11 +95,11 @@ Factory.define :pickup_with_orders, :parent => :pickup do |p|
   end
 end
 
-Factory.define :pickup_with_stock_items, :parent => :pickup do |pickup|
-  pickup.after_create do |p|
-    p.stock_items << Factory(:stock_item, :pickup => p)
-    p.stock_items << Factory(:stock_item, :pickup => p)
-    p.stock_items << Factory(:stock_item, :pickup => p)
+Factory.define :delivery_with_stock_items, :parent => :delivery do |delivery|
+  delivery.after_create do |p|
+    p.stock_items << Factory(:stock_item, :delivery => p)
+    p.stock_items << Factory(:stock_item, :delivery => p)
+    p.stock_items << Factory(:stock_item, :delivery => p)
   end
 end
 
@@ -117,14 +117,14 @@ Factory.define :farm_with_products, :parent => :farm do |farm|
   end
 end
 
-Factory.define :farm_with_pickups, :parent => :farm do |farm|
+Factory.define :farm_with_deliveries, :parent => :farm do |farm|
   farm.after_create do |f|
-    f.pickups << Factory(:pickup, :farm => f, :status => "inprogress")
-    f.pickups << Factory(:pickup, :farm => f, :status => "inprogress")
-    f.pickups << Factory(:pickup, :farm => f, :status => "open")
-    f.pickups << Factory(:pickup, :farm => f, :status => "notyetopen")
-    f.pickups << Factory(:pickup, :farm => f, :status => "archived")
-    f.pickups << Factory(:pickup, :farm => f, :status => "finalized")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "inprogress")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "inprogress")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "open")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "notyetopen")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "archived")
+    f.deliveries << Factory(:delivery, :farm => f, :status => "finalized")
   end
 end
 
@@ -144,10 +144,10 @@ Factory.define :member_with_orders_from_2_farms, :parent => :member do |member|
   member.after_create do |m|
     m.farms << Factory(:farm)
     m.farms << Factory(:farm)
-    pickup1 = Factory(:pickup, :farm => m.farms[0])
-    pickup2 = Factory(:pickup, :farm => m.farms[1])
-    order1 = Factory(:order, :pickup => pickup1, :member => m)
-    order2 = Factory(:order, :pickup => pickup2, :member => m)
+    delivery1 = Factory(:delivery, :farm => m.farms[0])
+    delivery2 = Factory(:delivery, :farm => m.farms[1])
+    order1 = Factory(:order, :delivery => delivery1, :member => m)
+    order2 = Factory(:order, :delivery => delivery2, :member => m)
   end
 end
 

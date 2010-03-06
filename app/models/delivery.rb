@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: pickups
+# Table name: deliveries
 #
 #  id                  :integer         not null, primary key
 #  name                :string(255)
@@ -18,7 +18,7 @@
 #  minimum_order_total :integer
 #
 
-class Pickup < ActiveRecord::Base
+class Delivery < ActiveRecord::Base
   belongs_to :farm
   has_many :stock_items, :dependent => :destroy
   has_many :orders, :dependent => :destroy
@@ -29,12 +29,12 @@ class Pickup < ActiveRecord::Base
   accepts_nested_attributes_for :orders
 
   def self.new_from_farm(farm)
-    pickup = Pickup.new
+    delivery = Delivery.new
     farm.products.each do |product|
-      stock_item = pickup.stock_items.build(:product_id => product.id)
+      stock_item = delivery.stock_items.build(:product_id => product.id)
       stock_item.copy_product_attributes
     end
-    return pickup
+    return delivery
   end
 
 

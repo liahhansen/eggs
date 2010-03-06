@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: pickups
+# Table name: deliveries
 #
 #  id                  :integer         not null, primary key
 #  name                :string(255)
@@ -56,7 +56,7 @@ sf_emeryville_feb3:
   closing_at: '2010-01-29 00:01:00'
 
 sf_farm_feb3:
-  name: Farm Pickup
+  name: Farm Delivery
   description:
   farm: soulfood
   date: '2010-02-03'
@@ -82,7 +82,7 @@ sf_mission_feb10:
 
 cs_farm_feb3:
   name: Marin
-  description: New pickup in Sausalito!
+  description: New delivery in Sausalito!
   farm: clarksummit
   date: '2010-02-03'
   status: open

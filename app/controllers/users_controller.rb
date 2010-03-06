@@ -27,14 +27,14 @@ class UsersController < ApplicationController
 
     if(current_user == @user)
       orders = @user.member.orders.filter_by_farm(@farm)
-      @open_orders = orders.select {|order| order.pickup.status == "open"}
-      @finalized_orders = orders.select {|order|order.pickup.status == "finalized"}
-      @inprogress_orders = orders.select {|order|order.pickup.status == "inprogress"}
+      @open_orders = orders.select {|order| order.delivery.status == "open"}
+      @finalized_orders = orders.select {|order|order.delivery.status == "finalized"}
+      @inprogress_orders = orders.select {|order|order.delivery.status == "inprogress"}
 
-      @open_pickups = Pickup.find_all_by_farm_id_and_status(@farm.id, "open").reject do |pickup|
+      @open_deliveries = Delivery.find_all_by_farm_id_and_status(@farm.id, "open").reject do |delivery|
         has_order = false
         @open_orders.each do |order|
-          if order.pickup == pickup
+          if order.delivery == delivery
             has_order = true
             break
           end

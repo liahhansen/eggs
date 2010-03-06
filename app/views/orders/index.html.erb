@@ -3,14 +3,14 @@
 <table>
   <tr>
     <th>Member</th>
-    <th>Pickup</th>
+    <th>delivery</th>
     <th>Notes</th>
   </tr>
 
 <% @orders.each do |order| %>
   <tr>
     <td><%=h order.member.first_name %></td>
-    <td><%=h order.pickup.name %></td>
+    <td><%=h order.delivery.name %></td>
     <td><%=h order.notes %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>

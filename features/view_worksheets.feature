@@ -1,6 +1,6 @@
-Feature: View Pickup Worksheet
-  In order to manage a CSA pickup
-  I want to see a worksheet view of a pickup
+Feature: View delivery Worksheet
+  In order to manage a CSA delivery
+  I want to see a worksheet view of a delivery
 
 Background:
   Given I am the registered user jennyjones
@@ -9,7 +9,7 @@ Background:
   Then I should see "Farms"
   When I follow "Soul Food Farm"
   And I follow "Emeryville"
-  Then I should see "Pickup: Emeryville"
+  Then I should see "delivery: Emeryville"
 
 Scenario: View a worksheet
   When I follow "View Worksheet"
