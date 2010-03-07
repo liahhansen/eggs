@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+kathryn_home:
+  name: SF / Potrero
+  host_name: Kathryn Aaker
+  host_phone: 415-222-3333
+  host_email: kathryn@kathrynaaker.com
+  address: 123 22nd Street, San Francisco, CA 94110
+  time_window: 5-7pm
+  notes: Entry is through the side garage entrance.  Email me if you need to pick up early or late.
+
+soul_food_farm:
+  name: Soul Food Farm
+  host_name: Alexis
+  host_phone: 123-456-7890
+  host_email: sff@example.com
+  address: 24 Farm Lane, Napa, CA 12345
+  time_window: 12-4pm
+  notes:

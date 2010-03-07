@@ -1,0 +1,8 @@
+
+pickup_sff_kathryn:
+  location: kathryn_home
+  delivery: sf_emeryville_feb3
+
+pickup_sff_farm:
+  location: soul_food_farm
+  delivery: sf_farm_feb3
