@@ -15,6 +15,7 @@ class Farm < ActiveRecord::Base
   has_many :deliveries
   has_many :subscriptions
   has_many :members, :through => :subscriptions
+  has_many :locations
 
   acts_as_authorization_object
 

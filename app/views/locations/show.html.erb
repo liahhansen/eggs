@@ -1,0 +1,43 @@
+<p>
+  <b>Name:</b>
+  <%=h @location.name %>
+</p>
+
+<p>
+  <b>Host name:</b>
+  <%=h @location.host_name %>
+</p>
+
+<p>
+  <b>Host phone:</b>
+  <%=h @location.host_phone %>
+</p>
+
+<p>
+  <b>Host email:</b>
+  <%=h @location.host_email %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @location.address %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @location.notes %>
+</p>
+
+<p>
+  <b>Time window:</b>
+  <%=h @location.time_window %>
+</p>
+
+<p>
+  <b>Farm:</b>
+  <%=h @location.farm_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

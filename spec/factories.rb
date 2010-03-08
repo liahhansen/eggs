@@ -156,3 +156,13 @@ Factory.define :transaction do |transaction|
   transaction.debit false
   transaction.association :subscription
 end
+
+Factory.define :location do |location|
+  location.name "SF / Potrero"
+  location.host_name "Kathryn Aaker"
+  location.address "123 4th street"
+  location.time_window "5-7pm"
+  location.host_phone "123-234-5959"
+  location.host_email "kathryn@example.com"
+  location.association :farm
+end

@@ -1,0 +1,38 @@
+<div id="" class="grid_12 ">
+
+  <p style="color: green"><%= flash[:notice] %></p>
+
+<h3>Pickup Locations for <%= @farm.name %>:</h3>
+
+<table class="simple">
+  <tr>
+    <th>Name</th>
+    <th>Host name</th>
+    <th>Host phone</th>
+    <th>Host email</th>
+    <th>Address</th>
+    <th>Notes</th>
+    <th>Time window</th>
+  </tr>
+
+<% @locations.each do |location| %>
+  <tr>
+    <td><%=h location.name %></td>
+    <td><%=h location.host_name %></td>
+    <td><%=h location.host_phone %></td>
+    <td><%=h location.host_email %></td>
+    <td><%=h location.address %></td>
+    <td><%=h location.notes %></td>
+    <td><%=h location.time_window %></td>
+    <td><%= link_to 'Edit', edit_location_path(location, :farm_id => @farm.id) %></td>
+    <td><%= link_to 'Delete', location, :confirm => 'Are you sure you want to do this?  This could screw up deliveries that use this location!', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<b><%= link_to 'Create New location', new_location_path(:farm_id => @farm.id) %></b>
+
+<p>Note: Near-duplicates are OK.  If sometimes a pickup is at the same spot, but with a different host, just create a second location.</p>  
+</div>

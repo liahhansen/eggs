@@ -8,6 +8,7 @@ kathryn_home:
   address: 123 22nd Street, San Francisco, CA 94110
   time_window: 5-7pm
   notes: Entry is through the side garage entrance.  Email me if you need to pick up early or late.
+  farm: soulfood
 
 soul_food_farm:
   name: Soul Food Farm
@@ -17,3 +18,14 @@ soul_food_farm:
   address: 24 Farm Lane, Napa, CA 12345
   time_window: 12-4pm
   notes:
+  farm: soulfood
+
+sf_clarksummit:
+  name: Someone's House
+  host_name: Julia Childs
+  host_phone: 123-959-5959
+  host_email: julia@example.com
+  address: 24 SF lane, SF, CA 94110
+  time_window: 1am - 5pm
+  notes:
+  farm: clarksummit

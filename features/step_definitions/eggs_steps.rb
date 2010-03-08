@@ -23,3 +23,15 @@ end
 Given /^I am a registered user $/ do
   UserSession.create Factory(:user)
 end
+
+Given /^I am logged in as an admin$/ do
+  Given "I am the registered user jennyjones"
+  And "I am on login"
+  Given "I login with valid credentials"
+end
+
+And /^I am at Soul Food Farm/ do
+  Given "I am on farms"
+  And 'I follow "Soul Food Farm"'
+end
+
