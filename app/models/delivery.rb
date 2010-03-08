@@ -21,7 +21,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to :farm
   has_many :stock_items, :dependent => :destroy
-  has_many :orders, :dependent => :destroy
+  has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name"
   has_many :locations, :through => :pickups
 
   validates_presence_of :farm_id

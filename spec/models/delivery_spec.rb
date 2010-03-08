@@ -106,4 +106,16 @@ describe Delivery do
     delivery.finalized_total.should == 10 * delivery.orders.size
   end
 
+  it "should alphabetize associated orders by last name" do
+    delivery = Factory(:delivery)
+    Factory(:order, :delivery => delivery, :member => Factory(:member, :last_name => "Salant"))
+    Factory(:order, :delivery => delivery, :member => Factory(:member, :last_name => "Aaker"))
+    Factory(:order, :delivery => delivery, :member => Factory(:member, :last_name => "Reed"))
+
+    delivery.orders.first.member.last_name.should == "Aaker"
+    delivery.orders.last.member.last_name.should == "Salant"
+
+
+  end
+
 end
