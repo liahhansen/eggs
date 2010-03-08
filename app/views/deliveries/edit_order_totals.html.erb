@@ -14,8 +14,8 @@
 
 <table class="simple">
   <tr class="hed">
-    <th>First Name</th>
     <th>Last Name</th>
+    <th>First Name</th>
     <% @delivery.stock_items.each do |item| %>
       <th><%= item.product_name %><br/>
         <%= item.product_price_code %><br/>
@@ -38,8 +38,8 @@
     <% @delivery.orders.each do |order| %>
       <% f.fields_for :orders, order do |builder| %>
         <tr>
-          <td><%= order.member.first_name %></td>
           <td><%= order.member.last_name %></td>
+          <td><%= order.member.first_name %></td>
 
           <% order.order_items.each do |item| %>
             <td><%= item.quantity %></td>

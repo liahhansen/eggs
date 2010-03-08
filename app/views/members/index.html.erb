@@ -11,8 +11,8 @@
 
   <table class="simple">
     <tr>
-      <th>First name</th>
       <th>Last name</th>
+      <th>First name</th>
       <th>Neighborhood</th>
       <th>Email address</th>
       <th>Phone number</th>
@@ -21,8 +21,8 @@
 
   <% @members.each do |member| %>
     <tr>
-      <td><%=h member.first_name %></td>
       <td><%=h member.last_name %></td>
+      <td><%=h member.first_name %></td>
       <td><%=h member.neighborhood %></td>
       <td><%=h member.email_address %></td>
       <td><%=h member.phone_number %></td>
