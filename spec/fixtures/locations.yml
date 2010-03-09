@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  host_name   :string(255)
+#  host_phone  :string(255)
+#  host_email  :string(255)
+#  address     :string(255)
+#  notes       :text
+#  time_window :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  farm_id     :integer
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 kathryn_home:

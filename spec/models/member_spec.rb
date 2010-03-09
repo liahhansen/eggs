@@ -11,7 +11,6 @@
 #  joined_on     :datetime
 #  created_at    :datetime
 #  updated_at    :datetime
-#  balance       :float
 #
 
 require 'spec_helper'

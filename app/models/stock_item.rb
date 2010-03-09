@@ -3,7 +3,7 @@
 # Table name: stock_items
 #
 #  id                      :integer         not null, primary key
-#  delivery_id               :integer
+#  delivery_id             :integer
 #  product_id              :integer
 #  max_quantity_per_member :integer
 #  quantity_available      :integer
@@ -16,6 +16,7 @@
 #  product_description     :text
 #  product_price           :float
 #  product_estimated       :boolean
+#  product_price_code      :string(255)
 #
 
 class StockItem < ActiveRecord::Base

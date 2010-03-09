@@ -4,7 +4,7 @@
 #
 #  id              :integer         not null, primary key
 #  member_id       :integer
-#  delivery_id       :integer
+#  delivery_id     :integer
 #  notes           :text
 #  created_at      :datetime
 #  updated_at      :datetime

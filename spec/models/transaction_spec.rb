@@ -2,14 +2,17 @@
 #
 # Table name: transactions
 #
-#  id          :integer         not null, primary key
-#  date        :date
-#  amount      :float
-#  description :string(255)
-#  member_id   :integer
-#  order_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id              :integer         not null, primary key
+#  date            :date
+#  amount          :float
+#  description     :string(255)
+#  member_id       :integer
+#  order_id        :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  debit           :boolean
+#  balance         :float
+#  subscription_id :integer
 #
 
 require 'spec_helper'
