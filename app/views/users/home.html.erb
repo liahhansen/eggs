@@ -39,7 +39,6 @@
       <% @inprogress_orders.each do |order| %>
         <tr>
           <td><%= order.delivery.date %></td>
-          <td><%= order.delivery.farm.name %></td>
           <td><%= order.delivery.name %></td>
           <td><%= order.delivery.status %></td>
           <td><%= link_to "view order", order_path(:id => order, :farm_id => @farm.id) %></td>
@@ -54,7 +53,6 @@
       <% @open_orders.each do |order| %>
         <tr>
           <td><%= order.delivery.date %></td>
-          <td><%= order.delivery.farm.name %></td>
           <td><%= order.delivery.name %></td>
           <td><%= order.delivery.status %></td>
           <td><%= link_to "view/edit order", order_path(:id => order, :farm_id => @farm.id) %></td>
@@ -71,7 +69,6 @@
       %>
       <tr>
         <td><%= delivery.date %></td>
-        <td><%= delivery.farm.name %></td>
         <td><%= link_to delivery.name, new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id)%></td>
         <td><%= delivery.status %></td>
         <td><%= link_to "new order", new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id) %></td>
