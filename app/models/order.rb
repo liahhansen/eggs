@@ -20,6 +20,7 @@ class Order < ActiveRecord::Base
       self.select {|item| item.quantity > 0 }
     end
   end
+  belongs_to :location
 
   validates_presence_of :member_id, :delivery_id
   validate :member_must_exist, :delivery_must_exist, :total_meets_minimum

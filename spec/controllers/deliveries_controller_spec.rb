@@ -24,4 +24,18 @@ describe DeliveriesController do
     
   end
 
+  it "should create a delivery and pickups" do
+    farm = Factory(:farm)
+
+    location1 = Factory(:location, :farm => farm, :name => "Potrero")
+    location2 = Factory(:location, :farm => farm, :name => "Elsewhere")
+
+    get :create, :location_ids => [location1.id,location2.id],
+          :farm_id => farm.id,
+          :delivery => {:farm_id => farm.id, :date => '2010-03-01'}
+
+    assigns[:delivery].locations.first.should_not be_nil
+    assigns[:delivery].locations.size.should == 2
+  end
+
 end

@@ -18,4 +18,9 @@
 class Location < ActiveRecord::Base
   has_many :deliveries, :through => :pickups
   belongs_to :farm
+  has_many :orders
+end
+
+def map_link
+  "http://mapof.it/#{location}"
 end

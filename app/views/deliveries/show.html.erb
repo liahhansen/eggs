@@ -68,9 +68,16 @@
   <p></p>
   <div class="box_header"><h4>delivery Details: <%= link_to "(edit)", edit_delivery_path(@delivery, :farm_id => @farm.id)%></h4></div>
     <div class="box_content">
-      <p>
-        <b>Location:</b>          <%=h @delivery.location %> <%= link_to "(map)", @delivery.map_link, :target => "_blank"%><br/>
-        <b>Host:</b>              <%=h @delivery.host %><br/>
+      <div>
+        <div>
+        <h5><%= pluralize @delivery.locations.size, "Location" %>:</h5>
+        <ul>
+        <% @delivery.locations.each do |location| %>
+          <li><%= link_to "#{location.name}, #{location.host_name}", location_path(location, :farm_id => @farm.id)%></li>
+        <% end %>
+        </ul>
+        </div>
+
         <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
         <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
         <b>Current total:</b>
@@ -79,7 +86,7 @@
           <% else %>
             <%=h "#{number_to_currency @delivery.estimated_total}" %> (estimated)<br/>
           <% end %>
-      </p>
+      </div>
     </div>
 
   <p></p>

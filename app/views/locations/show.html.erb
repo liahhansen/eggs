@@ -20,7 +20,7 @@
 
 <p>
   <b>Address:</b>
-  <%=h @location.address %>
+  <%=h @location.address %> <%= link_to "(map)", @delivery.map_link, :target => "_blank"%>
 </p>
 
 <p>

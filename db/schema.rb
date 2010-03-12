@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100307002020) do
+ActiveRecord::Schema.define(:version => 20100310045147) do
 
   create_table "deliveries", :force => true do |t|
     t.string   "name"
@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(:version => 20100307002020) do
     t.integer  "farm_id"
     t.date     "date"
     t.string   "status"
-    t.string   "host"
-    t.string   "location"
     t.datetime "opening_at"
     t.datetime "closing_at"
     t.text     "notes"
@@ -74,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20100307002020) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "finalized_total"
+    t.integer  "location_id"
   end
 
   create_table "pickups", :force => true do |t|

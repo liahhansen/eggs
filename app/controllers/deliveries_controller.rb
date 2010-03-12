@@ -30,7 +30,7 @@ class DeliveriesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @delivery }
       format.csv do
-        csv_string = deliveryExporter.get_csv(@delivery, params[:tabs])
+        csv_string = DeliveryExporter.get_csv(@delivery, params[:tabs])
 
         send_data csv_string,
                 :type => 'text/csv; charset=iso-8859-1; header=present',
@@ -70,11 +70,15 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(params[:delivery])
 
     respond_to do |format|
-      if @delivery.save
+      if params[:location_ids] && @delivery.save
+        @delivery.create_pickups(params[:location_ids])
         flash[:notice] = 'Delivery was successfully created.'
         format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }
         format.xml  { render :xml => @delivery, :status => :created, :location => @delivery }
       else
+        if !params[:location_ids]
+          @delivery.errors.add_to_base "You must specify at least one Location"
+        end
         format.html { render :action => "new" }
         format.xml  { render :xml => @delivery.errors, :status => :unprocessable_entity }
       end

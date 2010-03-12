@@ -27,6 +27,16 @@ kathryn_home:
   notes: Entry is through the side garage entrance.  Email me if you need to pick up early or late.
   farm: soulfood
 
+bonnie_home:
+  name: Emeryville
+  host_name: Bonnie
+  host_phone: 123-345-5939
+  host_email: bonnie@example.com
+  address: 3904 West Eville Street, Emeryville, 93939
+  time_window: 5-8pm
+  notes:
+  farm: soulfood
+
 soul_food_farm:
   name: Soul Food Farm
   host_name: Alexis

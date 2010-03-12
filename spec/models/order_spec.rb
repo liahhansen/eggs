@@ -19,7 +19,8 @@ describe Order do
     @valid_attributes = {
       :member_id => Factory(:member).id,
       :delivery_id => Factory(:delivery).id,
-      :order_items => Factory(:order_with_items).order_items
+      :order_items => Factory(:order_with_items).order_items,
+      :location_id => Factory(:location).id
     }
   end
 

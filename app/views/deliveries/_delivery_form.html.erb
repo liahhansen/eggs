@@ -21,14 +21,31 @@
     <%= f.text_area :description, :size => "60x3" %>
   </p>
 
-  <p>
-    <%= f.label :host %><br />
-    <%= f.text_field :host %>
-  </p>
-  <p>
-    <%= f.label :location %><br />
-    <%= f.text_area :location, :size => "40x3" %>
-  </p>
+  <% if action == 'new' %>
+  <h5>Select Locations:</h5>
+  <table class="deliveries_picker">
+    <% @farm.locations.each_with_index do |location, index| %>
+      <tr>
+        <td><%= check_box_tag("location_ids[]", value = "#{location.id}", checked = false, options = {:id => "location_#{index}"})  %></td>
+        <td><%= location.name %></td>
+        <td><%= location.host_name %></td>
+        <td><%= location.address %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% else %>
+    Locations:<br/>
+    <table class="deliveries_picker">    
+      <% @delivery.locations.each do |location| %>
+        <tr>
+          <td><%= location.name %></td>
+          <td><%= location.host_name %></td>
+          <td><%= location.address %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+
   <p>
     <%= f.label :minimum_order_total %><br/>
     <%= f.text_field :minimum_order_total, :size=> 5 %>

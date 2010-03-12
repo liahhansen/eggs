@@ -36,13 +36,21 @@ Factory.define :subscription do |s|
   s.association :member
 end
 
+Factory.define :location do |location|
+  location.name "SF / Potrero"
+  location.host_name "Kathryn Aaker"
+  location.address "123 4th street"
+  location.time_window "5-7pm"
+  location.host_phone "123-234-5959"
+  location.host_email "kathryn@example.com"
+  location.association :farm
+end
+
 Factory.define :delivery do |p|
   p.name 'Emeryville'
   p.association :farm
   p.date '2010-01-28'
   p.status 'inprogress'
-  p.host 'Tami Taylor'
-  p.location '38 Panther Street, Dillon, TX 59285'
   p.opening_at '2010-01-08 00:01:00'
   p.closing_at '2010-01-23 00:01:00'
 end
@@ -50,6 +58,7 @@ end
 Factory.define :order do |o|
   o.association :member
   o.association :delivery
+  o.association :location
 end
 
 Factory.define :product do |p|
@@ -157,12 +166,3 @@ Factory.define :transaction do |transaction|
   transaction.association :subscription
 end
 
-Factory.define :location do |location|
-  location.name "SF / Potrero"
-  location.host_name "Kathryn Aaker"
-  location.address "123 4th street"
-  location.time_window "5-7pm"
-  location.host_phone "123-234-5959"
-  location.host_email "kathryn@example.com"
-  location.association :farm
-end

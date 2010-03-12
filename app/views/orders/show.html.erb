@@ -14,8 +14,10 @@
 <p>
   <b>delivery:</b>
   <%= "#{@order.delivery.name} - #{@order.delivery.pretty_date}" %><br/>
-  <b>Host:</b> <%= @order.delivery.host %><br/>
-  <b>Location:</b> <%= @order.delivery.location %><br/>
+
+  <b>Pickup Location:</b> <%= @order.location.name %><br/>
+  <b>Host:</b> <%= @order.location.host_name %><br/>
+  <b>Address:</b> <%= @order.location.address %><br/>
   <b>Notes:</b> <%= @order.delivery.notes %><br/>
 
 </p>

@@ -23,7 +23,8 @@ require 'spec_helper'
 describe Delivery do
   before(:each) do
     @valid_attributes = {
-      :farm_id => Factory(:farm).id
+      :farm_id => Factory(:farm).id,
+      :date => '2010-01-28'
     }
   end
 
@@ -65,6 +66,7 @@ describe Delivery do
     delivery = Delivery.new_from_farm(farm)
     delivery.farm_id = farm.id
     delivery.stock_items[1].product_estimated = false
+    delivery.date = "5/2/2008"
     delivery.valid?.should == true
     delivery.save
     delivery.stock_items.size.should == 2
@@ -78,15 +80,20 @@ describe Delivery do
 
     delivery_hash = {"closing_at(4i)"=>"17",
                    "name"=>"asdf",
-                   "closing_at(5i)"=>"00",
-                   "location"=>"",
-                   "date(1i)"=>"2010",
+                   "closing_at(5i)"=>"00", "closing_at(1i)"=>"2010", "closing_at(2i)"=>"2", "closing_at(3i)"=>"16",
+                   "date"=>"03/17/2010",
+                   "notes"=>"",
+                   "minimum_order_total"=>"25",
+                   "opening_at(1i)"=>"2010","opening_at(2i)"=>"2", "opening_at(3i)"=>"16", "opening_at(4i)"=>"17",
+                   "farm_id"=>"1213367748",
+                   "opening_at(5i)"=>"00", "status"=>"notyetopen",
                    "stock_items_attributes"=>{
                            "0"=>{"product_description"=>"1 dozen of the best eggs you'll ever eat.", "max_quantity_per_member"=>"4", "product_id"=>"114468584", "notes"=>"", "product_estimated"=>"false", "product_price"=>"6.5", "product_name"=>"Eggs", "quantity_available"=>"50"},
                            "1"=>{"product_description"=>"Large chickens come from the farm next door, also pasture-raised. Good meat/bone ratio.  ($6/lb., 4.5-5.5lbs)", "max_quantity_per_member"=>"4", "product_id"=>"337383792", "notes"=>"", "product_estimated"=>"true", "product_price"=>"33.0", "product_name"=>"Chicken, LARGE", "quantity_available"=>"50"},
                            "2"=>{"product_description"=>"($6/lb., 7-7.25 lbs)", "max_quantity_per_member"=>"4", "product_id"=>"501917461", "notes"=>"", "product_estimated"=>"true", "product_price"=>"42.0", "product_name"=>"Chicken, XXL", "quantity_available"=>"50"},
                            "3"=>{"product_description"=>"500ml", "max_quantity_per_member"=>"4", "product_id"=>"1588188741", "notes"=>"", "product_estimated"=>"false", "product_price"=>"18.0", "product_name"=>"Terra Sole olive oil", "quantity_available"=>"50"},
-                           "4"=>{"product_description"=>"A medium-large, pasture-raised chicken.  ($6.50/lb., 3.75-4.5 lbs)", "max_quantity_per_member"=>"4", "product_id"=>"2026084183", "notes"=>"", "product_estimated"=>"true", "product_price"=>"26.0", "product_name"=>"Chicken, REGULAR", "quantity_available"=>"50"}}, "date(2i)"=>"2", "notes"=>"", "date(3i)"=>"16", "minimum_order_total"=>"25", "opening_at(1i)"=>"2010", "opening_at(2i)"=>"2", "opening_at(3i)"=>"16", "closing_at(1i)"=>"2010", "opening_at(4i)"=>"17", "host"=>"", "description"=>"", "farm_id"=>"1213367748", "closing_at(2i)"=>"2", "opening_at(5i)"=>"00", "status"=>"notyetopen", "closing_at(3i)"=>"16"}
+                           "4"=>{"product_description"=>"A medium-large, pasture-raised chicken.  ($6.50/lb., 3.75-4.5 lbs)", "max_quantity_per_member"=>"4", "product_id"=>"2026084183", "notes"=>"", "product_estimated"=>"true", "product_price"=>"26.0", "product_name"=>"Chicken, REGULAR", "quantity_available"=>"50"}},
+                    }
 
     delivery = Delivery.new(delivery_hash)
     delivery.valid?.should == true
@@ -114,8 +121,14 @@ describe Delivery do
 
     delivery.orders.first.member.last_name.should == "Aaker"
     delivery.orders.last.member.last_name.should == "Salant"
-
-
   end
 
+  it "should add pickups when passed an array of location ids" do
+    delivery = Factory(:delivery)
+    location = Factory(:location)
+    
+    delivery.create_pickups([location.id])
+    delivery.locations.first.should == location
+  end
+  
 end

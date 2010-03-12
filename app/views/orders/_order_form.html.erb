@@ -1,7 +1,5 @@
 <p>
   <b><%= "#{@delivery.name} - #{@delivery.pretty_date}"%></b><br/>
-  <b>Location:</b>          <%=h @delivery.location %> <%= link_to "(map)", @delivery.map_link, :target => "_blank"%><br/>
-  <b>Host:</b>              <%=h @delivery.host %><br/>
   <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
 
@@ -18,8 +16,14 @@
 
   <%= f.error_messages %>
 
+  <p>
+    Pickup Location:<br/>
+    <%= f.select :location_id, @farm.locations.map {|location| [location.name, location.id]} %>
+  </p>
+
   <% if @members %>
     <p>
+      Member: <br/>
       <%= select("order", "member_id", @members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
     </p>
   <% else %>

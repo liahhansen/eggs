@@ -22,9 +22,11 @@ class Delivery < ActiveRecord::Base
   belongs_to :farm
   has_many :stock_items, :dependent => :destroy
   has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name"
+  has_many :pickups
   has_many :locations, :through => :pickups
 
   validates_presence_of :farm_id
+  validates_presence_of :date
 
   accepts_nested_attributes_for :stock_items
   accepts_nested_attributes_for :orders
@@ -61,8 +63,10 @@ class Delivery < ActiveRecord::Base
     total
   end
 
-  def map_link
-    "http://mapof.it/#{location}"
+  def create_pickups(locations)
+    locations.each do |location|
+      Pickup.create(:location_id => location, :delivery_id => self.id)
+    end
   end
 
 end

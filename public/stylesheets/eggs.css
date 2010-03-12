@@ -125,11 +125,6 @@ div#header_gutter div {
   height: 20px;
 }
 
-div#title {
-  position: relative;
-  top: 26px;
-}
-
 div#user_nav {
   float: right;
   font-size: 14px;
@@ -139,6 +134,10 @@ div#user_nav {
 
 div#user_nav a {
   color: #B4C2BA;
+}
+
+table.deliveries_picker td{
+  padding: 3px 15px 0 0;
 }
 
 table.simple {

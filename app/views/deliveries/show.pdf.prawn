@@ -9,7 +9,7 @@ def render_order(pdf, order)
     pdf.indent 4 do
       pdf.move_down 4
       pdf.font "Helvetica", :style => :bold do
-        pdf.text "#{order.member.last_name}, #{order.member.first_name} - #{order.member.phone_number} - #{@delivery.name}", :size => 12
+        pdf.text "#{order.member.last_name}, #{order.member.first_name} - #{order.member.phone_number} - #{order.location.name}", :size => 12
       end
       order.order_items.each do |item|
         if item.quantity != 0
