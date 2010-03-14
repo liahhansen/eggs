@@ -53,6 +53,7 @@ describe DeliveryImport do
         @import.orders[0].order_items.size.should == 8
         @import.orders[0].order_items[0].stock_item.product.should == @chicken_regular
         @import.orders[0].order_items[0].quantity.should == 1
+        @import.orders[0].order_items[1].quantity.should == 0
       end
 
     end

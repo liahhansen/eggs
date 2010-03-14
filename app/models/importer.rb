@@ -178,7 +178,7 @@ class DeliveryImport
                         :notes => row[columns[:notes]]
       order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
       delivery.stock_items.each do |stock_item|
-        order.order_items << OrderItem.new(:stock_item => stock_item, :quantity => row[columns[:products][stock_item.product]] || 0)
+        order.order_items << OrderItem.new(:stock_item => stock_item, :quantity => row[columns[:products][stock_item.product]].to_i || 0)
       end
 
       order
