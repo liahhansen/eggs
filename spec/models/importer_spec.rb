@@ -26,7 +26,6 @@ describe DeliveryImport do
       end
 
       it "should find existing member" do
-        kathryn = Factory(:member, :first_name => "Kathryn", :last_name => "Aaker", :email_address => 'kathryn@kathrynaaker.com')
         @import.members.size.should == 2
         @import.members[0].should == @kathryn
         @import.members[0].subscriptions[0].farm.should == @farm
@@ -42,11 +41,11 @@ describe DeliveryImport do
       it "should create new orders" do
         @import.orders.size.should == 4
         @import.orders[0].member.should == @kathryn
-        @import.orders[0].delivery.name.should == "SF Potrero"
+        @import.orders[0].delivery.name.should == "SF Potrero / Farm"
         @import.orders[0].finalized_total.should == 30.55
 
         @import.orders[1].member.first_name.should == "Alon"
-        @import.orders[1].delivery.name.should == "SF Potrero"
+        @import.orders[1].delivery.name.should == "SF Potrero / Farm"
       end
 
       it "should create order items for each stock item" do
@@ -58,8 +57,9 @@ describe DeliveryImport do
 
     end
 
-    context "Creating Products, deliveries and StockItems" do
+    context "Creating Products, delivery and StockItems" do
       before :each do
+        @location = Factory(:location, :name => "SF Potrero", :farm => @farm)        
       end
 
       it "should identify columns" do
@@ -78,18 +78,30 @@ describe DeliveryImport do
         columns[:total].should == 20
       end
 
-      it "should have multiple location names" do
+      it "should have multiple locations" do
         @import.location_names.should == ['SF Potrero', 'Farm']
       end
 
-      it "should have multiple deliveries" do
-        @import.deliveries.size.should == 2
-        @import.deliveries[0].name.should == 'SF Potrero'
-        @import.deliveries[1].name.should == 'Farm'
+      it "should find existing location" do
+        @import.delivery.farm.locations.size.should == 2
+        @import.delivery.pickups[0].location.should == @location
+      end
+
+      it "should have a delivery" do
+        @import.delivery.should_not be_nil
+      end
+
+      it "should have a name that combines location names" do
+        @import.delivery.name.should == "SF Potrero / Farm"
+      end
+
+      it "should have multiple locations and pickups" do
+        @import.delivery.pickups.size.should == 2
+        @import.delivery.pickups.first.location.name.should == 'SF Potrero'
       end
 
       it "should take delivery date from file name" do
-        @import.deliveries.first.date.should == Date.parse("2010-01-13")
+        @import.delivery.date.should == Date.parse("2010-01-13")
       end
 
       it "should find existing products by header name" do
@@ -106,8 +118,8 @@ describe DeliveryImport do
       end
 
       it "should create a stock item for each product" do
-        @import.deliveries[0].stock_items.size.should == 8
-        @import.deliveries[0].stock_items[0].product.should == @chicken_regular
+        @import.delivery.stock_items.size.should == 8
+        @import.delivery.stock_items[0].product.should == @chicken_regular
       end
     end
 
@@ -115,11 +127,14 @@ describe DeliveryImport do
       it "should create everything" do
         DeliveryImport.new("#{RAILS_ROOT}/db/import/SFF CSA 1-13-10 TEST.csv", @farm).import!
 
-        Delivery.count.should == 2
-        StockItem.count.should == 16
+        Delivery.count.should == 1
+        StockItem.count.should == 8
         Product.count.should == 8
         Member.count.should == 2
         Order.count.should == 4
+        Pickup.count.should == 2
+        Location.count.should == 2
+
       end
     end
 
@@ -149,6 +164,7 @@ describe DeliveryImport do
       @import.orders.size.should == 4
       @import.orders[0].member.first_name.should == 'Sue'
       @import.orders[0].finalized_total.should == 154.14
+      @import.orders[0].location.name.should == "EB"
     end
 
     it "should have multiple location names" do

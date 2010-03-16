@@ -20,7 +20,7 @@ namespace :eggs do
     end
 
 
-    desc "Deletes all deliveries, Products, Members and their dependent models"
+    desc "Deletes all deliveries, Products, Members, Locations and their dependent models"
     task :clean => :environment do
       Delivery.delete_all
       Product.delete_all

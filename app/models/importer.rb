@@ -28,7 +28,7 @@ class DeliveryImport
   end
 
   def import!
-    deliveries.each {|delivery| delivery.save!}
+    delivery.save!
     members.each {|member| member.save(false)}
     orders.each {|order| order.save(false)}
   end
@@ -38,17 +38,34 @@ class DeliveryImport
     Date.civil 2010, $2.to_i, $3.to_i
   end
 
-  def deliveries
-    return @deliveries if @deliveries
-
-    @deliveries = location_names.collect do |location|
-      delivery = Delivery.new(:name => location, :date => delivery_date, :status => 'archived', :farm => @farm)
-      products.each do |product|
-        delivery.stock_items << StockItem.new(:product => product)
-      end
-      delivery
+  def find_or_new_location(location_name)
+    location = Location.find_by_name_and_farm_id location_name, @farm
+    if !location
+      location = Location.new(:name => location_name, :farm => @farm)
+      location.save!
     end
-    @deliveries
+    location
+  end
+
+
+  def locations
+    location_names.collect {|location_name| find_or_new_location(location_name)}
+  end
+
+
+  def delivery
+    return @delivery if @delivery    
+
+    @delivery = Delivery.new(:name => location_names.join(' / '), :date => delivery_date, :status => 'archived', :farm => @farm)
+    products.each do |product|
+      @delivery.stock_items << StockItem.new(:product => product)
+    end
+
+    locations.each do |location|
+      @delivery.pickups << Pickup.new(:location => location)
+    end
+
+    @delivery
   end
 
   def normalize_product_header(header)
@@ -102,7 +119,9 @@ class DeliveryImport
   end
 
   def location_names
-    @rows[1..-1].collect {|row| row[columns[:location]]}.uniq.reject {|name| name.nil? || name == '0' || name.strip.empty?}
+    @rows[1..-1].collect {|row| row[columns[:location]]}.uniq.reject {|name|
+      name.nil? || name == '0' || name.strip.empty?
+    }
   end
 
   def find_or_new_product(header)
@@ -158,16 +177,16 @@ class DeliveryImport
     @orders ||= @rows[1..-1].collect do |row|
       first_name = row[columns[:first_name]]
       last_name = row[columns[:last_name]]
-      location = row[columns[:location]]
-      next unless first_name && last_name && location
+      location_name = row[columns[:location]]
+      next unless first_name && last_name && location_name
 
+      location = find_or_new_location(location_name)      
       first_name = first_name.titleize
       last_name = last_name.titleize
       member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Create Order
-      delivery = deliveries.find {|item| item.name == location}
-      raise "No delivery found for location '#{location}." unless delivery
+      raise "No delivery found for location '#{location_name}." unless delivery
       begin
         timestamp = DateTime.parse(row[columns[:timestamp]])
       rescue Exception => e
@@ -175,6 +194,7 @@ class DeliveryImport
       end
 
       order = Order.new :delivery => delivery, :member => member, :created_at => timestamp,
+                        :location => location,
                         :notes => row[columns[:notes]]
       order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
       delivery.stock_items.each do |stock_item|
