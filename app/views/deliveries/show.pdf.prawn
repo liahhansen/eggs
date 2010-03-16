@@ -4,39 +4,54 @@ pdf.font_size 12
 pdf.stroke_color 'cccccc'
 
 
-def render_order(pdf, order)
-  if order
+def render_label(pdf, label)
     pdf.indent 4 do
-      pdf.move_down 4
-      pdf.font "Helvetica", :style => :bold do
-        pdf.text "#{order.member.last_name}, #{order.member.first_name} - #{order.member.phone_number} - #{order.location.name}", :size => 12
-      end
-      order.order_items.each do |item|
-        if item.quantity != 0
-          pdf.text "#{item.quantity} x #{item.stock_item.product_name} - #{item.stock_item.product_price_code}", :size => 10
-        end
-      end
-      pdf.move_cursor_to(16)
-      pdf.text "Bag Total: ____________"
+    pdf.move_down 4
+    pdf.font "Helvetica", :style => :bold do
+      pdf.text "#{label.order.member.last_name}, #{label.order.member.first_name} - #{label.order.member.phone_number} - #{label.order.location.name}", :size => 12
     end
+    label.order_items.each do |item|
+      if item.quantity != 0
+        pdf.text "#{item.quantity} x #{item.stock_item.product_name} - #{item.stock_item.product_price_code}", :size => 10
+      end
+    end
+    pdf.move_cursor_to(16)
+    if label.total_labels == 1
+      pdf.text "Bag Total: ____________"
+    else
+      if label.total_labels == label.label_num
+        pdf.text "Bag Total: ____________  Label #{label.label_num} of #{label.total_labels}"
+      else
+        pdf.text "Label #{label.label_num} of #{label.total_labels}"
+      end
+    end
+
   end
 end
 
-def render_page(pdf, order_count)
+def render_page(pdf, labels)
+  label_num = 0
   pdf.grid.rows.times do |row|
     pdf.grid.columns.times do |col|
       box = pdf.grid(row,col)
       pdf.bounding_box box.top_left, :width => box.width, :height => box.height do
-        render_order pdf, @delivery.orders[order_count]
-        pdf.stroke { pdf.rectangle(pdf.bounds.top_left, box.width,box.height)}
-        order_count += 1
+        if(labels[label_num] != nil)
+          render_label pdf, labels[label_num]
+          label_num += 1
+          pdf.stroke { pdf.rectangle(pdf.bounds.top_left, box.width,box.height)}
+        end
       end
     end
   end
-  if order_count % 10 == 0 && @delivery.orders[order_count] != nil
-    pdf.start_new_page
-    render_page(pdf, order_count)
-  end
 end
 
-render_page(pdf, 0)
+label_maker = LabelMaker.new
+labels = label_maker.get_labels_from_delivery @delivery
+
+num_pages = (labels.size.to_f / 10).ceil
+
+(1..num_pages).each do |page_num|
+  render_page pdf, labels[(page_num-1)*10...(10*page_num)]
+  pdf.start_new_page unless page_num == num_pages
+end
+
