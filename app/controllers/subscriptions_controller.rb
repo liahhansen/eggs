@@ -1,6 +1,12 @@
 class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.xml
+
+  access_control do
+    allow :admin
+    deny  :member
+  end  
+
   def index
     @subscriptions = Subscription.all
 

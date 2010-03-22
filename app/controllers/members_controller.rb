@@ -1,6 +1,11 @@
 class MembersController < ApplicationController
   # GET /members
   # GET /members.xml
+
+  access_control do
+    allow :admin
+  end
+
   def index
     @members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}, :order => 'last_name, first_name'
 

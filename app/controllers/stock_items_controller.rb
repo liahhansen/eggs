@@ -1,6 +1,12 @@
 class StockItemsController < ApplicationController
   # GET /stock_items
   # GET /stock_items.xml
+
+  access_control do
+    allow :admin
+    deny  :member
+  end
+
   def index
     if(params[:delivery_id] == nil)
       redirect_to root_path

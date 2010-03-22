@@ -1,21 +1,8 @@
 <h1>New member</h1>
 
-<% form_for(user) do |f| %>
+<% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </p>
-
-  <p>
-    <%= f.label :username %><br />
-    <%= f.text_field :username%>
-  </p>
   <p>
     <%= f.label :password %><br />
     <%= f.password_field :password%>
@@ -25,16 +12,8 @@
     <%= f.password_field :password_confirmation%>
   </p>
   <p>
-    <%= f.label :email_address %><br />
-    <%= f.text_field :email_address %>
-  </p>
-  <p>
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
-  </p>
-  <p>
-    <%= f.label :neighborhood %><br />
-    <%= f.text_field :neighborhood %>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
   </p>
   <p>
     <%= f.submit 'Create' %>

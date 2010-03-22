@@ -1,6 +1,12 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
+
+  access_control do
+    allow :admin
+    deny  :member
+  end
+
   def index
     @products = Product.find_all_by_farm_id(@farm.id)
 

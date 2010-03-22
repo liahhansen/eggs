@@ -1,6 +1,12 @@
 class OrderItemsController < ApplicationController
   # GET /order_items
   # GET /order_items.xml
+
+  access_control do
+    allow :admin
+    deny  :member
+  end
+
   def index
     @order_items = OrderItem.all
 
