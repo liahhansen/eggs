@@ -5,8 +5,8 @@ pdf.stroke_color 'cccccc'
 
 
 def render_label(pdf, label)
-    pdf.indent 4 do
-    pdf.move_down 4
+    pdf.indent 7 do
+    pdf.move_down 7
     pdf.font "Helvetica", :style => :bold do
       pdf.text "#{label.order.member.last_name}, #{label.order.member.first_name} - #{label.order.member.phone_number} - #{label.order.location.name}", :size => 12
     end
