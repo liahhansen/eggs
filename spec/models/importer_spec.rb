@@ -7,7 +7,7 @@ describe Importer do
   end
 
   it "should list imports" do
-    @importer.imports.size.should == 2
+    @importer.imports.size.should == 3
   end
 end
 
@@ -64,7 +64,7 @@ describe DeliveryImport do
 
       it "should identify columns" do
         columns = @import.columns
-        columns.size.should == 9
+        columns.size.should == 10
         columns[:timestamp].should == 0
         columns[:first_name].should == 2
         columns[:last_name].should == 1
@@ -98,6 +98,10 @@ describe DeliveryImport do
       it "should have multiple locations and pickups" do
         @import.delivery.pickups.size.should == 2
         @import.delivery.pickups.first.location.name.should == 'SF Potrero'
+        @import.delivery.pickups.last.location.host_name.should == ''
+        @import.delivery.pickups.last.location.host_phone.should == ''
+        @import.delivery.pickups.last.location.address.should == ''
+        @import.delivery.pickups.last.location.host_email.should == ''
       end
 
       it "should take delivery date from file name" do

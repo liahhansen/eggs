@@ -28,9 +28,9 @@ class DeliveryImport
   end
 
   def import!
-    delivery.save!
+    delivery.save! if location_names
     members.each {|member| member.save(false)}
-    orders.each {|order| order.save(false)}
+    orders.each {|order| order.save(false)} if location_names
   end
 
   def delivery_date
@@ -41,7 +41,9 @@ class DeliveryImport
   def find_or_new_location(location_name)
     location = Location.find_by_name_and_farm_id location_name, @farm
     if !location
-      location = Location.new(:name => location_name, :farm => @farm)
+      location = Location.new(:name => location_name, :farm => @farm,
+                              :host_name => '', :host_email => '', :host_phone => '',
+                              :address => '',:time_window => '')
       location.save!
     end
     location
@@ -101,10 +103,16 @@ class DeliveryImport
           columns[:last_name] = index
         when header =~ /email/i
           columns[:email] = index
-        when header =~ /cell/i
+        when header =~ /group email/i
+          columns[:alternate_email] = index
+        when header =~ /phone|cell/i
           columns[:phone] = index
         when header =~ /where/i
           columns[:location] = index
+        when header =~ /neighborhood/i
+          columns[:neighborhood] = index
+        when header =~ /address/i
+          columns[:address] = index
         when header =~ /(\$)/
           normalize_product_header(header)
           columns[:products][find_or_new_product(header)] = index
@@ -119,6 +127,7 @@ class DeliveryImport
   end
 
   def location_names
+    return if columns[:location] == nil
     @rows[1..-1].collect {|row| row[columns[:location]]}.uniq.reject {|name|
       name.nil? || name == '0' || name.strip.empty?
     }
@@ -151,18 +160,26 @@ class DeliveryImport
     @rows[1..-1].each do |row|
       first_name = row[columns[:first_name]]
       last_name = row[columns[:last_name]]
-      location = row[columns[:location]]
-      next unless first_name && last_name && location
+      next unless first_name && last_name
       
-      first_name = first_name.titleize
-      last_name = last_name.titleize
+      first_name = first_name.strip.titleize
+      last_name = last_name.strip.titleize
       next if @members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Find or create new Member
       member = Member.find_by_first_name_and_last_name first_name, last_name
       if !member
+        phone_number =  columns[:phone] ? row[columns[:phone]] : ''
+        address =       columns[:address] ? row[columns[:address]] : ''
+        neighborhood =  columns[:neighborhood] ? row[columns[:neighborhood]] : ''
+        alternate_email = columns[:alternate_email] ? row[columns[:alternate_email]] : ''
+
+
+
         member = Member.new :first_name => first_name, :last_name => last_name,
-                            :email_address => row[3], :phone_number => row[4]
+                            :email_address => row[3], :phone_number => phone_number,
+                            :address => address, :neighborhood => neighborhood,
+                            :alternate_email => alternate_email
       end
       if !member.subscriptions.detect {|item| item.farm == @farm}
         member.subscriptions << Subscription.new(:farm => @farm)
@@ -181,8 +198,8 @@ class DeliveryImport
       next unless first_name && last_name && location_name
 
       location = find_or_new_location(location_name)      
-      first_name = first_name.titleize
-      last_name = last_name.titleize
+      first_name = first_name.strip.titleize
+      last_name = last_name.strip.titleize
       member = members.find {|item| item.first_name == first_name && item.last_name == last_name}
 
       # Create Order
