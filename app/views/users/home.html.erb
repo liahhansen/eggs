@@ -13,9 +13,9 @@
 
     <h5>delivery Details:</h5>
     <p><b>date/time: </b><%= next_order.delivery.pretty_date %>, 5-7pm<br/>
-    <b>host: </b> <%= next_order.delivery.host %><br/>
-    <b>location:  </b><%= next_order.delivery.location %>
-    <%= link_to "(map)", next_order.delivery.map_link, :target => "_blank"%></p>
+    <b>host: </b> <%= next_order.delivery.location.host_name %><br/>
+    <b>location:  </b><%= next_order.delivery.location.name %>
+    <%= link_to "(map)", next_order.delivery.location.map_link, :target => "_blank"%></p>
 
   <% end %>
 

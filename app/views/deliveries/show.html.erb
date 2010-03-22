@@ -73,7 +73,7 @@
         <h5><%= pluralize @delivery.locations.size, "Location" %>:</h5>
         <ul>
         <% @delivery.locations.each do |location| %>
-          <li><%= link_to "#{location.name}, #{location.host_name}", location_path(location, :farm_id => @farm.id)%></li>
+          <li><%= "#{location.name}, #{location.host_name}" %></li>
         <% end %>
         </ul>
         </div>
