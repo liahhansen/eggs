@@ -24,11 +24,6 @@ kathryn_sf_emeryville_feb3:
   location: bonnie_home
 
 
-kathryn_sf_farm_feb3:
-  member: kathryn
-  delivery: sf_emeryville_farm_feb3
-  location: soul_food_farm
-
 jenny_sf_emeryville_feb3:
   member: jenny
   delivery: sf_emeryville_farm_feb3
