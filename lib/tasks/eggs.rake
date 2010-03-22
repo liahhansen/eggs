@@ -1,4 +1,5 @@
 require "csv"
+require "importer"
 
 # Loads a single-delivery CSV file (exported from gDocs)
 # and saves the following to the database:
@@ -36,12 +37,21 @@ namespace :eggs do
       import_run(dir, farm)
     end
 
+    desc "Import a single delivery file"
+    task :run_single => :environment do
+      import_file(filename, farm)
+    end
+
     def dir
       ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
     end
 
     def farm
       Farm.find_by_name(ENV['FARM'] || "Soul Food Farm")
+    end
+
+    def filename
+      ENV['FILE'] || raise("You must specify a file to import!")
     end
 
     def import_dry(dir, farm)
@@ -64,6 +74,14 @@ namespace :eggs do
         puts "  Importing #{import.file}."
         import.import!
       end
+      puts "Done."
+    end
+
+    def import_file(file, farm)
+      puts "Importing for #{farm.name} from #{file}."
+      import = DeliveryImport.new(file,farm)
+      puts "Importing #{file}"
+      import.import!
       puts "Done."
     end
   end

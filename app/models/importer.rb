@@ -28,9 +28,11 @@ class DeliveryImport
   end
 
   def import!
-    delivery.save! if location_names
-    members.each {|member| member.save(false)}
-    orders.each {|order| order.save(false)} if location_names
+    ActiveRecord::Base.transaction do
+      delivery.save! if location_names
+      members.each {|member| member.save(false)}
+      orders.each {|order| order.save(false)} if location_names
+    end
   end
 
   def delivery_date
@@ -213,7 +215,10 @@ class DeliveryImport
       order = Order.new :delivery => delivery, :member => member, :created_at => timestamp,
                         :location => location,
                         :notes => row[columns[:notes]]
-      order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
+
+      if columns[:total]
+        order.finalized_total = row[columns[:total]].gsub('$','').to_f if row[columns[:total]]
+      end
       delivery.stock_items.each do |stock_item|
         order.order_items << OrderItem.new(:stock_item => stock_item, :quantity => row[columns[:products][stock_item.product]].to_i || 0)
       end
