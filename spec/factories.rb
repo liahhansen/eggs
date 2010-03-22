@@ -3,7 +3,7 @@ require 'factory_girl'
 # BASE FACTORIES
 
 Factory.define :user do |user|
-  user.sequence(:username) {|n| "DillonFootballRules#{n}"}
+  user.sequence(:email) {|n| "fan@DillonFootballRules#{n}.com"}
   user.password 'gopanthers'
   user.password_confirmation 'gopanthers'
   user.after_create do |u|

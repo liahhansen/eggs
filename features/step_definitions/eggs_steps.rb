@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 
 Given /^I am the registered user (.+)$/ do |login|
   params = {
-    "username"=> login,
+    "email"=> login,
     "password"=>"eggsrock",
     "password_confirmation"=>"eggsrock"
   }
@@ -11,7 +11,7 @@ Given /^I am the registered user (.+)$/ do |login|
 end
 
 When /^I login with valid credentials$/ do
-  fill_in('Username', :with => @user.username)
+  fill_in('Username', :with => @user.email)
   fill_in('Password', :with => "eggsrock")
   click_button("Login")
 end

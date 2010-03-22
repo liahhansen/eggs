@@ -25,7 +25,10 @@ namespace :eggs do
       Delivery.delete_all
       Product.delete_all
       Member.delete_all
-      puts "Deleted all deliveries, Products, Members and their dependent models."
+      Location.delete_all
+      User.delete_all
+      RolesUser.delete_all
+      puts "Deleted all deliveries, Products, Members, Users, Locations and their dependent models."
     end
 
     desc "Run data import from DIR."
@@ -62,6 +65,25 @@ namespace :eggs do
         import.import!
       end
       puts "Done."
+    end
+  end
+
+
+
+  namespace :create do
+    desc "creates admin user"
+    task :admin => :environment do
+      user = User.create!(:email => "admin@example.com", :password => "eggsrock", :password_confirmation => "eggsrock")
+      user.has_role!(:admin)
+    end
+
+    desc "creates member & user for Soul Food Farm"
+    task :user => :environment do
+      member = Member.create!(:first_name => "John", :last_name => "Doe",
+                              :email_address => "johndoe@example.com", :phone_number => "123-456-7890")
+      subscription = Subscription.create(:farm => Farm.find_by_name("Soul Food Farm"), :member => member)
+      user = User.create!(:email => member.email_address, :password => "eggsrock", :password_confirmation => "eggsrock", :member => member)
+      user.has_role!(:member)
     end
   end
 

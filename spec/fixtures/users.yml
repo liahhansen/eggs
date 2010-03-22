@@ -15,28 +15,28 @@
 
 kathryn:
   member: kathryn
-  username: kathrynaaker
+  email: kathryn@example.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 jenny:
   member: jenny
-  username: jennyjones
+  email: jenny@example.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 ben:
   member: ben
-  username: benbrown
+  email: ben@example.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
 
 sue:
   member: sue
-  username: suesmith
+  email: sue@example.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
