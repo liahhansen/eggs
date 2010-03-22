@@ -8,14 +8,16 @@
   <p style="color: green"><%= flash[:notice] %></p>
 
   <h1>Listing members</h1>
-
+  <h4><%= link_to '(New member)', new_member_path(:farm_id => @farm.id) %></h4>  
   <table class="simple">
     <tr>
       <th>Last name</th>
       <th>First name</th>
       <th>Neighborhood</th>
       <th>Email address</th>
+      <th>Alternate email</th>
       <th>Phone number</th>
+      <th>Address</th>
       <th>Joined on</th>
     </tr>
 
@@ -25,7 +27,9 @@
       <td><%=h member.first_name %></td>
       <td><%=h member.neighborhood %></td>
       <td><%=h member.email_address %></td>
+      <td><%=h member.alternate_email %></td>
       <td><%=h member.phone_number %></td>
+      <td><%=h member.address %></td>
       <td><%=h member.joined_on %></td>
       <td><%= link_to 'Show', member_path(member, :farm_id => @farm.id) %></td>
       <td><%= link_to 'Edit', edit_member_path(member, :farm_id => @farm.id) %></td>
@@ -35,7 +39,4 @@
   <% end %>
   </table>
 
-<br />
-
-<%= link_to 'New member', new_member_path(:farm_id => @farm.id) %>
 </div>
