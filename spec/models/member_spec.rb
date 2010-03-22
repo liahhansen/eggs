@@ -35,4 +35,18 @@ describe Member do
     member.orders.size.should == 2
     member.orders.filter_by_farm(member.farms.first).size.should == 1
   end
+
+  it "can return the balance for a subscription given a farm" do
+    farm = Factory(:farm_with_members)
+    member = farm.members.first
+    member.subscriptions.size.should == 1
+
+    transaction = Transaction.new(:member_id => member.id, :subscription => member.subscriptions.first,
+                    :amount => 90, :debit => true)
+    
+    transaction.save.should == true
+    member.subscriptions.first.current_balance.should == -90
+    member.balance_for_farm(farm).should == -90
+
+  end
 end
