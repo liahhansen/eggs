@@ -4,6 +4,14 @@ class DeliveriesController < ApplicationController
   require "prawn/measurement_extensions"
   prawnto :prawn => { :left_margin => 0.18.in, :right_margin => 0.18.in}
 
+  def authenticate
+    if params[:action] != "public_summary"
+      super
+    else
+      true
+    end
+  end
+
   def index
 
     if !params[:farm_id]
