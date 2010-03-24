@@ -5,22 +5,23 @@ pdf.stroke_color 'cccccc'
 
 
 def render_label(pdf, label)
-    pdf.indent 7 do
-    pdf.move_down 7
+    pdf.indent 8 do
+    pdf.move_down 8
     pdf.font "Helvetica", :style => :bold do
-      pdf.text "#{label.order.member.last_name}, #{label.order.member.first_name} - #{label.order.member.phone_number} - #{label.order.location.name}", :size => 12
+      pdf.text "#{label.order.member.last_name}, #{label.order.member.first_name} - #{label.order.location.name}", :size => 13
+      pdf.text "#{label.order.member.phone_number}", :size => 13
     end
     label.order_items.each do |item|
       if item.quantity != 0
-        pdf.text "#{item.quantity} x #{item.stock_item.product_name} - #{item.stock_item.product_price_code}", :size => 10
+        pdf.text "#{item.quantity} x #{item.stock_item.product_name} - #{item.stock_item.product_price_code}", :size => 12
       end
     end
-    pdf.move_cursor_to(16)
+    pdf.move_cursor_to(18)
     if label.total_labels == 1
-      pdf.text "Bag Total: ____________"
+      pdf.text "Prv. Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: _________"
     else
       if label.total_labels == label.label_num
-        pdf.text "Bag Total: ____________  Label #{label.label_num} of #{label.total_labels}"
+        pdf.text "Prv. Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: ____________  Label #{label.label_num} of #{label.total_labels}"
       else
         pdf.text "Label #{label.label_num} of #{label.total_labels}"
       end
