@@ -17,9 +17,9 @@
           <%= "#{order_item.quantity}x #{order_item.stock_item.product_name}" %><br/>
         <% end %>
       </td>
-      <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
-      <td><%= number_to_currency order.finalized_total %></td>
-      <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
+      <td><%= number_to_currency (order.member.balance_for_farm(@farm) + order.finalized_total) %></td>
+      <td class="bag_total"><%= number_to_currency order.finalized_total %></td>
+      <td <%= 'class="neg_balance"' if order.member.balance_for_farm(@farm) < 0 %> ><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
     </tr>
     <% end %>
 

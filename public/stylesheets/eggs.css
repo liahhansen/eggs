@@ -260,3 +260,10 @@ table.public {
 table.public th {
   font-weight: bold;
 }
+table.public td.neg_balance {
+  color: red;
+  font-weight: bold;
+}
+table.public td.bag_total {
+ font-weight: bold; 
+}
