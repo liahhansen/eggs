@@ -1,4 +1,14 @@
-<div id="" class="grid_12 ">
+<script>
+  $(function(){
+    $('#content').removeClass('container_12');
+    $('#content').addClass('master_list')
+    $('#header').hide();
+    $('#headerbg').hide();
+  });
+</script>
+
+<br/>
+<div id="">
 
 <p style="color: green"><%= flash[:notice] %></p>
   
@@ -14,14 +24,14 @@
           <td><%= location.name %></td>
           <td><%= location.host_name %></td>
           <td><%= location.address %></td>
+          <td><%= location.host_phone %></td>
         </tr>
       <% end %>
     </table>
 </div>
-
-<table class="simple">
-  <tr class="hed">
-    <th>Timestamp</th>
+<br/>
+<table class="order_form">
+  <tr>
     <th>Last Name</th>
     <th>First Name</th>
     <th>Email</th>
@@ -29,8 +39,7 @@
     <th>delivery</th>
     <% @delivery.stock_items.each do |item| %>
       <th><%= item.product_name %><br/>
-        <%= item.product_price_code %><br/>
-        <%= item.quantity_ordered %></th>
+        <%= item.product_price_code %></th>
     <% end %>
 
     <th>Notes</th>
@@ -38,11 +47,28 @@
     <th>Estimated Bag Total</th>
     <th>Finalized Bag Total</th>
     <th>Updated Balance</th>
+    <th class="note_entry">How Paid? Notes</th>
+  </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <% @delivery.stock_items.each do |item| %>
+      <th><%= item.quantity_ordered %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+
   </tr>
 
   <% @delivery.orders.each do |order| %>
     <tr>
-      <td><%= order.created_at %></td>
       <td><%= order.member.last_name %></td>
       <td><%= order.member.first_name %></td>
       <td><%= order.member.email_address %></td>
@@ -68,7 +94,7 @@
       <td><%= number_to_currency order.estimated_total %></td>
       <td><%= number_to_currency order.finalized_total %></td>
       <td><%= number_to_currency (order.member.balance_for_farm @farm) %></td>
-
+      <td></td>
     </tr>
   <% end %>
 

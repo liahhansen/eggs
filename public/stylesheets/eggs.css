@@ -167,7 +167,7 @@ table.simple td {
 }
 
 table.simple td.hed {
-  color: #fff;
+  color: #000;
   padding: 4px;
   text-align: left;
   border-bottom: 2px #fff solid;
@@ -176,19 +176,26 @@ table.simple td.hed {
 }
 
 table.order_form {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   border-collapse: collapse;
   border-spacing: 0px;
 }
 
 table.order_form td {
   padding: 4px;
-  border: 1px #eee solid;
+  border: 1px #666 solid;
 }
 
-table.order_form td.hed {
+table.order_form th {
   padding: 4px;
-  border: 1px #eee solid;
+  border: 1px #666 solid;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+table.order_form th.note_entry {
+  width: 100px;
+  white-space:nowrap;
 }
 
 div.delivery_summary_box {
