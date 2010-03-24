@@ -95,7 +95,7 @@
       <p>
         <%= link_to "View Worksheet", :controller => 'deliveries', :action => 'show_sheet', :id => @delivery.id, :farm_id => @farm.id %><br/>
         <%= link_to "Enter Finalized Totals", :controller => 'deliveries', :action => 'edit_order_totals', :id => @delivery.id, :farm_id => @farm.id %><br/>
-
+        <%= link_to "Public Summary", :controller => 'deliveries', :action => "public_summary", :id => @delivery.id, :farm_id => @farm.id %><br/>
         <%= link_to "Export as CSV", delivery_path(@delivery, :csv, :farm_id => @farm.id) %><br/>
         <%= link_to "Export as TSV", delivery_path(@delivery, :csv, :farm_id => @farm.id, :tabs => true) %> (copy/paste to gDocs)<br/>
         <%= link_to "Export Labels", delivery_path(@delivery, :pdf, :farm_id => @farm.id) %> (PDF)<br/><br/>

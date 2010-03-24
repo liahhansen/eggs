@@ -48,6 +48,10 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
   end
 
+  def public_summary
+    @delivery = Delivery.find(params[:id])
+  end
+
   # GET /deliveries/new
   # GET /deliveries/new.xml
   def new

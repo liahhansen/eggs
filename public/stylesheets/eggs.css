@@ -245,3 +245,11 @@ span.header_link {
 h2.deliveries_header {
   margin-bottom: 14px;
 }
+
+table.public {
+  font-size: 16px;
+  width: 940px;
+}
+table.public th {
+  font-weight: bold;
+}

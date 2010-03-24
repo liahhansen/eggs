@@ -1,0 +1,28 @@
+<div id="" class="grid_12 ">
+  <br/>
+  <table class="order_form public">
+    <tr class="hed">
+      <th>Name</th>
+      <th>Order Items</th>
+      <th>Old Balance</th>
+      <th>Bag Total</th>
+      <th>Current Balance</th>
+    </tr>
+
+    <% @delivery.orders.each do |order| %>
+    <tr>
+      <td><%= order.member.last_name %></td>
+      <td>
+        <% order.order_items.with_quantity.each do |order_item| %>
+          <%= "#{order_item.quantity}x #{order_item.stock_item.product_name}" %><br/>
+        <% end %>
+      </td>
+      <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
+      <td><%= number_to_currency order.finalized_total %></td>
+      <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
+    </tr>
+    <% end %>
+
+    
+  </table>
+</div>
