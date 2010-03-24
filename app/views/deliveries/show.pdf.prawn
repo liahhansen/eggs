@@ -18,7 +18,7 @@ def render_label(pdf, label)
     end
     pdf.move_cursor_to(18)
     if label.total_labels == 1
-      pdf.text "Prv. Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: _________"
+      pdf.text "Prev Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: _________"
     else
       if label.total_labels == label.label_num
         pdf.text "Prv. Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: ____________  Label #{label.label_num} of #{label.total_labels}"
