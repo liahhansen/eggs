@@ -2,6 +2,6 @@
   <td><%= link_to "#{o.member.last_name}, #{o.member.first_name}", order_path(o, :farm_id => @farm.id)%></td>
   <td><%= o.total_items_quantity %></td>
   <td><%= o.finalized_total ? number_to_currency(o.finalized_total) : number_to_currency(o.estimated_total) %></td>
-  <td><%= number_to_currency(o.member.balance_for_farm @farm)%></td>
+  <td><%= link_to number_to_currency(o.member.balance_for_farm @farm), transactions_path(:member_id => o.member.id, :farm_id => @farm.id)%></td>
   <td>--</td>
 </tr>
