@@ -18,7 +18,11 @@
 
   <p>
     Pickup Location:<br/>
-    <%= f.select :location_id, @farm.locations.map {|location| [location.name, location.id]} %>
+    <% if @delivery.locations.size > 1 %>
+      <%= f.select :location_id, @delivery.locations.map {|location| [location.name, location.id]} %>
+    <% else %>
+      <%= @delivery.locations.first.name %>
+    <% end %>
   </p>
 
   <% if @members %>
