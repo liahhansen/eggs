@@ -19,6 +19,12 @@
 
   <% end %>
 
+  <% if @open_deliveries.size == 0 %>
+    <div>
+      There are currently no <%= @farm.name %> deliveries open for orders.
+    </div>
+  <% end %>
+
   <% if @finalized_orders.size > 0 %>
     <div class="box_header"><h4>Finalized Orders - delivery soon!:</h4></div>
     <table class="box_table">
@@ -61,7 +67,7 @@
     </table>
   <% end %>
 
-  <% if @open_orders.size > 0 %>  
+  <% if @open_deliveries.size > 0 %>  
     <div class="box_header"><h4>deliveries currently open for orders:</h4></div>
     <table class="box_table">
       <%
