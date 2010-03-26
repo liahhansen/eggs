@@ -32,4 +32,12 @@ describe Farm do
     f = Factory(:farm_with_members)
     f.members.length.should >= 1
   end
+
+  it "should be able to store contact info and payment URL" do
+    f = Factory(:farm_with_details)
+    f.paypal_link.should == "http://paypal.pay.me/please"
+    f.contact_email.should == "csa@example.com"
+    f.contact_name.should == "Kathryn Aaker"
+  end
+
 end

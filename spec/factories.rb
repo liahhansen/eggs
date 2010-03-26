@@ -120,6 +120,12 @@ Factory.define :farm_with_members, :parent => :farm do |farm|
   end
 end
 
+Factory.define :farm_with_details, :parent => :farm do |farm|
+  farm.paypal_link "http://paypal.pay.me/please"
+  farm.contact_email "csa@example.com"
+  farm.contact_name "Kathryn Aaker"
+end
+
 Factory.define :farm_with_products, :parent => :farm do |farm|
   farm.after_create do |f|
     3.times {f.products << Factory(:product, :farm => f)}

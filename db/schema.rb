@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100319225058) do
+ActiveRecord::Schema.define(:version => 20100326200535) do
 
   create_table "deliveries", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20100319225058) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key"
+    t.string   "paypal_link"
+    t.string   "contact_email"
+    t.string   "contact_name"
   end
 
   create_table "locations", :force => true do |t|
