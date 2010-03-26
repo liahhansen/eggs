@@ -3,7 +3,7 @@ Feature: Manage Farms
   I want to create and manage farms
 
 Background:
-  Given I am the registered user jennyjones
+  Given I am the registered user jenny@example.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"

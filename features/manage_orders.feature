@@ -4,7 +4,7 @@ Feature: Manage Orders
   I should be able to submit an order for a farm's member
 
 Background:
-  Given I am the registered user jennyjones
+  Given I am the registered user jenny@example.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"
@@ -24,6 +24,6 @@ Scenario: Add a new order as an admin
   
 Scenario: Delete an order as an admin
   When I follow "Emeryville"
-  Then I should see "Ben Brown"
-  When I follow "Ben Brown"
+  Then I should see "Brown, Ben"
+  When I follow "Brown, Ben"
   Then I should see "Delete Order"

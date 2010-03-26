@@ -3,7 +3,7 @@ Feature: View delivery Worksheet
   I want to see a worksheet view of a delivery
 
 Background:
-  Given I am the registered user jennyjones
+  Given I am the registered user jenny@example.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"

@@ -3,7 +3,7 @@ Feature: Submit Order
   They have to submit an order form
 
 Background:
-  Given I am the registered user benbrown
+  Given I am the registered user ben@example.com
   And I am on login
   When I login with valid credentials
   Then I should see "Welcome"  
