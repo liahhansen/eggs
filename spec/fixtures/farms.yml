@@ -12,7 +12,12 @@
 soulfood:
   name: Soul Food Farm
   key: sff
+  contact_email: csa@example.com
+  contact_name: Bonnie Brown
 
 clarksummit:
   name: Clark Summit Farm
   key: csf
+  contact_email: csa@example.com
+  contact_name:
+
