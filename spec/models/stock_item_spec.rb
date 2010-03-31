@@ -61,4 +61,13 @@ describe StockItem do
 
   end
 
+  it "should have available_per_member that returns min(limit, avail)" do
+    stock_item = Factory(:stock_item, :quantity_available => 5, :max_quantity_per_member => 3)
+    stock_item.available_per_member.should == 3
+    Factory(:order_item, :stock_item => stock_item, :quantity => 3)
+    stock_item.available_per_member.should == 2
+    Factory(:order_item, :stock_item => stock_item, :quantity => 2)
+    stock_item.available_per_member.should == 0
+  end
+
 end

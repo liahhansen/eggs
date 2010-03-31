@@ -17,7 +17,7 @@
         <% f.fields_for :order_items, item do |builder| %>
             <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id %>
             <td>
-              <%= builder.select :quantity, 0..item.stock_item.max_quantity_per_member %>
+              <%= builder.select :quantity, 0..item.stock_item.available_per_member %>
             </td>
         <% end %>
 
