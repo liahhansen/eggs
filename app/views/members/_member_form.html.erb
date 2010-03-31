@@ -15,8 +15,16 @@
     <%= f.text_field :neighborhood %>
   </p>
   <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
     <%= f.label :email_address %><br />
     <%= f.text_field :email_address %>
+  </p>
+  <p>
+    <%= f.label :alternate_email %><br />
+    <%= f.text_field :alternate_email %>
   </p>
   <p>
     <%= f.label :phone_number %><br />
@@ -25,6 +33,10 @@
   <p>
     <%= f.label :joined_on %><br />
     <%= f.date_select :joined_on %>
+  </p>
+  <p>
+    <%= f.label :notes %><br/>
+    <%= f.text_area :notes %>
   </p>
   <p>
     <%= f.submit button_label %>
