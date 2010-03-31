@@ -1,16 +1,18 @@
 <div id="" class="grid_12 ">
 <p style="color: green"><%= flash[:notice] %></p>
 
+<% title "login" %>
+
 <% form_for @user_session do |form| %>
 <%= form.error_messages %>
-  <p>
+  <div>
     <%= form.label :email, "Email" %>
     <%= form.text_field :email %>
-  </p>
-  <p>
+  </div>
+  <div>
     <%= form.label :password, "Password" %>
     <%= form.password_field :password %>
-  </p>
+  </div>
   <p>
     <%= form.submit "Login" %>
   </p>
