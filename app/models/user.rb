@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   has_many :roles_users
   has_many :roles, :through => :roles_users
 
-  validates_presence_of :password, :email
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
 
   acts_as_authorization_subject
   acts_as_authentic

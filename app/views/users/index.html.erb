@@ -6,20 +6,12 @@
 
 <table>
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
     <th>Email address</th>
-    <th>Phone number</th>
-    <th>Neighborhood</th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%=h user.first_name %></td>
-    <td><%=h user.last_name %></td>
-    <td><%=h user.email_address %></td>
-    <td><%=h user.phone_number %></td>
-    <td><%=h user.neighborhood %></td>
+    <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

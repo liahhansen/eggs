@@ -3,25 +3,11 @@
   <p style="color: green"><%= flash[:notice] %></p>
 
   <p>
-    <%=h "#{@user.first_name} #{@user.last_name}!" %>
-  </p>
-
-  <p>
     <b>Email address:</b>
-    <%=h @user.email_address %>
-  </p>
-
-  <p>
-    <b>Phone number:</b>
-    <%=h @user.phone_number %>
-  </p>
-
-  <p>
-    <b>Neighborhood:</b>
-    <%=h @user.neighborhood %>
+    <%=h @user.email %>
   </p>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Edit', edit_user_path(@user) %>
 
 </div>

@@ -57,4 +57,25 @@ describe UsersController do
     
   end
 
+  it "should let members only edit their own user profile" do
+    member = Factory(:member_user)
+    UserSession.create member
+    get :edit, :id => member.id
+    assigns(:user).should == member
+
+    get :edit, :id => 34
+    assigns(:user).should == member
+
+  end
+
+  it "should allow admins to edit any user profile" do
+    admin = Factory(:admin_user)
+    UserSession.create admin
+    member = Factory(:member_user)
+
+    get :edit, :id => member.id
+    assigns(:user).should == member
+
+  end
+
 end
