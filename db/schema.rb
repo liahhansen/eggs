@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100331054446) do
+ActiveRecord::Schema.define(:version => 20100401061346) do
 
   create_table "deliveries", :force => true do |t|
     t.string   "name"
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(:version => 20100331054446) do
     t.string   "persistence_token"
     t.string   "email"
     t.integer  "member_id"
+    t.string   "perishable_token"
+    t.boolean  "active",            :default => false, :null => false
   end
 
 end
