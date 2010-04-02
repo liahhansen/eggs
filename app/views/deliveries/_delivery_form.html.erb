@@ -5,7 +5,6 @@
   
 </script>
 
-
 <% form_for(@delivery) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.error_messages %>
@@ -21,7 +20,7 @@
     <%= f.select :status, ["notyetopen", "open", "inprogress", "finalized", "archived"] %>
   </p>
   <p>
-    <%= f.label :name ,"Name: (Emeryville, Farm, etc.)" %><br />
+    <%= f.label :name ,"Name: (Emeryville/Farm, etc.)" %><br />
     <%= f.text_field :name %>
   </p>
   <p>
@@ -56,7 +55,7 @@
 
   <p>
     <%= f.label :minimum_order_total %><br/>
-    <%= f.text_field :minimum_order_total, :size=> 5 %>
+    $<%= f.text_field :minimum_order_total, :size=> 5 %>
   </p>
   <p>
     <%= f.label :opening_at %><br />

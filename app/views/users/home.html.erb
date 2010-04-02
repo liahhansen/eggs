@@ -1,10 +1,15 @@
+<% title "#{@farm.name} : #{@user.member.first_name} #{@user.member.last_name}"%>
 
-<div id="" class="grid_8 ">
+
+<div class="grid_12">
+  <h2 id="page-heading">Welcome, <%= "#{@user.member.first_name} #{@user.member.last_name}!"%></h2>  
+</div>
+
+
+<div class="grid_8 ">
 
   <p style="color: green"><%= flash[:notice] %></p>
-  <% title "#{@farm.name} : #{@user.member.first_name} #{@user.member.last_name}"%>
 
-  <h5>Welcome, <%= "#{@user.member.first_name} #{@user.member.last_name}!"%></h5>
   <% if @finalized_orders.size >= 1
       next_order = @finalized_orders.first %>
     <p>Your upcoming order (<%= "#{next_order.delivery.pretty_date} - #{next_order.delivery.name}" %>) has been finalized with a total
@@ -40,8 +45,8 @@
   <% end %>
 
   <% if @inprogress_orders.size > 0 %>  
-    <div class="box_header"><h4>Orders that are currently Processing:</h4></div>
-    <table class="box_table">
+    <h4>Orders that are currently Processing:</h4>
+    <table>
       <% @inprogress_orders.each do |order| %>
         <tr>
           <td><%= order.delivery.date %></td>
@@ -54,8 +59,8 @@
   <% end %>
 
   <% if @open_orders.size > 0 %>    
-    <div class="box_header"><h4>Your current open orders:</h4></div>
-    <table class="box_table">
+    <h4>Your current open orders:</h4>
+    <table>
       <% @open_orders.each do |order| %>
         <tr>
           <td><%= order.delivery.date %></td>
@@ -68,8 +73,8 @@
   <% end %>
 
   <% if @open_deliveries.size > 0 %>  
-    <div class="box_header"><h4>deliveries currently open for orders:</h4></div>
-    <table class="box_table">
+    <h4>deliveries currently open for orders:</h4>
+    <table>
       <%
         @open_deliveries.each do |delivery|
       %>
@@ -80,23 +85,26 @@
         <td><%= link_to "new order", new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id) %></td>
       </tr>
       <% end %>
-    </ul>
     </table>
   <% end %>
 
 
 </div>
 
-<div id="sidebar" class="grid_4">
-  <p></p>
-  <div class="box_header">
-    <h4>Your Account Balance:</h4>
-  </div>
-  <div class="box_content">
-    <h4><%= number_to_currency @subscription.current_balance %></h4>
-    <div><%= link_to "balance details", transactions_path(:farm_id => @farm.id, :member_id => @user.member.id)%> </div>
+<div class="grid_4">
+  <div class="box">
+    <h2></h2>
+    <div class="block">
+      <h5>Your Account Balance:</h5>
+      <h4><%= number_to_currency @subscription.current_balance %></h4>
+      <ul class="menu">
+        <li><%= link_to "Balance Details", transactions_path(:farm_id => @farm.id, :member_id => @user.member.id)%></li>
+      </ul>
+    </div>
   </div>
 </div>
+
+
 
 
   

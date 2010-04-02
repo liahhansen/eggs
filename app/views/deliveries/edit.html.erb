@@ -1,10 +1,10 @@
+<div class="grid_12">
+  <h2 id="page-heading">Edit Delivery</h2>
+</div>
+
 <div id="" class="grid_12 ">
 
 <p style="color: green"><%= flash[:notice] %></p>
-
-<p><%= link_to "< Back to Farm", @farm %></p>  
-
-<h1>Editing delivery</h1>
 
 <%= render :partial => 'delivery_form', :locals => {:button_label => 'Update', :action => 'edit'} %>
 

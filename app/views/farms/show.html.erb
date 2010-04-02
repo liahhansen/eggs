@@ -1,65 +1,86 @@
-<div id="" class="nav grid_12">
-    <%= link_to "< Farm List", farms_path %>
-    <div class="nav_divider"/>
+<div class="grid_12">
+  <h2 id="page-heading"><%= "#{@farm.name} - Home" %></h2>
 </div>
+<p style="color: green"><%= flash[:notice] %></p>
 
-<div id="" class="grid_8 alpha">
-
-  <p style="color: green"><%= flash[:notice] %></p>
-
-  <div class="page_header"><h1><%= "#{@farm.name} - Home" %></h1></div>
-  <h2 class="deliveries_header">deliveries: <span class="header_link"><%= link_to "add new delivery", new_delivery_path(:farm_id => @farm.id) %></span></h2>
-
-
-  <div class="box_container">
-  <div class="box_header"><h4>Finalized deliveries (ready for delivery!):</h4></div>
-  <% @deliveries_finalized.each do |p|%>
-      <%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %>
-  <% end %>
-  </div>
-
-  <div class="box_container">
-  <div class="box_header"><h4>In Progress deliveries (not accepting orders):</h4></div>
-  <% @deliveries_inprogress.each do |p|%>
-      <%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %>
-  <% end %>
-  </div>
-
-  <div class="box_container">
-  <div class="box_header"><h4>Open deliveries (currently accepting orders):</h4></div>
-  <% @deliveries_open.each do |p|%>
-      <%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %>
-  <% end %>
-  </div>
-
-  <div class="box_container">
-  <div class="box_header"><h4>Not Yet Open deliveries:</h4></div>
-  <% @deliveries_notyetopen.each do |p|%>
-      <%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %>
-  <% end %>
-  </div>
-
-  <div class="box_container">
-  <div class="box_header"><h4>Archived deliveries:</h4></div>
-  <% @deliveries_archived.each do |p|%>
-      <%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %>
-  <% end %>
-  </div>
-
-
-</div>
-
-<div class="grid_4 omega">
-  <div class="box_container">
-    <div class="box_header"><h4>Manage Farm</h4></div>
-      <div class="box_content">
-        <p>
-          <%= link_to "Schedule new Delivery", new_delivery_path(:farm_id => @farm.id) %><br/>
-          <%= link_to "View / Manage Products", products_path(:farm_id => @farm.id) %><br/>
-          <%= link_to "View / Manage Members", members_path(:farm_id => @farm.id) %><br/>
-          <%= link_to "View / Manage Locations", locations_path(:farm_id => @farm.id)%><br/>
-        </p>
+<div class="grid_8">
+  <h1>Deliveries:</h1>
+  <ul class="menu">
+    <li><%= link_to "Add New Delivery", new_delivery_path(:farm_id => @farm.id) %></li>
+  </ul>
+  <div class="box">
+    <h2>Finalized (ready for delivery!):</h2>
+    <div class="block">
+      <ul>
+      <% @deliveries_finalized.each do |p|%>
+          <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
+      <% end %>
+      </ul>
     </div>
   </div>
 
+  <div class="box">
+    <h2>In Progress (not accepting orders):</h2>
+    <div class="block">
+      <ul class="menu">
+      <% @deliveries_inprogress.each do |p|%>
+          <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
+      <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Open (currently accepting orders):</h2>
+    <div class="block">
+      <ul class="menu">
+      <% @deliveries_open.each do |p|%>
+          <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
+      <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Not Yet Open:</h2>
+    <div class="block">
+      <ul class="menu">
+      <% @deliveries_notyetopen.each do |p|%>
+          <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
+      <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>  
+
+  <div class="box">
+    <h2>Archived deliveries:</h2>
+    <div class="block">
+      <ul class="menu">      
+      <% @deliveries_archived.each do |p|%>
+          <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
+      <% end %>
+      </ul>
+      <div class="clear"></div>      
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="grid_4">
+  <div class="box">
+    <h2>Manage Farm</h2>
+    <div class="block">
+      <ul class="menu">
+        <li><%= link_to "Schedule new Delivery", new_delivery_path(:farm_id => @farm.id) %></li>
+        <li><%= link_to "View / Manage Products", products_path(:farm_id => @farm.id) %></li>
+        <li><%= link_to "View / Manage Members", members_path(:farm_id => @farm.id) %></li>
+        <li><%= link_to "View / Manage Locations", locations_path(:farm_id => @farm.id)%></li>
+      </ul>
+    </div>
+  </div>
 </div>

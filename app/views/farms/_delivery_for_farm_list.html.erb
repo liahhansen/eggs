@@ -1,8 +1,8 @@
-<div class="delivery_summary_box">
-  <div class="date grid_1 alpha">
-    <span class="day"><%= p.date.strftime('%d') %></span>
-    <span class="month"><%= p.date.strftime('%b').upcase %></span>
+<div class="grid_8">
+  <div class="grid_1 alpha">
+    <span><%= p.date.strftime('%d') %></span>
+    <span><%= p.date.strftime('%b').upcase %></span>
   </div>
-  <div class="name grid_5"><%= link_to "#{p.name}", delivery_path(p, :farm_id => @farm) %></div>
-  <div class="details grid_2 omega"><%= pluralize(p.orders.size, "Order" ) %></div>
+  <div class="grid_5"><%= link_to "#{p.name}", delivery_path(p, :farm_id => @farm) %></div>
+  <div class="grid_2 omega"><%= pluralize(p.orders.size, "Order" ) %></div>
 </div>

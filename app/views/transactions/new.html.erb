@@ -1,8 +1,6 @@
 <div id="" class="grid_12 ">
+  <h2 id="page-heading">New transaction for <%= "#{@member.first_name} #{@member.last_name}" %></h2>
   <p style="color: green"><%= flash[:notice] %></p>
-
-
-<h2>New transaction for <%= "#{@member.first_name} #{@member.last_name}" %></h2>
 
 <% form_for(@transaction) do |f| %>
   <%= f.error_messages %>
@@ -22,10 +20,10 @@
   </p>
   <p>
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_field :description, :size => 90 %>
   </p>
   <p>
-    <%= f.label :order_id %><br />
+    <%= f.label "Order Number (optional)" %><br />
     <%= f.text_field :order_id %>
   </p>
   <p>

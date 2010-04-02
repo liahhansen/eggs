@@ -1,51 +1,93 @@
 <div id="" class="grid_12 ">
+  <h2 id="page-heading">Order Details:<br/><%= "#{@order.member.last_name}, #{@order.member.first_name} - #{@order.delivery.name} - #{@order.delivery.pretty_date}"%></h2>
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 
 <p>
-  <b>Order For:</b>
   <% if current_user.has_role?(:admin) %>
-    <span><%= link_to "#{@order.member.first_name} #{@order.member.last_name} - (member details)", member_path(@order.member, :farm_id => @farm.id)%></span>
-  <% else %>
-    <%= "#{@order.member.first_name} #{@order.member.last_name}" %>
+    <ul class="menu">
+      <li><%= link_to "#{@order.member.first_name} #{@order.member.last_name} - Member Details", member_path(@order.member, :farm_id => @farm.id)%></li>
+    </ul>
   <% end %>
 </p>
 
-<p>
-  <b>delivery:</b>
-  <%= "#{@order.delivery.name} - #{@order.delivery.pretty_date}" %><br/>
+<div>
+  <h4>Status: <%= @order.delivery.status %></h4>
+</div>
 
-  <b>Pickup Location:</b> <%= @order.location.name %><br/>
-  <b>Host:</b> <%= @order.location.host_name %><br/>
-  <b>Address:</b> <%= @order.location.address %><br/>
-  <b>Notes:</b> <%= @order.delivery.notes %><br/>
+<div class="box">
+  <h2>Order Details</h2>
+  <div class="block">
+    <ul>
+      <% @order.order_items.with_quantity.each do |item| %>
+        <li><%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %></li>
+      <% end %>
+    </ul>
+    <% if @order.notes && @order.notes != '' %>
+    <p>
+      <b>Order Notes:</b>
+      <%=h @order.notes %>
+    </p>
+    <% end %>
+    <p>
+      <b>Estimated Total:</b> <%= number_to_currency @order.estimated_total %><br/>
+      <b>Finalized Total:</b> <%= @order.finalized_total ? number_to_currency(@order.finalized_total) : "not yet finalized" %>
+    </p>
 
-</p>
+    <% if @order.delivery.status == "open" || current_user.has_role?(:admin) %>
+      <ul class="menu">
+        <li><%= link_to 'Edit Order', edit_order_path(:id => @order, :farm_id => @farm.id) %></li>
+      </ul>
+    <% end %>
 
-<p>
-  <b>Order Notes:</b>
-  <%=h @order.notes %>
-</p>
+    <% if current_user.has_role?(:admin) %>
+      <%= link_to 'Delete Order', {:action => "destroy", :id => @order.id, :farm_id => @farm.id}, :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
 
-<p>
-  <b>order items:</b><br/>
-<% @order.order_items.with_quantity.each do |item| %>
-  <%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %><br/>
-<% end %>
-</p>
 
-<p>
-  <b>Estimated Total:</b> <%= number_to_currency @order.estimated_total %><br/>
-  <b>Finalized Total:</b> <%= @order.finalized_total ? number_to_currency(@order.finalized_total) : "not yet finalized" %>
-</p>
+  </div>
+</div>
 
-<% if @order.delivery.status == "open" || current_user.has_role?(:admin) %>
-  <%= link_to 'Edit', edit_order_path(:id => @order, :farm_id => @farm.id) %> |
-<% end %>
-<%= link_to 'Back', root_path %>
+<div class="box">
+  <h2>Pickup Details</h2>
+  <div class="block">
+    <table>
+      <tr>
+        <th>Date:</th>
+        <td><%= "#{@order.delivery.pretty_date}, #{@order.location.time_window}"%></td>
+      </tr>
+      <tr>
+        <th>Name:</th>
+        <td><%= "#{@order.delivery.name}"%></td>
+      </tr>
+      <tr>
+        <th>Your Pickup Location:</th>
+        <td><%= @order.location.name %></td>
+      </tr>
+      <tr>
+        <th>Address:</th>
+        <td><%= @order.location.address %>  <%= link_to "(map)", @order.location.map_link, :target => "_blank" %></td>
+      </tr>
+      <tr>
+        <th>Host:</th>
+        <td><%= @order.location.host_name %></td>
+      </tr>
+      <tr>
+        <th>Host Email:</th>
+        <td><%= @order.location.host_email %></td>
+      </tr>
+      <tr>
+        <th>Host Phone:</th>
+        <td><%= @order.location.host_phone %></td>
+      </tr>
+      <tr>
+        <th>Pickup Notes:</th>
+        <td><%= @order.delivery.notes %></td>
+      </tr>
+    </table>
+  </div>
+</div>
 
-<% if current_user.has_role?(:admin) %>
-| <%= link_to 'Delete Order', {:action => "destroy", :id => @order.id, :farm_id => @farm.id}, :confirm => 'Are you sure?', :method => :delete %>
-<% end %>
 
 </div>

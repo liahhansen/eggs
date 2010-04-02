@@ -1,15 +1,13 @@
-<div id="" class="grid_8 ">
+<div class="grid_12 ">
+  <h2 id="page-heading">Farms</h2>
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-<h1>Farms:</h1>
+  
+  <ul class="menu">
+    <% @farms.each do |farm| %>
+      <li><%= link_to farm.name, farm%></li>
+    <% end %>
+  </ul>
 
-
-<% @farms.each do |farm| %>
-  <p><%= link_to farm.name, farm%></p>
-<% end %>
-
-<br />
-
-<%= link_to 'New farm', new_farm_path %>
 </div>

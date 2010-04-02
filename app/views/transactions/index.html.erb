@@ -1,16 +1,7 @@
 <div id="" class="grid_12 ">
-  <div>
-    <% if current_user.has_role?(:admin) %>    
-      <%= link_to "< Back to Member", member_path(:farm_id => @farm.id, :id => @member.id)%>
-    <% else %>
-      <%= link_to "< Back to Home", root_path(:farm_id => @farm.id)%>    
-    <% end %>
-    <div class="nav_divider"/>
-  </div>
-
+  <h2 id="page-heading"><%= "#{@member.first_name} #{@member.last_name}"%>'s Balance History</h2>
+  
   <p style="color: green"><%= flash[:notice] %></p>
-
-  <h4><%= "#{@member.first_name} #{@member.last_name}"%>'s Balance History</h4>
 
   <table class="order_form">
     <tr>
@@ -26,7 +17,7 @@
     <tr>
       <td><%=h transaction.date %></td>
       <td><% if transaction.debit == true%>
-        <span style="color: red"><%=h number_to_currency transaction.amount %></span>
+        <span ><%=h number_to_currency transaction.amount %></span>
       <% end %></td>
       <td><% if transaction.debit == false%>
         <span style="color: green"><%=h number_to_currency transaction.amount %></span>
@@ -40,16 +31,20 @@
     </tr>
   <% end %>
   </table>
+  <h2>Current Balance: <%= number_to_currency @member.balance_for_farm(@farm) %></h2>
+  
 
   <% if current_user.has_role?(:admin) %>
-    <%= link_to 'Record a Transaction', new_transaction_path(:farm_id => @farm.id, :member_id => @member.id) %>
+    <ul class="menu">
+    <li><%= link_to 'Record a Transaction', new_transaction_path(:farm_id => @farm.id, :member_id => @member.id) %></li>
+    </ul>
   <% end %>
 
   <% if current_user.has_role?(:member) %>
     <br/>
     <div class="grid_5 alpha">
       <p>
-      Note: PayPal payments are tracked manually, and may take a few days to show in your account.
+      Note: PayPal payments, checks, and cash are tracked manually, and may take a few days to show in your account.
       If you have any questions about your account balance, please contact the CSA manager.
       </p>
       <p>

@@ -1,10 +1,8 @@
 <div id="" class="grid_12 ">
+  <h2 id="page-heading">Editing Order</h2>
 <p style="color: green"><%= flash[:notice] %></p>
-
-<h1>Editing order</h1>
 
 <%= render :partial => 'order_form', :locals => {:button_label => 'Update', :action => 'edit'} %>
 
-<%= link_to 'Show', @order %> |
-<%= link_to 'Cancel', root_path %>
+<h5><%= link_to 'Cancel', order_path(:id => @order.id, :farm_id => @farm.id) %></h5>
 </div>
