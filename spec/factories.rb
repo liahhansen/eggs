@@ -6,6 +6,7 @@ Factory.define :user do |user|
   user.sequence(:email) {|n| "fan@DillonFootballRules#{n}.com"}
   user.password 'gopanthers'
   user.password_confirmation 'gopanthers'
+  user.active true
   user.after_create do |u|
     u.member = Factory(:member) if !u.member
   end

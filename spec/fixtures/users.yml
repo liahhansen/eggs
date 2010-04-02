@@ -19,6 +19,7 @@ kathryn:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
+  active: true
 
 jenny:
   member: jenny
@@ -26,6 +27,7 @@ jenny:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
+  active: true
 
 ben:
   member: ben
@@ -33,6 +35,7 @@ ben:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
+  active: true
 
 sue:
   member: sue
@@ -40,4 +43,5 @@ sue:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("eggsrock" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
+  active: true
     

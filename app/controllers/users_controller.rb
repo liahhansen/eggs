@@ -8,9 +8,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-     members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
-     @users = User.all :conditions => ["member_id IN (?)", members]
-
+    members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
+    @users = User.all :conditions => ["member_id IN (?)", members]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,8 +77,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
-        flash[:notice] = 'Registration successful.'
+      if @user.save_without_session_maintenance
+        @user.deliver_activation_instructions!
+        flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
         format.html { redirect_to root_url }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
