@@ -72,16 +72,4 @@ describe OrdersController do
     assigns(:member).should == member
   end
 
-  it "should only allow a member to create / edit orders for themselves" do
-    pending
-  end
-
-  it "should render edit instead of new if an order for this delivery and user already exists" do
-    pending
-  end
-
-  it "should require a user id when rendering any action except index" do
-    pending
-  end
-
 end
