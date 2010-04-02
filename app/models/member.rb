@@ -24,6 +24,10 @@ class Member < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :email_address, :phone_number
 
+  def email_address_with_name
+    "\"#{first_name} #{last_name}\" <#{email_address}>"
+  end
+
   def balance_for_farm(farm)
     subscription = subscriptions.find_by_farm_id(farm.id)
     subscription.current_balance
