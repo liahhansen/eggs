@@ -1,8 +1,8 @@
 class Notifier < ActionMailer::Base
   def order_confirmation(order)
     recipients order.member.email_address_with_name
-    from       "\"#{order.pickup.farm.name}\" <eggs@eggbasket.org>"
-    subject    "[#{order.pickup.farm.name}] #{order.pickup.name} - Order Confirmation"
+    from       "\"#{order.delivery.farm.name}\" <eggs@eggbasket.org>"
+    subject    "[#{order.delivery.farm.name} CSA] #{order.location.name} #{order.delivery.pretty_date} - Order Confirmation"
     body       :order => order
   end
 
