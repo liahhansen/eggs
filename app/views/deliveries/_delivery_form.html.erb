@@ -1,3 +1,11 @@
+<script>
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+  
+</script>
+
+
 <% form_for(@delivery) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.error_messages %>
