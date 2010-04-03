@@ -6,6 +6,11 @@ class DeliveriesController < ApplicationController
 
   skip_before_filter :authenticate, :only => "public_summary"
 
+  access_control do
+    allow :admin
+    deny :member
+  end
+
   def index
 
     if !params[:farm_id]

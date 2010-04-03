@@ -98,11 +98,18 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.xml
   def destroy
     @order = Order.find(params[:id])
-    @order.destroy
+    
+    @order.destroy if @order.delivery.status == "open"
 
     respond_to do |format|
-      format.html { redirect_to delivery_path(:id => @order.delivery, :farm_id => @farm.id) }
-      format.xml  { head :ok }
+
+      if current_user.has_role?(:member)
+        format.html { redirect_to root_path}
+      else
+        format.html { redirect_to delivery_path(:id => @order.delivery, :farm_id => @farm.id) }
+        format.xml  { head :ok }
+      end
+
     end
   end
 end
