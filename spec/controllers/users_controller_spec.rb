@@ -21,7 +21,7 @@ describe UsersController do
     get :index
     response.should render_template('home/access_denied')
   end
-  
+
 
   it "should allow an admin to see the index" do
     admin = Factory(:admin_user)
@@ -77,6 +77,29 @@ describe UsersController do
     get :edit, :id => member.id
     assigns(:user).should == member
 
+  end
+
+  it "should update member attributes" do
+    member_user = Factory(:member_user)
+    UserSession.create member_user
+
+    get :update, "id" => member_user.id,
+                 "user"=>{"password_confirmation"=>"[FILTERED]",
+                          "member_attributes"=>{"address"=>"Somewhere over the rainbow...",
+                                                "alternate_email"=>"",
+                                                "id"=>member_user.member.id,
+                                                "phone_number"=>"333-444-5555",
+                                                "last_name"=>"Brown",
+                                                "first_name"=>"Ben"},
+                          "password"=>"[FILTERED]",
+                          "email"=>"ben@kathrynaaker.com"}
+
+    response.should be_redirect
+    assigns(:user).should == member_user
+    assigns(:user).member.first_name.should == "Ben"
+    assigns(:user).email.should == "ben@kathrynaaker.com"
+    assigns(:user).member.email_address.should == "ben@kathrynaaker.com"
+    
   end
 
 end

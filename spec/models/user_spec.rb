@@ -29,4 +29,18 @@ describe User do
     User.create!(@valid_attributes)
   end
 
+  it "should allow updating of member and change user email/login" do
+    user = Factory(:member_user)
+    user.update_attributes("email"=>"ben@kathrynaaker.com", "member_attributes"=>{"address"=>"Somewhere over the rainbow...",
+                                                "alternate_email"=>"",
+                                                "phone_number"=>"333-444-5555",
+                                                "last_name"=>"Brown",
+                                                "first_name"=>"Ben"})
+
+
+    user.update_member_email
+    user.member.first_name.should == "Ben"
+    user.member.email_address.should == "ben@kathrynaaker.com"
+  end
+
 end

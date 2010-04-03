@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :roles_users
   has_many :roles, :through => :roles_users
 
+  accepts_nested_attributes_for :member
+
   validates_presence_of :email
 
   acts_as_authorization_subject
@@ -26,7 +28,18 @@ class User < ActiveRecord::Base
     c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
 
-  attr_accessible :email, :password, :password_confirmation
+
+  attr_accessible :email, :password, :password_confirmation, :member_attributes
+
+  # BUG: this doesn't always seem to trigger, so you have to trigger manually after update/create
+  before_save :update_member_email
+
+  def update_member_email
+    if self.member
+      self.member.email_address = self.email
+      self.member.save
+    end
+  end
 
   def active?
     active
