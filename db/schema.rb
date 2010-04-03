@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100401061346) do
+ActiveRecord::Schema.define(:version => 20100403174009) do
+
+  create_table "backup", :force => true do |t|
+    t.string   "storage"
+    t.string   "trigger"
+    t.string   "adapter"
+    t.string   "filename"
+    t.string   "path"
+    t.string   "bucket"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "deliveries", :force => true do |t|
     t.string   "name"
