@@ -1,6 +1,19 @@
-<h1>Activate your account</h1>
+<div class="grid_12">
+  <h2 id="page-heading">Account Activation</h2>
+</div>
 
-<% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |f| %>
-  <%= f.error_messages %>
-  <%= f.submit "Activate" %>
-<% end %>
+<div id="" class="grid_12 ">
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
+  	<%= form.error_messages %>
+  	<%= render :partial => "form", :locals => { :form => form }%>
+  	<%= form.submit "Activate" %>
+  <% end %>
+
+
+
+</div>
+
+

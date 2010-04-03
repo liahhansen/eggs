@@ -21,6 +21,7 @@ describe UsersController do
     get :index
     response.should render_template('home/access_denied')
   end
+  
 
   it "should allow an admin to see the index" do
     admin = Factory(:admin_user)

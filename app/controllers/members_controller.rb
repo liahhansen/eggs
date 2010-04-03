@@ -49,14 +49,22 @@ class MembersController < ApplicationController
     @member = Member.new(params[:member])
 
     respond_to do |format|
-      if @member.save
-        subscription = Subscription.create!(:farm => @farm, :member => @member )
-        flash[:notice] = 'Member was successfully created.'
-        format.html { redirect_to :action => "index", :farm_id => @farm.id }
-        format.xml  { render :xml => @member, :status => :created, :location => @member }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+      ActiveRecord::Base.transaction do
+        if @member.save
+          Subscription.create!(:farm => @farm, :member => @member )
+          @user = User.new
+          if @user.signup!(:member => @member, :email => params[:member][:email_address])
+            @user.deliver_activation_instructions!
+            @user.has_role!(:member)
+          end
+
+          flash[:notice] = 'Member was successfully created.'
+          format.html { redirect_to :action => "index", :farm_id => @farm.id }
+          format.xml  { render :xml => @member, :status => :created, :location => @member }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end

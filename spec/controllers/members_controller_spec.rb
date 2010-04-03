@@ -43,4 +43,20 @@ describe MembersController do
     end
   end
 
+  it "should create a user, subscription, and assign roles when creating a member" do
+    admin = Factory(:admin_user)
+    UserSession.create admin
+
+    farm = Factory(:farm)
+    Factory(:role, :name => :member)
+
+    get :create, :farm_id => farm.id, :member => {:email_address => 'jj@example.com','first_name' => 'Jay','last_name' => 'Jay'}
+    
+    assigns[:member].should_not be_nil
+    assigns[:user].member.should == assigns[:member]
+    assigns[:member].subscriptions.first.farm.should == farm
+    assigns[:user].has_role?(:member).should == true
+
+  end
+
 end

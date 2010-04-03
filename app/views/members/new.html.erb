@@ -1,8 +1,9 @@
-<div id="" class="grid_12 ">
+<div id="" class="grid_6 ">
+  <h2 id="page-heading">New Member</h2>
 
 <p style="color: green"><%= flash[:notice] %></p>
 
-<h5>New Member</h5>
+</p>This form creates the new member in the system and sends them an email with a link to activate their account and set their new password.</p>
 
 <%= render :partial => 'member_form', :locals => {:button_label => 'Create'} %>
 

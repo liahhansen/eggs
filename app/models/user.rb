@@ -18,11 +18,13 @@ class User < ActiveRecord::Base
   has_many :roles_users
   has_many :roles, :through => :roles_users
 
-  validates_presence_of :password, :on => :create
   validates_presence_of :email
 
   acts_as_authorization_subject
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+    c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+  end
 
   attr_accessible :email, :password, :password_confirmation
 
@@ -30,9 +32,21 @@ class User < ActiveRecord::Base
     active
   end
 
-  def activate!
+  def activate!(params)
     self.active = true
+    self.password = params[:user][:password]
+    self.password_confirmation = params[:user][:password_confirmation]
     save
+  end
+
+  def has_no_credentials?
+    self.crypted_password.blank?
+  end
+
+  def signup!(params)
+    self.email = params[:email]
+    self.member = params[:member]
+    save_without_session_maintenance
   end
 
   def deliver_activation_instructions!

@@ -50,6 +50,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_no_user
+    if current_user
+      flash[:notice] = "You must be logged out to access this page"
+      redirect_to root_url
+      return false
+    end
+  end
+  
+
   def access_denied
     if current_user
       render :template => 'home/access_denied'
