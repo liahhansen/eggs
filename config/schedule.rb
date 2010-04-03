@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 15.minutes do
+every :hour do
   rake "backup:run trigger='mysql-backup-s3' RAILS_ENV=production"
 end
