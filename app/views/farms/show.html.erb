@@ -11,11 +11,12 @@
   <div class="box">
     <h2>Finalized (ready for delivery!):</h2>
     <div class="block">
-      <ul>
+      <ul class="menu">
       <% @deliveries_finalized.each do |p|%>
           <li><%= render :partial => 'delivery_for_farm_list', :locals => {:p => p} %></li>
       <% end %>
       </ul>
+      <div class="clear"></div>
     </div>
   </div>
 

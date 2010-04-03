@@ -54,7 +54,7 @@
   <% end %>
 
   <% if @finalized_orders.size > 0 %>
-    <div class="box_header"><h4>Finalized Orders - delivery soon!:</h4></div>
+    <div class="box_header"><h4>Finalized Orders - pickup soon!</h4></div>
     <table class="box_table">
       <% @finalized_orders.each do |order| %>
         <tr>
@@ -96,7 +96,7 @@
   <% end %>
 
   <% if @open_deliveries.size > 0 %>  
-    <h4>Deliveries currently accepting new orders:</h4>
+    <h4>You can place orders for these upcoming pickups:</h4>
     <table>
       <%
         @open_deliveries.each do |delivery|
