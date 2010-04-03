@@ -44,5 +44,6 @@ end
 
 after "deploy:symlink" do
   run "cp #{File.join(shared_path, 'config', 'database.yml')} #{File.join(current_path, 'config', 'database.yml')}"
+  run "cp #{File.join(shared_path, 'config', 'backup.rb')} #{File.join(current_path, 'config', 'backup.rb')}"  
   run "cp #{File.join(shared_path, 'config', 'production.rb')} #{File.join(current_path, 'config', 'environments', 'production.rb')}"
 end
