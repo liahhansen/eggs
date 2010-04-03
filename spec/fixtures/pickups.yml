@@ -17,3 +17,32 @@ pickup_sff_bonnie:
 pickup_sff_farm:
   location: soul_food_farm
   delivery: sf_emeryville_farm_feb3
+
+sf_berkeley_jan20:
+  location: kathryn_home
+  delivery: sf_berkeley_jan20
+
+sf_hayesvalley_jan27:
+  location: kathryn_home
+  delivery: sf_hayesvalley_jan27
+
+sf_emeryville_farm_feb3:
+  location: soul_food_farm
+  delivery: sf_emeryville_farm_feb3
+
+sf_farm_feb3:
+  location: soul_food_farm
+  delivery: sf_farm_feb3
+
+sf_mission_feb10:
+  location: kathryn_home
+  delivery: sf_mission_feb10
+
+cs_farm_feb3:
+  location: sf_clarksummit
+  delivery: cs_farm_feb3
+
+cs_mission_feb10:
+  location: sf_clarksummit
+  delivery: cs_mission_feb10
+
