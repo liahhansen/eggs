@@ -9,6 +9,7 @@
 <p>
   <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
+  <b>Minimum Estimated Total:</b>     <%=h number_to_currency @delivery.minimum_order_total %><br/>
 
   <% if @member %>
     <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
@@ -21,14 +22,16 @@
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.hidden_field :delivery_id, :value => @delivery.id  %>
 
-  <%= f.error_messages %>
-
+  <%= f.error_messages :header_message => "Order failed",
+                          :message => "You'll need to fix the following fields:",
+                          :header_tag => :h4 %>
   <p>
     Pickup Location:<br/>
     <% if @delivery.locations.size > 1 %>
       <%= f.select :location_id, @delivery.locations.map {|location| [location.name, location.id]} %>
     <% else %>
       <%= @delivery.locations.first.name %>
+      <%= f.hidden_field :location_id, :value => @delivery.locations.first.id %>
     <% end %>
   </p>
 
