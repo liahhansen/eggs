@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem "prawn"
   config.gem "backup"
+  config.gem "whenever"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).
