@@ -50,7 +50,7 @@
       <p>
         <b><%= "#{@farm.name} CSA Manager:" %></b><br/>
         <%= @farm.contact_name %><br/>
-        <%= link_to @farm.contact_email, @farm.contact_email %>
+        <%= mail_to @farm.contact_email, @farm.contact_email %>
       </p>
     </div>
   <% end %>
