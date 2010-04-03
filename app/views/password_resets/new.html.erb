@@ -1,0 +1,22 @@
+<% title "Reset Password" %>
+
+<div class="grid_1">&nbsp;</div>
+<div class="block grid_5" id="login-forms">
+  <p style="color: green"><%= flash[:notice] %></p>
+  <% form_tag password_resets_path do %>
+  <fieldset class="login">
+    <legend>Reset Password</legend>
+    <p class="notice">Please enter your email address and instructions to reset your password will be emailed to you.</p>
+
+    <p>
+      <label>Email</label>
+      <%= text_field_tag "email" %>
+    </p>
+    
+    <%= submit_tag "Reset my password", :class => "login button" %>
+
+  </fieldset>
+
+  <% end %>
+
+</div>

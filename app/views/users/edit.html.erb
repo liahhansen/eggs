@@ -6,41 +6,45 @@
 <div class="grid_6">
 
   <% form_for(@user) do |f| %>
-    <%= f.error_messages %>
+    <%= hidden_field_tag :farm_id, @farm.id %>
+
+    <%= f.error_messages :header_message => "Update failed",
+                            :message => "You'll need to fix the following fields:",
+                            :header_tag => :h4 %>
 
     <fieldset class="login">
       <legend>Member Info</legend>
 
     <p>
-      <%= f.label :email %>
+      <label>Email</label>
       <%= f.text_field :email %>
     </p>
 
     <% f.fields_for :member do |member_fields| %>
 
       <p>
-        <%= member_fields.label :first_name %>
+        <label>First Name</label>
         <%= member_fields.text_field :first_name, :size => "20" %>
       </p>
 
       <p>
-        <%= member_fields.label :last_name %>
+        <label>Last Name</label>
         <%= member_fields.text_field :last_name, :size => "20" %>
       </p>
 
       <p>
         <i>If your Paypal account is under a different email address, enter it here:</i>
-        <%= member_fields.label :alternate_email %>
+        <label>Alternate email</label>
         <%= member_fields.text_field :alternate_email %>
       </p>
 
       <p>
-        <%= member_fields.label :address %>
+        <label>Address</label>
         <%= member_fields.text_area :address, :size => "30x3" %>
       </p>
 
       <p>
-        <%= member_fields.label :phone_number %>
+        <label>Phone number</label>
         <%= member_fields.text_field :phone_number %>
       </p>
 
@@ -49,11 +53,11 @@
     <i>Leave password blank to remain the same</i>
 
     <p>
-      <%= f.label :password %>
+      <label>Password</label>
       <%= f.password_field :password %>
     </p>
     <p>
-      <%= f.label :password_confirmation %>
+      <label>Confirm Password</label>
       <%= f.password_field :password_confirmation %>
     </p>
 

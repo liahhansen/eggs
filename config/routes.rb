@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :transactions
 
+  map.resources :password_resets
+
   map.resources :members
 
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'

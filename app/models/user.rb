@@ -22,10 +22,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email
 
+  validates_presence_of :password, :password_confirmation, :on => :update
+
   acts_as_authorization_subject
   acts_as_authentic do |c|
-    c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-    c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+    #c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+    #c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
 
 
@@ -70,6 +72,11 @@ class User < ActiveRecord::Base
   def deliver_activation_confirmation!
     reset_perishable_token!
     Notifier.deliver_activation_confirmation(self)
+  end
+
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
   end
 
 

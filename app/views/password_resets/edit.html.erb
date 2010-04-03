@@ -1,0 +1,30 @@
+<% title "Change Password" %>
+
+<div class="grid_1">&nbsp;</div>
+<div class="block grid_5" id="login-forms">
+  <p style="color: green"><%= flash[:notice] %></p>
+  <% form_for @user, :url => password_reset_path, :method => :put do |form| %>
+
+  <fieldset class="login">
+    <legend>Change Password</legend>
+    <p class="notice">Please enter your new password.</p>
+
+    <%= form.error_messages :header_message => "Password change failed",
+                            :message => "You'll need to fix the following fields:",
+                            :header_tag => :h4 %>
+
+    <p>
+      <label>Password</label>
+      <%= form.password_field :password %>
+    </p>
+    <p>
+      <label>Confirm Password</label>
+      <%= form.password_field :password_confirmation %>
+    </p>
+    <%= form.submit "Update my password and log me in", :class => "login button" %>
+
+  </fieldset>
+
+  <% end %>
+
+</div>
