@@ -2,26 +2,27 @@
 
 <div class="grid_1">&nbsp;</div>
 <div class="block grid_5" id="login-forms">
-  <p style="color: green"><%= flash[:notice] %></p>  
+  <p style="color: green"><%= flash[:notice] %></p>
   <% form_for @user_session do |form| %>
 
   <fieldset class="login">
     <legend>Login</legend>
     <p class="notice">Login to access your account.</p>
 
-    <%= form.error_messages %>
-    
+    <%= form.error_messages :header_message => "Login failed",
+                            :message => "You'll need to fix the following fields:",
+                            :header_tag => :h4 %>
+
     <p>
-      <%= form.label :email, "Email" %>
+      <label>Email</label>
       <%= form.text_field :email %>
     </p>
     <p>
-      <%= form.label :password, "Password" %>
+      <label>Password</label>
       <%= form.password_field :password %>
     </p>
     <%= form.submit "Login", :class => "login button" %>
 
-    <!--<input class="login button" type="submit" value="Login" />-->
   </fieldset>
 
   <% end %>
