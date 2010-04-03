@@ -2,10 +2,10 @@
 #
 # Table name: order_items
 #
-#  id            :integer         not null, primary key
-#  stock_item_id :integer
-#  order_id      :integer
-#  quantity      :integer
+#  id            :integer(4)      not null, primary key
+#  stock_item_id :integer(4)
+#  order_id      :integer(4)
+#  quantity      :integer(4)
 #  notes         :text
 #  created_at    :datetime
 #  updated_at    :datetime

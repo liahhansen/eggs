@@ -2,20 +2,18 @@
 #
 # Table name: deliveries
 #
-#  id                  :integer         not null, primary key
+#  id                  :integer(4)      not null, primary key
 #  name                :string(255)
 #  description         :text
-#  farm_id             :integer
+#  farm_id             :integer(4)
 #  date                :date
 #  status              :string(255)
-#  host                :string(255)
-#  location            :string(255)
 #  opening_at          :datetime
 #  closing_at          :datetime
 #  notes               :text
 #  created_at          :datetime
 #  updated_at          :datetime
-#  minimum_order_total :integer
+#  minimum_order_total :integer(4)
 #
 
 class Delivery < ActiveRecord::Base

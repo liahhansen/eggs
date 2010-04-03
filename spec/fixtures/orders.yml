@@ -2,13 +2,14 @@
 #
 # Table name: orders
 #
-#  id              :integer         not null, primary key
-#  member_id       :integer
-#  delivery_id     :integer
+#  id              :integer(4)      not null, primary key
+#  member_id       :integer(4)
+#  delivery_id     :integer(4)
 #  notes           :text
 #  created_at      :datetime
 #  updated_at      :datetime
 #  finalized_total :float
+#  location_id     :integer(4)
 #
 
 #  create_table "orders", :force => true do |t|

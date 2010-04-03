@@ -2,9 +2,9 @@
 #
 # Table name: subscriptions
 #
-#  id         :integer         not null, primary key
-#  member_id  :integer
-#  farm_id    :integer
+#  id         :integer(4)      not null, primary key
+#  member_id  :integer(4)
+#  farm_id    :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
 #

@@ -2,20 +2,20 @@
 #
 # Table name: stock_items
 #
-#  id                      :integer         not null, primary key
-#  delivery_id             :integer
-#  product_id              :integer
-#  max_quantity_per_member :integer
-#  quantity_available      :integer
-#  substitutions_available :boolean
+#  id                      :integer(4)      not null, primary key
+#  delivery_id             :integer(4)
+#  product_id              :integer(4)
+#  max_quantity_per_member :integer(4)
+#  quantity_available      :integer(4)
+#  substitutions_available :boolean(1)
 #  notes                   :text
 #  created_at              :datetime
 #  updated_at              :datetime
-#  hide                    :boolean
+#  hide                    :boolean(1)
 #  product_name            :string(255)
 #  product_description     :text
 #  product_price           :float
-#  product_estimated       :boolean
+#  product_estimated       :boolean(1)
 #  product_price_code      :string(255)
 #
 

@@ -2,11 +2,14 @@
 #
 # Table name: farms
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  key        :string(255)
+#  id            :integer(4)      not null, primary key
+#  name          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  key           :string(255)
+#  paypal_link   :string(255)
+#  contact_email :string(255)
+#  contact_name  :string(255)
 #
 
 require 'spec'

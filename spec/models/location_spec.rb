@@ -2,7 +2,7 @@
 #
 # Table name: locations
 #
-#  id          :integer         not null, primary key
+#  id          :integer(4)      not null, primary key
 #  name        :string(255)
 #  host_name   :string(255)
 #  host_phone  :string(255)
@@ -12,7 +12,7 @@
 #  time_window :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  farm_id     :integer
+#  farm_id     :integer(4)
 #
 
 require 'spec_helper'
