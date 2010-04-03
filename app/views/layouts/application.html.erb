@@ -58,6 +58,11 @@
             <%= link_to "Log in", login_path %>
           <% end %>
         </li>
+        <% if current_user && current_user.has_role?(:member) %>
+          <li class="secondary">
+            <%= link_to "#{current_user.member.first_name} #{current_user.member.last_name}", edit_user_path(:id => current_user.id, :farm_id => @farm.id) %>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="clear"></div>
