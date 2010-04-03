@@ -20,7 +20,7 @@
 
     <p style="color: green"><%= flash[:notice] %></p>
 
-    <h5>Current Status: <%= "#{@delivery.status.upcase}"%></h5>
+    <h5>Current Status: <%= "#{@delivery.pretty_status.upcase}"%></h5>
 
     <% if @delivery.description != nil %>
     <p>

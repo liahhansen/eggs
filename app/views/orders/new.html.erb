@@ -1,11 +1,16 @@
 <div id="" class="grid_12 ">
+  <h2 id="page-heading">New Order</h2>
+  
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 
-<h1>New order</h1>
-
 <%= render :partial => 'order_form', :locals => {:button_label => 'Create', :action => 'new'} %>
 
-<%= link_to 'Cancel', @farm %>
+<% if current_user.has_role?(:admin) %>
+  <%= link_to 'Cancel', delivery_path(:id => @delivery.id, :farm_id => @farm.id) %>
+<% else %>
+  <%= link_to 'Cancel', root_path %>
+<% end %>
 
 </div>

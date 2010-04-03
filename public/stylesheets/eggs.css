@@ -1,3 +1,16 @@
 body {
 	font-size: 13px;
 }
+
+label.error {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+span.validation-error {
+  color: #cc0000;
+}
+
+.errorExplanation h4 {
+  color: #cc0000;
+}

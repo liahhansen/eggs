@@ -69,4 +69,15 @@ class Delivery < ActiveRecord::Base
     end
   end
 
+  def pretty_status
+    case status
+    when 'notyetopen'
+      return "Not Yet Open"
+    when 'inprogress'
+      return "In Progress"
+    else
+      return status.capitalize  
+    end
+  end
+
 end

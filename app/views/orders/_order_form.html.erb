@@ -1,12 +1,12 @@
 <script>
   $(function(){
-    
+
   });
 </script>
 
 
+<h3><%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h3>
 <p>
-  <b><%= "#{@delivery.name} - #{@delivery.pretty_date}"%></b><br/>
   <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
 
