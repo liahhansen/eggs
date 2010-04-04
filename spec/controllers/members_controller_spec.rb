@@ -48,7 +48,7 @@ describe MembersController do
     UserSession.create admin
 
     farm = Factory(:farm)
-    Factory(:role, :name => :member)
+    Role.create!(:name => "member")
 
     get :create, :farm_id => farm.id, :member => {:email_address => 'jj@example.com','first_name' => 'Jay','last_name' => 'Jay'}
     

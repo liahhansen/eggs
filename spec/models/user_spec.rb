@@ -45,4 +45,10 @@ describe User do
     user.member.email_address.should == "ben@kathrynaaker.com"
   end
 
+  it "should allow for no password on initial create" do
+    user = User.new
+    user.email = "foo@example.com"
+    user.valid?.should == true
+  end
+
 end

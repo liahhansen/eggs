@@ -27,13 +27,13 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :password_confirmation, :on => :update
 
   acts_as_authorization_subject
-  acts_as_authentic do |c|
-    #c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-    #c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+  acts_as_authentic do |c |
+    c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+    c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
 
 
-  attr_accessible :email, :password, :password_confirmation, :member_attributes
+  attr_accessible :email, :password, :password_confirmation, :member_attributes, :member_id
 
   # BUG: this doesn't always seem to trigger, so you have to trigger manually after update/create
   before_save :update_member_email
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
   def signup!(params)
     self.email = params[:email]
-    self.member = params[:member]
+    self.member_id = params[:member_id]
     save_without_session_maintenance
   end
 

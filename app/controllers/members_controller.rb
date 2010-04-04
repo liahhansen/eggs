@@ -53,7 +53,7 @@ class MembersController < ApplicationController
         if @member.save
           Subscription.create!(:farm => @farm, :member => @member )
           @user = User.new
-          if @user.signup!(:member => @member, :email => params[:member][:email_address])
+          if @user.signup!(:member_id => @member.id, :email => params[:member][:email_address])
             @user.deliver_activation_instructions!
             @user.has_role!(:member)
           end

@@ -2,16 +2,17 @@
   <h2 id="page-heading">Account Activation</h2>
 </div>
 
-<div id="" class="grid_12 ">
+<div id="" class="grid_5 ">
 
 <p style="color: green"><%= flash[:notice] %></p>
 
+  <fieldset class="login">
   <% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
   	<%= form.error_messages %>
   	<%= render :partial => "form", :locals => { :form => form }%>
-  	<%= form.submit "Activate" %>
+  	<%= form.submit "Activate", :class => "login button" %>
   <% end %>
-
+  </fieldset>
 
 
 </div>
