@@ -29,6 +29,7 @@ class UsersController < ApplicationController
       @open_orders = orders.select {|order| order.delivery.status == "open"}
       @finalized_orders = orders.select {|order|order.delivery.status == "finalized"}
       @inprogress_orders = orders.select {|order|order.delivery.status == "inprogress"}
+      @archived_orders = orders.select {|order|order.delivery.status == "archived"}
 
       @open_deliveries = Delivery.find_all_by_farm_id_and_status(@farm.id, "open").reject do |delivery|
         has_order = false
@@ -78,7 +79,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save_without_session_maintenance
-        @user.deliver_activation_instructions!
         flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
         format.html { redirect_to root_url }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
