@@ -55,6 +55,7 @@ class MembersController < ApplicationController
           @user = User.new
           if @user.signup!(:member_id => @member.id, :email => params[:member][:email_address])
             @user.has_role!(:member)
+            @user.deliver_welcome_and_activation!
           end
 
           flash[:notice] = 'Member was successfully created.'
