@@ -1,0 +1,127 @@
+#!/usr/bin/env ruby
+
+require 'backup'
+
+include Backup::Environment::Unix::Commands
+include Backup::Environment::Unix::Helpers
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  
+  opts.banner = "\nUsage: backup [options]\n "
+  
+  opts.on('-r', '--run [trigger]', "Runs backup process by trigger") do |trigger|
+    confirm_configuration_file_existence
+    puts "Running: #{trigger}."
+    Backup::Setup.new(trigger, @backup_procedures).initialize_adapter
+  end
+  
+  opts.on('-f', '--find [trigger]', "Finds backup records by trigger") do |trigger|
+    confirm_configuration_file_existence
+    puts "Finding backup records with trigger: #{trigger}."
+    backup = Backup::Setup.new(trigger, @backup_procedures)
+    records = Array.new
+    case backup.procedure.storage_name.to_sym
+      when :s3    then records = Backup::Record::S3.all   :conditions => {:trigger => trigger}
+      when :scp   then records = Backup::Record::SCP.all  :conditions => {:trigger => trigger}
+      when :ftp   then records = Backup::Record::FTP.all  :conditions => {:trigger => trigger}
+      when :sftp  then records = Backup::Record::SFTP.all :conditions => {:trigger => trigger}
+    end
+    
+    if options[:table]
+      puts Hirb::Helpers::AutoTable.render(records)
+    else
+      records.each do |record|
+        puts record.to_yaml
+      end
+    end
+  end
+  
+  opts.on('-t', '--truncate [trigger]', "Truncates backup records for specified trigger") do |trigger|
+    puts "Truncating backup records with trigger: #{trigger}."
+    Backup::Record::S3.destroy_all    :trigger => trigger, :storage => 's3'
+    Backup::Record::SCP.destroy_all   :trigger => trigger, :storage => 'scp'
+    Backup::Record::FTP.destroy_all   :trigger => trigger, :storage => 'ftp'
+    Backup::Record::SFTP.destroy_all  :trigger => trigger, :storage => 'sftp'
+  end
+  
+  opts.on('-d', '--destroy [trigger]', "Destroys backup records and files for specified trigger") do |trigger|
+    confirm_configuration_file_existence
+    puts "Destroying backup records with trigger: #{trigger}."
+    backup = Backup::Setup.new(trigger, @backup_procedures)
+    case backup.procedure.storage_name.to_sym
+      when :s3    then Backup::Record::S3.destroy_all_backups   backup.procedure,  trigger
+      when :scp   then Backup::Record::SCP.destroy_all_backups  backup.procedure,  trigger
+      when :ftp   then Backup::Record::FTP.destroy_all_backups  backup.procedure,  trigger
+      when :sftp  then Backup::Record::SFTP.destroy_all_backups backup.procedure,  trigger
+    end
+  end
+  
+  opts.on('--truncate-all', "Truncates all backup records") do
+    puts "Truncating all backup records."
+    Backup::Record::S3.destroy_all
+    Backup::Record::SCP.destroy_all
+    Backup::Record::FTP.destroy_all
+    Backup::Record::SFTP.destroy_all
+  end
+
+  opts.on('--destroy-all', "Destroys all backup records and files") do
+    confirm_configuration_file_existence
+    puts "Destroying all backup records."
+    backup = Backup::Setup.new(false, @backup_procedures)
+    backup.procedures.each do |backup_procedure|
+      case backup_procedure.storage_name.to_sym
+        when :s3    then Backup::Record::S3.destroy_all_backups     backup_procedure,  backup_procedure.trigger
+        when :scp   then Backup::Record::SCP.destroy_all_backups    backup_procedure,  backup_procedure.trigger
+        when :ftp   then Backup::Record::FTP.destroy_all_backups    backup_procedure,  backup_procedure.trigger
+        when :sftp  then Backup::Record::SFTP.destroy_all_backups   backup_procedure,  backup_procedure.trigger
+      end
+    end
+  end
+
+  opts.on('--decrypt [file]', "Decrypts a \"Backup\" encrypted file") do |file|
+    puts "Attempting to decrypt: #{file}."
+    %x{ openssl enc -des-cbc -d -in #{file} -out #{file.gsub('.enc', '')} }
+  end
+  
+  options[:table] = false
+  opts.on('--table', "Shows records in table format") do |format|
+    options[:table] = true
+  end
+
+  opts.on('--setup', "Sets up Backup") do
+    setup
+  end
+  
+  opts.on('--reset', "Reinstalls Backup (This will remove ALL current settings!)") do
+    reset
+  end
+  
+  opts.on('--remove', "Removes Backup (This will remove ALL current settings!)") do
+    remove
+  end
+  
+  opts.on('-v', '--version', 'Displays installed Backup version') do
+    File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')) do |file|
+      puts "Backup version #{file.read}"
+    end
+    exit
+  end  
+
+  opts.on('-h', '--help', 'Display help screen') do
+    puts opts
+    puts "\n "
+    exit
+  end  
+  
+end
+
+begin
+  optparse.parse!
+rescue OptionParser::InvalidOption
+  puts "\nInvalid Option. See the list of available options below.\n"
+  puts optparse
+  puts "\n "
+  exit
+end
