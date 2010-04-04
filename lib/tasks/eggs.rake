@@ -130,7 +130,7 @@ namespace :eggs do
       desc "Emails a single user a welcome and activation message"
       task :run_welcome_single => :environment do
         user = single_user
-        user.delivery_welcome_and_activation!
+        user.deliver_welcome_and_activation!
         puts "Done."
       end
 
