@@ -105,5 +105,46 @@ namespace :eggs do
     end
   end
 
+
+   namespace :email do
+
+    namespace :inactive do
+      
+      desc "Dry run of inactive email."
+      task :dry => :environment do
+        users = get_inactive_users_for_farm(farm)
+        users.each do |user|
+          puts user.email
+        end
+      end
+
+      desc "Sends all inactive users a welcome/activation email"
+      task :run_welcome => :environment do
+        users = get_inactive_users_for_farm(farm)
+        users.each do |user|
+          puts "emailing: #{user.email}"
+          user.deliver_welcome_and_activation!
+        end
+      end
+
+      def get_inactive_users_for_farm(farm)
+        puts "getting list of inactive users"
+        users = User.all.reject do |user|
+         user.active? || !user.member.farms.include?(farm)
+        end
+        puts "Found #{users.length} users."
+        return users
+      end
+
+      def farm
+        Farm.find_by_name(ENV['FARM'] || raise("You must specify a farm name!"))
+      end
+    end
+
+
+
+   end
+
+
 end
 
