@@ -37,6 +37,8 @@ class OrdersController < ApplicationController
 
     if(params[:as_admin])
       @members = @delivery.farm.members
+      @members.sort! { |a,b| a.last_name.downcase <=> b.last_name.downcase }
+
     else
       @member = params[:member_id] ? Member.find(params[:member_id]) : current_user.member
     end

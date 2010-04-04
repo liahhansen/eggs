@@ -38,7 +38,7 @@
   <% if @members %>
     <p>
       Member: <br/>
-      <%= select("order", "member_id", @members.map {|m| [ "#{m.first_name} #{m.last_name}", m.id ]})%>
+      <%= select("order", "member_id", @members.map {|m| [ "#{m.last_name}, #{m.first_name}", m.id ]})%>
     </p>
   <% else %>
     <%= f.hidden_field :member_id, :value => @member.id %>
