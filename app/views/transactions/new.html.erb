@@ -8,9 +8,9 @@
   <%= hidden_field_tag :member_id, @member.id %>
   <%= f.hidden_field :subscription_id, :value => @subscription.id %>
 
+  <%= f.hidden_field :date, :value => Date.today %>
   <p>
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    Date: <%= Date.today %>
   </p>
   <p>
     <%= f.label :amount %><br />
