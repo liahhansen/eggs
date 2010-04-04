@@ -127,6 +127,13 @@ namespace :eggs do
         end
       end
 
+      desc "Emails a single user a welcome and activation message"
+      task :run_welcome_single => :environment do
+        user = single_user
+        user.delivery_welcome_and_activation!
+        puts "Done."
+      end
+
       def get_inactive_users_for_farm(farm)
         puts "getting list of inactive users"
         users = User.all.reject do |user|
@@ -139,6 +146,11 @@ namespace :eggs do
       def farm
         Farm.find_by_name(ENV['FARM'] || raise("You must specify a farm name!"))
       end
+
+      def single_user
+        User.find_by_email(ENV['EMAIL'] || raise("You must specify a user email from the system"))
+      end
+
     end
 
 
