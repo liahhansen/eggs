@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DeliveriesController do
   before(:each) do
     activate_authlogic
-    UserSession.create Factory(:user)
+    UserSession.create Factory(:admin_user)
   end  
 
   it "should list deliveries only for soul food farm" do
