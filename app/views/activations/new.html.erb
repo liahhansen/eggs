@@ -2,11 +2,14 @@
   <h2 id="page-heading">Account Activation</h2>
 </div>
 
-<div id="" class="grid_5 ">
+<div class="grid_1">&nbsp;</div>
+
+<div class="grid_5 ">
 
 <p style="color: green"><%= flash[:notice] %></p>
 
   <fieldset class="login">
+    Please choose and confirm the password for your new account.
   <% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
   	<%= form.error_messages %>
   	<%= render :partial => "form", :locals => { :form => form }%>
