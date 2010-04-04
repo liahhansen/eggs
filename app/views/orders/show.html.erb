@@ -14,8 +14,11 @@
 
   <div>
     <h4>Status: <%= @order.delivery.pretty_status.upcase %></h4>
+    <% if @order.delivery.status == 'open' %>
+      Closes <%= @order.delivery.closing_at.strftime('%e %b %lpm') %>
+    <% end %>
   </div>
-
+  <br/>
   <div class="box">
     <h2>Order Details</h2>
     <div class="block">
