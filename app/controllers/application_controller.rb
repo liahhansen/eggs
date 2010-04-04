@@ -52,6 +52,9 @@ class ApplicationController < ActionController::Base
 
   def require_no_user
     if current_user
+
+      @user_session = UserSession.find
+      @user_session.destroy
       flash[:notice] = "You must be logged out to access this page"
       redirect_to root_url
       return false
@@ -61,7 +64,7 @@ class ApplicationController < ActionController::Base
 
   def access_denied
     if current_user
-      render :template => 'home/access_denied'
+      render :acctemplate => 'home/access_denied'
     else
       flash[:notice] = 'Access denied. Try to log in first.'
       redirect_to login_path
