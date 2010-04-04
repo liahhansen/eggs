@@ -66,6 +66,11 @@ class User < ActiveRecord::Base
     save_without_session_maintenance
   end
 
+  def deliver_welcome_and_activation!
+    reset_perishable_token!
+    Notifier.deliver_welcome_and_activation(self)
+  end
+
   def deliver_activation_instructions!
     reset_perishable_token!
     Notifier.deliver_activation_instructions(self)

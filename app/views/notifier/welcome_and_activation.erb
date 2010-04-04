@@ -1,0 +1,20 @@
+Dear <%= "#{@user.member.first_name} #{@user.member.last_name}," %> 
+
+We've launched a new ordering and member system for Soul Food Farm!
+
+We need a little help in getting set up.  Please click the activation link below and choose a password.  Your login will be this email address: <%= @user.email %>.  You can change it if you like after logging in.
+
+<%= @account_activation_url %>
+
+If the above URL does not work try copying and pasting it into your browser. If you continue to have problems, please feel free to contact us!
+
+Once you're activated, we'll send another email with more information about the new system.  Thanks for being patient as we work out the kinks!
+
+Thanks!
+Kathryn
+kathryn@kathrynaaker.com
+
+Soul Food Farm CSA:
+http://soulfood.eggbasket.org
+
+

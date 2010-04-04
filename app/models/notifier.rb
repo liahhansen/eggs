@@ -6,25 +6,34 @@ class Notifier < ActionMailer::Base
     body       :order => order
   end
 
+  def welcome_and_activation(user)
+    subject       "Welcome to Soul Food Farm's new CSA site!"
+    from          "EggBasket <noreply@eggbasket.org>"
+    recipients    user.email
+    sent_on       Time.now
+    body          :account_activation_url => register_url(user.perishable_token), :user => user
+    
+  end
+
   def activation_instructions(user)
     subject       "Activation Instructions"
-    from          "Eggbasket <noreply@eggbasket.org>"
+    from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
     body          :account_activation_url => register_url(user.perishable_token)
   end
 
   def activation_confirmation(user)
-    subject       "Activation Complete"
-    from          "Eggbasket <noreply@eggbasket.org>"
+    subject       "Thanks for joining us!"
+    from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
-    body          :root_url => root_url
+    body          :root_url => root_url, :user => user
   end
 
   def password_reset_instructions(user)
-    subject       "Eggbasket Password Reset Instructions"
-    from          "Eggbasket <noreply@eggbasket.org>"
+    subject       "EggBasket Password Reset Instructions"
+    from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
