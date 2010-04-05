@@ -26,7 +26,7 @@ Rails::Initializer.run do |config|
   config.gem "factory_girl", :source => "http://gemcutter.org"
   config.gem "fastercsv"
   config.gem "prawn"
-  config.gem "backup"
+  # config.gem "backup"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).
