@@ -3,10 +3,19 @@ class ActivationsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
 
   def new
-    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
-    if @user.active?
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week)
+    
+    if @user
+      if @user.active?
+        flash[:notice] = "Your account is already active"
+        redirect_to root_url if @user.active?
+      end
+    else
+      flash[:notice] = "That activation code is invalid"
       redirect_to root_url
     end
+
+
   end
 
   def create
