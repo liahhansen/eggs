@@ -1,1 +1,33 @@
+<%= "#{@order.member.first_name} #{@order.member.last_name}," %>
+
 Your order has been placed!
+
+<% @order.order_items.with_quantity.each do |item| %>
+  <%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %>
+<% end %>
+
+You can make changes to your order until <%= @order.delivery.closing_at.strftime('%b %e at %lpm') %>
+
+Date / Time:  <%= "#{@order.delivery.pretty_date}, #{@order.location.time_window}"%>
+Location: <%= @order.location.name %>
+Address: <%= @order.location.address %>
+Host: <%= @order.location.host_name %>
+Host email: <%= @order.location.host_email %>
+Phone: <%= @order.location.host_phone %>
+Ordering closes <%= @order.delivery.closing_at.strftime('%e %b %lpm') %>
+<% if @order.delivery.notes %>
+
+Delivery notes: <%= @order.delivery.notes %>
+<% end %>
+<% if @order.location.notes %>
+
+Location notes: <%= @order.location.notes %>
+<% end %>
+
+
+Thanks!
+Kathryn & Bonnie
+csa@soulfoodfarm.com
+
+Soul Food Farm CSA:
+http://soulfood.eggbasket.org
