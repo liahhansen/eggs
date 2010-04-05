@@ -4,7 +4,9 @@ class ActivationsController < ApplicationController
 
   def new
     @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
-    raise Exception if @user.active?
+    if @user.active?
+      redirect_to root_url
+    end
   end
 
   def create
