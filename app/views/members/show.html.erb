@@ -56,7 +56,6 @@
       <th>Delivery</th>
       <th>Date</th>
       <th>delivery Status</th>
-      <th>Estimated Total</th>
       <th>Actual Total</th>
     </tr>
     <% @member.orders.each do |order| %>
@@ -65,7 +64,6 @@
         <td><%= link_to order.delivery.name, delivery_path(order.delivery, :farm_id => @farm.id) %></td>
         <td><%= order.delivery.date %></td>
         <td><%= order.delivery.status %></td>
-        <td><%= number_to_currency order.estimated_total %></td>
         <td><%= number_to_currency order.finalized_total %></td>
       </tr>
     <% end %>

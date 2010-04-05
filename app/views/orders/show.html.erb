@@ -34,7 +34,9 @@
       </p>
       <% end %>
       <p>
-        <b>Estimated Total:</b> <%= number_to_currency @order.estimated_total %><br/>
+        <% if current_user.has_role?(:admin) || !@order.finalized_total %>
+        <b>Maximum Estimated Total:</b> <%= number_to_currency @order.estimated_total %><br/>
+        <% end %>
         <b>Finalized Total:</b> <%= @order.finalized_total ? number_to_currency(@order.finalized_total) : "not yet finalized" %>
       </p>
 

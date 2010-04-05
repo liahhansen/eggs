@@ -9,7 +9,7 @@
 <p>
   <b>Orders open at:</b>    <%=h @delivery.formatted_opening_at %><br/>
   <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
-  <b>Minimum Estimated Total:</b>     <%=h number_to_currency @delivery.minimum_order_total %><br/>
+  <b>Minimum Order Total Allowed (estimated):</b>     <%=h number_to_currency @delivery.minimum_order_total %><br/>
 
   <% if @member %>
     <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>

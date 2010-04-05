@@ -100,7 +100,7 @@
             <% if @delivery.finalized_total > 0 %>
               <%=h "#{number_to_currency @delivery.finalized_total}" %> (finalized)<br/>
             <% else %>
-              <%=h "#{number_to_currency @delivery.estimated_total}" %> (estimated)<br/>
+              <%=h "#{number_to_currency @delivery.estimated_total}" %> (estimated max)<br/>
             <% end %>
         </div>
     </div><!-- end details box -->
