@@ -24,7 +24,7 @@ class Notifier < ActionMailer::Base
   end
 
   def activation_confirmation(user)
-    subject       "Thanks for joining us!"
+    subject       "Soul Food Farm CSA - Thanks for joining us!"
     from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
