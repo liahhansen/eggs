@@ -7,7 +7,7 @@ class Notifier < ActionMailer::Base
   end
 
   def welcome_and_activation(user)
-    subject       "Welcome to Soul Food Farm's new CSA site!"
+    subject       "Introducing Soul Food Farm's new CSA system!"
     from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
