@@ -32,7 +32,6 @@
   <% end %>
   </table>
   <h2>Current Balance: <%= number_to_currency @member.balance_for_farm(@farm) %></h2>
-  
 
   <% if current_user.has_role?(:admin) %>
     <ul class="menu">
@@ -43,6 +42,13 @@
   <% if current_user.has_role?(:member) %>
     <br/>
     <div class="grid_5 alpha">
+      <% if @farm.paypal_link %>
+      <p>
+        <%= link_to "Click here to top up your account using PayPal", @farm.paypal_link, :target => "_blank"%><br/>
+        (will open new window)
+      </p>
+      <% end %>
+
       <p>
       Note: PayPal payments, checks, and cash are tracked manually, and may take a few days to show in your account.
       If you have any questions about your account balance, please contact the CSA manager.
