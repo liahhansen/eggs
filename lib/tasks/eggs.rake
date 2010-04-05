@@ -137,6 +137,9 @@ namespace :eggs do
       def get_inactive_users_for_farm(farm)
         puts "getting list of inactive users"
         users = User.all.reject do |user|
+          user.member == nil
+        end
+        users = users.reject do |user|
          user.active? || !user.member.farms.include?(farm)
         end
         puts "Found #{users.length} users."
