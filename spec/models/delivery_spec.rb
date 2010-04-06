@@ -35,6 +35,32 @@ describe Delivery do
     delivery.estimated_total.should == delivery.orders.inject(0){|total, o| total + o.estimated_total}
   end
 
+  it "should be able to deduct finalized order prices from member balances" do
+    delivery = Factory(:delivery_with_orders)
+    delivery.orders.each do |order|
+      subscription = Factory.create(:subscription, :farm => delivery.farm, :member => order.member)
+    end
+
+    delivery.deductions_complete.should == false
+    member = delivery.orders.first.member
+    delivery.orders.first.finalized_total = 24.5
+
+    # set initial balance
+    Transaction.create!(:subscription_id => member.subscriptions.first, :amount => 100, :debit => false)
+    
+    member.balance_for_farm(delivery.farm).should == 100
+    delivery.perform_deductions.should == true
+    member.balance_for_farm(delivery.farm).should == 75.5
+
+
+    # check that it won't happen again
+    delivery.deductions_complete.should == true
+    delivery.perform_deductions.should == false
+    member.balance_for_farm(delivery.farm).should == 75.5
+    
+
+  end
+
   it "should have an available list of members for its related farm" do
     delivery = Factory(:delivery, :farm => Factory(:farm_with_members))
     delivery.farm.members.size.should == 4
@@ -128,5 +154,5 @@ describe Delivery do
     delivery.create_pickups([location.id])
     delivery.locations.first.should == location
   end
-  
+
 end

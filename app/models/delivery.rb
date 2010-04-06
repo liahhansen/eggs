@@ -78,4 +78,16 @@ class Delivery < ActiveRecord::Base
     end
   end
 
+  def perform_deductions
+    return false if deductions_complete
+    ActiveRecord::Base.transaction do
+      orders.each do |order|
+        subscription = Subscription.find_by_farm_id_and_member_id(farm.id, order.member.id)
+        transaction = Transaction.new(:subscription_id => subscription.id, :amount => order.finalized_total, :debit => true)
+        transaction.save!
+      end
+      update_attribute(:deductions_complete, true)
+    end
+  end
+
 end
