@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100406051701) do
+ActiveRecord::Schema.define(:version => 20100406055638) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20100406051701) do
     t.datetime "updated_at"
     t.integer  "minimum_order_total"
     t.boolean  "deductions_complete", :default => false
+    t.boolean  "finalized_totals",    :default => false
   end
 
   create_table "farms", :force => true do |t|

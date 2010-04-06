@@ -46,16 +46,16 @@ describe Delivery do
     delivery.orders.first.finalized_total = 24.5
 
     # set initial balance
-    Transaction.create!(:subscription_id => member.subscriptions.first, :amount => 100, :debit => false)
+    Transaction.create!(:subscription_id => member.subscriptions.first, :amount => 100, :debit => false, :date => Date.today)
     
     member.balance_for_farm(delivery.farm).should == 100
-    delivery.perform_deductions.should == true
+    delivery.perform_deductions!.should == true
     member.balance_for_farm(delivery.farm).should == 75.5
 
 
     # check that it won't happen again
     delivery.deductions_complete.should == true
-    delivery.perform_deductions.should == false
+    delivery.perform_deductions!.should == false
     member.balance_for_farm(delivery.farm).should == 75.5
     
 

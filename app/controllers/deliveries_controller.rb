@@ -61,6 +61,25 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
   end
 
+  def preview_deductions
+    @delivery = Delivery.find(params[:id])
+  end
+
+  def submit_deductions
+    @delivery = Delivery.find(params[:id])
+
+    if !@delivery.deductions_complete
+      if @delivery.perform_deductions!
+        flash[:notice] = "Deductions successful!"
+        redirect_to :action => 'confirm_deductions', :id => @delivery.id, :farm_id => @farm.id
+      end
+    end
+  end
+
+  def confirm_deductions
+    @delivery = Delivery.find(params[:id])
+  end
+
   # GET /deliveries/new
   # GET /deliveries/new.xml
   def new
@@ -105,6 +124,11 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
+
+        if params[:totals]
+          @delivery.update_attribute(:finalized_totals, true)
+        end
+
         flash[:notice] = 'Delivery was successfully updated.'
         format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }
         format.xml  { head :ok }

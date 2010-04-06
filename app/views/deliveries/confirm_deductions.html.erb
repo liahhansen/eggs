@@ -1,0 +1,28 @@
+<div class="grid_12">
+  <h2 id="page-heading">Deductions confirmed - <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
+</div>
+
+<div class="grid_8">
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <h5>New Balances:</h5>
+
+  <table>
+  <tr>
+    <th>Member Name</th>
+    <th>Bag Total</th>
+    <th>Current Balance</th>
+  </tr>
+  <% @delivery.orders.each do |order| %>
+    <tr>
+      <td><%= "#{order.member.last_name}, #{order.member.first_name }" %></td>
+      <td><%= number_to_currency order.finalized_total %></td>
+      <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back to delivery', delivery_path(:id => @delivery.id, :farm_id => @farm.id) %>
+</div>
+<div class="grid_4"></div>

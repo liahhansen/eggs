@@ -1,0 +1,55 @@
+<div class="grid_12">
+  <h2 id="page-heading">Preview deductions - <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
+</div>
+
+<div class="grid_8">
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <% if @delivery.finalized_totals %>
+
+    <% if @delivery.deductions_complete %>
+      <h3>Oops!</h3>
+      <p>Looks like you've already triggered the deductions for these orders. If you need to make changes to a single member, you can still create a new transaction for them and mark it as part of this delivery's order.</p>
+    <% else %>
+
+      <h3>Warning!</h3>
+      <p>This can only be submitted once per delivery, so ensure all finalized totals are complete!  You can make any other adjustments on a per-member basis.</p>
+
+      <div class="box">
+        <h2>Deductions Preview</h2>
+        <div class="block">
+          <table>
+            <tr>
+              <th>Member Name</th>
+              <th>Current Balance</th>
+              <th>Bag Total</th>
+              <th>Balance after deduction</th>
+            </tr>
+            <% @delivery.orders.each do |order| %>
+              <tr>
+                <td><%= "#{order.member.last_name}, #{order.member.first_name }" %></td>
+                <td><%= number_to_currency order.member.balance_for_farm(@farm) %></td>
+                <td><%= number_to_currency order.finalized_total %></td>
+                <td><%= number_to_currency order.member.balance_for_farm(@farm) - order.finalized_total %></td>
+
+              </tr>
+            <% end %>
+          </table>
+          <ul class="menu">
+            <li><%= link_to "Yes, I'm sure!  Do all the deductions now!", :controller => 'deliveries',
+                            :action => 'submit_deductions', :id => @delivery.id, :farm_id => @farm.id %></li>
+            <li><%= link_to "No, let me edit the bag totals again", :controller => 'deliveries',
+                            :action => 'edit_order_totals', :id => @delivery.id, :farm_id => @farm.id %></li>
+          </ul>
+        </div>
+      <% end %>
+
+    </div>
+  <% else %>
+    <p>You need to enter finalized totals before you can do the deductions!</p>
+  <% end %>
+
+<%= link_to 'Back', delivery_path(:id => @delivery.id, :farm_id => @farm.id) %>
+</div>
+<div class="grid_4">&nbsp;<div>&nbsp;</div></div>

@@ -78,15 +78,20 @@ class Delivery < ActiveRecord::Base
     end
   end
 
-  def perform_deductions
-    return false if deductions_complete
+  def perform_deductions!
+    return false if self.deductions_complete
     ActiveRecord::Base.transaction do
       orders.each do |order|
         subscription = Subscription.find_by_farm_id_and_member_id(farm.id, order.member.id)
-        transaction = Transaction.new(:subscription_id => subscription.id, :amount => order.finalized_total, :debit => true)
+        transaction = Transaction.new(:subscription_id => subscription.id,
+                                      :amount => order.finalized_total,
+                                      :debit => true,
+                                      :date => Date.today,
+                                      :order_id => order.id,
+                                      :description => "Automatic debit for #{order.delivery.pretty_date} order pickup")
         transaction.save!
       end
-      update_attribute(:deductions_complete, true)
+      self.update_attribute(:deductions_complete, true)
     end
   end
 

@@ -16,6 +16,7 @@
 <h3>Bag Totals:</h3>
 <% form_for @delivery do |f| %>
 <%= hidden_field_tag :farm_id, @farm.id %>
+<%= hidden_field_tag :totals, true %>
 
 
 <table class="simple">
