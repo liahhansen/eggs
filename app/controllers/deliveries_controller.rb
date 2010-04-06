@@ -49,10 +49,12 @@ class DeliveriesController < ApplicationController
 
   def show_sheet
     @delivery = Delivery.find(params[:id])
+    render :layout => "delivery_fluid"
   end
 
   def edit_order_totals
     @delivery = Delivery.find(params[:id])
+    render :layout => "delivery_fluid"
   end
 
   def public_summary
