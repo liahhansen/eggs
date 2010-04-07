@@ -1,3 +1,19 @@
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+//    $('#bag_totals').dataTable( {
+//  "bPaginate": false,
+//  "bLengthChange": false,
+//  "bFilter": false,
+//  "bSort": false,
+//  "bInfo": false,
+//  "bAutoWidth": false } );
+
+  $('a.details').cluetip({local:true,showTitle: false, width:400});
+
+  });
+</script>
+
+
 <div id="" class="grid_12 ">
   <h2 id="page-heading">Bag Totals for Delivery: <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
 <p style="color: green"><%= flash[:notice] %></p>
@@ -19,54 +35,70 @@
 <%= hidden_field_tag :totals, true %>
 
 
-<table class="simple">
-  <tr class="hed">
-    <th>Last Name</th>
-    <th>First Name</th>
-    <% @delivery.stock_items.each do |item| %>
-      <th><%= item.product_name %><br/>
-        <%= item.product_price_code %><br/>
-      </th>
-    <% end %>
+<table id="bag_totals">
+  <thead>
+  <tr>
+    <th>Member Name</th>
+    <th>Total items</th>
 
-    <th>Notes</th>
+
     <th>Estimated Total</th>
     <th>Finalized Total</th>
-  </tr>
-
-  <tr class="hed">
-    <th>totals:</th>
-    <th></th>
-    <% @delivery.stock_items.each do |item| %>
-      <th><%= item.quantity_ordered %></th>
-    <% end %>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
+  </thead>
 
-    <% @delivery.orders.each do |order| %>
+  <tbody>
+    <% @delivery.orders.each_with_index do |order, i| %>
       <% f.fields_for :orders, order do |builder| %>
         <tr>
-          <td><%= order.member.last_name %></td>
-          <td><%= order.member.first_name %></td>
+          <td><a class="details" href="#tip-<%= i %>" rel="#tip-<%= i %>"><%= "#{order.member.last_name}, #{order.member.first_name}" %></a></td>
+          <td><%= order.total_items_quantity %></td>
 
-          <% order.order_items.each do |item| %>
-            <td><%= item.quantity %></td>
-          <% end %>
 
-          <td><%= order.notes %></td>
           <td><%= number_to_currency order.estimated_total %></td>
           <td>$<%= builder.text_field :finalized_total, :size => 5 %></td>
-
+          <td><%= order.member.last_name %> </td>
         </tr>
       <% end %>
     <% end %>
+   </tbody>
 </table>
 
 <div style="float:right"><%= f.submit "Update" %></div>
 <% end %>
 
+  <% @delivery.orders.each_with_index do |order, i| %>
+    <div id="tip-<%= i %>">
+      <table>
+        <thead>
+          <tr>
+            <th>Num</th>
+            <th>Item</th>
+            <th>Price Each (*est)</th>
+            <th>Line total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.order_items.with_quantity.each do |order_item| %>
+            <tr>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.stock_item.product_name%></td>
+              <td><%= number_to_currency order_item.stock_item.product_price %></td>
+              <td><%= number_to_currency order_item.stock_item.product_price * order_item.quantity %></td>
+            </tr>
+
+          <% end %>
+          <tr><td colspan="4"></td></tr>
+          <tr>
+            <td></td>
+            <td colspan="2"><h5>Estimated Total:</h5></td>
+            <td><h5><%= number_to_currency order.estimated_total %></h5></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 
 </div>
 

@@ -14,3 +14,8 @@ span.validation-error {
 .errorExplanation h4 {
   color: #cc0000;
 }
+
+/* override clueTip default bg color */
+.cluetip-default #cluetip-outer {
+  background-color: #666666;
+}
