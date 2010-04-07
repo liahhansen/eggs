@@ -38,7 +38,13 @@
     <tbody>
   <% @members.each do |member| %>
     <tr>
-      <td><%= link_to member.last_name, member_path(member, :farm_id => @farm.id) %></td>
+      <td>
+        <%= link_to member.last_name, member_path(member, :farm_id => @farm.id) %>
+        <% if !User.find_by_member_id(member.id) || User.find_by_member_id(member.id).active == false %>
+          (not yet active)
+        <% end %>
+
+      </td>
       <td><%= link_to member.first_name, member_path(member, :farm_id => @farm.id) %></td>
       <td><%=h member.email_address %></td>
       <td><%=h member.alternate_email %></td>
