@@ -17,6 +17,17 @@
     <%= f.label 'Price Code: (e.g. "3-4lbs, $6.50/lb"), for label use:' %><br />
     <%= f.text_field :price_code, :size => "50x5" %>
   </p>
+
+  <p>
+    <%= f.label "Default inventory quantity" %><br />
+    $<%= f.text_field :default_quantity, :size => "5" %>
+  </p>
+
+  <p>
+    <%= f.label "Default per member" %><br />
+    $<%= f.text_field :default_per_member, :size => "5" %>
+  </p>
+
   <p>
     <%= f.label "Price: either set price or calculated approximate" %><br />
     $<%= f.text_field :price, :size => "5" %>

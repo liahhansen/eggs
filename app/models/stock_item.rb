@@ -27,11 +27,6 @@ class StockItem < ActiveRecord::Base
 
   before_create :copy_product_attributes
 
-  def after_initialize
-    self.max_quantity_per_member = 4 if !self.max_quantity_per_member
-    self.quantity_available = 50 if !self.quantity_available
-  end
-
   def sold_out?
 
     items = OrderItem.find_all_by_stock_item_id(id)
@@ -53,6 +48,8 @@ class StockItem < ActiveRecord::Base
       self.product_estimated    = product.estimated     if self.product_estimated == nil
       self.product_price_code   = product.price_code    if !self.product_price_code
       self.product_category     = product.category      if !self.product_category
+      self.quantity_available   = product.default_quantity if !self.quantity_available
+      self.max_quantity_per_member = product.default_per_member if !self.max_quantity_per_member 
     end
   end
 

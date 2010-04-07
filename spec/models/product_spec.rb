@@ -19,7 +19,9 @@ describe Product do
   before(:each) do
     @valid_attributes = {
       :farm_id => Factory(:farm).id,
-      :name => "Extra Large Chicken"
+      :name => "Extra Large Chicken",
+      :default_quantity => 100,
+      :default_per_member => 3
     }
   end
 
@@ -30,7 +32,5 @@ describe Product do
   it "can have a category" do
     product = Factory(:product, :category => "poultry")
     product.category.should == "poultry"
-
-    
   end
 end
