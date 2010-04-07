@@ -18,7 +18,11 @@
 
 class Delivery < ActiveRecord::Base
   belongs_to :farm
-  has_many :stock_items, :dependent => :destroy
+  has_many :stock_items, :dependent => :destroy do
+    def with_quantity
+      self.select {|item| item.quantity_available > 0 }
+    end
+  end
   has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name"
   has_many :pickups
   has_many :locations, :through => :pickups

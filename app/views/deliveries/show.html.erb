@@ -67,7 +67,7 @@
         <th>Available</th>
         <th>Remaining</th>
       </tr>
-        <% @delivery.stock_items.each do |s|%>
+        <% @delivery.stock_items.with_quantity.each do |s|%>
           <tr>
               <td><%= s.product_name %></td>
               <td><%= s.quantity_ordered %></td>

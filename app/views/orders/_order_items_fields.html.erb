@@ -13,7 +13,7 @@
 
 
   <% @order.order_items.each do |item| %>
-      <tr>
+      <tr <%= "class='zero_quantity'" if item.stock_item.quantity_available.zero? %>>
         <% f.fields_for :order_items, item do |builder| %>
             <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id %>
             <td>

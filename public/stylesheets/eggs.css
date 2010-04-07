@@ -19,3 +19,7 @@ span.validation-error {
 .cluetip-default #cluetip-outer {
   background-color: #666666;
 }
+
+tr.zero_quantity {
+  display:none;
+}
