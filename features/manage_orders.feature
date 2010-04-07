@@ -4,7 +4,7 @@ Feature: Manage Orders
   I should be able to submit an order for a farm's member
 
 Background:
-  Given I am the registered user jenny@example.com
+  Given I am the registered user jennyjones@kathrynaaker.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"

@@ -3,7 +3,7 @@ Feature: Manage deliveries
   I want to create and manage deliveries
 
 Background:
-  Given I am the registered user jenny@example.com
+  Given I am the registered user jennyjones@kathrynaaker.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"  
@@ -18,7 +18,7 @@ Scenario: View delivery Details
   When I go to farms
   And I follow "Soul Food Farm"
   And I follow "Emeryville"
-  Then I should see "delivery: Emeryville"
+  Then I should see "Delivery: Emeryville"
   And I should see "Feb 3, 2010"
   And I should see "Status: OPEN"
 

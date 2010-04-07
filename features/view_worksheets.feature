@@ -3,13 +3,13 @@ Feature: View delivery Worksheet
   I want to see a worksheet view of a delivery
 
 Background:
-  Given I am the registered user jenny@example.com
+  Given I am the registered user jennyjones@kathrynaaker.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"
   When I follow "Soul Food Farm"
   And I follow "Emeryville"
-  Then I should see "delivery: Emeryville"
+  Then I should see "Delivery: Emeryville"
 
 Scenario: View a worksheet
   When I follow "View Worksheet"

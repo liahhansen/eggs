@@ -11,8 +11,8 @@ Given /^I am the registered user (.+)$/ do |login|
 end
 
 When /^I login with valid credentials$/ do
-  fill_in('Email', :with => @user.email)
-  fill_in('Password', :with => "eggsrock")
+  fill_in('user_session_email', :with => @user.email)
+  fill_in('user_session_password', :with => "eggsrock")
   click_button("Login")
 end
 
@@ -25,7 +25,7 @@ Given /^I am a registered user $/ do
 end
 
 Given /^I am logged in as an admin$/ do
-  Given "I am the registered user jenny@example.com"
+  Given "I am the registered user jennyjones@kathrynaaker.com"
   And "I am on login"
   Given "I login with valid credentials"
 end

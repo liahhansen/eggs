@@ -6,12 +6,12 @@ Background:
   Given I am logged in as an admin
   When I follow "Soul Food Farm"
   And I follow "Emeryville"
-  Then I should see "delivery: Emeryville"
+  Then I should see "Delivery: Emeryville"
 
 Scenario: Create A Delivery
   Given I am at Soul Food Farm
-  Then I should see "add new delivery"
-  When I follow "add new delivery"
+  Then I should see "Add New Delivery"
+  When I follow "Add New Delivery"
   Then I should see "Minimum order total"
   And I should see "Select Locations:"
   And I should see "SF / Potrero"

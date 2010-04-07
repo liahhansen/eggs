@@ -10,7 +10,7 @@ Scenario: View location Index
   Given I am at Soul Food Farm
   Then I should see "Manage Locations"
   When I follow "Manage Locations"
-  Then I should see "Locations for Soul Food Farm:"
+  Then I should see "Pickup Locations"
   And I should see "Alexis"
   And I should not see "Julia Childs"
   
@@ -20,5 +20,5 @@ Scenario: Create a new location
   And I follow "Create New Location"
   And I fill in the form with a location
   And I press "Create"
-  Then I should see "Locations for Soul Food Farm:"
+  Then I should see "Pickup Locations"
 
