@@ -14,6 +14,10 @@
     <%= f.text_area :description, :size => "50x5" %>
   </p>
   <p>
+    <%= f.label 'Category (e.g. "chicken", "beef", "other", etc.")' %><br />
+    <%= f.text_field :category, :size => "30x5" %>
+  </p>
+  <p>
     <%= f.label 'Price Code: (e.g. "3-4lbs, $6.50/lb"), for label use:' %><br />
     <%= f.text_field :price_code, :size => "50x5" %>
   </p>
