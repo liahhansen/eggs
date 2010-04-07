@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    @farm = @user.member.farms.first
+    @farm = @user.member.farms.first if !@farm      
     @subscription = Subscription.find_by_member_id_and_farm_id(@user.member.id,@farm.id)
 
     if(current_user == @user)
