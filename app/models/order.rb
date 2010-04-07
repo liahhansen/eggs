@@ -66,5 +66,9 @@ class Order < ActiveRecord::Base
       end
     end
   end
+
+  def deliver_finalized_order_confirmation!
+    Notifier.deliver_finalized_order_confirmation(self)
+  end
   
 end

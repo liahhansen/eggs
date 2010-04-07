@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100406055638) do
+ActiveRecord::Schema.define(:version => 20100407025452) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20100406055638) do
     t.string   "paypal_link"
     t.string   "contact_email"
     t.string   "contact_name"
+    t.string   "subdomain",     :default => "soulfood"
   end
 
   create_table "locations", :force => true do |t|

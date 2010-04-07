@@ -39,4 +39,12 @@ class Notifier < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
 
+  def finalized_order_confirmation(order)
+    subject       "Your #{order.delivery.farm.name} - #{order.location.name} order has been finalized!"
+    from          "#{order.delivery.farm.name} EggBasket <noreply@eggbasket.org>"
+    recipients    order.member.email_address
+    sent_on       Time.now
+    body          :order => order
+  end
+
 end

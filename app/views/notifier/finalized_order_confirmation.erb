@@ -1,0 +1,27 @@
+Hi <%= "#{@order.member.first_name} #{@order.member.last_name}"%>,
+
+We've weighed your delicious goods for the <%= @order.delivery.farm.name %> pickup tonight.
+
+Your final bag total is <%= number_to_currency @order.finalized_total %>.
+
+We've deducted your account, which leaves your balance at <%= number_to_currency @order.member.balance_for_farm(@order.delivery.farm) %>.
+
+If the number is negative, please top up with paypal using this link:
+<%= @order.delivery.farm.paypal_link %>
+
+You can also bring a check or cash to the pickup, made out to <%= @order.delivery.farm.name %>.
+
+Here are your pickup details:
+Date/Time:  <%= "#{@order.delivery.pretty_date} - #{@order.location.time_window}" %>
+Location: <%= "#{@order.location.address}"%>
+Host: <%= "#{@order.location.host_name}"%>
+Host phone: <%= "#{@order.location.host_phone}"%>
+Host email: <%= "#{@order.location.host_email}"%>
+
+Thanks!
+Kathryn & Bonnie
+<%= @order.delivery.farm.contact_email %>
+
+<%= @order.delivery.farm.name %> CSA:
+http://<%= @order.delivery.farm.subdomain %>.eggbasket.org
+
