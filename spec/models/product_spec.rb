@@ -26,4 +26,11 @@ describe Product do
   it "should create a new instance given valid attributes" do
     Product.create!(@valid_attributes)
   end
+
+  it "can have a category" do
+    product = Factory(:product, :category => "poultry")
+    product.category.should == "poultry"
+
+    
+  end
 end

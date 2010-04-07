@@ -23,7 +23,7 @@ require 'spec_helper'
 
 describe StockItem do
   before(:each) do
-    @product = Factory(:product)
+    @product = Factory(:product, :category => "poultry")
     @valid_attributes = {
       :product_id => @product.id,
       :delivery_id => 4
@@ -50,6 +50,7 @@ describe StockItem do
     stock_item.product_price.should        == @product.price
     stock_item.product_estimated.should    == @product.estimated
     stock_item.product_price_code.should   == @product.price_code
+    stock_item.product_category.should     == @product.category
   end
 
   it "should return quantity ordered" do

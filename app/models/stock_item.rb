@@ -52,6 +52,7 @@ class StockItem < ActiveRecord::Base
       self.product_price        = product.price         if !self.product_price
       self.product_estimated    = product.estimated     if self.product_estimated == nil
       self.product_price_code   = product.price_code    if !self.product_price_code
+      self.product_category     = product.category      if !self.product_category
     end
   end
 
