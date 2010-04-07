@@ -15,6 +15,51 @@ namespace :eggs do
 
   namespace :import do
 
+    namespace :products do
+      desc "Dry run import products"
+      task :dry => :environment do
+        puts "attempting to dry run"
+        import_products_dry(filename,farm)
+      end
+
+      desc "Import Products"
+      task :run => :environment do
+        import_products_run(filename,farm)
+      end
+
+      desc "Clean Products for Farm"
+      task :clean => :environment do
+        if(farm)
+          Product.delete_all "farm_id = #{farm.id}"
+        end
+      end
+
+      def import_products_dry(file,farm)
+        puts "Importing from #{file} for #{farm.name} (dry run)."
+        importer = ProductImport.new(file,farm)
+        importer.products.each do |product|
+          puts "#{product.category} - #{product.name} - #{product.description}"
+          puts "#{product.price} - #{product.price_code} - #{product.estimated} = #{product.farm_id}"
+          puts "---------"
+        end
+      end
+
+      def import_products_run(file,farm)
+        puts "Importing from #{file} for #{farm.name}."
+        importer = ProductImport.new(file,farm)
+        importer.import!
+        puts "Imported #{importer.products.size} products"
+      end
+
+      def farm
+        Farm.find_by_name(ENV['FARM'] || raise("you must specify a farm!"))
+      end
+
+      def filename
+        ENV['FILE'] || raise("You must specify a file to import!")
+      end
+    end
+
     desc "Dry run import prints data to import from DIR."
     task :dry => :environment do
       import_dry(dir, farm)

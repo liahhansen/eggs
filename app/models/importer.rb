@@ -17,6 +17,49 @@ class Importer
 
 end
 
+class ProductImport
+  attr_reader :file, :rows, :columns, :farm, :products
+
+  def initialize(file, farm)
+    @file = file
+    @rows = CSV.read file
+    @farm = farm || raise("farm cannot be nil")
+    @columns = {:category => 0,:name => 1, :description => 2, :price_code => 3, :price => 4, :estimated => 5}
+  end
+
+  def import!
+    ActiveRecord::Base.transaction do
+      products.each {|product| product.save}
+    end
+  end
+
+  def products
+    @products = []
+    @rows[1..-1].each do |row|
+      category = row[columns[:category]]
+      name = row[columns[:name]]
+      description = row[columns[:description]]
+      price_code = row[columns[:price_code]]
+      price = row[columns[:price]]
+      estimated = row[columns[:estimated]] == "FALSE" ? 0 : 1
+
+      product = Product.new(:name => name,
+                            :category => category,
+                            :description => description,
+                            :price_code => price_code,
+                            :price => price,
+                            :estimated => estimated,
+                            :default_quantity => 0,
+                            :default_per_member => 1,
+                            :farm_id => @farm.id)
+
+      @products << product
+    end
+    @products
+  end
+  
+end
+
 class DeliveryImport
   attr_reader :file, :rows, :columns, :farm
 
