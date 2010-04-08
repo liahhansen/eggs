@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   def signup!(params)
     self.email = params[:email]
     self.member_id = params[:member_id]
-    save_without_session_maintenance
+    save_without_session_maintenance(false)
   end
 
   def deliver_welcome_and_activation!
