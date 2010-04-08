@@ -26,6 +26,7 @@ class Member < ActiveRecord::Base
   end
 
   validates_presence_of :first_name, :last_name, :email_address
+  validates_uniqueness_of :email_address
 
   def email_address_with_name
     "\"#{first_name} #{last_name}\" <#{email_address}>"

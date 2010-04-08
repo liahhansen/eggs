@@ -52,4 +52,10 @@ describe Member do
     member.balance_for_farm(farm).should == -90
 
   end
+
+  it "ensures email_address is unique" do
+    Factory.create(:member, :email_address => "one@two.com")
+    second_member = Factory.build(:member, :email_address => "one@two.com")
+    second_member.valid?.should == false
+  end
 end
