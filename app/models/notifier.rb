@@ -20,7 +20,7 @@ class Notifier < ActionMailer::Base
     from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
-    body          :account_activation_url => register_url(user.perishable_token), :farm => farm
+    body          :account_activation_url => "http://#{farm.subdomain}.eggbasket.org/register/#{user.perishable_token}", :farm => farm
   end
 
   def activation_confirmation(user, farm)
