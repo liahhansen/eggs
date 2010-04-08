@@ -2,8 +2,11 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.xml
 
+  skip_before_filter :authenticate, :only => [:new, :create, :confirm]
+
   access_control do
     allow :admin
+    allow all, :to => [:new, :create, :confirm]
   end
 
   def index
@@ -55,18 +58,24 @@ class MembersController < ApplicationController
           @user = User.new
           if @user.signup!(:member_id => @member.id, :email => params[:member][:email_address])
             @user.has_role!(:member)
-            @user.deliver_welcome_and_activation!
+            @user.deliver_activation_instructions!
           end
 
-          flash[:notice] = 'Member was successfully created.'
-          format.html { redirect_to :action => "index", :farm_id => @farm.id }
-          format.xml  { render :xml => @member, :status => :created, :location => @member }
+          if(current_user && current_user.has_role?(:admin))
+            flash[:notice] = 'Member was successfully created.'
+            format.html { redirect_to :action => "index", :farm_id => @farm.id }
+          else
+            format.html { render :action => "confirm", :farm_id => @farm.id }
+          end
         else
           format.html { render :action => "new" }
-          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
         end
       end
     end
+  end
+
+  def confirm
+    
   end
 
   # PUT /members/1

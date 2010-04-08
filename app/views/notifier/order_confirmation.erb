@@ -15,19 +15,19 @@ Host: <%= @order.location.host_name %>
 Host email: <%= @order.location.host_email %>
 Phone: <%= @order.location.host_phone %>
 Ordering closes <%= @order.delivery.closing_at.strftime('%e %b %lpm') %>
-<% if @order.delivery.notes %>
+<% if @order.delivery.notes != '' %>
 
 Delivery notes: <%= @order.delivery.notes %>
 <% end %>
-<% if @order.location.notes %>
+<% if @order.location.notes != '' %>
 
 Location notes: <%= @order.location.notes %>
 <% end %>
 
 
 Thanks!
-Kathryn & Bonnie
-csa@soulfoodfarm.com
+<%= @order.delivery.farm.contact_name %>
+<%= @order.delivery.farm.contact_email %>
 
-Soul Food Farm CSA:
-http://soulfood.eggbasket.org
+<%= @order.delivery.farm.name %> CSA:
+http://<%= @order.delivery.farm.subdomain %>.eggbasket.org

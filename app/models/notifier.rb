@@ -15,20 +15,20 @@ class Notifier < ActionMailer::Base
     
   end
 
-  def activation_instructions(user)
+  def activation_instructions(user, farm)
     subject       "Activation Instructions"
     from          "EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
-    body          :account_activation_url => register_url(user.perishable_token)
+    body          :account_activation_url => register_url(user.perishable_token), :farm => farm
   end
 
-  def activation_confirmation(user)
-    subject       "Soul Food Farm CSA - Thanks for joining us!"
-    from          "EggBasket <noreply@eggbasket.org>"
+  def activation_confirmation(user, farm)
+    subject       "#{farm.name} CSA - Thanks for joining us!"
+    from          "#{farm.name} EggBasket <noreply@eggbasket.org>"
     recipients    user.email
     sent_on       Time.now
-    body          :root_url => root_url, :user => user
+    body          :root_url => root_url, :user => user, :farm => farm
   end
 
   def password_reset_instructions(user)
