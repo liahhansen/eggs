@@ -62,7 +62,7 @@ class StockItem < ActiveRecord::Base
   end
 
   def available_per_member
-    max_quantity_per_member < quantity_remaining ? max_quantity_per_member : quantity_remaining
+    [max_quantity_per_member, quantity_remaining].min
   end
 
 end
