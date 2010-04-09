@@ -17,6 +17,14 @@
     liberally for any comments and suggestions!
   </p>
 
+  <% if @farm.name == "Clark Summit Farm" %>
+  <hr/>
+  <h4>Ordering notes:</h4>
+  <p>The order form shows availability at the time you load the page, so if you are hoping to get items that are in high demand, I suggest placing the order for those first, then editing the order through the edit link (don't click the back button on your browser) to add the rest of your desired items. </p>
+  <p>The order minimum is $40 but I'm removing the requirement initially so that you don't get errors when trying to save before your order is fully complete. </p>
+  <hr/>
+  <% end %>
+
   <p>
     Please ensure your member information is correct and complete, especially if you pay with PayPal
     under an alternate email address.  Click your name in
@@ -68,7 +76,7 @@
 
   <% if @open_deliveries.size == 0 %>
     <div>
-      There are currently no <%= @farm.name %> deliveries open for orders.
+      <h5>There are currently no <%= @farm.name %> deliveries open for orders.</h5>
     </div>
   <% end %>
 

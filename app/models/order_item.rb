@@ -19,8 +19,9 @@ class OrderItem < ActiveRecord::Base
 
   validates_presence_of :stock_item_id, :quantity
   validates_inclusion_of :quantity, :in => 0..99
-  validate :stock_item_must_exist, :stock_item_must_not_be_sold_out
-
+  validate :stock_item_must_exist
+  validate :stock_item_must_not_be_sold_out
+  
   def stock_item_must_exist
     errors.add(:stock_item_id, "this stock_item must exist") if stock_item_id && !StockItem.find(stock_item_id)
   end
@@ -28,7 +29,7 @@ class OrderItem < ActiveRecord::Base
   def stock_item_must_not_be_sold_out
     last_quantity = new_record? ? 0 : OrderItem.find(self.id).quantity
     if stock_item.quantity_remaining - quantity + last_quantity < 0
-      errors.add(:quantity, "#{stock_item.product_name} is sold out or you have attempted to order more than are currently available.  Please check the current inventory and try again.")
+      errors.add(:quantity, "#{stock_item.product_name} is sold out or you have tried to order more than currently available.")
     end
   end
 

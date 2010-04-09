@@ -5,7 +5,7 @@
 <p style="color: green"><%= flash[:notice] %></p>
 
 
-<%= render :partial => 'order_form', :locals => {:button_label => 'Create', :action => 'new'} %>
+<%= render :partial => 'order_form', :locals => {:button_label => 'Submit', :action => 'new'} %>
 
 <% if current_user.has_role?(:admin) %>
   <%= link_to 'Cancel', delivery_path(:id => @delivery.id, :farm_id => @farm.id) %>
