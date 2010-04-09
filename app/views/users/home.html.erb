@@ -129,7 +129,7 @@
       %>
       <tr>
         <td><%= "#{delivery.date.strftime('%d')} #{delivery.date.strftime('%b').upcase}" %></td>
-        <td><%= delivery.name %></td>
+        <td><%= link_to delivery.name, new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id) %></td>
         <td><%= delivery.pretty_status %></td>
         <td><%= link_to "new order", new_order_path(:delivery_id => delivery.id, :farm_id => delivery.farm.id) %></td>
       </tr>
