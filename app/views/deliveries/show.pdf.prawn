@@ -5,6 +5,7 @@ pdf.stroke_color 'cccccc'
 
 
 def render_label(pdf, label)
+    pdf.fill_color label.order.location.label_color
     pdf.indent 8 do
     pdf.move_down 8
     pdf.font "Helvetica", :style => :bold do
@@ -21,9 +22,15 @@ def render_label(pdf, label)
       pdf.text "Prev Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: _________"
     else
       if label.total_labels == label.label_num
-        pdf.text "Prv. Acct Balance: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: ____________  Label #{label.label_num} of #{label.total_labels}"
+        pdf.text "Prev Bal: #{number_to_currency label.order.member.balance_for_farm(@farm)} Bag Total: ______ "
+        pdf.move_cursor_to(18)
+        pdf.indent 205 do
+          pdf.text "Label #{label.label_num} of #{label.total_labels}"
+        end
       else
-        pdf.text "Label #{label.label_num} of #{label.total_labels}"
+        pdf.indent 205 do
+          pdf.text "Label #{label.label_num} of #{label.total_labels}"
+        end
       end
     end
 

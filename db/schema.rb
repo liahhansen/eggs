@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100407032839) do
+ActiveRecord::Schema.define(:version => 20100409234830) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20100407032839) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "farm_id"
+    t.string   "label_color", :default => "000000"
   end
 
   create_table "members", :force => true do |t|
