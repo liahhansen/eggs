@@ -64,14 +64,14 @@ describe Order do
   end
 
   it "should not be valid unless the order total is greater than the delivery minimum" do
-    p = Factory(:delivery, :minimum_order_total => 25)
-    o = Factory.build(:order, :delivery => Factory(:delivery, :minimum_order_total => 25))
-    o.order_items << Factory(:cheap_order_item)
-    o.valid?.should == false
-    o.errors.on_base.should == "your order does not meet the minimum"
+    delivery = Factory(:delivery, :minimum_order_total => 25)
+    order = Factory.build(:order, :delivery => Factory(:delivery, :minimum_order_total => 25))
+    order.order_items << Factory(:cheap_order_item)
+    order.valid?.should == false
+    order.errors.on_base.should == "your order does not meet the minimum"
 
-    o.order_items << Factory(:expensive_order_item)
-    o.valid?.should == true
+    order.order_items << Factory(:expensive_order_item)
+    order.valid?.should == true
   end
 
   it "should generate with order_items when a delivery is passed to new" do
