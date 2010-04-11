@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100409234830) do
+ActiveRecord::Schema.define(:version => 20100411055538) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -128,6 +128,15 @@ ActiveRecord::Schema.define(:version => 20100409234830) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "snippets", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "identifier"
+    t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

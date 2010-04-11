@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :snippets
+
   map.feedback 'feedbacks', :controller => 'feedbacks', :action => 'create'
   map.new_feedback 'feedbacks/new', :controller => 'feedbacks', :action => 'new'
   map.resources :locations

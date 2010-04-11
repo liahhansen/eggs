@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem "factory_girl", :source => "http://gemcutter.org"
   config.gem "fastercsv"
   config.gem "prawn"
+  config.gem "liquid"
   # config.gem "backup"
 
   

@@ -1,0 +1,23 @@
+<p>
+  <b>Title:</b>
+  <%=h @snippet.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @snippet.body %>
+</p>
+
+<p>
+  <b>Identifier:</b>
+  <%=h @snippet.identifier %>
+</p>
+
+<p>
+  <b>Farm:</b>
+  <%=h @snippet.farm_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_snippet_path(@snippet) %> |
+<%= link_to 'Back', snippets_path %>
