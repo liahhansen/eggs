@@ -2,7 +2,7 @@ class SnippetsController < ApplicationController
   # GET /snippets
   # GET /snippets.xml
   def index
-    @snippets = Snippet.all
+    @snippets = Snippet.find_all_by_farm_id(@farm.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +45,7 @@ class SnippetsController < ApplicationController
     respond_to do |format|
       if @snippet.save
         flash[:notice] = 'Snippet was successfully created.'
-        format.html { redirect_to(@snippet) }
+        format.html { redirect_to(snippet_path(@snippet, :farm_id => @farm.id)) }
         format.xml  { render :xml => @snippet, :status => :created, :location => @snippet }
       else
         format.html { render :action => "new" }
@@ -62,7 +62,7 @@ class SnippetsController < ApplicationController
     respond_to do |format|
       if @snippet.update_attributes(params[:snippet])
         flash[:notice] = 'Snippet was successfully updated.'
-        format.html { redirect_to(@snippet) }
+        format.html { redirect_to(snippet_path(@snippet, :farm_id => @farm.id)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,7 +78,7 @@ class SnippetsController < ApplicationController
     @snippet.destroy
 
     respond_to do |format|
-      format.html { redirect_to(snippets_url) }
+      format.html { redirect_to :action => "index", :farm_id => @farm.id }
       format.xml  { head :ok }
     end
   end

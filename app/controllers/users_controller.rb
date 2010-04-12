@@ -31,6 +31,9 @@ class UsersController < ApplicationController
       @inprogress_orders = orders.select {|order|order.delivery.status == "inprogress"}
       @archived_orders = orders.select {|order|order.delivery.status == "archived"}
 
+      @member_home = Snippet.find_by_identifier_and_farm_id("welcome_home", @farm.id)
+      @welcome_template = Liquid::Template.parse(@member_home.body) if @member_home
+
       @open_deliveries = Delivery.find_all_by_farm_id_and_status(@farm.id, "open", :order=>'date').reject do |delivery|
         has_order = false
         @open_orders.each do |order|

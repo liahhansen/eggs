@@ -10,6 +10,8 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
+  <%= RedCloth.new(@welcome_template.render('member' => @user.member)).to_html  %>
+
   <h5>Welcome to the new <%= @farm.name %> CSA system!</h5>
   <p>
     We're just getting started with this, so there might be the odd issue; bear with

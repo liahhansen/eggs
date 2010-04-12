@@ -28,6 +28,8 @@ class Member < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email_address
   validates_uniqueness_of :email_address
 
+  liquid_methods :first_name, :last_name
+
   def email_address_with_name
     "\"#{first_name} #{last_name}\" <#{email_address}>"
   end
