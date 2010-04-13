@@ -12,6 +12,9 @@ class TransactionsController < ApplicationController
     @subscription = Subscription.find_by_member_id_and_farm_id(params[:member_id], @farm.id)
     @transactions = Transaction.find_all_by_subscription_id(@subscription.id, @farm.id, :order=>'date')
 
+    balance_snippet = Snippet.find_by_identifier_and_farm_id('balance_details', @farm.id)
+    @balance_template = Liquid::Template.parse(balance_snippet.body) if balance_snippet
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @transactions }

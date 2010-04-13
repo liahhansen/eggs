@@ -10,31 +10,7 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-  <%= RedCloth.new(@welcome_template.render('member' => @user.member)).to_html  %>
-
-  <h5>Welcome to the new <%= @farm.name %> CSA system!</h5>
-  <p>
-    We're just getting started with this, so there might be the odd issue; bear with
-    us as we work out the kinks and improve it as we go.  Use the feedback link
-    liberally for any comments and suggestions!
-  </p>
-
-  <% if @farm.name == "Clark Summit Farm" %>
-  <hr/>
-  <h4>Ordering notes:</h4>
-  <p>The order form shows availability at the time you load the page, so if you are hoping to get items that are in high demand, I suggest placing the order for those first, then editing the order through the edit link (don't click the back button on your browser) to add the rest of your desired items. </p>
-  <p>The order minimum is $40 but I'm removing the requirement initially so that you don't get errors when trying to save before your order is fully complete. </p>
-  <hr/>
-  <% end %>
-
-  <p>
-    Please ensure your member information is correct and complete, especially if you pay with PayPal
-    under an alternate email address.  Click your name in
-    the top right corner or just click
-    <%= link_to "here", edit_user_path(:id => @user.id, :farm_id => @farm.id)%>.
-  </p>
-
-  
+  <%= RedCloth.new(@member_home_template.render('member' => @user.member)).to_html if @member_home_template %>
 
   <% if @finalized_orders.size >= 1
       next_order = @finalized_orders.first %>
@@ -76,7 +52,7 @@
 
   <% end %>
 
-  <% if @open_deliveries.size == 0 %>
+  <% if @open_deliveries.size == 0 && @open_orders.size == 0%>
     <div>
       <h5>There are currently no <%= @farm.name %> deliveries open for orders.</h5>
     </div>

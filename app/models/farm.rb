@@ -22,6 +22,8 @@ class Farm < ActiveRecord::Base
 
   acts_as_authorization_object
 
+  liquid_methods :name, :contact_email, :contact_name, :paypal_link
+
   # TODO: Figure out why this relationship is broken!
   def users
     user_arr = []

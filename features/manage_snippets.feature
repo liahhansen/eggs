@@ -17,7 +17,7 @@ Scenario: Viewing Snippet List
 Scenario: Viewing a Snippet
   When I follow "show"
   Then I should see "Member Homepage Welcome"
-  When I follow "Back"
+  When I follow "Snippets List"
   Then I should see "snippets"
 
 Scenario: Editing a Snippet
@@ -33,6 +33,6 @@ Scenario: Editing a Snippet
 Scenario: Updating a Snippet
   When I follow "edit"
   Then I should see "Editing snippet"
-  When I press "Update"
+  When I press "Submit"
   Then I should see "snippets"
 

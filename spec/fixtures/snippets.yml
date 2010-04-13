@@ -1,13 +1,13 @@
 
 soulfood_member_home:
   title: SoulFood Member Homepage Welcome
-  body:
+  body: Some text for the homepage
   identifier: member_home
   farm: soulfood
 
 
 clarksummit_member_home:
   title: Clark Member Homepage Welcome
-  body:
+  body:  Some text for the homepage
   identifier: member_home
   farm: clarksummit

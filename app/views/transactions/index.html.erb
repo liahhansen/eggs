@@ -49,15 +49,7 @@
       </p>
       <% end %>
 
-      <p>
-      Note: PayPal payments, checks, and cash are tracked manually, and may take a few days to show in your account.
-      If you have any questions about your account balance, please contact the CSA manager.
-      </p>
-      <p>
-        <b><%= "#{@farm.name} CSA Manager:" %></b><br/>
-        <%= @farm.contact_name %><br/>
-        <%= mail_to @farm.contact_email, @farm.contact_email %>
-      </p>
+      <%= RedCloth.new(@balance_template.render('farm' => @farm)).to_html if @balance_template %>
     </div>
   <% end %>
 
