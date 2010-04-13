@@ -11,13 +11,6 @@
   <b>Orders close at:</b>   <%=h @delivery.formatted_closing_at %><br/>
   <b>Minimum Order Total Allowed (estimated):</b>     <%=h number_to_currency @delivery.minimum_order_total %><br/>
 
-  <% if @farm.name == "Clark Summit Farm" %>
-    <br/>
-    <p><b>Description:</b>  This is our first attempt at this (very new) ordering system, so thanks for being patient! </p>
-    <p>The order form shows availability at the time you load the page, so if you are hoping to get items that are in high demand, I suggest placing the order for those first, then editing the order through the edit link (don't click the back button on your browser) to add the rest of your desired items. </p>
-    <p>The order minimum is $40 but I'm removing the requirement initially so that you don't get errors when trying to save before your order is fully complete. </p>
-  <% end %>
-
   <% if @member %>
     <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
   <% end %>
@@ -28,10 +21,6 @@
   <%= hidden_field_tag :delivery_id, @delivery.id %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.hidden_field :delivery_id, :value => @delivery.id  %>
-
-  <%# f.error_messages :header_message => "Order failed",
-                          :message => "You'll need to fix the following fields:",
-                          :header_tag => :h4 %>
 
   <%= render_error_messages @order %>
   <%= error_message_on :order, :base %>
