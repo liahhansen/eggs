@@ -1,4 +1,6 @@
-<h1>Listing snippets</h1>
+<div class="grid_12">
+  <h2 id="page-heading"><%= @farm.name %> snippets</h2>
+
 
 <table>
   <tr>
@@ -11,7 +13,7 @@
 <% @snippets.each do |snippet| %>
   <tr>
     <td><%=h snippet.title %></td>
-    <td><%=h snippet.body %></td>
+    <td><%=h truncate(snippet.body, 40, "...") %></td>
     <td><%=h snippet.identifier %></td>
     <td><%=h snippet.farm_id %></td>
     <td><%= link_to 'Show', snippet_path(snippet,:farm_id => @farm.id) %></td>
@@ -24,4 +26,7 @@
 
 <br />
 
-<%= link_to 'New snippet', new_snippet_path(:farm_id => @farm.id) %>
+<ul class="menu">
+  <li><%= link_to 'New snippet', new_snippet_path(:farm_id => @farm.id) %></li>
+</ul>
+</div>
