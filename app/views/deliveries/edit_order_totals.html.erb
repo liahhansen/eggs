@@ -35,69 +35,78 @@
 <%= hidden_field_tag :totals, true %>
 
 
-<table id="bag_totals">
-  <thead>
-  <tr>
-    <th>Member Name</th>
-    <th>Total items</th>
+
+<% @delivery.locations.each_with_index do |location, li| %>
+  <h1><%= location.name%>:</h1>
+  <table id="bag_totals">
+    <thead>
+    <tr>
+      <th>Member Name</th>
+      <th>Total items</th>
 
 
-    <th>Estimated Total</th>
-    <th>Finalized Total</th>
-    <th></th>
-  </tr>
-  </thead>
+      <th>Estimated Total</th>
+      <th>Finalized Total</th>
+      <th></th>
+    </tr>
+    </thead>
 
-  <tbody>
-    <% @delivery.orders.each_with_index do |order, i| %>
-      <% f.fields_for :orders, order do |builder| %>
-        <tr>
-          <td><a class="details" href="#tip-<%= i %>" rel="#tip-<%= i %>"><%= "#{order.member.last_name}, #{order.member.first_name}" %></a></td>
-          <td><%= order.total_items_quantity %></td>
+    <tbody>
+      <% @delivery.orders.for_location(location).each_with_index do |order, i| %>
+        <% f.fields_for :orders, order do |builder| %>
+          <tr>
+            <td><a class="details" href="#tip-<%= "#{li}-#{i}" %>" rel="#tip-<%= "#{li}-#{i}" %>"><%= "#{order.member.last_name}, #{order.member.first_name}" %></a></td>
+            <td><%= order.total_items_quantity %></td>
 
 
-          <td><%= number_to_currency order.estimated_total %></td>
-          <td>$<%= builder.text_field :finalized_total, :size => 5 %></td>
-          <td><%= order.member.last_name %> </td>
-        </tr>
+            <td><%= number_to_currency order.estimated_total %></td>
+            <td>$<%= builder.text_field :finalized_total, :size => 5 %></td>
+            <td><%= order.member.last_name %> </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-   </tbody>
-</table>
+     </tbody>
+  </table>
+
+  <% end %>
+
 
 <div style="float:right"><%= f.submit "Update" %></div>
 <% end %>
 
-  <% @delivery.orders.each_with_index do |order, i| %>
-    <div id="tip-<%= i %>">
-      <table>
-        <thead>
-          <tr>
-            <th>Num</th>
-            <th>Item</th>
-            <th>Price Each (*est)</th>
-            <th>Line total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% order.order_items.with_quantity.each do |order_item| %>
-            <tr>
-              <td><%= order_item.quantity %></td>
-              <td><%= order_item.stock_item.product_name%></td>
-              <td><%= number_to_currency order_item.stock_item.product_price %></td>
-              <td><%= number_to_currency order_item.stock_item.product_price * order_item.quantity %></td>
-            </tr>
+  <% @delivery.locations.each_with_index do |location, li| %>
 
-          <% end %>
-          <tr><td colspan="4"></td></tr>
-          <tr>
-            <td></td>
-            <td colspan="2"><h5>Estimated Total:</h5></td>
-            <td><h5><%= number_to_currency order.estimated_total %></h5></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <% @delivery.orders.for_location(location).each_with_index do |order, i| %>
+      <div id="tip-<%= "#{li}-#{i}" %>">
+        <table>
+          <thead>
+            <tr>
+              <th>Num</th>
+              <th>Item</th>
+              <th>Price Each (*est)</th>
+              <th>Line total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.order_items.with_quantity.each do |order_item| %>
+              <tr>
+                <td><%= order_item.quantity %></td>
+                <td><%= order_item.stock_item.product_name%></td>
+                <td><%= number_to_currency order_item.stock_item.product_price %></td>
+                <td><%= number_to_currency order_item.stock_item.product_price * order_item.quantity %></td>
+              </tr>
+
+            <% end %>
+            <tr><td colspan="4"></td></tr>
+            <tr>
+              <td></td>
+              <td colspan="2"><h5>Estimated Total:</h5></td>
+              <td><h5><%= number_to_currency order.estimated_total %></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   <% end %>
 
 </div>
