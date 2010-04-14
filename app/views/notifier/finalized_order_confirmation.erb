@@ -4,16 +4,14 @@ We've weighed your delicious goods for the <%= @order.delivery.farm.name %> pick
 
 Your final bag total is <%= number_to_currency @order.finalized_total %>.
 
-We've deducted your account, which leaves your balance at <%= number_to_currency @order.member.balance_for_farm(@order.delivery.farm) %>.
+Subtracting any credit you may have, your balance is <%= number_to_currency @order.member.balance_for_farm(@order.delivery.farm) %>.
 
-<% if @order.delivery.farm.paypal_link %>
-If the number is negative, please top up with paypal using this link:
-<%= @order.delivery.farm.paypal_link %>
+If the number is negative, please bring a check made out to <%= @order.delivery.farm.name %> or exact cash to the pickup.
 
-You can also bring a check or cash to the pickup, made out to <%= @order.delivery.farm.name %>.
-<% else %>
-You can bring a check or cash to the pickup, made out to <%= @order.delivery.farm.name %>.
-<% end %>
+You can also choose to make a $100 payment through PayPal via this link:
+<%= @order.delivery.farm.paypal_link if @order.delivery.farm.paypal_link %>
+
+Any amount over what you owe will be credited to your account for future orders.
 
 Here are your pickup details:
 Date/Time:  <%= "#{@order.delivery.pretty_date} - #{@order.location.time_window}" %>
