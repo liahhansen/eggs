@@ -23,7 +23,11 @@ class Delivery < ActiveRecord::Base
       self.select {|item| item.quantity_available > 0 }
     end
   end
-  has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name"
+  has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name" do
+    def for_location(location)
+      self.select {|order| order.location == location}
+    end
+  end
   has_many :pickups
   has_many :locations, :through => :pickups
 
