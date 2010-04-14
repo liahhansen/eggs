@@ -21,8 +21,8 @@
       <h2>Upcoming Pickup Details:</h2>
       <div class="block">
     <p>Your upcoming order (<%= "#{next_order.delivery.pretty_date} - #{next_order.delivery.name}" %>) has been finalized with a total
-    of <b><%= number_to_currency next_order.finalized_total %></b>.  Please bring a check or top up your account using
-    PayPal if your current balance will not cover the total.</p>
+    of <b><%= number_to_currency next_order.finalized_total %></b>.  Your current balance should reflect this order.  Please bring a check, cash, or
+    top up your Paypal account if your current balance is negative.</p>
 
 
         <table>
