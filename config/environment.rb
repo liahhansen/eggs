@@ -28,7 +28,7 @@ Rails::Initializer.run do |config|
   config.gem "prawn"
   config.gem "liquid"
   config.gem "RedCloth"
-  # config.gem "backup"
+  config.gem "backup"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).
