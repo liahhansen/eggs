@@ -45,6 +45,7 @@ end
 after "deploy:symlink" do
   run "cp #{File.join(shared_path, 'config', 'database.yml')} #{File.join(current_path, 'config', 'database.yml')}"
   run "cp #{File.join(shared_path, 'config', 'backup.rb')} #{File.join(current_path, 'config', 'backup.rb')}"  
+  run "cp #{File.join(shared_path, 'config', 'newrelic.yml')} #{File.join(current_path, 'config', 'newrelic.yml')}"  
   run "cp #{File.join(shared_path, 'config', 'production.rb')} #{File.join(current_path, 'config', 'environments', 'production.rb')}"
 end
 
@@ -54,10 +55,4 @@ namespace :deploy do
   task :update_crontab, :roles => :db do
     run "cd #{release_path} && /home/eggbasket/.gem/ruby/1.8/bin/whenever --update-crontab #{application}"
   end
-end
-
-task :after_update_code, :roles => :app do
-  # if ENV['build_gems'] and ENV['build_gems'] == '1'
-    run "rake -f #{release_path}/Rakefile gems:build"
-  # end
 end
