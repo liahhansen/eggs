@@ -22,7 +22,7 @@ Scenario: Submit Order Form With Minimum Order Error
   And I follow "Mission / Potrero"
   Then I should see "New Order"
   And I select "1" from "order_order_items_attributes_1_quantity"
-  And I press "Create"
+  And I press "Submit"
   Then I should see "your order does not meet the minimum"
 
 Scenario: Submit Order Form with Success
@@ -30,7 +30,7 @@ Scenario: Submit Order Form with Success
   And I follow "Mission / Potrero"
   Then I should see "New Order"
   And I select "2" from "order_order_items_attributes_0_quantity"
-  And I press "Create"
+  And I press "Submit"
   Then I should see "Order was successfully created."
   
 Scenario: Edit an Order
