@@ -56,3 +56,8 @@ namespace :deploy do
   end
 end
 
+task :after_update_code, :roles => :app do
+  # if ENV['build_gems'] and ENV['build_gems'] == '1'
+    run "rake -f #{release_path}/Rakefile gems:build"
+  # end
+end
