@@ -28,7 +28,9 @@ class OrderItem < ActiveRecord::Base
 
   def stock_item_must_not_be_sold_out
     last_quantity = new_record? ? 0 : OrderItem.find(self.id).quantity
-    if stock_item.quantity_remaining - quantity + last_quantity < 0
+    this_quantity = quantity || 0
+
+    if stock_item.quantity_remaining - this_quantity + last_quantity < 0
       errors.add(:quantity, "#{stock_item.product_name} is sold out or you have tried to order more than currently available.")
     end
   end
