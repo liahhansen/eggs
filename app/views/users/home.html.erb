@@ -10,7 +10,7 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
-  <%= RedCloth.new(@member_home_template.render('member' => @user.member)).to_html if @member_home_template %>
+  <%= @member_home_template.render('member' => @user.member) if @member_home_template %>
 
   <% if @finalized_orders.size >= 1
       next_order = @finalized_orders.first %>

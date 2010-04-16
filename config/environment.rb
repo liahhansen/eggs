@@ -27,7 +27,6 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem "prawn"
   config.gem "liquid"
-  config.gem "RedCloth"
   config.gem "backup"
 
   

@@ -49,7 +49,7 @@
       </p>
       <% end %>
 
-      <%= RedCloth.new(@balance_template.render('farm' => @farm)).to_html if @balance_template %>
+      <%= @balance_template.render('farm' => @farm) if @balance_template %>
     </div>
   <% end %>
 
