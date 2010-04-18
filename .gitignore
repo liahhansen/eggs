@@ -6,3 +6,4 @@ db/*.sqlite3
 .idea/
 *.iml
 rerun.txt
+config/heroku_env.rb
