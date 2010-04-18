@@ -14,4 +14,19 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
+
+# set delivery method to :smtp, :sendmail or :test
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  :address => "smtp.sendgrid.net",
+  :port => '587',
+  :tls => true,
+  :domain => ENV["SENDGRID_DOMAIN"],
+  :authentication => :plain,
+  :user_name => ENV["SENDGRID_USER_NAME"],
+  :password => ENV["SENDGRID_PASSWORD"]
+}
+
+config.action_mailer.default_url_options = { :host => ENV["ACTIONMAILER_DEFAULT_HOST"] }

@@ -10,7 +10,7 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 # See everything in the log (default is :info)
-# config.log_level = :debug
+config.log_level = :info
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
@@ -22,7 +22,23 @@ config.action_view.cache_template_loading            = true
 # config.action_controller.asset_host = "http://assets.example.com"
 
 # Disable delivery errors, bad email addresses will be ignored
-# config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
+
+# set delivery method to :smtp, :sendmail or :test
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  :address => "smtp.sendgrid.net",
+  :port => '587',
+  :tls => true,
+  :domain => ENV["SENDGRID_DOMAIN"],
+  :authentication => :plain,
+  :user_name => ENV["SENDGRID_USER_NAME"],
+  :password => ENV["SENDGRID_PASSWORD"]
+}
+
+config.action_mailer.default_url_options = { :host => ENV["ACTIONMAILER_DEFAULT_HOST"] }
+
 
 # Enable threaded mode
 # config.threadsafe!
