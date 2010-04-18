@@ -1,0 +1,7 @@
+hoptoad_notifier
+authlogic
+acl9 --source http://gemcutter.org
+factory_girl --source http://gemcutter.org
+fastercsv
+prawn
+liquid
