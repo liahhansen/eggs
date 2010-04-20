@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   rescue_from 'Acl9::AccessDenied', :with => :access_denied
-  
+
   before_filter :authenticate
   before_filter :set_farm
 
@@ -63,8 +63,9 @@ class ApplicationController < ActionController::Base
   
 
   def access_denied
+    set_farm
     if current_user
-      render :acctemplate => 'home/access_denied'
+      render :template => 'home/access_denied'
     else
       flash[:notice] = 'Access denied. Try to log in first.'
       redirect_to login_path
