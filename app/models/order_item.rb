@@ -21,7 +21,9 @@ class OrderItem < ActiveRecord::Base
   validates_inclusion_of :quantity, :in => 0..99
   validate :stock_item_must_exist
   validate :stock_item_must_not_be_sold_out
-  
+
+  liquid_methods :stock_item, :quantity
+
   def stock_item_must_exist
     errors.add(:stock_item_id, "this stock_item must exist") if stock_item_id && !StockItem.find(stock_item_id)
   end

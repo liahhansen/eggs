@@ -27,6 +27,8 @@ class StockItem < ActiveRecord::Base
 
   before_create :copy_product_attributes
 
+  liquid_methods :product_name, :product_description, :product_price, :product_estimated, :product_price_code
+
   def sold_out?
 
     items = OrderItem.find_all_by_stock_item_id(id)

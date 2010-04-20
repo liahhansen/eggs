@@ -28,6 +28,9 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_items
 
+  liquid_methods :member, :delivery, :finalized_total, :location, :notes,
+                 :order_items, :estimated_total, :order_items_with_quantity
+
   def self.new_from_delivery(delivery)
     order = Order.new
     delivery.stock_items.each do |item|

@@ -20,6 +20,8 @@ class Location < ActiveRecord::Base
   belongs_to :farm
   has_many :orders
 
+  liquid_methods :name, :host_name, :host_phone, :host_email, :address, :notes, :time_window, :map_link
+
   def map_link
     "http://mapof.it/#{address}"
   end

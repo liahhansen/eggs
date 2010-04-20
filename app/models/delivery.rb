@@ -37,6 +37,8 @@ class Delivery < ActiveRecord::Base
   accepts_nested_attributes_for :stock_items
   accepts_nested_attributes_for :orders
 
+  liquid_methods :name, :farm, :date, :pretty_date, :pretty_closing_at
+
   def self.new_from_farm(farm)
     delivery = Delivery.new
     farm.products.each do |product|
