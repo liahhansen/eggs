@@ -2,10 +2,10 @@ class EmailTemplate < ActiveRecord::Base
 
   belongs_to :farm
   ### Validation
-  validates_presence_of :subject, :from, :body, :name
+  validates_presence_of :subject, :from, :body, :name, :identifier
 
   # http://code.dunae.ca/validates_email_format_of.html
-  validates_email_format_of :from, :allow_nil => true, :allow_blank => true
+  # validates_email_format_of :from, :allow_nil => true, :allow_blank => true
   validates_email_format_of :cc, :allow_nil => true, :allow_blank => true
   validates_email_format_of :bcc, :allow_nil => true, :allow_blank => true
 
@@ -36,7 +36,6 @@ class EmailTemplate < ActiveRecord::Base
 
     begin
       @template = Liquid::Template.parse(text)
-      self[:template] = ActiveSupport::Base64.encode64(Marshal.dump(@template))
     rescue Liquid::SyntaxError => error
       @syntax_error = error.message
     end
@@ -58,7 +57,6 @@ class EmailTemplate < ActiveRecord::Base
   # Delivers the email
   #
   def deliver_to(address, options = {})
-    puts "deliver_to"
     options[:cc] ||= cc unless cc.blank?
     options[:bcc] ||= bcc unless bcc.blank?
 
@@ -71,7 +69,6 @@ class EmailTemplate < ActiveRecord::Base
   # Renders body as Liquid Markup template
   #
   def render_body(options = {})
-    puts template.render options
     template.render options
   end
 
@@ -93,14 +90,7 @@ class EmailTemplate < ActiveRecord::Base
   def template
     return @template unless @template.nil?
 
-    if self[:template].blank?
-      @template = Liquid::Template.parse body
-      self[:template] = ActiveSupport::Base64.encode64(@template)
-      save
-    else
-      @template = Marshal.load ActiveSupport::Base64.decode64(self[:template])
-    end
-
+    @template = Liquid::Template.parse body
     @template
   end
 

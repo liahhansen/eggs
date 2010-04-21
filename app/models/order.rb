@@ -73,5 +73,10 @@ class Order < ActiveRecord::Base
   def deliver_finalized_order_confirmation!
     Notifier.deliver_finalized_order_confirmation(self)
   end
+
+  def deliver_pickup_reminder!
+    template = EmailTemplate.find_by_identifier("order_pickup_reminder")
+    template.deliver_to(self.member.email_address, :order => self) if template
+  end
   
 end
