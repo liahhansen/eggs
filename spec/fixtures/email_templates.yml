@@ -1,0 +1,18 @@
+
+order_confirmation:
+  name: Order Confirmation
+  subject: Order Confirmation for {{order.delivery.date}} - {{order.delivery.location}}
+  from: eggs@example.com
+  bcc:
+  cc:
+  body: This confirms your order for {{order.delivery.date}}
+  farm: soulfood
+
+new_member_welcome:
+  name: New Member Welcome
+  subject: Welcome to Soul Food Farm!
+  from: eggs@example.com
+  bcc: eggs-admin@example.com
+  cc:
+  body: Thanks for joining us at {{farm.name}}
+  farm: soulfood

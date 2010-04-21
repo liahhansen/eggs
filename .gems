@@ -5,3 +5,4 @@ factory_girl --source http://gemcutter.org
 fastercsv
 prawn
 liquid
+validates_email_format_of

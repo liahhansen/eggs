@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100411055538) do
+ActiveRecord::Schema.define(:version => 20100421040753) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(:version => 20100411055538) do
     t.integer  "minimum_order_total"
     t.boolean  "deductions_complete", :default => false
     t.boolean  "finalized_totals",    :default => false
+  end
+
+  create_table "email_templates", :force => true do |t|
+    t.string   "subject",    :null => false
+    t.string   "from",       :null => false
+    t.string   "bcc"
+    t.string   "cc"
+    t.text     "body",       :null => false
+    t.text     "template"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "farm_id"
+    t.text     "notes"
+    t.string   "name"
   end
 
   create_table "farms", :force => true do |t|
@@ -170,7 +184,6 @@ ActiveRecord::Schema.define(:version => 20100411055538) do
     t.date     "date"
     t.float    "amount"
     t.string   "description"
-    t.integer  "member_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"

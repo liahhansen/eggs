@@ -2,6 +2,10 @@ body {
 	font-size: 13px;
 }
 
+.template_code {
+  font: 13px Courier, Courier New, Andale Mono, monospace;
+}
+
 label.error {
   color: #cc0000;
   font-weight: bold;
