@@ -4,6 +4,7 @@ describe EmailTemplate do
   before(:each) do
     @valid_attributes = {
       :name => "Welcome Email",
+      :identifier => 'new_member_welcome',
       :subject => "Welcome to Soul Food Farm",
       :from => "email@example.com",
       :bcc => "another@example.com",
