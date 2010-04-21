@@ -13,6 +13,8 @@
 #
 
 class Order < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper  
+
   belongs_to :member
   belongs_to :delivery
   has_many :transactions
@@ -29,7 +31,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_items
 
   liquid_methods :member, :delivery, :finalized_total, :location, :notes,
-                 :order_items, :estimated_total, :order_items_with_quantity
+                 :order_items, :estimated_total, :order_items_with_quantity,
+                 :member_balance_formatted, :finalized_total_formatted
 
   def self.new_from_delivery(delivery)
     order = Order.new
@@ -47,6 +50,17 @@ class Order < ActiveRecord::Base
     end
     total
   end
+
+  # These should be liquid filters!
+  def member_balance_formatted
+    number_to_currency member.balance_for_farm(delivery.farm)
+  end
+
+  def finalized_total_formatted
+    number_to_currency finalized_total
+  end
+
+  
 
   def total_items_quantity
     order_items.with_quantity.inject(0){|total, item|total + item.quantity}
