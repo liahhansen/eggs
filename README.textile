@@ -1,0 +1,45 @@
+h1. Eggs
+
+Eggs is a tool to help small meat farms manage their community supported agriculture programs (CSAs).
+
+h2. Who is it for?
+
+h3. It was built especially for CSAs which:
+* Have centralized pickups (rather than direct deliveries to customers)
+* Accept orders for products which only have an estimated price until they are weighed (such as chickens and cuts of beef)
+* Let members "top up" and carry a balance from month to month, from which their final order total is deducted after weighing.
+* Don't require a monthly commitment
+
+h3. It is not so good for CSAs or farms which:
+* Have a single flat-rate product, such as a fruit or veggie box
+* Need automatically recurring billing or orders
+* Require a monthly commitment
+
+h2. Some Features:
+
+h3. Members of a CSA can:
+* Join a CSA for a specific farm
+* Submit an order for any open delivery
+* Edit or cancel their order up until the delivery closes for orders
+* View their balance and any previous transactions
+* Receive a customized email once their order is finalized (weighed and priced) with the final total and any amount due.
+
+h3. Managers of a CSA can:
+* Manage members
+* Enter transactions for a member's balance (debits/credits)
+* Manage products which the farm offers
+* Create a delivery with available inventory (total available and per-person maximums)
+* Define available pickup locations
+* Accept orders and view inventory status
+* Print bag/box labels and packing lists for farm use
+* Export delivery data
+* Email members
+
+h2. Status
+
+Eggs has been rolled out to two farms, but a lot of things are still missing UI pieces (you have to send emails from the commandline, at the moment).
+
+We have a bunch more features in the works, including PayPal integration.  I'd love some help, so please contact me if you're interested: kathryn@kathrynaaker.com
+
+It's released under the MIT license, so use freely!
+
