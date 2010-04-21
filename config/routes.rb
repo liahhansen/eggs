@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
+  map.essential_info 'essential_info', :controller => 'farms', :action => 'show_essential_info'
   map.resources :user_sessions
 
   map.resources :order_items

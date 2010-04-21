@@ -2,7 +2,7 @@ class FarmsController < ApplicationController
 
   access_control do
     allow :admin
-    deny  :member
+    allow :member, :to => [:show_essential_info]
   end
   
   # GET /farms
@@ -30,6 +30,11 @@ class FarmsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @farm }
     end
+  end
+
+  def show_essential_info
+    @snippet = Snippet.find_by_identifier_and_farm_id("essential_info", @farm.id)
+    render :template => 'farms/essential_info'
   end
 
   # GET /farms/new
