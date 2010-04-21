@@ -44,7 +44,7 @@ describe Member do
     member = farm.members.first
     member.subscriptions.size.should == 1
 
-    transaction = Transaction.new(:member_id => member.id, :subscription => member.subscriptions.first,
+    transaction = Transaction.new(:subscription => member.subscriptions.first,
                     :amount => 90, :debit => true)
     
     transaction.save.should == true
