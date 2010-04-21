@@ -43,3 +43,8 @@ We have a bunch more features in the works, including PayPal integration.  I'd l
 
 It's released under the MIT license, so use freely!
 
+h2. Thanks
+
+* Bonnie Powell, the intrepid manager of Soul Food Farm and Clark Summit Farm CSA programs, who inspired and guided the project.
+* Alon Salant, for much mentoring and help with importing
+* Arena Reed, for some early UI sketching and brainstorming
