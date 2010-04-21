@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :email_templates
+
   map.resources :snippets
 
   map.feedback 'feedbacks', :controller => 'feedbacks', :action => 'create'
