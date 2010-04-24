@@ -1,0 +1,22 @@
+<% title "Resend Activation" %>
+
+<div class="grid_1">&nbsp;</div>
+<div class="block grid_5" id="login-forms">
+  <p style="color: green"><%= flash[:notice] %></p>
+  <% form_tag activation_resets_path do %>
+  <fieldset class="login">
+    <legend>Resend Activation</legend>
+    <p class="notice">Please enter your email address, and instructions to activate your account will be mailed to you.</p>
+
+    <p>
+      <label>Email</label>
+      <%= text_field_tag "email" %>
+    </p>
+
+    <%= submit_tag "Resend my activation", :class => "login button" %>
+
+  </fieldset>
+
+  <% end %>
+
+</div>

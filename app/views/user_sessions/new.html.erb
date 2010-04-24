@@ -12,7 +12,7 @@
     <%= form.error_messages :header_message => "Login failed",
                             :message => "You'll need to fix the following fields:",
                             :header_tag => :h4 %>
-
+    <%= form.hidden_field :remember_me, :value => true %>
     <p>
       <label>Email</label>
       <%= form.text_field :email %>
@@ -28,6 +28,7 @@
   <% end %>
 
 
-  <%= link_to "Forgot your password?", new_password_reset_path %>
+  <div><%= link_to "Forgot your password?", new_password_reset_path %></div>
+  <div><%= link_to "Resend activation email?", new_activation_reset_path %></div>
 
 </div>
