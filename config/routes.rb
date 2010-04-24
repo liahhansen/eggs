@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :transactions
 
   map.resources :password_resets
+  map.resources :activation_resets
 
   map.resources :members
 
