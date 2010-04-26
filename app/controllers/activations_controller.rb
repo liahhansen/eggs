@@ -3,7 +3,7 @@ class ActivationsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
 
   def new
-    @user = User.find_using_perishable_token(params[:activation_code], 2.weeks)
+    @user = User.find_using_perishable_token(params[:activation_code], 12.weeks)
     
     if @user
       if @user.active?
