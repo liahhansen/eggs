@@ -2,6 +2,8 @@
   <h2 id="page-heading">New transaction for <%= "#{@member.first_name} #{@member.last_name}" %></h2>
   <p style="color: green"><%= flash[:notice] %></p>
 
+  <h5>Current Balance: <%= number_to_currency @subscription.current_balance %></h5>
+  <hr/>
 <% form_for(@transaction) do |f| %>
   <%= f.error_messages %>
   <%= hidden_field_tag :farm_id, @farm.id %>
@@ -10,7 +12,7 @@
 
   <%= f.hidden_field :date, :value => Date.today %>
   <p>
-    Date: <%= Date.today %>
+    New Transaction Date: <%= Date.today %>
   </p>
   <p>
     <%= f.label :amount %><br />
