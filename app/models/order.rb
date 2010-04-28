@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   belongs_to :member
   belongs_to :delivery
   has_many :transactions
-  has_many :order_items, :dependent => :destroy do
+  has_many :order_items, :dependent => :destroy, :include => :stock_item, :order => "stock_items.product_name" do
     def with_quantity
       self.select {|item| item.quantity && (item.quantity > 0) }
     end
