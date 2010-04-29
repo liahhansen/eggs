@@ -12,6 +12,8 @@ module NavigationHelpers
       '/'
 
 
+    when /the delivery "(.*)"$/i
+      delivery_path(Delivery.find_by_name($1), :farm_id => @farm.id)  
       
     # Add more mappings here.
     # Here is a more fancy example:

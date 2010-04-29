@@ -4,9 +4,11 @@ Feature: Create Locations
   I need to be able to create locations for a particular farm
 
 Background:
+  Given there is a farm "Soul Food Farm"
   Given I am logged in as an admin
 
 Scenario: View location Index
+  Given the farm has a location "Soul Food Farm" with host "Alexis"
   Given I am at Soul Food Farm
   Then I should see "Manage Locations"
   When I follow "Manage Locations"

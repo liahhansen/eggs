@@ -3,7 +3,9 @@ Feature: View delivery Worksheet
   I want to see a worksheet view of a delivery
 
 Background:
-  Given I am the registered user jennyjones@kathrynaaker.com
+  Given I am the registered admin user jennyjones@kathrynaaker.com
+  Given there is a farm "Soul Food Farm"
+  Given there is a "open" delivery "Emeryville"
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"
@@ -13,4 +15,4 @@ Background:
 
 Scenario: View a worksheet
   When I follow "View Worksheet"
-  Then I should see "Aaker" 
+  Then I should see "Brown" 

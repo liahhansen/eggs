@@ -3,7 +3,8 @@ Feature: Manage Members
   I want to be able to veiw and manage members
 
 Background:
-  Given I am the registered user jennyjones@kathrynaaker.com
+  Given there is a farm "Soul Food Farm"
+  Given I am the registered admin user jennyjones@kathrynaaker.com
   And I am on login
   When I login with valid credentials
   Then I should see "Farms"
@@ -11,6 +12,7 @@ Background:
   Then I should see "Manage Members"
 
 Scenario: View list of members
+  Given the farm has the member "Billy Bobbins"
   When I follow "Manage Members"
-  Then I should see "Aaker"
+  Then I should see "Bobbins"
   And I should see "Soul Food Farm"  

@@ -3,13 +3,13 @@ Feature: Manage deliveries
   I want to create and manage deliveries
 
 Background:
+  Given there is a farm "Soul Food Farm"
   Given I am logged in as an admin
   When I follow "Soul Food Farm"
-  And I follow "Emeryville"
-  Then I should see "Delivery: Emeryville"
 
 Scenario: Create A Delivery
   Given I am at Soul Food Farm
+  Given the farm has a location "SF / Potrero" with host "Billy Baggins"
   Then I should see "Add New Delivery"
   When I follow "Add New Delivery"
   Then I should see "Minimum order total"
@@ -26,8 +26,11 @@ Scenario: Create A Delivery
 
 
 Scenario: Entering Finalized Totals
+  Given there is a "inprogress" delivery "SF - Hayes Valley"
+  When I go to the delivery "SF - Hayes Valley"
   When I follow "Enter Finalized Totals"
   Then I should see "Finalized Total"
+  And I should see "Anderson"
   When I fill in the following:
     |delivery_orders_attributes_0_finalized_total|11.11|
     |delivery_orders_attributes_1_finalized_total|22.22|

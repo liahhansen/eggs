@@ -5,3 +5,10 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+
+if ENV['RAILS_ENV'] == 'cucumber'
+  Role.delete_all
+  Role.create!(:name => 'admin')
+  Role.create!(:name => 'member')
+end

@@ -3,7 +3,9 @@ Feature: Submit Order
   They have to submit an order form
 
 Background:
-  Given I am the registered user benbrown@kathrynaaker.com
+  Given there is a farm "Soul Food Farm"
+  Given I am the registered member user benbrown@kathrynaaker.com
+  Given there is a "open" delivery "Mission / Potrero"
   And I am on login
   When I login with valid credentials
   Then I should see "Welcome"  
@@ -18,14 +20,16 @@ Scenario: View Order Form
   And I should see "Eggs"
 
 Scenario: Submit Order Form With Minimum Order Error
+  Given the delivery has a minimum total of 40
   When I go to home
   And I follow "Mission / Potrero"
   Then I should see "New Order"
-  And I select "1" from "order_order_items_attributes_1_quantity"
+  And I select "1" from "order_order_items_attributes_2_quantity"
   And I press "Submit"
   Then I should see "your order does not meet the minimum"
 
 Scenario: Submit Order Form with Success
+  Given the delivery has a minimum total of 40  
   When I go to home
   And I follow "Mission / Potrero"
   Then I should see "New Order"
@@ -34,6 +38,8 @@ Scenario: Submit Order Form with Success
   Then I should see "Order was successfully created."
   
 Scenario: Edit an Order
+  Given I have an existing order for the "Mission / Potrero" delivery
   When I go to home
-  And I follow "edit order"
-  Then I should see "Emeryville"
+  Then I should see "view/edit order"
+  And I follow "view/edit order"
+  Then I should see "Mission / Potrero"

@@ -50,7 +50,7 @@ end
 Factory.define :delivery do |p|
   p.name 'Emeryville'
   p.association :farm
-  p.date '2010-01-28'
+  p.date '2010-01-27'
   p.status 'inprogress'
   p.opening_at '2010-01-08 00:01:00'
   p.closing_at '2010-01-23 00:01:00'
@@ -75,7 +75,7 @@ end
 
 Factory.define :order_item do |p|
   p.association :stock_item
-#  p.association :order
+  p.association :order
   p.quantity 1
 end
 
@@ -173,3 +173,8 @@ Factory.define :transaction do |transaction|
   transaction.association :subscription
 end
 
+Factory.define :snippet do |snippet|
+  snippet.body '<h3>Welcome</h3><p>Thanks for joining us!</p>'
+  snippet.identifier 'member_welcome'
+  snippet.title 'Member Welcome'
+end
