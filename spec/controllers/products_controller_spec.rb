@@ -22,7 +22,7 @@ describe ProductsController do
     farm = Factory(:farm)
     Factory(:product, :farm_id => farm.id)
     Factory(:product, :farm_id => farm.id)
-    Factory(:product, :farm_id => 24)
+    Factory(:product, :farm => Factory(:farm))
 
     get :index, :farm_id => farm.id
     assigns(:products).size.should == 2
