@@ -155,8 +155,8 @@ describe Delivery do
     delivery.locations.first.should == location
   end
 
-  it "should allow addition of a product and update orders" do
-    delivery = Factory(:delivery)
+  def setup_delivery_with_orders(farm, status = 'open')
+    delivery = Factory(:delivery, :status => status, :farm => farm)
     3.times  {delivery.stock_items << Factory(:stock_item, :delivery => delivery)}
     delivery.stock_items.size.should == 3
 
@@ -175,17 +175,57 @@ describe Delivery do
       order.order_items.size.should == 3
     end
 
-    product = Factory(:product, :name => "Pellet Eggs")
+    return delivery
+  end
 
-    stock_item = delivery.create_new_stock_item_from_product(product)
+  it "should allow addition of a product and update orders" do
+    farm = Factory(:farm)
+
+    setup_delivery_with_orders(farm, "open")
+    product = Factory(:product, :name => "Pellet Eggs", :farm => farm)
+
+    delivery = farm.deliveries.first
     delivery.stock_items.size.should == 4
 
     delivery.orders.each do |order|
       order.order_items.size.should == 4
-      stock_order_item = order.order_items.detect {|order_item| order_item.stock_item == stock_item}
+      stock_order_item = order.order_items.detect {|order_item| order_item.stock_item.product == product}
       stock_order_item.quantity.should == 0
     end
+  end
 
+  it "should be updated with stock_items and update existing orders when new products are created" do
+    farm = Factory(:farm)
+    farm.deliveries << setup_delivery_with_orders(farm, "open")
+    farm.deliveries << setup_delivery_with_orders(farm, "inprogress")
+    farm.deliveries << setup_delivery_with_orders(farm, "finalized")
+    farm.deliveries << setup_delivery_with_orders(farm, "archived")
+
+    farm.deliveries.each do |delivery|
+      delivery.stock_items.size.should == 3
+      delivery.orders.each do |order|
+        order.order_items.size.should == 3
+      end
+    end
+
+    product = Factory.create(:product, :name => "Pellet Eggs", :farm => farm)
+
+    farm.deliveries.each do |delivery|
+      if delivery.status == "archived"
+        delivery.stock_items.size.should == 3
+        delivery.orders.each do |order|
+          order.order_items.size.should == 3
+        end
+      else
+        delivery.stock_items.size.should == 4
+        delivery.orders.each do |order|
+          order.order_items.size.should == 4
+          stock_order_item = order.order_items.detect {|order_item| order_item.stock_item.product == product}
+          stock_order_item.quantity.should == 0
+        end
+      end
+    end
+    
   end
 
 end
