@@ -3,7 +3,7 @@ Feature: Manage Snippet
   They must be able to add/edit snippets of text
 
 Background:
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given there is a snippet titled "Member Homepage Welcome"  
   Given I am logged in as an admin
   Given I am on home

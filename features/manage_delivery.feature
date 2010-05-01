@@ -3,7 +3,7 @@ Feature: Manage deliveries
   I want to create and manage deliveries
 
 Background:
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given I am logged in as an admin
   When I follow "Soul Food Farm"
 
@@ -22,6 +22,7 @@ Scenario: Create A Delivery
   And I check "location_0"
   And I press "Create"
   Then I should see "Delivery was successfully created"
+  And I should see "Hayes Valley"
 
 
 

@@ -4,7 +4,7 @@ Feature: View delivery Worksheet
 
 Background:
   Given I am the registered admin user jennyjones@kathrynaaker.com
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given there is a "open" delivery "Emeryville"
   And I am on login
   When I login with valid credentials

@@ -3,7 +3,7 @@ Feature: Submit Order
   They have to submit an order form
 
 Background:
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given I am the registered member user benbrown@kathrynaaker.com
   Given there is a "open" delivery "Mission / Potrero"
   And I am on login

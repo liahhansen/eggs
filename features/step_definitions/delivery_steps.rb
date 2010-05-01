@@ -1,20 +1,23 @@
 
-
-Given /^the member "([^\"]*)" has an order for the delivery "([^\"]*)"$/ do |member_last_name, delivery_name|
-  member = Member.find_by_last_name(member_last_name)
+Given /^the member "([^\"]*)" has an order for the delivery "([^\"]*)" and the location "([^\"]*)"$/ do |member_last_name, delivery_name, location_name|
   delivery = Delivery.find_by_name(delivery_name)
 
-  delivery.orders << Order.new(:member => member, :location => @farm.locations.first)
-  delivery.save!
+  order = Order.new_from_delivery(delivery)
+  order.member = Member.find_by_last_name(member_last_name)
+  order.location = delivery.locations.detect{|l| l.name == location_name}
 
+  order.order_items.each {|item| item.quantity = 1}
+
+  delivery.orders << order
+  delivery.save!
 end
 
 Given /^the farm has a product called "([^\"]*)"$/ do |product_name|
-  @farm.products << Factory.create(:product, :name => product_name)
+  @farm.products << Factory.create(:product, :name => product_name, :farm => @farm)
 end
 
 Given /^the delivery "([^\"]*)" has the stock_item "([^\"]*)" with a price of (.+)$/ do |delivery_name, stock_item_name, price|
-  Given 'there is a farm "Soul Food Farm"'
+  Given 'there is a farm'
   Given 'the farm has a product called "'+stock_item_name+'"'
   delivery = Delivery.find_by_name(delivery_name)
 
@@ -30,7 +33,7 @@ end
 
 Given /^there is a "([^\"]*)" delivery "([^\"]*)"$/ do |status, delivery_name|
   steps %Q{
-    Given there is a farm "Soul Food Farm"
+    Given there is a farm
     Given the farm has the member "Ben Brown"
     Given the farm has the member "Suzy Smith"
     Given the farm has the member "Alice Anderson"
@@ -45,10 +48,10 @@ Given /^there is a "([^\"]*)" delivery "([^\"]*)"$/ do |status, delivery_name|
     Given the delivery "#{delivery_name}" has the stock_item "Chicken, REGULAR" with a price of 30
     Given the delivery "#{delivery_name}" has the stock_item "Chicken, EXTRA LARGE" with a price of 45
     Given the delivery "#{delivery_name}" has the stock_item "Eggs" with a price of 6.5
-    Given the member "Brown" has an order for the delivery "#{delivery_name}"
-    Given the member "Smith" has an order for the delivery "#{delivery_name}"
-    Given the member "Anderson" has an order for the delivery "#{delivery_name}"
-  }  
+    Given the member "Brown" has an order for the delivery "#{delivery_name}" and the location "Hayes Valley"
+    Given the member "Smith" has an order for the delivery "#{delivery_name}" and the location "Hayes Valley"
+    Given the member "Anderson" has an order for the delivery "#{delivery_name}" and the location "Hayes Valley"
+  }
 end
 
 Given /^the "([^\"]*)" delivery has a date of "([^\"]*)"$/ do |delivery_name, delivery_date|
@@ -58,8 +61,7 @@ Given /^the "([^\"]*)" delivery has a date of "([^\"]*)"$/ do |delivery_name, de
 end
 
 Given /^I have an existing order for the "([^\"]*)" delivery$/ do |name|
-  delivery = Delivery.find_by_name(name)
   steps %Q{
-    Given the member "#{@user.member.last_name}" has an order for the delivery "#{name}"
+    Given the member "#{@user.member.last_name}" has an order for the delivery "#{name}" and the location "Hayes Valley"
   }
 end

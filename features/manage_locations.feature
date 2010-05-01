@@ -4,7 +4,7 @@ Feature: Create Locations
   I need to be able to create locations for a particular farm
 
 Background:
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given I am logged in as an admin
 
 Scenario: View location Index

@@ -3,7 +3,7 @@ Feature: Manage deliveries
   I want to create and manage deliveries
 
 Background:
-  Given there is a farm "Soul Food Farm"
+  Given there is a farm
   Given there is a "inprogress" delivery "Hayes Valley"
   Given there is a "open" delivery "Emeryville"
   Given the "Emeryville" delivery has a date of "2/3/2010"
