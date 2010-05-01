@@ -155,4 +155,37 @@ describe Delivery do
     delivery.locations.first.should == location
   end
 
+  it "should allow addition of a product and update orders" do
+    delivery = Factory(:delivery)
+    3.times  {delivery.stock_items << Factory(:stock_item, :delivery => delivery)}
+    delivery.stock_items.size.should == 3
+
+    2.times do
+      order = Order.new_from_delivery(delivery)
+      order.delivery = delivery
+      order.member = Factory(:member)
+      order.order_items[0].quantity = 1
+      order.order_items[1].quantity = 2
+      order.save!
+    end
+
+    delivery.orders.size.should == 2
+
+    delivery.orders.each do |order|
+      order.order_items.size.should == 3
+    end
+
+    product = Factory(:product, :name => "Pellet Eggs")
+
+    stock_item = delivery.create_new_stock_item_from_product(product)
+    delivery.stock_items.size.should == 4
+
+    delivery.orders.each do |order|
+      order.order_items.size.should == 4
+      stock_order_item = order.order_items.detect {|order_item| order_item.stock_item == stock_item}
+      stock_order_item.quantity.should == 0
+    end
+
+  end
+
 end

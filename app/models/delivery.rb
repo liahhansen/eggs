@@ -105,4 +105,17 @@ class Delivery < ActiveRecord::Base
     end
   end
 
+  def create_new_stock_item_from_product(product)
+    stock_item = stock_items.build(:product_id => product.id)
+    stock_item.copy_product_attributes
+    save!
+
+    orders.each {|order|
+      order.order_items.build(:stock_item_id => stock_item.id, :quantity => 0)
+      order.save!
+    }
+
+    return stock_item
+  end
+
 end
