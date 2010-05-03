@@ -39,14 +39,22 @@ describe Subscription do
     subscription.deposit_received = false
     subscription.joined_mailing_list = false
     subscription.referral = "kathryn aaker"
+    subscription.save!
     subscription.pending.should == true
   end
 
   it "defaults new member fields to pending" do
     subscription = Factory.build(:subscription)
+    subscription.pending.should == false
+    subscription.deposit_received.should == true
+    subscription.joined_mailing_list.should == true
+    subscription.save!
+
+    # this is because the database defaults to not pending,
+    # but newly created members default to pending = true
     subscription.pending.should == true
-    subscription.deposit_received.should == false
     subscription.joined_mailing_list.should == false
+    subscription.deposit_received.should == false
   end
 
 

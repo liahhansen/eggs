@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to "#{o.member.last_name}, #{o.member.first_name}", order_path(o, :farm_id => @farm.id)%>
-    <%= " (pending) " if o.member.subscription_for_form(@form).pending %>
+    <%= " (pending) " if o.member.subscription_for_farm(@farm).pending %>
     <% if !User.find_by_member_id(o.member.id) || User.find_by_member_id(o.member.id).active == false %>
       (not yet active)
     <% end %>
