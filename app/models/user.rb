@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def deliver_activation_instructions!(registration_url)
-    template = EmailTemplate.find_by_identifier("activation_instructions")
+    template = EmailTemplate.find_by_identifier_and_farm_id("activation_instructions",self.member.farms.first)
     template.deliver_to(self.member.email_address,
                         {:farm => self.member.farms.first,
                          :account_activation_url => registration_url}) if template
@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 
   def deliver_activation_confirmation!
     reset_perishable_token!
-    template = EmailTemplate.find_by_identifier("new_member_welcome")
+    template = EmailTemplate.find_by_identifier_and_farm_id("new_member_welcome",self.member.farms.first)
     template.deliver_to(self.member.email_address,
                         {:farm => self.member.farms.first, :user => self}) if template
 
