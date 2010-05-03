@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100503163124) do
+ActiveRecord::Schema.define(:version => 20100503180523) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20100503163124) do
     t.string   "contact_name"
     t.string   "subdomain",                      :default => "soulfood"
     t.string   "mailing_list_subscribe_address"
+    t.string   "address"
   end
 
   create_table "locations", :force => true do |t|

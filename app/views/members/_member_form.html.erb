@@ -36,9 +36,7 @@
     </li>
 
     <div class="grid_6">If by check, please mail it promptly to:
-      <pre class="farm_address">Soul Food Farm
-6046 Pleasants Valley Rd.
-Vacaville, CA 95688.</pre>We must receive your $100 pre-payment no later than 4 days before your first order.</div>
+      <pre class="farm_address"><%= @farm.address %></pre>We must receive your $100 pre-payment no later than 4 days before your first order.</div>
   <div class="grid_6">
     You can pay using PayPal by <%= link_to "clicking here", @farm.paypal_link, :target => "_blank" %>.
   </div>
