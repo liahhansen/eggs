@@ -32,4 +32,22 @@ describe Subscription do
 
     subscription.current_balance.should == 60
   end
+
+  it "accepts fields pertaining to new membership" do
+    subscription = Factory.build(:subscription)
+    subscription.deposit_type = "paypal"
+    subscription.deposit_received = false
+    subscription.joined_mailing_list = false
+    subscription.referral = "kathryn aaker"
+    subscription.pending.should == true
+  end
+
+  it "defaults new member fields to pending" do
+    subscription = Factory.build(:subscription)
+    subscription.pending.should == true
+    subscription.deposit_received.should == false
+    subscription.joined_mailing_list.should == false
+  end
+
+
 end

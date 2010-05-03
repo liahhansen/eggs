@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421065555) do
+ActiveRecord::Schema.define(:version => 20100503163124) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -61,7 +61,8 @@ ActiveRecord::Schema.define(:version => 20100421065555) do
     t.string   "paypal_link"
     t.string   "contact_email"
     t.string   "contact_name"
-    t.string   "subdomain",     :default => "soulfood"
+    t.string   "subdomain",                      :default => "soulfood"
+    t.string   "mailing_list_subscribe_address"
   end
 
   create_table "locations", :force => true do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20100421065555) do
     t.string   "address"
     t.string   "alternate_email"
     t.text     "notes"
+    t.boolean  "joined_google_groups", :default => true
   end
 
   create_table "order_items", :force => true do |t|
@@ -179,12 +181,18 @@ ActiveRecord::Schema.define(:version => 20100421065555) do
     t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "deposit_type",        :default => "unknown (old system)"
+    t.boolean  "deposit_received",    :default => true
+    t.boolean  "joined_mailing_list", :default => true
+    t.boolean  "pending",             :default => false
+    t.string   "referral"
   end
 
   create_table "transactions", :force => true do |t|
     t.date     "date"
     t.float    "amount"
     t.string   "description"
+    t.integer  "member_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"

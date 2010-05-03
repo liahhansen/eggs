@@ -27,3 +27,7 @@ span.validation-error {
 tr.zero_quantity {
   display:none;
 }
+
+pre.farm_address {
+  background-color: #E2E4E4;
+}

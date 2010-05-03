@@ -17,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
   map.activate '/activate/:id', :controller => 'activations', :action => 'create'
 
+  map.join 'join', :controller => 'members', :action => 'new'
+
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
   map.essential_info 'essential_info', :controller => 'farms', :action => 'show_essential_info'

@@ -13,6 +13,10 @@ Background:
 
 Scenario: View list of members
   Given the farm has the member "Billy Bobbins"
+  Given the farm has the member "Suzy Smith"
+  Given the member "Bobbins" is pending
   When I follow "Manage Members"
-  Then I should see "Bobbins"
-  And I should see "Soul Food Farm"  
+  Then I should see "Bobbins (pending)"
+  And I should see "Soul Food Farm"
+  And I should see "Smith"
+  And I should not see "Smith (pending)"
