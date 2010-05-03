@@ -1,0 +1,14 @@
+A new member has signed up for the <%= @farm.name %> CSA:
+
+<%= @user.member.last_name %>, <%= @user.member.first_name %>
+<%= @user.email %>
+
+Contact Details:
+Alternate email: <%= @user.member.alternate_email %>
+Phone number: <%= @user.member.phone_number %>
+Address: <%= @user.member.address %>
+
+Signup Details:
+Deposit type: <%= @user.member.subscription_for_farm(@farm).deposit_type %>
+Referral: <%= @user.member.subscription_for_farm(@farm).referral %>
+

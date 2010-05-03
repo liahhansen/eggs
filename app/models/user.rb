@@ -15,7 +15,7 @@
 #  active            :boolean(1)      default(FALSE), not null
 #
 
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   belongs_to :member
   has_many :roles_users
   has_many :roles, :through => :roles_users
@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
     c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
 
+  liquid_methods :email, :member 
 
   attr_accessible :email, :password, :password_confirmation, :member_attributes, :member_id
 
@@ -71,14 +72,23 @@ class User < ActiveRecord::Base
     Notifier.deliver_welcome_and_activation(self)
   end
 
-  def deliver_activation_instructions!
-    reset_perishable_token!
-    Notifier.deliver_activation_instructions(self, self.member.farms.first)
+  def deliver_activation_instructions!(registration_url)
+    template = EmailTemplate.find_by_identifier("activation_instructions")
+    template.deliver_to(self.member.email_address,
+                        {:farm => self.member.farms.first,
+                         :account_activation_url => registration_url}) if template
+
   end
 
   def deliver_activation_confirmation!
     reset_perishable_token!
-    Notifier.deliver_activation_confirmation(self, self.member.farms.first)
+    template = EmailTemplate.find_by_identifier("new_member_welcome")
+    template.deliver_to(self.member.email_address,
+                        {:farm => self.member.farms.first, :user => self}) if template
+
+
+    Notifier.deliver_new_member_notification(self, self.member.farms.first)
+    Notifier.deliver_mailing_list_subscription_request(self, self.member.farms.first)
   end
 
   def deliver_password_reset_instructions!

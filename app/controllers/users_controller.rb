@@ -34,6 +34,15 @@ class UsersController < ApplicationController
       member_home = Snippet.find_by_identifier_and_farm_id("welcome_home", @farm.id)
       @member_home_template = Liquid::Template.parse(member_home.body) if member_home
 
+      member_pending = Snippet.find_by_identifier_and_farm_id("member_pending", @farm.id)
+      @member_pending_template = Liquid::Template.parse(member_pending.body) if member_pending
+
+      member_pending_mailing_list = Snippet.find_by_identifier_and_farm_id("member_pending_mailing_list", @farm.id)      
+      @member_pending_mailing_list_template = Liquid::Template.parse(member_pending_mailing_list.body) if member_pending_mailing_list
+
+      member_pending_deposit = Snippet.find_by_identifier_and_farm_id("member_pending_deposit", @farm.id)      
+      @member_pending_deposit_template = Liquid::Template.parse(member_pending_deposit.body) if member_pending_deposit
+
       @open_deliveries = Delivery.find_all_by_farm_id_and_status(@farm.id, "open", :order=>'date').reject do |delivery|
         has_order = false
         @open_orders.each do |order|

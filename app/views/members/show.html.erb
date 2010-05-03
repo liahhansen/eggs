@@ -45,6 +45,26 @@
         <th>Notes:</th>
         <td><%= "#{@member.notes}"%></td>
       </tr>
+      <tr>
+        <th>Deposit Type:</th>
+        <td><%= @subscription.deposit_type %></td>
+      </tr>
+      <tr>
+        <th>Deposit Received?</th>
+        <td><%= @subscription.deposit_received %></td>
+      </tr>
+      <tr>
+        <th>Joined mailing list?</th>
+        <td><%= @subscription.joined_mailing_list %></td>
+      </tr>
+      <tr>
+        <th>Member Pending?</th>
+        <td><%= @subscription.pending %></td>
+      </tr>
+      <tr>
+        <th>Referred by?</th>
+        <td><%= @subscription.referral %></td>
+      </tr>
     </table>
   </div>
   <div class="clear"></div>

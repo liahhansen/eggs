@@ -17,7 +17,7 @@
 #
 
 class Member < ActiveRecord::Base
-  has_many :subscriptions
+  has_many :subscriptions, :include => :transactions
   has_many :farms, :through => :subscriptions
   has_many :orders, :dependent => :destroy do
     def filter_by_farm(farm)
@@ -28,15 +28,19 @@ class Member < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email_address
   validates_uniqueness_of :email_address
 
-  liquid_methods :first_name, :last_name, :email_address
+  liquid_methods :first_name, :last_name, :email_address, :address, :phone_number, :alternate_email  
 
   def email_address_with_name
     "\"#{first_name} #{last_name}\" <#{email_address}>"
   end
 
   def balance_for_farm(farm)
-    subscription = subscriptions.find_by_farm_id(farm.id)
+    subscription = subscription_for_farm(farm)
     subscription.current_balance
+  end
+
+  def subscription_for_farm(farm)
+    subscriptions.detect{|subscription|subscription.farm_id == farm.id}
   end
   
 end

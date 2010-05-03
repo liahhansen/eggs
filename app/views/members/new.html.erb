@@ -1,14 +1,9 @@
-<div id="" class="grid_6 ">
-  <h2 id="page-heading">New Member</h2>
+<div id="" class="grid_8 ">
+  <h2 id="page-heading"><%= @farm.name %> CSA Signup</h2>
 
 <p style="color: green"><%= flash[:notice] %></p>
 
-<% if current_user.respond_to?('has_role?') && current_user.has_role?(:admin) %>
-  </p>This form creates the new member in the system and sends them an email with a link to activate their account and set their new password.</p>
-<% else %>
-  <p>Thanks for helping us get set up with the new system at the <%= @farm.name %> CSA!</p>
-  <p>Make sure to enter in an alternate email if you use Paypal from a different address.</p>
-<% end %>
+<%= @new_member_template.render if @new_member_template %>
 
 <%= render :partial => 'member_form', :locals => {:button_label => 'Create'} %>
 

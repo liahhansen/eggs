@@ -10,7 +10,7 @@ class MembersController < ApplicationController
   end
 
   def index
-    @members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}, :order => 'last_name, first_name'
+    @members = @farm.members
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,7 @@ class MembersController < ApplicationController
   # GET /members/1.xml
   def show
     @member = Member.find(params[:id])
-    @subscription = Subscription.find_by_member_id_and_farm_id(@member.id,@farm.id)    
+    @subscription = Subscription.find_by_member_id_and_farm_id(@member.id,@farm.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,10 @@ class MembersController < ApplicationController
   # GET /members/new
   # GET /members/new.xml
   def new
+    @farm = Farm.find_by_subdomain(request.subdomains.first) unless @farm
     @member = Member.new
+
+    @new_member_template = Snippet.get_template("new_member", @farm)    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +47,7 @@ class MembersController < ApplicationController
   # GET /members/1/edit
   def edit
     @member = Member.find(params[:id])
+    @subscription = @member.subscription_for_farm(@farm)
   end
 
   # POST /members
@@ -54,11 +58,14 @@ class MembersController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if @member.save
-          Subscription.create!(:farm => @farm, :member => @member )
+          Subscription.create!(:farm => @farm, :member => @member,
+                               :referral => params[:referral],
+                               :deposit_type => params[:deposit_type])
           @user = User.new
           if @user.signup!(:member_id => @member.id, :email => params[:member][:email_address])
             @user.has_role!(:member)
-            @user.deliver_activation_instructions!
+            @user.reset_perishable_token!
+            @user.deliver_activation_instructions!(register_url(@user.perishable_token))
           end
 
           if(current_user && current_user.has_role?(:admin))
@@ -82,11 +89,20 @@ class MembersController < ApplicationController
   # PUT /members/1.xml
   def update
     @member = Member.find(params[:id])
+    @subscription = @member.subscription_for_farm(@farm)
+
+    pending = params[:pending] || false
+    deposit_received = params[:deposit_received] || false
+    joined_mailing_list = params[:joined_mailing_list] || false
+
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
+        @subscription.update_attributes!(:pending => pending,
+                                        :deposit_received => deposit_received,
+                                        :joined_mailing_list => joined_mailing_list)
         flash[:notice] = 'Member was successfully updated.'
-        format.html { redirect_to :action => "index", :farm_id => @farm.id }
+        format.html { redirect_to :action => "show", :id => @member.id, :farm_id => @farm.id }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -10,6 +10,25 @@
 
   <p style="color: green"><%= flash[:notice] %></p>
 
+  <% if @subscription.pending %>
+    <%= @member_pending_template.render('farm' => @farm) if @member_pending_template %>
+
+    <% if !@subscription.joined_mailing_list %>
+      <hr/>
+      <h3>Mailing List:</h3>
+      <%= @member_pending_mailing_list_template.render('user' => @user) if @member_pending_mailing_list_template %>
+      <hr/>
+    <% end %>
+
+    <% if !@subscription.deposit_received %>
+      <h3>Initial deposit:</h3>
+      <%= @member_pending_deposit_template.render('farm' => @farm) if @member_pending_deposit_template %>
+      <hr/>
+    <% end %>
+
+
+  <% end %>
+
   <%= @member_home_template.render('member' => @user.member) if @member_home_template %>
 
   <% if @finalized_orders.size >= 1

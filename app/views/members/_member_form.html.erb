@@ -1,53 +1,95 @@
 
-<% form_for(@member) do |f| %>
+<% form_for(@member, :html => { :class => 'wufoo'}) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
 
   <%= f.error_messages :header_message => "Member signup failed",
                           :message => "You'll need to fix the following fields:",
                           :header_tag => :h4 %>
 
-  <fieldset class="login">
-    <legend>New Member Info</legend>
+<ul>
 
-    <p>
+
+    
+    <li>
       <label>First Name</label>
-      <%= f.text_field :first_name, :size => "20" %>
-    </p>
+      <div><%= f.text_field :first_name, :size => "20", :class => "field text medium" %></div>
+    </li>
 
-    <p>
+    <li>
       <label>Last Name</label>
-      <%= f.text_field :last_name, :size => "20" %>
-    </p>
+      <div><%= f.text_field :last_name, :size => "20", :class => "field text medium" %></div>
+    </li>
 
-    <p>
+    <li>
       <label>Email Address</label>
-      <%= f.text_field :email_address %>
-    </p>
+      <div><%= f.text_field :email_address, :class => "field text medium" %></div>
+    </li>
 
-    <p>
+    <li>
+      <label>How will you be paying your $100 commitment fee?</label>
+      <% if @member.new_record? %>
+      <div><%= select_tag 'deposit_type', "<option>PayPal</option><option>Check</option>",
+                          :class => "field select small" %></div>
+      <% else %>
+      <div><%= @subscription.deposit_type if @subscription %></div>
+      <% end %>
+    </li>
+
+    <div class="grid_6">If by check, please mail it promptly to:
+      <pre class="farm_address">Soul Food Farm
+6046 Pleasants Valley Rd.
+Vacaville, CA 95688.</pre>We must receive your $100 pre-payment no later than 4 days before your first order.</div>
+  <div class="grid_6">
+    You can pay using PayPal by <%= link_to "clicking here", @farm.paypal_link, :target => "_blank" %>.
+  </div>
+
+    <li>
       <label>Alternate email</label>
-      <%= f.text_field :alternate_email %>
-    </p>
+      <div><%= f.text_field :alternate_email, :class => "field text medium"  %></div>
+    </li>
 
-    <p>
+    <li>
       <label>Phone number</label>
-      <%= f.text_field :phone_number %>
-    </p>
+      <div><%= f.text_field :phone_number, :class => "field text medium"  %></div>
+    </li>
 
-    <p>
-      <%= f.label :neighborhood %>
-      <%= f.text_field :neighborhood %>
-    </p>
-
-    <p>
+    <li>
       <label>Address</label>
-      <%= f.text_area :address, :size => "30x3" %>
-    </p>
+      <div><%= f.text_area :address, :size => "30x3", :class => "field textarea small" %></div>
+    </li>
+
+    <li>
+      <label>How did you hear about the CSA?  If you were referred by a member please tell us their name (for our rewards program).</label>
+      <div><%= text_field_tag :referral, nil, :class => "field text medium"  %></div>
+    </li>
+
+    <% if current_user && current_user.has_role?(:admin) && @subscription %>
+    <h4>Admin use</h4>
+
+    <li>
+      <label>Deposit Paid?</label>
+      <div><%= check_box_tag :deposit_received, true, @subscription.deposit_received %></div>
+    </li>
+
+    <li>
+      <label>Joined Mailing List?</label>
+      <div><%= check_box_tag :joined_mailing_list, true, @subscription.joined_mailing_list %></div>
+    </li>
+
+    <li>
+      <label>Member Pending?</label>
+      <div><%= check_box_tag :pending, true, @subscription.pending %></div>
+    </li>
+    <% end %>
+
+    <li>
+      <%= f.submit 'Submit', :class => "btTxt submit" %>      
+    </li>
+
+
+  </ul>
 
 
 
-  <%= f.submit 'Submit', :class => "login button" %>
-
-  </fieldset>
 
 <% end %>
