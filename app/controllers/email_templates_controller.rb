@@ -2,7 +2,7 @@ class EmailTemplatesController < ApplicationController
   # GET /email_templates
   # GET /email_templates.xml
   def index
-    @email_templates = EmailTemplate.all
+    @email_templates = @farm.email_templates
 
     respond_to do |format|
       format.html # index.html.erb
