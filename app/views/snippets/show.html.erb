@@ -1,6 +1,8 @@
 <div class="grid_12">
   <h2 id="page-heading">Snippet: <%=h @snippet.title %></h2>
 
+  <p style="color: green"><%= flash[:notice] %></p>  
+
   <p>
     <b>Identifier:</b>
     <%=h @snippet.identifier %>
