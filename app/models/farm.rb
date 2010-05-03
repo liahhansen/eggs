@@ -23,7 +23,7 @@ class Farm < ActiveRecord::Base
 
   acts_as_authorization_object
 
-  liquid_methods :name, :contact_email, :contact_name, :paypal_link
+  liquid_methods :name, :contact_email, :contact_name, :paypal_link, :subdomain, :address, :mailing_list_subscribe_address
 
   # TODO: Figure out why this relationship is broken!
   def users

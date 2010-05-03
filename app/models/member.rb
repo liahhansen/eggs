@@ -25,10 +25,11 @@ class Member < ActiveRecord::Base
     end
   end
 
-  validates_presence_of :first_name, :last_name, :email_address
+  validates_presence_of :first_name, :last_name, :email_address, :phone_number
   validates_uniqueness_of :email_address
 
-  liquid_methods :first_name, :last_name, :email_address, :address, :phone_number, :alternate_email  
+  liquid_methods :first_name, :last_name, :email_address, :address, :phone_number, :alternate_email,
+                 :balance_for_farm, :referral, :deposit_type, :deposit_received, :joined_mailing_list  
 
   def email_address_with_name
     "\"#{first_name} #{last_name}\" <#{email_address}>"
