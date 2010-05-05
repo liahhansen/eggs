@@ -228,4 +228,12 @@ describe Delivery do
     
   end
 
+  it "should have ordered stock_items" do
+    delivery = Factory(:delivery_with_stock_items)
+    delivery.stock_items.size.should == 3
+    delivery.stock_items.first.first?.should == true
+    delivery.stock_items.first.position.should == 1
+    delivery.stock_items[1].position.should == 2
+  end
+
 end

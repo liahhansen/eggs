@@ -23,6 +23,8 @@ class StockItem < ActiveRecord::Base
   belongs_to :delivery
   belongs_to :product
 
+  acts_as_list :scope => :delivery
+
   validates_associated :product
 
   before_create :copy_product_attributes

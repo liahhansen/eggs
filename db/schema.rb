@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100503180523) do
+ActiveRecord::Schema.define(:version => 20100505010452) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20100503180523) do
     t.boolean  "product_estimated"
     t.string   "product_price_code"
     t.string   "product_category"
+    t.integer  "position"
   end
 
   create_table "subscriptions", :force => true do |t|
