@@ -85,7 +85,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update_attributes(params[:order])
-        #Notifier.deliver_order_confirmation(@order)
+        Notifier.deliver_order_confirmation(@order, true)
         flash[:notice] = 'Order was successfully updated.'
         format.html { redirect_to order_path(:id => @order, :farm_id => @farm.id) }
         format.xml  { head :ok }

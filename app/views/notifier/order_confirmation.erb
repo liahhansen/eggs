@@ -1,6 +1,6 @@
 <%= "#{@order.member.first_name} #{@order.member.last_name}," %>
 
-Your order has been placed!
+Your order has been <%= @update ? "updated." : "placed!" %>
 
 <% @order.order_items.with_quantity.each do |item| %>
   <%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %>
