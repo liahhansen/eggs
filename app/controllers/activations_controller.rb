@@ -21,9 +21,10 @@ class ActivationsController < ApplicationController
   def create
     @user = User.find(params[:id])
 
-    raise Exception if @user.active?
-
-    if @user.activate!(params)
+    if @user.active?
+      flash[:notice] = "Looks like your account is already active.  Try logging in."
+      redirect_to login_url
+    elsif @user.activate!(params)
       @user.deliver_activation_confirmation!
       flash[:notice] = "Your account has been activated."
       redirect_to root_url
