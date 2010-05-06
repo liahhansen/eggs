@@ -15,10 +15,10 @@ describe EmailTemplatesController do
 
   describe "GET index" do
     it "assigns all email_templates as @email_templates" do
-      EmailTemplate.stub(:find).with(:all).and_return([mock_email_template])
+      @farm.email_templates << Factory(:email_template, :farm => @farm)
 
       get :index, :farm_id => @farm.id
-      assigns[:email_templates].should == [mock_email_template]
+      assigns[:email_templates].should == [@farm.email_templates.first]
     end
   end
 
