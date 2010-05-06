@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   end
   belongs_to :location
 
-  validates_presence_of :member_id, :delivery_id
+  validates_presence_of :member_id, :delivery_id, :location_id
   validate :member_must_exist, :delivery_must_exist, :total_meets_minimum
 
   accepts_nested_attributes_for :order_items

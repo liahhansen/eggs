@@ -47,4 +47,12 @@ class Notifier < ActionMailer::Base
     body          :order => order
   end
 
+  def order_notes_notification(order)
+    subject       "A recent order has special notes: #{order.member.last_name}, #{order.delivery.name}"
+    from          "EggBasket <noreply@eggbasket.org>"
+    recipients    order.delivery.farm.contact_email
+    sent_on       Time.now
+    body          :order => order
+  end
+
 end

@@ -1,0 +1,19 @@
+A recently placed or updated order has notes that you might be interested in:
+
+<%= "#{@order.member.last_name}, #{@order.member.first_name}" %>
+<%= "#{@order.delivery.name}, #{@order.delivery.pretty_date}" %>
+
+NOTES:
+<%= @order.notes %>
+
+
+ORDER DETAILS:
+
+<% @order.order_items.with_quantity.each do |item| %>
+  <%= "#{item.quantity} X "%><%= "#{item.stock_item.product_name} (#{item.stock_item.product_price_code})" %>
+<% end %>
+
+Location:  <%= @order.location.name %>
+Current balance: <%= number_to_currency @order.member.balance_for_farm(@order.delivery.farm) %>
+
+
