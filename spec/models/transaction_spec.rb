@@ -37,6 +37,7 @@ describe Transaction do
     sub = Factory(:subscription)
     Factory(:transaction, :subscription => sub, :amount => 100, :debit => false, :balance => 100)
     Factory(:transaction, :subscription => sub, :amount => 40, :debit => true)
+    sub.transactions.reload
     sub.current_balance.should == 60;
   end
 

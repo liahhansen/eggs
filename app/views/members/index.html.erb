@@ -41,7 +41,7 @@
       <td>
         <%= link_to member.last_name, member_path(member, :farm_id => @farm.id) %>
         <%= " (pending)" if member.subscription_for_farm(@farm).pending %>
-        <% if !User.find_by_member_id(member.id) || User.find_by_member_id(member.id).active == false %>
+        <% if !member.user || !member.user.active? %>
           (not yet active)
         <% end %>
 

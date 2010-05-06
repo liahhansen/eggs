@@ -27,7 +27,7 @@ class Transaction < ActiveRecord::Base
 
   def calculate_balance
     if !balance
-      last = Transaction.find_all_by_subscription_id(subscription.id, :order => :date).last
+      last = Transaction.find_all_by_subscription_id(subscription.id, :order => 'date ASC').last
       if last
         self.balance = last.balance + (debit ? -amount : amount)
       else

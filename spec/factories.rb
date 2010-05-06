@@ -178,3 +178,11 @@ Factory.define :snippet do |snippet|
   snippet.identifier 'member_welcome'
   snippet.title 'Member Welcome'
 end
+
+Factory.define :email_template do |email_template|
+  email_template.name "Welcome Email"
+  email_template.identifier "welcome_email"
+  email_template.subject "Hello"
+  email_template.from "fromme@example.com"
+  email_template.body "Welcome to the Farm!"
+end

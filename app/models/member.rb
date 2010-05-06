@@ -25,6 +25,8 @@ class Member < ActiveRecord::Base
     end
   end
 
+  has_one :user
+
   validates_presence_of :first_name, :last_name, :email_address, :phone_number
   validates_uniqueness_of :email_address
 

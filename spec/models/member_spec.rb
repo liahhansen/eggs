@@ -58,4 +58,12 @@ describe Member do
     second_member = Factory.build(:member, :email_address => "one@two.com")
     second_member.valid?.should == false
   end
+
+  it "has one user" do
+    member = Factory.create(:member)
+    user = Factory.create(:user, :member => member)
+
+    member.user.should == user
+
+  end
 end

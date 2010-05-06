@@ -10,7 +10,7 @@ class MembersController < ApplicationController
   end
 
   def index
-    @members = @farm.members
+    @members = @farm.members :include => :user
 
     respond_to do |format|
       format.html # index.html.erb

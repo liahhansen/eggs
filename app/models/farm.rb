@@ -17,7 +17,7 @@ class Farm < ActiveRecord::Base
   has_many :products
   has_many :deliveries
   has_many :subscriptions
-  has_many :members, :through => :subscriptions, :order => 'last_name, first_name', :include => :subscriptions
+  has_many :members, :through => :subscriptions, :order => 'last_name, first_name', :include => [:user,:subscriptions]
   has_many :locations
   has_many :email_templates
 

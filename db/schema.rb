@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100505010452) do
+ActiveRecord::Schema.define(:version => 20100505053723) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.boolean  "finalized_totals",    :default => false
   end
 
+  add_index "deliveries", ["farm_id"], :name => "index_deliveries_on_farm_id"
+
   create_table "email_templates", :force => true do |t|
     t.string   "subject",    :null => false
     t.string   "from",       :null => false
@@ -53,6 +55,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.string   "identifier"
   end
 
+  add_index "email_templates", ["farm_id", "identifier"], :name => "index_email_templates_on_farm_id_and_identifier"
+  add_index "email_templates", ["farm_id"], :name => "index_email_templates_on_farm_id"
+
   create_table "farms", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -65,6 +70,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.string   "mailing_list_subscribe_address"
     t.string   "address"
   end
+
+  add_index "farms", ["name"], :name => "index_farms_on_name"
+  add_index "farms", ["subdomain"], :name => "index_farms_on_subdomain"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -79,6 +87,8 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.integer  "farm_id"
     t.string   "label_color", :default => "000000"
   end
+
+  add_index "locations", ["farm_id"], :name => "index_locations_on_farm_id"
 
   create_table "members", :force => true do |t|
     t.string   "first_name"
@@ -104,6 +114,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.datetime "updated_at"
   end
 
+  add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
+  add_index "order_items", ["stock_item_id"], :name => "index_order_items_on_stock_item_id"
+
   create_table "orders", :force => true do |t|
     t.integer  "member_id"
     t.integer  "delivery_id"
@@ -114,12 +127,19 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.integer  "location_id"
   end
 
+  add_index "orders", ["delivery_id"], :name => "index_orders_on_delivery_id"
+  add_index "orders", ["location_id"], :name => "index_orders_on_location_id"
+  add_index "orders", ["member_id"], :name => "index_orders_on_member_id"
+
   create_table "pickups", :force => true do |t|
     t.integer  "delivery_id"
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pickups", ["delivery_id"], :name => "index_pickups_on_delivery_id"
+  add_index "pickups", ["location_id"], :name => "index_pickups_on_location_id"
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -135,6 +155,8 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.integer  "default_per_member", :default => 4
   end
 
+  add_index "products", ["farm_id"], :name => "index_products_on_farm_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40
     t.string   "authorizable_type", :limit => 40
@@ -143,12 +165,18 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.datetime "updated_at"
   end
 
+  add_index "roles", ["authorizable_type", "authorizable_id"], :name => "index_roles_on_authorizable_type_and_authorizable_id"
+
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id", "role_id"], :name => "index_roles_users_on_user_id_and_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "snippets", :force => true do |t|
     t.string   "title"
@@ -158,6 +186,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "snippets", ["farm_id", "identifier"], :name => "index_snippets_on_farm_id_and_identifier"
+  add_index "snippets", ["farm_id"], :name => "index_snippets_on_farm_id"
 
   create_table "stock_items", :force => true do |t|
     t.integer  "delivery_id"
@@ -178,6 +209,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.integer  "position"
   end
 
+  add_index "stock_items", ["delivery_id"], :name => "index_stock_items_on_delivery_id"
+  add_index "stock_items", ["product_id"], :name => "index_stock_items_on_product_id"
+
   create_table "subscriptions", :force => true do |t|
     t.integer  "member_id"
     t.integer  "farm_id"
@@ -189,6 +223,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.boolean  "pending",             :default => false
     t.string   "referral"
   end
+
+  add_index "subscriptions", ["farm_id"], :name => "index_subscriptions_on_farm_id"
+  add_index "subscriptions", ["member_id"], :name => "index_subscriptions_on_member_id"
 
   create_table "transactions", :force => true do |t|
     t.date     "date"
@@ -203,6 +240,9 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.integer  "subscription_id"
   end
 
+  add_index "transactions", ["order_id"], :name => "index_transactions_on_order_id"
+  add_index "transactions", ["subscription_id"], :name => "index_transactions_on_subscription_id"
+
   create_table "users", :force => true do |t|
     t.string   "phone_number"
     t.datetime "created_at"
@@ -215,5 +255,8 @@ ActiveRecord::Schema.define(:version => 20100505010452) do
     t.string   "perishable_token"
     t.boolean  "active",            :default => false, :null => false
   end
+
+  add_index "users", ["member_id"], :name => "index_users_on_member_id"
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
 end
