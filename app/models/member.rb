@@ -19,7 +19,7 @@
 class Member < ActiveRecord::Base
   has_many :subscriptions
   has_many :farms, :through => :subscriptions
-  has_many :orders, :dependent => :destroy do
+  has_many :orders, :dependent => :destroy, :include => :delivery, :order => 'deliveries.date DESC' do
     def filter_by_farm(farm)
       self.select {|order| order.delivery.farm == farm}
     end
