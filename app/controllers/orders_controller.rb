@@ -101,7 +101,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     
-    @order.destroy if @order.delivery.status == "open"
+    @order.destroy if @order.delivery.status == "open" || current_user.has_role?(:admin)
 
     respond_to do |format|
 
