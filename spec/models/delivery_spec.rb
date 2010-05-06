@@ -159,6 +159,7 @@ describe Delivery do
     delivery = Factory(:delivery, :status => status, :farm => farm)
     3.times  {delivery.stock_items << Factory(:stock_item, :delivery => delivery)}
     delivery.stock_items.size.should == 3
+    delivery.locations << Factory(:location)
 
     2.times do
       order = Order.new_from_delivery(delivery)
@@ -166,6 +167,7 @@ describe Delivery do
       order.member = Factory(:member)
       order.order_items[0].quantity = 1
       order.order_items[1].quantity = 2
+      order.location = delivery.locations.first
       order.save!
     end
 

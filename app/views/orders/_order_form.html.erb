@@ -15,6 +15,8 @@
     <b>Order For:</b>         <%=h "#{@member.first_name} #{@member.last_name}" %><br/>
   <% end %>
 </div>
+<br/>
+<br/>
 
 
 <% form_for @order do |f| %>
@@ -24,10 +26,10 @@
 
   <%= render_error_messages @order %>
   <%= error_message_on :order, :base %>
+  <h4>Pickup Location:</h4>
   <p>
-    Pickup Location:<br/>
     <% if @delivery.locations.size > 1 %>
-      <%= f.select :location_id, @delivery.locations.map {|location| [location.name, location.id]} %>
+      <%= f.select :location_id, @delivery.locations.map {|location| [location.name, location.id]}, :include_blank => true %>
     <% else %>
       <%= @delivery.locations.first.name %>
       <%= f.hidden_field :location_id, :value => @delivery.locations.first.id %>
@@ -43,10 +45,11 @@
     <%= f.hidden_field :member_id, :value => @member.id %>
   <% end %>
 
+  <h4>Your Order:</h4>
   <%= render :partial => 'order_items_fields', :locals => {:f => f} %>
 
   <p>
-    <%= f.label :notes %><br />
+    <label>Notes, questions, comments:</label><br />
     <%= f.text_area :notes, :size => "50x5" %>
   </p>
   <p>

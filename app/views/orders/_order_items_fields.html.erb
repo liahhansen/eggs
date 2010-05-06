@@ -1,24 +1,33 @@
 <table class="order_form">
-  <tr class="hed">
-    <th>Quantity</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Pricing details</th>
-    <th>Price *estimated maximum</th>
-    <th>Total number available</th>
-    <th>Max per member</th>
-    <th>Quantity remaining</th>
-    <th>Sold out?</th>
-  </tr>
-
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Pricing details</th>
+      <th>Price *estimated maximum</th>
+      <th>Total number available</th>
+      <th>Max per member</th>
+      <th>Quantity remaining</th>
+      <th>Sold out?</th>
+    </tr>
+  </thead>
 
   <% @order.order_items.each do |item| %>
       <tr <%= "class='zero_quantity'" if item.stock_item.quantity_available.zero? %>>
+      <tr class="<%= 'zero_quantity' if item.stock_item.quantity_available.zero? %>
+          <%= cycle("even", "odd") %>">  
+
         <% f.fields_for :order_items, item do |builder| %>
             <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id %>
             <td>
               <% if @order.new_record? %>
-                <%= builder.select :quantity, 0..item.stock_item.available_per_member %>
+                <% if item.stock_item.available_per_member == 0 %>
+                  <%= builder.hidden_field :quantity, :value => 0 %>
+                  SOLD OUT
+                <% else %>
+                  <%= builder.select :quantity, 0..item.stock_item.available_per_member %>
+                <% end %>
               <% else %>
                 <% if item.quantity >= 1 %>
 
@@ -44,7 +53,7 @@
         <td><%= item.stock_item.quantity_available %></td>
         <td><%= item.stock_item.max_quantity_per_member %></td>
         <td><%= item.stock_item.quantity_remaining %></td>
-        <td><%= item.stock_item.sold_out? %></td>
+        <td><%= item.stock_item.sold_out? ? "SOLD OUT" : "-" %></td>
       </tr>
 
   <% end %>
