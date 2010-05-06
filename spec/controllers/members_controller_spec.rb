@@ -50,7 +50,7 @@ describe MembersController do
     farm = Factory(:farm)
     Role.create!(:name => "member")
 
-    get :create, :farm_id => farm.id, :member => {:email_address => 'jj@example.com','first_name' => 'Jay','last_name' => 'Jay'}
+    get :create, :farm_id => farm.id, :member => {:email_address => 'jj@example.com','first_name' => 'Jay','last_name' => 'Jay','phone_number'=>'123'}
     
     assigns[:member].should_not be_nil
     assigns[:user].member.should == assigns[:member]
