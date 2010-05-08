@@ -100,6 +100,29 @@
   <% end %>
   </table>
 
+  <table>
+    <tr>
+      <th>Visible?</th>
+      <th>Description</th>
+      <th>Short Code</th>
+      <th>Options</th>
+    </tr>
+  <% @delivery.delivery_questions.each do |question| %>
+
+        <% f.fields_for :delivery_questions, question do |builder| %>
+        <tr>
+          <%= builder.hidden_field :product_question_id, :value => question.product_question.id %>
+          <td><%= builder.check_box :visible %></td>
+          <td><%= builder.text_area :description, :size => "20x8" %></td>
+          <td><%= builder.text_field :short_code, :size => "14" %></td>
+          <td><%= builder.text_area :options, :size => "62x8" %></td>
+        </tr>
+        <% end %>
+
+  <% end %>
+  </table>
+
+
   <p>
     <%= f.submit button_label %>
   </p>

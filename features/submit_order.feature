@@ -36,6 +36,20 @@ Scenario: Submit Order Form with Success
   And I select "2" from "order_order_items_attributes_0_quantity"
   And I press "Submit"
   Then I should see "Order was successfully created."
+
+#Scenario: Submit order with a delivery question
+#  pending
+#  Given there is a delivery question "Our policy is to provide fresh" with options OK with frozen | OK\\nOK to substitute 1 for frozen | 1
+#  When I go to home
+#  And I follow "Mission / Potrero"
+#  Then I should see "Our policy is to provide fresh"
+#  And I should see "OK with frozen"
+#  And I should see "OK to substitute"
+#  When I select "OK with frozen" from "order_order_questions_attributes_0_option_code"
+#  And I select "2" from "order_order_items_attributes_0_quantity"
+#  And I press "Submit"
+#  Then I should see "OK to substitute 1 for frozen"
+#  And I should see "Order was successfully created."
   
 Scenario: Edit an Order
   Given I have an existing order for the "Mission / Potrero" delivery

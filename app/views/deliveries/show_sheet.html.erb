@@ -55,7 +55,9 @@
         <th><%= item.product_name %><br/>
           <%= item.product_price_code %></th>
       <% end %>
-
+      <% @delivery.delivery_questions.visible.each do |question| %>
+        <th><%= question.short_code %></th>
+      <% end %>
       <th class="note_entry">Notes, questions</th>
       <th>Old Account Balance</th>
       <th>Estimated Bag Total</th>
@@ -92,6 +94,9 @@
         </td>
       <% end %>
 
+      <% order.order_questions.visible.each do |question| %>
+        <td><%= question.option_code %></td>
+      <% end %>
       <td><%= order.notes %></td>
       <td><%= number_to_currency (order.member.balance_for_farm(@farm) - order.finalized_total.to_f)%></td>
       <td><%= number_to_currency order.estimated_total %></td>

@@ -66,3 +66,8 @@ Given /^I have an existing order for the "([^\"]*)" delivery$/ do |name|
     Given the member "#{@user.member.last_name}" has an order for the delivery "#{name}" and the location "Hayes Valley"
   }
 end
+
+Given /^there is a delivery question "([^\"]*)" with options ([^\"]*)$/ do |description, options|
+  delivery_question = DeliveryQuestion.new(:description => description, :options => options, :delivery => @delivery)
+  delivery_question.save!  
+end

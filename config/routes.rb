@@ -39,6 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :products
+  map.resources :product_questions
 
   map.resources :farms do |farm|
     farm.resources :deliveries do |delivery|

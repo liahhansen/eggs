@@ -19,7 +19,7 @@
     </tr>
 
   <% @products.each do |product| %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%=h product.name %></td>
       <td><%=h product.description %></td>
       <td><%=h product.price_code %></td>

@@ -20,6 +20,7 @@ class Farm < ActiveRecord::Base
   has_many :members, :through => :subscriptions, :order => 'last_name, first_name', :include => [:user,:subscriptions]
   has_many :locations
   has_many :email_templates
+  has_many :product_questions
 
   acts_as_authorization_object
 

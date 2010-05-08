@@ -23,6 +23,12 @@ class Delivery < ActiveRecord::Base
       self.select {|item| item.quantity_available > 0 }
     end
   end
+  has_many :delivery_questions, :dependent => :destroy do
+    def visible
+      self.select {|question| question.visible? }
+    end
+  end
+
   has_many :orders, :dependent => :destroy, :include => :member, :order => "members.last_name" do
     def for_location(location)
       self.select {|order| order.location == location}
@@ -36,6 +42,7 @@ class Delivery < ActiveRecord::Base
 
   accepts_nested_attributes_for :stock_items
   accepts_nested_attributes_for :orders
+  accepts_nested_attributes_for :delivery_questions
 
   liquid_methods :name, :farm, :date, :pretty_date, :pretty_closing_at
 
@@ -44,6 +51,10 @@ class Delivery < ActiveRecord::Base
     farm.products.each do |product|
       stock_item = delivery.stock_items.build(:product_id => product.id)
       stock_item.copy_product_attributes
+    end
+    farm.product_questions.each do |product_question|
+      delivery_question = delivery.delivery_questions.build(:product_question_id => product_question.id)
+      delivery_question.copy_product_question_attributes
     end
     return delivery
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100505053723) do
+ActiveRecord::Schema.define(:version => 20100506180347) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20100505053723) do
   end
 
   add_index "deliveries", ["farm_id"], :name => "index_deliveries_on_farm_id"
+
+  create_table "delivery_questions", :force => true do |t|
+    t.integer "delivery_id"
+    t.string  "description"
+    t.text    "options"
+    t.boolean "visible"
+    t.string  "short_code"
+    t.integer "product_question_id"
+  end
 
   create_table "email_templates", :force => true do |t|
     t.string   "subject",    :null => false
@@ -117,6 +126,13 @@ ActiveRecord::Schema.define(:version => 20100505053723) do
   add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
   add_index "order_items", ["stock_item_id"], :name => "index_order_items_on_stock_item_id"
 
+  create_table "order_questions", :force => true do |t|
+    t.integer "order_id"
+    t.integer "delivery_question_id"
+    t.string  "option_code"
+    t.string  "option_string"
+  end
+
   create_table "orders", :force => true do |t|
     t.integer  "member_id"
     t.integer  "delivery_id"
@@ -140,6 +156,15 @@ ActiveRecord::Schema.define(:version => 20100505053723) do
 
   add_index "pickups", ["delivery_id"], :name => "index_pickups_on_delivery_id"
   add_index "pickups", ["location_id"], :name => "index_pickups_on_location_id"
+
+  create_table "product_questions", :force => true do |t|
+    t.integer  "farm_id"
+    t.string   "description"
+    t.text     "options"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "short_code"
+  end
 
   create_table "products", :force => true do |t|
     t.string   "name"

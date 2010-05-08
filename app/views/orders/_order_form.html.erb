@@ -48,6 +48,26 @@
   <h4>Your Order:</h4>
   <%= render :partial => 'order_items_fields', :locals => {:f => f} %>
 
+  <h4>Additional Questions:</h4>
+  <% @order.order_questions.each do |question| %>
+
+  <div>
+      <% f.fields_for :order_questions, question do |builder| %>
+        <% options_arr = question.delivery_question.options.split("\n") %>
+
+        <%= builder.hidden_field :delivery_question_id, :value => question.delivery_question.id %>
+        <div class="grid_5 alpha">
+          <%= question.delivery_question.description %><br/>
+        </div>
+        <div class="clear"></div>
+        <%= builder.select :option_code, options_arr.map {|option| [option.split("|").first.strip, option.split("|").last.strip]} %>
+      <% end %>
+      <br/>
+      <br/>
+  </div>
+  <% end %>
+
+
   <p>
     <label>Notes, questions, comments:</label><br />
     <%= f.text_area :notes, :size => "50x5" %>

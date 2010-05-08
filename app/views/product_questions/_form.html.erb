@@ -1,0 +1,28 @@
+<% form_for(@product_question) do |f| %>
+  <%= hidden_field_tag :farm_id, @farm.id %>
+  <%= f.hidden_field :farm_id, :value => @farm.id %>
+
+  <%= f.error_messages %>
+
+
+  <p>
+    <%= f.label "Description (displays in order form):" %><br />
+    <%= f.text_area :description, :size => "60x2" %>
+  </p>
+  <p>
+    <%= f.label 'Short description (for label use, e.g. "Froz OK?")' %><br />
+    <%= f.text_field :short_code, :size => "15" %>
+  </p>
+
+  <div>
+    <%= f.label "Options - each option on a newline, short code separated by '|' (pipe) character" %><br />
+    Example:
+    <pre>OK with frozen | OK
+Not OK with frozen, please cancel instead of substitute | NO</pre>
+    <%= f.text_area :options, :size => "90x8" %>
+  </div><br/>
+
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>

@@ -24,11 +24,17 @@ class Order < ActiveRecord::Base
     end
   end
   belongs_to :location
+  has_many :order_questions, :dependent => :destroy, :include => :delivery_question do
+    def visible
+      self.select {|question| question.delivery_question.visible}
+    end
+  end
 
   validates_presence_of :member_id, :delivery_id, :location_id
   validate :member_must_exist, :delivery_must_exist, :total_meets_minimum
 
   accepts_nested_attributes_for :order_items
+  accepts_nested_attributes_for :order_questions
 
   liquid_methods :member, :delivery, :finalized_total, :location, :notes,
                  :order_items, :estimated_total, :order_items_with_quantity,
@@ -38,6 +44,9 @@ class Order < ActiveRecord::Base
     order = Order.new
     delivery.stock_items.each do |item|
       order.order_items.build(:stock_item_id => item.id, :quantity => 0)
+    end
+    delivery.delivery_questions.each do |question|
+      order.order_questions.build(:delivery_question_id => question.id)
     end
     return order
   end
