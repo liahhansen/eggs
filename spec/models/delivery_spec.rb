@@ -165,6 +165,7 @@ describe Delivery do
       order = Order.new_from_delivery(delivery)
       order.delivery = delivery
       order.member = Factory(:member)
+      order.member.subscriptions << Factory(:subscription, :member => order.member, :farm => farm)
       order.order_items[0].quantity = 1
       order.order_items[1].quantity = 2
       order.location = delivery.locations.first
@@ -236,6 +237,21 @@ describe Delivery do
     delivery.stock_items.first.first?.should == true
     delivery.stock_items.first.position.should == 1
     delivery.stock_items[1].position.should == 2
+  end
+
+  it "should escape commas in CSV format" do
+    farm = Factory(:farm)
+    delivery = setup_delivery_with_orders(farm, "finalized")
+    delivery.orders.first.update_attribute("notes", "Hi Bonnie, I'd like extra eggs, please!")
+
+    csv = DeliveryExporter.get_csv(delivery)
+
+    rows = FasterCSV.parse(csv)
+
+    rows[4...rows.size].each do |row|
+      row.size.should == 14
+    end
+    
   end
 
 end
