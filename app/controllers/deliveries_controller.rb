@@ -43,6 +43,17 @@ class DeliveriesController < ApplicationController
                 :type => 'text/csv; charset=iso-8859-1; header=present',
                 :disposition => "attachment; filename=#{@delivery.date}#{@delivery.name}.csv"
       end
+      format.xls do
+        xls = DeliveryExporter.get_xls(@delivery)
+        data = StringIO.new('')
+        xls.write(data)
+
+        send_data data.string, :type=>"application/excel",
+                  :disposition=>'attachment',
+                  :filename => "#{@delivery.farm.key}-#{@delivery.name}-#{@delivery.date}.xls"
+      end
+
+
       format.pdf {render :layout => false}
     end
   end

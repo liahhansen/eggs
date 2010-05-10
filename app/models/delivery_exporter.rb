@@ -35,4 +35,22 @@ class DeliveryExporter < ActiveRecord::Base
       
     end
   end
+
+  def self.get_xls(delivery)
+    csv_str = self.get_csv(delivery)
+
+    book = Spreadsheet::Workbook.new
+    sheet = book.create_worksheet :name => "#{delivery.name} - #{delivery.pretty_date}"
+
+    csv_rows = FasterCSV.parse(csv_str)
+
+    csv_rows.each_with_index do |row, i|
+      row.each_with_index do |field, j|
+        sheet.row(i).push field
+      end
+    end
+
+    return book
+
+  end
 end

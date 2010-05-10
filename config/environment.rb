@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem "prawn"
   config.gem "liquid"
   config.gem "validates_email_format_of"
+  config.gem "spreadsheet"
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).
