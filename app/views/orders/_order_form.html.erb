@@ -54,7 +54,7 @@
   <div>
       <% f.fields_for :order_questions, question do |builder| %>
 
-        <% if question.visible? %>
+        <% if question.delivery_question.visible? %>
           <% options_arr = question.delivery_question.options.split("\n") %>
 
           <%= builder.hidden_field :delivery_question_id, :value => question.delivery_question.id %>
@@ -65,7 +65,7 @@
           <%= builder.select :option_code, options_arr.map {|option| [option.split("|").first.strip, option.split("|").last.strip]} %>
         <% else %>
           <%= builder.hidden_field :delivery_question_id, :value => question.delivery_question.id %>
-          <%= builder.hidden_field :option_code, "n/a" %>
+          <%= builder.hidden_field :option_code, :value => "n/a" %>
         <% end %>
 
       <% end %>
