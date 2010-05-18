@@ -28,7 +28,9 @@
         <% end %>
         <br/>
         <% @order.order_questions.visible.each do |question| %>
-          <li><%= "#{question.delivery_question.short_code} : #{question.option_code}" %></li>
+          <% if question.delivery_question.visible %>
+            <li><%= "#{question.delivery_question.short_code} : #{question.option_code}" %></li>
+          <% end %>
         <% end %>
       </ul>
       <% if @order.notes && @order.notes != '' %>
