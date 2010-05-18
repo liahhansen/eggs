@@ -20,11 +20,11 @@ class FarmsController < ApplicationController
   # GET /farms/1.xml
   def show
     @farm = Farm.find(params[:id])
-    @deliveries_finalized = Delivery.find_all_by_farm_id_and_status(@farm.id, "finalized")
-    @deliveries_inprogress = Delivery.find_all_by_farm_id_and_status(@farm.id, "inprogress")
-    @deliveries_open       = Delivery.find_all_by_farm_id_and_status(@farm.id, "open")
-    @deliveries_notyetopen = Delivery.find_all_by_farm_id_and_status(@farm.id, "notyetopen")
-    @deliveries_archived   = Delivery.find_all_by_farm_id_and_status(@farm.id, "archived")
+    @deliveries_finalized = Delivery.find_all_by_farm_id_and_status(@farm.id, "finalized", :order => "date ASC")
+    @deliveries_inprogress = Delivery.find_all_by_farm_id_and_status(@farm.id, "inprogress", :order => "date ASC")
+    @deliveries_open       = Delivery.find_all_by_farm_id_and_status(@farm.id, "open", :order => "date ASC")
+    @deliveries_notyetopen = Delivery.find_all_by_farm_id_and_status(@farm.id, "notyetopen", :order => "date ASC")
+    @deliveries_archived   = Delivery.find_all_by_farm_id_and_status(@farm.id, "archived", :order => "date DESC")
 
     respond_to do |format|
       format.html # show.html.erb
