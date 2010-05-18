@@ -1,0 +1,41 @@
+<div id="" class="grid_12 ">
+  <h2 id="page-heading">Preview and Send Email for: <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <div class="grid_10">
+  <ul>
+    <li>Bag totals email has <%= "<b>not</b> " if !@delivery.email_totals_sent %>been sent.</li>
+    <li>Pickup reminder email has <%= "<b>not</b> " if !@delivery.email_reminder_sent %>been sent.</li>
+  </ul>
+
+  <% form_tag :controller => "deliveries", :action => "send_emails" do %>
+    <%= hidden_field_tag "farm_id", @farm.id %>
+    <%= hidden_field_tag "id", @delivery.id %>
+    <%= hidden_field_tag "email_template", @email_template.id %>
+    <%= hidden_field_tag "email_subject", @email_template.subject %>
+    <%= hidden_field_tag "email_body", @email_template.body %>
+    <div class="box">
+    <h5>Subject: </h5>
+    <div class='template_code'>
+      <p>
+        <%= @email_template.subject %>
+      </p>
+    </div>
+
+    <h5>Body:</h5>
+    <div class='template_code'>
+      <%= simple_format @email_template.body %>
+    </div>
+
+    <p>
+      From: <%= @email_template.from %><br/>
+    </p>
+    </div>
+
+    To be delivered to <%= @delivery.orders.size %> recipients<br/>
+    For the <%= "#{@delivery.pretty_date} - #{@delivery.name} Delivery." %><br/>
+    <%= submit_tag "Send now" %>
+
+  <% end %>
+  </div>
+</div>

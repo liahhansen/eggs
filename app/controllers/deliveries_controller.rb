@@ -90,6 +90,46 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
   end
 
+  def setup_emails
+    @delivery = Delivery.find(params[:id])
+    @email_templates = EmailTemplate.find_all_by_farm_id(@farm.id)
+    
+  end
+
+  def customize_emails
+    @delivery = Delivery.find(params[:id])
+    @email_template = EmailTemplate.find(params[:email_template])
+  end
+
+  def preview_emails
+    @delivery = Delivery.find(params[:id])
+    @email_template = EmailTemplate.find(params[:email_template])
+    @email_template.subject = params[:email_subject]
+    @email_template.body = params[:email_body]
+
+    if !@email_template.valid?
+      render :action => 'customize_emails'
+    end
+  end
+
+  def send_emails
+    @delivery = Delivery.find(params[:id])
+    @email_template = EmailTemplate.find(params[:email_template])
+    @email_template.subject = params[:email_subject]
+    @email_template.body = params[:email_body]
+
+    @delivery.orders.each do |order|
+      @email_template.deliver_to(order.member.email_address, :order => order)
+    end
+
+    @delivery.update_attribute("email_reminder_sent", true) if @email_template.name == "Order Pickup Reminder"
+    @delivery.update_attribute("email_totals_sent", true) if @email_template.name == "Order Total and Balance Notification"
+
+    flash[:notice] = "Emails sent to #{@delivery.orders.size} recipients."
+    redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id
+
+  end
+
   # GET /deliveries/new
   # GET /deliveries/new.xml
   def new

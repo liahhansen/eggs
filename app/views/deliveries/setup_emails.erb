@@ -1,0 +1,32 @@
+<div id="" class="grid_12 ">
+  <h2 id="page-heading">Send emails to delivery recipients: <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <div class="grid_8">
+  <ul>
+    <li>Bag totals email has <%= "<b>not yet</b> " if !@delivery.email_totals_sent %>been sent.</li>
+    <li>Pickup reminder email has <%= "<b>not yet</b> " if !@delivery.email_reminder_sent %>been sent.</li>
+  </ul>
+
+  <% if !@delivery.deductions_complete? || !delivery.finalized_totals? %>
+    <h3>Important!</h3>
+    <p>
+      You haven't yet entered finalized totals and/or completed deductions.<br/>
+      You *must* do this before sending the bag total / balance email!<br/>
+      (Ok to send out the pickup reminder email)
+    </p>
+  <% end %>
+
+  <% form_tag :controller => "deliveries", :action => "customize_emails" do %>
+    <h5>Email template to send:</h5>
+    <p>
+    <%= select_tag "email_template", options_from_collection_for_select(@email_templates, 'id', 'name') %>
+    </p>
+
+    <%= hidden_field_tag "farm_id", @farm.id %>
+    <%= hidden_field_tag "id", @delivery.id %>
+    <%= submit_tag "Next" %> 
+
+  <% end %>
+  </div>
+</div>

@@ -22,4 +22,6 @@ Given /^the farm has the member "([^\"]*)"$/ do |member_name|
   sub = Factory.create(:subscription, :member => member, :farm => @farm)
   sub.pending = false
   sub.save!
+  
+  Factory.create(:user, :member => member, :email => member.email_address)
 end

@@ -118,6 +118,7 @@
           <li><%= link_to "Export as TSV", delivery_path(@delivery, :csv, :farm_id => @farm.id, :tabs => true) %></li>
           <li><%= link_to "Export as XLS", delivery_path(@delivery, :xls, :farm_id => @farm.id) %></li>
           <li><%= link_to "Export Labels", delivery_path(@delivery, :pdf, :farm_id => @farm.id) %></li>
+          <li><%= link_to "Send Email to Members with Orders", :controller => 'deliveries', :action => 'setup_emails', :id => @delivery.id, :farm_id => @farm.id %></li>
           <li><%= link_to 'Delete Delivery', { :id => @delivery.id,
                                          :farm_id => @farm.id},
                                          :confirm => 'This action will delete all orders associated with this delivery.  Are you sure you want to continue?',

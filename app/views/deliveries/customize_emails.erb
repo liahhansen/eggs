@@ -1,0 +1,37 @@
+<div id="" class="grid_12 ">
+  <h2 id="page-heading">Customize Email for: <%= "#{@delivery.name} - #{@delivery.pretty_date}"%></h2>
+<p style="color: green"><%= flash[:notice] %></p>
+
+  <div class="grid_11">
+  <ul>
+    <li>Bag totals email has <%= "<b>not yet</b> " if !@delivery.email_totals_sent %>been sent.</li>
+    <li>Pickup reminder email has <%= "<b>not yet</b> " if !@delivery.email_reminder_sent %>been sent.</li>
+  </ul>
+
+  <% form_for @email_template do |f| %>
+    <%= f.error_messages %>
+  <% end %>
+
+  <% form_tag :controller => "deliveries", :action => "preview_emails" do %>
+    <%= hidden_field_tag "farm_id", @farm.id %>
+    <%= hidden_field_tag "id", @delivery.id %>
+    <%= hidden_field_tag "email_template", @email_template.id %>
+    <h5>Subject</h5>
+    <p>    
+      <%= text_field_tag "email_subject", @email_template.subject, :size => "100" %>
+    </p>
+    
+    <h5>Body:</h5>
+    <p>
+      <%= text_area_tag "email_body", @email_template.body, :size => "100x30" %>
+    </p>
+
+    <p>
+      From: <%= text_field_tag "email_from", @email_template.from, :size => "40" %><br/>
+    </p>
+
+    <%= submit_tag "Preview" %>
+
+  <% end %>
+  </div>
+</div>

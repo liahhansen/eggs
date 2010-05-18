@@ -7,9 +7,7 @@ Factory.define :user do |user|
   user.password 'gopanthers'
   user.password_confirmation 'gopanthers'
   user.active true
-  user.after_create do |u|
-    u.member = Factory(:member) if !u.member
-  end
+  user.association :member
 end
 
 Factory.define :member do |m|
@@ -185,4 +183,12 @@ Factory.define :email_template do |email_template|
   email_template.subject "Hello"
   email_template.from "fromme@example.com"
   email_template.body "Welcome to the Farm!"
+end
+
+Factory.define :pickup_reminder_email_template, :parent => :email_template do |email_template|
+  email_template.name "Pickup Reminder"
+  email_template.identifier "order_pickup_reminder"
+  email_template.subject "Pickup Reminder for {{order.delivery.name}} - {{order.delivery.date}}"
+  email_template.from "eggs@example.com"
+  email_template.body "A reminder that your pickup in {{order.location.name}} is tomorrow."
 end
