@@ -205,6 +205,43 @@ namespace :eggs do
 
    end
 
+  namespace :manage do
+
+    desc "Copies questions from farm to deliveries and orders"
+    task :copy_product_questions => :environment do
+
+      farm = Farm.find_by_name("Soul Food Farm")
+
+      deliveries = farm.deliveries
+      deliveries.each do |delivery|
+        if delivery.status != "archived"
+
+          # copy from product questions into deliveries
+          farm.product_questions.each do |product_question|
+            delivery_question = delivery.delivery_questions.build(:product_question_id => product_question.id)
+            delivery_question.copy_product_question_attributes
+          end
+          delivery.save!
+          puts "----"
+          puts "#{delivery.name} saved with #{farm.product_questions.size} questions"
+
+
+          # copy from deliveries into orders
+          delivery.delivery_questions.each do |delivery_question|
+            delivery.orders.each do |order|
+              order.order_questions.build(:delivery_question_id => delivery_question.id,
+                                          :option_code => '',
+                                          :option_string => '')
+              order.save!
+            end
+            puts "copied questions to #{delivery.orders.size} orders"
+          end
+        end
+      end
+      
+    end
+  end
+
 
 end
 
