@@ -8,7 +8,7 @@
     <li>Pickup reminder email has <%= "<b>not yet</b> " if !@delivery.email_reminder_sent %>been sent.</li>
   </ul>
 
-  <% if !@delivery.deductions_complete? || !delivery.finalized_totals? %>
+  <% if !@delivery.deductions_complete? || !@delivery.finalized_totals? %>
     <h3>Important!</h3>
     <p>
       You haven't yet entered finalized totals and/or completed deductions.<br/>
