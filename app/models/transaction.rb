@@ -21,6 +21,10 @@ class Transaction < ActiveRecord::Base
 
   before_create :zero_nil_amount, :calculate_balance
 
+  def after_initialize
+    self.debit = false
+  end
+
   def zero_nil_amount
     self.amount = 0 if self.amount == nil
   end

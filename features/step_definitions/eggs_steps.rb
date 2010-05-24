@@ -16,3 +16,7 @@ end
 Given /^there is a snippet titled "([^\"]*)"$/ do |title|
   snippet = Factory.create(:snippet, :title => title, :farm => @farm)
 end
+
+Then /^"([^"]*)" should be selected for "([^"]*)"$/ do |value, field|
+  field_with_id(field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{value}/
+end
