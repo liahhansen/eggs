@@ -22,7 +22,7 @@ class Transaction < ActiveRecord::Base
   before_create :zero_nil_amount, :calculate_balance
 
   def after_initialize
-    self.debit = false
+    self.debit = false if !self.debit
   end
 
   def zero_nil_amount
