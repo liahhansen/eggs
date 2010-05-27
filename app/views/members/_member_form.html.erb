@@ -78,6 +78,11 @@
       <label>Member Pending?</label>
       <div><%= check_box_tag :pending, true, @subscription.pending %></div>
     </li>
+
+    <li>
+      <label>Joined on:</label>
+      <div><%= f.date_select :joined_on %></div>
+    </li>
     <% end %>
 
     <li>

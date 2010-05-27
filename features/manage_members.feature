@@ -31,9 +31,20 @@ Scenario: Add transaction for member through details page
   Then I should see "Current Balance: $0.00"
   Then "credit" should be selected for "transaction_debit"
 
-Scenario: View a member's joined_on date
+Scenario: View and change a member's joined_on date
   Given the farm has the member "Suzy Smith"
   When I follow "Manage Members"
   Then I should see "Smith"
   When I follow "Smith"
   Then I should see "March 22, 2010"
+  When I follow "Edit Member Information"
+  Then I should see "Admin use"
+  And I should see "Joined on:"
+  Then "2010" should be selected for "member_joined_on_1i"
+  Then "March" should be selected for "member_joined_on_2i"
+  Then "22" should be selected for "member_joined_on_3i"
+  When I select "10" from "member_joined_on_3i"
+  And I press "Submit"
+  Then I should see "March 10, 2010"
+
+  
