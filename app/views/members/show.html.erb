@@ -66,6 +66,10 @@
         <th>Referred by?</th>
         <td><%= @subscription.referral %></td>
       </tr>
+      <tr>
+        <th>Joined On:</th>
+        <td><%= @member.joined_on.strftime("%B %e, %Y") %></td>
+      </tr>
     </table>
   </div>
   <div class="clear"></div>

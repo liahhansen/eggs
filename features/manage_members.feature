@@ -30,3 +30,10 @@ Scenario: Add transaction for member through details page
   When I follow "Add Transaction"
   Then I should see "Current Balance: $0.00"
   Then "credit" should be selected for "transaction_debit"
+
+Scenario: View a member's joined_on date
+  Given the farm has the member "Suzy Smith"
+  When I follow "Manage Members"
+  Then I should see "Smith"
+  When I follow "Smith"
+  Then I should see "March 22, 2010"
