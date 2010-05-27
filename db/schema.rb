@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100517043415) do
+ActiveRecord::Schema.define(:version => 20100527212631) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20100517043415) do
     t.string   "email_address"
     t.string   "phone_number"
     t.string   "neighborhood"
-    t.datetime "joined_on"
+    t.date     "joined_on"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "address"

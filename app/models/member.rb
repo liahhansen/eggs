@@ -31,7 +31,11 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :email_address
 
   liquid_methods :first_name, :last_name, :email_address, :address, :phone_number, :alternate_email,
-                 :balance_for_farm, :referral, :deposit_type, :deposit_received, :joined_mailing_list  
+                 :balance_for_farm, :referral, :deposit_type, :deposit_received, :joined_mailing_list
+
+  def after_create
+    self.update_attribute(:joined_on, Date.today) if !joined_on
+  end
 
   def email_address_with_name
     "\"#{first_name} #{last_name}\" <#{email_address}>"

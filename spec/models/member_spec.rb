@@ -66,4 +66,16 @@ describe Member do
     member.user.should == user
 
   end
+
+  it "assigns the joined_on date to today if not already specified" do
+    member = Factory.build(:member)
+    member.save!
+    member.joined_on.should == Date.today
+
+    date = Date.parse('Mon, 22 Mar 2010')
+    member_with_joined_on = Factory.build(:member, :joined_on => date)
+    member_with_joined_on.save!
+    member_with_joined_on.joined_on.should == date
+
+  end
 end
