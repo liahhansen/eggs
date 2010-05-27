@@ -3,7 +3,7 @@
 
 <p style="color: green"><%= flash[:notice] %></p>
 
-<%= @new_member_template.render if @new_member_template %>
+<%= simple_format @new_member_template.render if @new_member_template %>
 
 <%= render :partial => 'member_form', :locals => {:button_label => 'Create'} %>
 
