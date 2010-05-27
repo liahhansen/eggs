@@ -1,14 +1,7 @@
 <script type="text/javascript" charset="utf-8">
   $(function(){
-//    $('#bag_totals').dataTable( {
-//  "bPaginate": false,
-//  "bLengthChange": false,
-//  "bFilter": false,
-//  "bSort": false,
-//  "bInfo": false,
-//  "bAutoWidth": false } );
 
-  $('a.details').cluetip({local:true,showTitle: false, width:400});
+    $('a.details').cluetip({local:true,showTitle: false, width:400});
 
   });
 </script>
@@ -54,7 +47,7 @@
     <tbody>
       <% @delivery.orders.for_location(location).each_with_index do |order, i| %>
         <% f.fields_for :orders, order do |builder| %>
-          <tr>
+          <tr class="<%= cycle("even", "odd")%>" >
             <td><a class="details" href="#tip-<%= "#{li}-#{i}" %>" rel="#tip-<%= "#{li}-#{i}" %>"><%= "#{order.member.last_name}, #{order.member.first_name}" %></a></td>
             <td><%= order.total_items_quantity %></td>
 
