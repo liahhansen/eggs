@@ -15,6 +15,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @members }
+      format.json { render :json => @members }
     end
   end
 
@@ -94,13 +95,15 @@ class MembersController < ApplicationController
     pending = params[:pending] || false
     deposit_received = params[:deposit_received] || false
     joined_mailing_list = params[:joined_mailing_list] || false
+    private_notes = params[:private_notes]
 
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
         @subscription.update_attributes!(:pending => pending,
                                         :deposit_received => deposit_received,
-                                        :joined_mailing_list => joined_mailing_list)
+                                        :joined_mailing_list => joined_mailing_list,
+                                        :private_notes => private_notes)
         flash[:notice] = 'Member was successfully updated.'
         format.html { redirect_to :action => "show", :id => @member.id, :farm_id => @farm.id }
         format.xml  { head :ok }

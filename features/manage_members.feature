@@ -47,4 +47,18 @@ Scenario: View and change a member's joined_on date
   And I press "Submit"
   Then I should see "March 10, 2010"
 
-  
+Scenario: Add a manager-only note for a member
+  Given the farm has the member "Suzy Smith"
+  When I follow "Manage Members"
+  When I follow "Smith"
+  Then I should see "Member Details:"
+  And I should see "Private Member notes:"
+  When I follow "Edit Member Information"
+  Then I should see "Private notes (only admins see):"
+  Then I should see "" within "textarea[id='private_notes_value']"
+  When I fill in "private_notes_value" with "Always late!"
+  And I press "Submit"
+  Then I should see "updated"
+  And I should see "Always late!"
+
+

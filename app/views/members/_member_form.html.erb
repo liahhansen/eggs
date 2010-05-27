@@ -83,6 +83,10 @@
       <label>Joined on:</label>
       <div><%= f.date_select :joined_on %></div>
     </li>
+    <li>
+      <label>Private notes (only admins see):</label>
+      <div><%= text_area :private_notes, :value => @subscription.private_notes %></div>
+    </li>
     <% end %>
 
     <li>

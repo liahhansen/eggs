@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100527212631) do
+ActiveRecord::Schema.define(:version => 20100527222827) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20100527212631) do
 
   create_table "delivery_questions", :force => true do |t|
     t.integer "delivery_id"
-    t.text    "description",         :limit => 255
+    t.text    "description"
     t.text    "options"
     t.boolean "visible"
     t.string  "short_code"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20100527212631) do
 
   create_table "product_questions", :force => true do |t|
     t.integer  "farm_id"
-    t.text     "description", :limit => 255
+    t.text     "description"
     t.text     "options"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(:version => 20100527212631) do
     t.boolean  "joined_mailing_list", :default => true
     t.boolean  "pending",             :default => false
     t.string   "referral"
+    t.text     "private_notes"
   end
 
   add_index "subscriptions", ["farm_id"], :name => "index_subscriptions_on_farm_id"
