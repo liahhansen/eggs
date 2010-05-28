@@ -28,7 +28,7 @@
     <li>
       <label>How will you be paying your $100 commitment fee?</label>
       <% if @member.new_record? %>
-      <div><%= select_tag 'deposit_type', "<option>PayPal</option><option>Check</option>",
+      <div><%= select_tag 'deposit_type', "<option>PayPal</option><option>Check</option><option>N/A (Previous Member)</option>",
                           :class => "field select small" %></div>
       <% else %>
       <div><%= @subscription.deposit_type if @subscription %></div>

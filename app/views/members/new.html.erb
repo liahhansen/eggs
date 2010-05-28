@@ -1,3 +1,11 @@
+<% content_for :style do %>
+  <%= stylesheet_link_tag "lib/wufoo/form", "lib/wufoo/theme" %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "lib/wufoo" %>
+<% end %>
+
 <div id="" class="grid_8 ">
   <h2 id="page-heading"><%= @farm.name %> CSA Signup</h2>
 

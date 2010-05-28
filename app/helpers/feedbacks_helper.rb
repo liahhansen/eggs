@@ -15,8 +15,8 @@ module FeedbacksHelper
   end
   
   def feedback_includes()
-    stylesheet_link_tag('feedback') +
-    javascript_include_tag('jquery.feedback.js')
+    stylesheet_link_tag('lib/feedback') +
+    javascript_include_tag('lib/jquery.feedback.js')
   end
   
   def feedback_tab(options = {})
