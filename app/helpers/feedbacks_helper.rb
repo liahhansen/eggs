@@ -15,7 +15,7 @@ module FeedbacksHelper
   end
   
   def feedback_includes()
-    stylesheet_link_tag('lib/feedback') +
+    stylesheet_link_tag('lib/feedback/feedback') +
     javascript_include_tag('lib/jquery.feedback.js')
   end
   
