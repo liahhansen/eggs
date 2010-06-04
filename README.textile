@@ -37,7 +37,7 @@ h3. Managers of a CSA can:
 
 h2. Status
 
-Eggs has been rolled out to two farms, but a lot of things are still missing UI pieces (you have to send emails from the commandline, at the moment).
+Eggs has been rolled out to two farms, but a lot of things are still missing UI pieces and all features are built specifically for those two farms - a more general use case will require some tweaking, at the very least.
 
 We have a bunch more features in the works, including PayPal integration.  I'd love some help, so please contact me if you're interested: kathryn@kathrynaaker.com
 
