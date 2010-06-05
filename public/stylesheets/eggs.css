@@ -2,6 +2,11 @@ body {
 	font-size: 13px;
 }
 
+h1#branding {
+  font-weight: bold;
+  text-shadow:2px 2px 2px #BDBFBF;
+}
+
 .template_code {
   font: 13px Courier, Courier New, Andale Mono, monospace;
 }
