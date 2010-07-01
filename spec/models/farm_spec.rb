@@ -43,4 +43,11 @@ describe Farm do
     f.contact_name.should == "Kathryn Aaker"
   end
 
+  it "should be able to have mailinglist, deposit and referral be optional" do
+    f = Factory(:farm_with_details)
+    f.require_deposit.should == true
+    f.require_mailinglist.should == true
+    f.request_referral.should == true
+  end
+
 end

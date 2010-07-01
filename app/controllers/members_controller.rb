@@ -59,9 +59,14 @@ class MembersController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if @member.save
-          Subscription.create!(:farm => @farm, :member => @member,
+          @subscription = Subscription.create!(:farm => @farm, :member => @member,
                                :referral => params[:referral],
                                :deposit_type => params[:deposit_type])
+
+          if !@farm.require_mailinglist && !@farm.require_deposit
+            @subscription.update_attribute(:pending, false)
+          end
+
           @user = User.new
           if @user.signup!(:member_id => @member.id, :email => params[:member][:email_address])
             @user.has_role!(:member)

@@ -25,6 +25,7 @@
       <div><%= f.text_field :email_address, :class => "field text medium" %></div>
     </li>
 
+    <% if @farm.require_deposit %>
     <li>
       <label>How will you be paying your $100 commitment fee?</label>
       <% if @member.new_record? %>
@@ -40,6 +41,7 @@
   <div class="grid_6">
     You can pay using PayPal by <%= link_to "clicking here", @farm.paypal_link, :target => "_blank" %>.
   </div>
+    <% end %>
 
     <li>
       <label>Alternate email</label>
@@ -56,10 +58,12 @@
       <div><%= f.text_area :address, :size => "30x3", :class => "field textarea small" %></div>
     </li>
 
+    <% if @farm.request_referral %>
     <li>
       <label>How did you hear about the CSA?  If you were referred by a member please tell us their name (for our rewards program).</label>
       <div><%= text_field_tag :referral, nil, :class => "field text medium"  %></div>
     </li>
+    <% end %>
 
     <% if current_user && current_user.has_role?(:admin) && @subscription %>
     <h4>Admin use</h4>

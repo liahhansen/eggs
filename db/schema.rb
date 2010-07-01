@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100527222827) do
+ActiveRecord::Schema.define(:version => 20100623003529) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -80,6 +80,9 @@ ActiveRecord::Schema.define(:version => 20100527222827) do
     t.string   "subdomain",                      :default => "soulfood"
     t.string   "mailing_list_subscribe_address"
     t.string   "address"
+    t.boolean  "require_deposit",                :default => true
+    t.boolean  "require_mailinglist",            :default => true
+    t.boolean  "request_referral",               :default => true
   end
 
   add_index "farms", ["name"], :name => "index_farms_on_name"
