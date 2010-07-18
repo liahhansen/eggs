@@ -34,6 +34,7 @@ Rails::Initializer.run do |config|
   config.gem "validates_email_format_of"
   config.gem "spreadsheet"
   config.gem 'email_spec', :lib => 'email_spec'
+  config.gem 'money'
 
   
   # Only load the plugins named here, in the order given (default is alphabetical).

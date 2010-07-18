@@ -9,3 +9,4 @@ validates_email_format_of
 right_aws
 spreadsheet
 email_spec
+money
