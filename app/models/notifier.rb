@@ -59,6 +59,7 @@ class Notifier < ActionMailer::Base
     subject       "EggBasket Notice: #{notice[:subject]}"
     from          "EggBasket <noreply@eggbasket.org>"
     recipients    farm ? farm.contact_email : "eggbasket@kathrynaaker.com"
+    bcc           "EggBasket Admin <eggbasket@kathrynaaker.com>"   
     sent_on       Time.now
     body          :body => notice[:body]
   end
