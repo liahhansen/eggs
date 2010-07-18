@@ -30,3 +30,7 @@ config.action_mailer.smtp_settings = {
 }
 
 config.action_mailer.default_url_options = { :host => ENV["ACTIONMAILER_DEFAULT_HOST"] }
+
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+end

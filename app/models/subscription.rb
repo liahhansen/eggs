@@ -14,6 +14,8 @@ class Subscription < ActiveRecord::Base
   belongs_to :member
   has_many :transactions
 
+  liquid_methods :member, :farm
+
   def after_create
     self.pending = true
     self.deposit_received = false

@@ -55,4 +55,12 @@ class Notifier < ActionMailer::Base
     body          :order => order
   end
 
+  def admin_notification(notice, farm=nil)
+    subject       "EggBasket Notice: #{notice[:subject]}"
+    from          "EggBasket <noreply@eggbasket.org>"
+    recipients    farm ? farm.contact_email : "eggbasket@kathrynaaker.com"
+    sent_on       Time.now
+    body          :body => notice[:body]
+  end
+
 end

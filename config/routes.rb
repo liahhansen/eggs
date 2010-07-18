@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :locations
 
   map.resources :transactions
+  map.ipn 'ipn', :controller => "transactions", :action => "ipn"
 
   map.resources :password_resets
   map.resources :activation_resets

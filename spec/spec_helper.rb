@@ -7,6 +7,8 @@ require 'spec/rails'
 require 'authlogic/test_case'
 require "email_spec"
 
+require 'mocks/test/paypal_ipn_mock'
+
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 

@@ -28,6 +28,7 @@ end
 
 Factory.define :farm do |f|
   f.name 'Soul Food Farm'
+  f.sequence(:paypal_account) {|n| "testfarm#{n}@example.com" }
 end
 
 Factory.define :subscription do |s|
