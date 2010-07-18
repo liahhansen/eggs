@@ -123,6 +123,7 @@ Factory.define :farm_with_details, :parent => :farm do |farm|
   farm.paypal_link "http://paypal.pay.me/please"
   farm.contact_email "csa@example.com"
   farm.contact_name "Kathryn Aaker"
+  farm.paypal_account "csa@example.com"
 end
 
 Factory.define :farm_with_products, :parent => :farm do |farm|

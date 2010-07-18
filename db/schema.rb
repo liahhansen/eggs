@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100623003529) do
+ActiveRecord::Schema.define(:version => 20100718013517) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20100623003529) do
     t.boolean  "require_deposit",                :default => true
     t.boolean  "require_mailinglist",            :default => true
     t.boolean  "request_referral",               :default => true
+    t.string   "paypal_account"
   end
 
   add_index "farms", ["name"], :name => "index_farms_on_name"
@@ -268,9 +269,11 @@ ActiveRecord::Schema.define(:version => 20100623003529) do
     t.boolean  "debit"
     t.float    "balance"
     t.integer  "subscription_id"
+    t.string   "paypal_transaction_id"
   end
 
   add_index "transactions", ["order_id"], :name => "index_transactions_on_order_id"
+  add_index "transactions", ["paypal_transaction_id"], :name => "index_transactions_on_paypal_transaction_id"
   add_index "transactions", ["subscription_id"], :name => "index_transactions_on_subscription_id"
 
   create_table "users", :force => true do |t|

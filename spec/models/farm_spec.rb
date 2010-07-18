@@ -41,6 +41,7 @@ describe Farm do
     f.paypal_link.should == "http://paypal.pay.me/please"
     f.contact_email.should == "csa@example.com"
     f.contact_name.should == "Kathryn Aaker"
+    f.paypal_account.should == "csa@example.com"
   end
 
   it "should be able to have mailinglist, deposit and referral be optional" do
