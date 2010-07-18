@@ -163,13 +163,13 @@ describe TransactionsController do
 
     describe "with valid params" do
       it "assigns a newly created transaction as @transaction" do
-        Transaction.stub(:new).with({'these' => 'params'}).and_return(mock_transaction(:save => true))
+        Transaction.stub(:new).with({'these' => 'params'}).and_return(mock_transaction(:save => true, :debit=>false, "deliver_credit_notification!"=>nil))
         post :create, :transaction => {:these => 'params'}
         assigns[:transaction].should equal(mock_transaction)
       end
 
       it "redirects to the index" do
-        Transaction.stub(:new).and_return(mock_transaction(:save => true))
+        Transaction.stub(:new).and_return(mock_transaction(:save => true, :debit=>false, "deliver_credit_notification!"=>nil))
         post :create, :transaction => {}
         response.should redirect_to(transactions_url)
       end
