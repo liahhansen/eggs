@@ -13,14 +13,14 @@ class DeliveryExporter < ActiveRecord::Base
       end
 
       headers = ["Last Name", "First Name", "Email", "Cell Phone", "Location"]
-      delivery.stock_items.each {|item| headers << "#{item.product_name} - #{item.product_price_code}"}
+      delivery.stock_items.with_quantity.each {|item| headers << "#{item.product_name} - #{item.product_price_code}"}
       delivery.delivery_questions.visible.each {|question| headers << question.short_code }
       headers += ["Notes", "Estimated Total", "Bag Total", "Balance", "How Paid", "Last Name"]
 
       csv << headers
 
       totals = [' ',' ',' ',' ',' ',]
-      delivery.stock_items.each {|item| totals << item.quantity_ordered}
+      delivery.stock_items.with_quantity.each {|item| totals << item.quantity_ordered}
       csv << totals
 
       # rows
