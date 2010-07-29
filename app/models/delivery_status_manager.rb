@@ -18,6 +18,12 @@ class DeliveryStatusManager
         delivery.update_attribute('status', 'open')
       end
     end
+
+    self.get_deliveries_by_status('inprogress').each do |delivery|
+      if(delivery.finalized_totals && delivery.deductions_complete)
+        delivery.update_attribute('status', 'finalized')
+      end
+    end
   end
   
   def self.get_deliveries_by_status(status)

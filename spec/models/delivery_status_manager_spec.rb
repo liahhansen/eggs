@@ -20,6 +20,9 @@ describe DeliveryStatusManager do
     Factory(:delivery, :status => 'finalized', :date => DateTime.now + 1.day)
     Factory(:delivery, :status => 'finalized', :date => DateTime.now - 1.day, :status_override => true)
 
+    Factory(:delivery, :status => 'inprogress', :deductions_complete => false, :finalized_totals => true)
+    Factory(:delivery, :status => 'inprogress', :deductions_complete => true, :finalized_totals => true)
+
   end
   
   it "should update statuses" do
@@ -27,15 +30,15 @@ describe DeliveryStatusManager do
     DeliveryStatusManager.get_deliveries_by_status('finalized').size.should == 3
     DeliveryStatusManager.get_deliveries_by_status('open').size.should == 2
     DeliveryStatusManager.get_deliveries_by_status('notyetopen').size.should == 2
-    DeliveryStatusManager.get_deliveries_by_status('inprogress').size.should == 0
+    DeliveryStatusManager.get_deliveries_by_status('inprogress').size.should == 2
     DeliveryStatusManager.get_deliveries_by_status('archived').size.should == 0
 
     DeliveryStatusManager.update_statuses
 
-    DeliveryStatusManager.get_deliveries_by_status('finalized').size.should == 2
+    DeliveryStatusManager.get_deliveries_by_status('finalized').size.should == 3
     DeliveryStatusManager.get_deliveries_by_status('open').size.should == 2
     DeliveryStatusManager.get_deliveries_by_status('notyetopen').size.should == 1
-    DeliveryStatusManager.get_deliveries_by_status('inprogress').size.should == 1
+    DeliveryStatusManager.get_deliveries_by_status('inprogress').size.should == 2
     DeliveryStatusManager.get_deliveries_by_status('archived').size.should == 1
 
     
