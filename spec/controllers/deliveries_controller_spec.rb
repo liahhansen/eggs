@@ -49,4 +49,25 @@ describe DeliveriesController do
     delivery.status.should == 'open'
   end
 
+  it "should set status_override if status is manually changed" do
+    farm = Factory(:farm)
+    delivery = Factory(:delivery, :status => 'inprogress', :farm => farm)
+
+    get :update,  :id => delivery.id,
+                  :farm_id => farm.id,
+                  :delivery => {}
+
+    response.should be_redirect
+    delivery.reload
+    delivery.status_override.should == false
+
+    get :update,  :id => delivery.id,
+                  :farm_id => farm.id,
+                  :delivery => {:status => 'open'}
+
+
+    delivery.reload
+    delivery.status_override.should == true
+  end
+
 end

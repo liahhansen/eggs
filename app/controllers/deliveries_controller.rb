@@ -178,8 +178,14 @@ class DeliveriesController < ApplicationController
   def update
     @delivery = Delivery.find(params[:id])
 
+    oldstatus = @delivery.status
+
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
+
+        if(oldstatus != @delivery.status)
+          @delivery.update_attribute('status_override', true)
+        end
 
         if params[:totals]
           @delivery.update_attribute(:finalized_totals, true)
