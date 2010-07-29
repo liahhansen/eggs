@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100727204041) do
+ActiveRecord::Schema.define(:version => 20100729224257) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20100727204041) do
     t.boolean  "finalized_totals",    :default => false
     t.boolean  "email_reminder_sent", :default => false
     t.boolean  "email_totals_sent",   :default => false
+    t.boolean  "status_override",     :default => false
   end
 
   add_index "deliveries", ["farm_id"], :name => "index_deliveries_on_farm_id"
