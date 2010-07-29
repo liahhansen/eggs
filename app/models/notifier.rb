@@ -58,10 +58,19 @@ class Notifier < ActionMailer::Base
   def admin_notification(notice, farm=nil)
     subject       "EggBasket Notice: #{notice[:subject]}"
     from          "EggBasket <noreply@eggbasket.org>"
-    recipients    farm ? farm.contact_email : "eggbasket@kathrynaaker.com"
-    bcc           "EggBasket Admin <eggbasket@kathrynaaker.com>"   
+    recipients    farm ? farm.contact_email : ENV['ADMIN_EMAIL']
+    bcc           "EggBasket Admin <#{ENV['ADMIN_EMAIL']}>"   
     sent_on       Time.now
     body          :body => notice[:body]
   end
+
+  def admin_notify_reminders_sent(delivery, email_template)
+    subject       "Ordering Reminders delivered for #{delivery.name}, #{delivery.pretty_date}"
+    from          "#{delivery.farm.name} EggBasket <noreply@eggbasket.org>"
+    recipients    delivery.farm.contact_email
+    bcc           "EggBasket Admin <#{ENV['ADMIN_EMAIL']}>"
+    sent_on       Time.now
+    body          :delivery => delivery, :email_template => email_template
+  end  
 
 end

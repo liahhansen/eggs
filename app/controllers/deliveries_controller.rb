@@ -154,6 +154,9 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       if params[:location_ids] && @delivery.save
         @delivery.create_pickups(params[:location_ids])
+
+        ReminderManager.new.schedule_reminders_for_delivery(@delivery)
+
         flash[:notice] = 'Delivery was successfully created.'
         format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }
         format.xml  { render :xml => @delivery, :status => :created, :location => @delivery }

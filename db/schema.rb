@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100718013517) do
+ActiveRecord::Schema.define(:version => 20100727204041) do
 
   create_table "backup", :force => true do |t|
     t.string   "storage"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(:version => 20100718013517) do
   end
 
   add_index "deliveries", ["farm_id"], :name => "index_deliveries_on_farm_id"
+
+  create_table "delivery_order_reminders", :force => true do |t|
+    t.integer  "delivery_id"
+    t.integer  "email_template_id"
+    t.boolean  "delivered",         :default => false
+    t.datetime "deliver_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delivery_questions", :force => true do |t|
     t.integer "delivery_id"
@@ -84,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20100718013517) do
     t.boolean  "require_mailinglist",            :default => true
     t.boolean  "request_referral",               :default => true
     t.string   "paypal_account"
+    t.boolean  "reminders_enabled",              :default => false
   end
 
   add_index "farms", ["name"], :name => "index_farms_on_name"

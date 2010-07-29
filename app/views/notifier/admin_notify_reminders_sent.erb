@@ -1,0 +1,15 @@
+EggBasket Admin Notification:
+--------------------------------
+
+Just letting you know that we just delivered reminders for this delivery:
+
+<%= @delivery.name %> - <%= @delivery.farm.name %>
+<%= @delivery.pretty_date %>
+
+We used the email template "<%= @email_template.name %>":
+
+----------------------------------
+
+<%= @email_template.body %>
+
+----------------------------------

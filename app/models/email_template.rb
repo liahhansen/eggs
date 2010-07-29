@@ -11,6 +11,7 @@ class EmailTemplate < ActiveRecord::Base
 
   validate :body_must_be_valid_liquid_format, :subject_must_be_valid_liquid_format
 
+  liquid_methods :name, :body, :subject
 
   #
   # Puts the parse error from Liquid on the error list if parsing failed
