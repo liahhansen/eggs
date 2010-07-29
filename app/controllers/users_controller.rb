@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
+    DeliveryStatusManager.update_statuses    
+
     @user = User.find(params[:id])
     @farm = @user.member.farms.first if !@farm      
     @subscription = Subscription.find_by_member_id_and_farm_id(@user.member.id,@farm.id)

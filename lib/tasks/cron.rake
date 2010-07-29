@@ -7,6 +7,7 @@ task :cron => :environment do
   end
 
   Rake::Task['reminders:deliver'].invoke
+  Rake::Task['deliveries:update_status'].invoke
 
 end
 
@@ -20,6 +21,15 @@ namespace :reminders do
       ReminderManager.new.deliver_ready_reminders if (pending_reminders >=1)
 
       puts "done: #{pending_reminders - DeliveryOrderReminder.count} sent."
+    end
+  end
+end
+
+namespace :deliveries do
+  desc "Update delivery statuses if necessary"
+  task :update_status => :environment do
+    begin
+      DeliveryStatusManager.update_statuses
     end
   end
 end

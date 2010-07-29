@@ -102,4 +102,20 @@ describe UsersController do
     
   end
 
+  it "should trigger a delivery status update" do
+
+    user = Factory(:member_user)
+    farm = Factory(:farm)
+    Factory(:subscription, :farm => farm, :member => user.member)
+    UserSession.create user
+
+    delivery = Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :farm => farm)
+
+    get :show, :id => user.member.id, :farm_id => farm.id
+
+    delivery.reload
+    delivery.status.should == 'open'
+
+  end
+
 end

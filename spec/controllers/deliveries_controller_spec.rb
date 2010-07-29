@@ -38,4 +38,15 @@ describe DeliveriesController do
     assigns[:delivery].locations.size.should == 2
   end
 
+  it "should update delivery statuses on show" do
+    farm = Factory(:farm)
+    delivery = Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :farm => farm)
+
+    get :show, :id => delivery.id
+
+    response.should be_success
+    delivery.reload
+    delivery.status.should == 'open'
+  end
+
 end

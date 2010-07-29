@@ -30,6 +30,9 @@ class DeliveriesController < ApplicationController
   # GET /deliveries/1
   # GET /deliveries/1.xml
   def show
+
+    DeliveryStatusManager.update_statuses
+
     @delivery = Delivery.find(params[:id])
 
 

@@ -19,6 +19,7 @@ class FarmsController < ApplicationController
   # GET /farms/1
   # GET /farms/1.xml
   def show
+    DeliveryStatusManager.update_statuses
     @farm = Farm.find(params[:id])
     @deliveries_finalized = Delivery.find_all_by_farm_id_and_status(@farm.id, "finalized", :order => "date ASC")
     @deliveries_inprogress = Delivery.find_all_by_farm_id_and_status(@farm.id, "inprogress", :order => "date ASC")
