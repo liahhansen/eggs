@@ -20,7 +20,4 @@ namespace :heroku do
   end
 end
 
-task :cron => :environment do
-  Rake::Task['heroku:backup'].invoke
-end
 
