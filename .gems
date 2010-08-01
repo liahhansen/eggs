@@ -8,6 +8,6 @@ liquid
 validates_email_format_of
 right_aws
 spreadsheet
+rspec
 email_spec
 money
-rspec
