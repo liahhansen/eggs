@@ -213,6 +213,7 @@ class DeliveriesController < ApplicationController
           order.update_attribute('finalized_total', total)
         end
       end
+      flash[:notice] = 'Delivery was successfully updated.'      
       
       format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }    
     end
