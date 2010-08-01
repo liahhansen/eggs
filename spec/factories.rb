@@ -53,6 +53,7 @@ Factory.define :delivery do |p|
   p.status 'inprogress'
   p.opening_at '2010-01-08 00:01:00'
   p.closing_at '2010-01-23 00:01:00'
+  p.status_override true
 end
 
 Factory.define :order do |o|

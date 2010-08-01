@@ -40,7 +40,9 @@ describe DeliveriesController do
 
   it "should update delivery statuses on show" do
     farm = Factory(:farm)
-    delivery = Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :farm => farm)
+    delivery = Factory(:delivery, :status => 'notyetopen',
+                       :opening_at => DateTime.now - 10.minutes, :farm => farm,
+                       :status_override => false)
 
     get :show, :id => delivery.id
 
@@ -51,7 +53,7 @@ describe DeliveriesController do
 
   it "should set status_override if status is manually changed" do
     farm = Factory(:farm)
-    delivery = Factory(:delivery, :status => 'inprogress', :farm => farm)
+    delivery = Factory(:delivery, :status => 'inprogress', :farm => farm, :status_override => false)
 
     get :update,  :id => delivery.id,
                   :farm_id => farm.id,

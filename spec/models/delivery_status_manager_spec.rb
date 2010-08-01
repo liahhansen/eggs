@@ -7,21 +7,21 @@ describe DeliveryStatusManager do
 
   before(:each) do
 
-    Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes)
-    Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now + 10.minutes)
+    Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :status_override => false)
+    Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now + 10.minutes, :status_override => false)
     Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :status_override => true)
 
-    Factory(:delivery, :status => 'open', :closing_at => DateTime.now - 10.minutes)
-    Factory(:delivery, :status => 'open', :closing_at => DateTime.now + 10.minutes)
+    Factory(:delivery, :status => 'open', :closing_at => DateTime.now - 10.minutes, :status_override => false)
+    Factory(:delivery, :status => 'open', :closing_at => DateTime.now + 10.minutes, :status_override => false)
     Factory(:delivery, :status => 'open', :closing_at => DateTime.now - 10.minutes, :status_override => true)
 
-    Factory(:delivery, :status => 'finalized', :date => DateTime.now - 1.day)
-    Factory(:delivery, :status => 'finalized', :date => DateTime.now)
-    Factory(:delivery, :status => 'finalized', :date => DateTime.now + 1.day)
+    Factory(:delivery, :status => 'finalized', :date => DateTime.now - 1.day, :status_override => false)
+    Factory(:delivery, :status => 'finalized', :date => DateTime.now, :status_override => false)
+    Factory(:delivery, :status => 'finalized', :date => DateTime.now + 1.day, :status_override => false)
     Factory(:delivery, :status => 'finalized', :date => DateTime.now - 1.day, :status_override => true)
 
-    Factory(:delivery, :status => 'inprogress', :deductions_complete => false, :finalized_totals => true)
-    Factory(:delivery, :status => 'inprogress', :deductions_complete => true, :finalized_totals => true)
+    Factory(:delivery, :status => 'inprogress', :deductions_complete => false, :finalized_totals => true, :status_override => false)
+    Factory(:delivery, :status => 'inprogress', :deductions_complete => true, :finalized_totals => true, :status_override => false)
 
   end
   

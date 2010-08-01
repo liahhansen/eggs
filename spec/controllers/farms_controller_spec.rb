@@ -19,17 +19,19 @@ describe FarmsController do
     get :show, :id => farm.id
     response.should be_success
 
-    assigns(:deliveries_inprogress).size.should == 3
+    assigns(:deliveries_inprogress).size.should == 2
     assigns(:deliveries_open).size.should == 1
-    assigns(:deliveries_notyetopen).size.should == 0
-    assigns(:deliveries_archived).size.should == 2
-    assigns(:deliveries_finalized).size.should == 0
+    assigns(:deliveries_notyetopen).size.should == 1
+    assigns(:deliveries_archived).size.should == 1
+    assigns(:deliveries_finalized).size.should == 1
     
   end
 
   it "should update deliveries on show" do
     farm = Factory(:farm_with_deliveries)
-    delivery = Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :farm => farm)
+    delivery = Factory(:delivery, :status => 'notyetopen',
+                       :opening_at => DateTime.now - 10.minutes, :farm => farm,
+                       :status_override => false)
 
     get :show, :id => farm.id
 

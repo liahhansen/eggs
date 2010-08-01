@@ -109,7 +109,9 @@ describe UsersController do
     Factory(:subscription, :farm => farm, :member => user.member)
     UserSession.create user
 
-    delivery = Factory(:delivery, :status => 'notyetopen', :opening_at => DateTime.now - 10.minutes, :farm => farm)
+    delivery = Factory(:delivery, :status => 'notyetopen',
+                       :opening_at => DateTime.now - 10.minutes, :farm => farm,
+                       :status_override => false)
 
     get :show, :id => user.member.id, :farm_id => farm.id
 
