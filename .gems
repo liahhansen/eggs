@@ -9,5 +9,5 @@ validates_email_format_of
 right_aws
 spreadsheet
 rspec
-email_spec
+email_spec -v 0.6.2
 money
