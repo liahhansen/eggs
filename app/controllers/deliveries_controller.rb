@@ -200,6 +200,23 @@ class DeliveriesController < ApplicationController
       end
     end
   end
+  
+  def update_finalized_totals
+    @delivery = Delivery.find(params[:id])
+    
+    respond_to do |format|
+      params[:delivery][:orders_attributes].each do |order_attrs|
+        total = order_attrs[1][:finalized_total]
+        id = order_attrs[1][:id]
+        order = Order.find(id)
+        if(order.finalized_total != total)
+          order.update_attribute('finalized_total', total)
+        end
+      end
+      
+      format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }    
+    end
+  end
 
   # DELETE /deliveries/1
   # DELETE /deliveries/1.xml
