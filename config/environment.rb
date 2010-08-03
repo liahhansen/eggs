@@ -33,8 +33,8 @@ Rails::Initializer.run do |config|
   config.gem "liquid"
   config.gem "validates_email_format_of"
   config.gem "spreadsheet"
-  config.gem "rspec"
-  config.gem 'email_spec', :lib => 'email_spec'
+  #config.gem "spec"
+  #config.gem 'email_spec', :lib => 'email_spec'
   config.gem 'money'
 
   
