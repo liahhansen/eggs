@@ -44,7 +44,7 @@ class Delivery < ActiveRecord::Base
   accepts_nested_attributes_for :orders
   accepts_nested_attributes_for :delivery_questions
 
-  liquid_methods :name, :farm, :date, :pretty_date, :pretty_closing_at
+  liquid_methods :name, :farm, :date, :pretty_date, :formatted_closing_at
 
   def self.new_from_farm(farm)
     delivery = Delivery.new
@@ -62,7 +62,7 @@ class Delivery < ActiveRecord::Base
 
   define_easy_dates do
     format_for :date, :format => "%A, %b %e, %Y", :as => "pretty_date"
-    format_for :opening_at, :format => "%I:%M%p, %m/%d/%y" 
+    format_for :opening_at, :format => "%I:%M%p, %m/%d/%y"
     format_for :closing_at, :format => "%I:%M%p, %m/%d/%y"
   end
 
