@@ -187,9 +187,7 @@ class DeliveriesController < ApplicationController
           @delivery.update_attribute('status_override', true)
         end
 
-        if params[:totals]
-          @delivery.update_attribute(:finalized_totals, true)
-        end
+        @delivery.update_attribute(:finalized_totals, true)
 
         flash[:notice] = 'Delivery was successfully updated.'
         format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }
@@ -213,9 +211,10 @@ class DeliveriesController < ApplicationController
           order.update_attribute('finalized_total', total)
         end
       end
-      flash[:notice] = 'Delivery was successfully updated.'      
+      @delivery.update_attribute(:finalized_totals, true)
       
-      format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }    
+      flash[:notice] = 'Delivery was successfully updated.'
+      format.html { redirect_to :action => "show", :id => @delivery.id, :farm_id => @farm.id }
     end
   end
 

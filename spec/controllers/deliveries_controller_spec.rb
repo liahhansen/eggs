@@ -72,4 +72,21 @@ describe DeliveriesController do
     delivery.status_override.should == true
   end
 
+  it "should update finalized totals and set a flag on the delivery" do
+    farm = Factory(:farm)
+    delivery = Factory(:delivery, :status => 'inprogress', :farm => farm)
+    delivery.orders << Factory.create(:order, :delivery => delivery)
+
+    get :update_finalized_totals, :id => delivery.id,
+                                  :farm_id => farm.id,
+                                  :totals => "true",
+                                  :delivery => {"orders_attributes"=>{"0"=>{"finalized_total"=>"86", "id"=>delivery.orders.first.id}}}
+
+
+    delivery.reload
+    delivery.finalized_totals.should == true
+    delivery.orders.first.finalized_total.should == 86
+
+  end
+
 end
