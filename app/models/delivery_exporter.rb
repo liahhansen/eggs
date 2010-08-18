@@ -25,7 +25,7 @@ class DeliveryExporter < ActiveRecord::Base
 
       # rows
       delivery.orders.each do |order|
-        sub = order.member.subscriptions.select{|item| item.farm.name = order.delivery.farm.name}.first
+        sub = order.member.subscriptions.select{|item| item.farm.name == order.delivery.farm.name}.first
         row = [order.member.last_name, order.member.first_name, order.member.email_address, order.member.phone_number, order.location.name]
         order.order_items.with_stock_quantity.each{ |item| row << item.quantity }
         order.order_questions.visible.each {|question| row << question.option_code }
