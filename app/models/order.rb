@@ -42,7 +42,8 @@ class Order < ActiveRecord::Base
 
   liquid_methods :member, :delivery, :finalized_total, :location, :notes,
                  :order_items, :estimated_total, :order_items_with_quantity,
-                 :member_balance_formatted, :finalized_total_formatted
+                 :member_balance_formatted, :finalized_total_formatted,
+                 :member_balance
 
   def self.new_from_delivery(delivery)
     order = Order.new
@@ -67,6 +68,10 @@ class Order < ActiveRecord::Base
   # These should be liquid filters!
   def member_balance_formatted
     number_to_currency member.balance_for_farm(delivery.farm)
+  end
+
+  def member_balance
+    member.balance_for_farm(delivery.farm)
   end
 
   def finalized_total_formatted
