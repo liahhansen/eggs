@@ -5,7 +5,7 @@ require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environ
 require 'spec/autorun'
 require 'spec/rails'
 require 'authlogic/test_case'
-require "email_spec"
+# require "email_spec"
 
 require 'mocks/test/paypal_ipn_mock'
 

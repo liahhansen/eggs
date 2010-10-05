@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20100729224257) do
 
   create_table "delivery_questions", :force => true do |t|
     t.integer "delivery_id"
-    t.text    "description"
+    t.text    "description",         :limit => 255
     t.text    "options"
     t.boolean "visible"
     t.string  "short_code"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(:version => 20100729224257) do
 
   create_table "product_questions", :force => true do |t|
     t.integer  "farm_id"
-    t.text     "description"
+    t.text     "description", :limit => 255
     t.text     "options"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(:version => 20100729224257) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["authorizable_id", "authorizable_type"], :name => "index_roles_on_authorizable_type_and_authorizable_id"
+  add_index "roles", ["authorizable_type", "authorizable_id"], :name => "index_roles_on_authorizable_type_and_authorizable_id"
 
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
@@ -215,8 +215,8 @@ ActiveRecord::Schema.define(:version => 20100729224257) do
     t.datetime "updated_at"
   end
 
-  add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_user_id_and_role_id"
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id", "role_id"], :name => "index_roles_users_on_user_id_and_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "snippets", :force => true do |t|
@@ -273,7 +273,6 @@ ActiveRecord::Schema.define(:version => 20100729224257) do
     t.date     "date"
     t.float    "amount"
     t.string   "description"
-    t.integer  "member_id"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
