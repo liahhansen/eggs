@@ -1,71 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>EggBasket : <%= yield(:title) || "#{controller_name()} : #{controller.action_name}" %></title>
-
-  <!-- ========= STYLESHEETS ============ -->
-
-
-  <!-- Fluid 960 Grid System -->
-  <%= stylesheet_link_tag "lib/fluid960gs/reset" %>
-  <%= stylesheet_link_tag "lib/fluid960gs/text" %>
-  <%= stylesheet_link_tag "lib/fluid960gs/960" %>
-  <%= stylesheet_link_tag "lib/fluid960gs/layout" %>
-  <%= stylesheet_link_tag "lib/fluid960gs/nav" %>
-  <!--[if IE 6]><%= stylesheet_link_tag "lib/fluid960gs/ie6" %><![endif]-->
-  <!--[if IE 7]><%= stylesheet_link_tag "lib/fluid960gs/ie" %><![endif]-->
-
-  <%= stylesheet_link_tag "lib/smoothness/jquery-ui-1.8.1.custom" %>
-
-  
-  <%= stylesheet_link_tag "eggs" %>
-
-  <!-- page-specific styles -->
-  <%= yield(:style) %>  
-  
-
-  <!-- ========== JAVASCRIPT ============ -->
-
-  <%= javascript_include_tag "lib/jquery-1.4.2.min" %>
-  <%= javascript_include_tag "lib/jquery-ui-1.8.1.custom.min" %>
-  <%= javascript_include_tag "lib/jquery.dataTables" %>
-  <%= javascript_include_tag "lib/jquery-fluid16" %>
-
-  <%= javascript_include_tag "application" %>
-
-  <!-- page-specific javascript -->
-  <%= yield(:script) %>
-
-
-  <%= feedback_includes %>
-
-  <%= feedback_tab(:position => 'top') %>
-  
-
+  <title>Eggs</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
 
-  <div class="container_12">
-
-    <%= render :partial => "layouts/shared/header"  %>
-
-    <div class="clear"></div>
-
-    <%= yield %>
-
-    <div class="clear"></div>
-    <div class="grid_12">&nbsp;</div>
-
-    <%= render :partial => "layouts/shared/footer"  %>
-    
-    <div class="clear"></div>
-
-
-  </div>
+<%= yield %>
 
 </body>
-
 </html>

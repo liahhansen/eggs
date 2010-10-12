@@ -1,95 +1,44 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :email_templates
-
-  map.resources :snippets
-
-  map.feedback 'feedbacks', :controller => 'feedbacks', :action => 'create'
-  map.new_feedback 'feedbacks/new', :controller => 'feedbacks', :action => 'new'
-  map.resources :locations
-
-  map.resources :transactions
-  map.ipn 'ipn', :controller => "transactions", :action => "ipn"
-
-  map.resources :password_resets
-  map.resources :activation_resets
-
-  map.resources :members
-
-  map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
-  map.activate '/activate/:id', :controller => 'activations', :action => 'create'
-
-  map.join 'join', :controller => 'members', :action => 'new'
-
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
-  map.essential_info 'essential_info', :controller => 'farms', :action => 'show_essential_info'
-  map.resources :user_sessions
-
-  map.resources :order_items
-
-  map.resources :orders
-
-  map.resources :subscriptions
-
-  map.resources :users
-
-  map.resources :stock_items
-
-  map.resources :deliveries do |delivery|
-    delivery.resources :orders
+Eggs::Application.routes.draw do
+  resources :email_templates
+  resources :snippets
+  match 'feedbacks' => 'feedbacks#create', :as => :feedback
+  match 'feedbacks/new' => 'feedbacks#new', :as => :new_feedback
+  resources :locations
+  resources :transactions
+  match 'ipn' => 'transactions#ipn', :as => :ipn
+  resources :password_resets
+  resources :activation_resets
+  resources :members
+  match '/register/:activation_code' => 'activations#new', :as => :register
+  match '/activate/:id' => 'activations#create', :as => :activate
+  match 'join' => 'members#new', :as => :join
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'essential_info' => 'farms#show_essential_info', :as => :essential_info
+  resources :user_sessions
+  resources :order_items
+  resources :orders
+  resources :subscriptions
+  resources :users
+  resources :stock_items
+  resources :deliveries do
+  
+  
+      resources :orders
   end
 
-  map.resources :products
-  map.resources :product_questions
-
-  map.resources :farms do |farm|
-    farm.resources :deliveries do |delivery|
-      delivery.resources :orders
+  resources :products
+  resources :product_questions
+  resources :farms do
+  
+  
+      resources :deliveries do
+    
+    
+          resources :orders
     end
   end
 
-  map.root :controller => 'home'
-
-
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :user => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
-
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match '/' => 'home#index'
+  match '/:controller(/:action(/:id))'
 end

@@ -1,0 +1,9 @@
+log/
+db/*.sqlite3
+*~
+.DS_Store
+*.swp
+.idea/
+*.iml
+rerun.txt
+config/heroku_env.rb
