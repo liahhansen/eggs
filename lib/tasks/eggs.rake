@@ -88,7 +88,7 @@ namespace :eggs do
     end
 
     def dir
-      ENV['DIR'] || "#{RAILS_ROOT}/../eggs_import/soul_food"
+      ENV['DIR'] || "#{Rails.root}/../eggs_import/soul_food"
     end
 
     def farm

@@ -10,7 +10,7 @@
 
   <fieldset class="login">
     Just one more thing - please pick a password that you'll use the next time you log in.
-  <% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
+  <%= form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
   	<%= form.error_messages %>
   	<%= render :partial => "form", :locals => { :form => form }%>
   	<%= form.submit "Activate", :class => "login button" %>

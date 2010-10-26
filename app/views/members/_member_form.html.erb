@@ -1,5 +1,5 @@
 
-<% form_for(@member, :html => { :class => 'wufoo'}) do |f| %>
+<%= form_for(@member, :html => { :class => 'wufoo'}) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
 
   <%= f.error_messages :header_message => "Member signup failed",

@@ -61,7 +61,7 @@ class ReminderManager
 
     members = delivery.farm.members
 
-    return [Member.find_by_email_address('kathryn@kathrynaaker.com')] if RAILS_ENV == 'development'
+    return [Member.find_by_email_address('kathryn@kathrynaaker.com')] if Rails.env == 'development'
 
 
     members.reject do |member|

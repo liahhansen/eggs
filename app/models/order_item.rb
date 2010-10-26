@@ -15,7 +15,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :stock_item
   belongs_to :order
 
-  named_scope :with_quantity, :conditions => ['quantity > 0']
+  scope :with_quantity, :conditions => ['quantity > 0']
 
   validates_presence_of :stock_item_id, :quantity
   validates_inclusion_of :quantity, :in => 0..99

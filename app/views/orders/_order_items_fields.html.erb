@@ -18,7 +18,7 @@
       <tr class="<%= 'zero_quantity' if item.stock_item.quantity_available.zero? %>
           <%= cycle("even", "odd") %>">  
 
-        <% f.fields_for :order_items, item do |builder| %>
+        <%= f.fields_for :order_items, item do |builder| %>
             <%= builder.hidden_field :stock_item_id, :value => item.stock_item.id %>
             <td>
               <% if @order.new_record? %>

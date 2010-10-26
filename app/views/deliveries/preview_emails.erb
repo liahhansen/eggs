@@ -8,7 +8,7 @@
     <li>Pickup reminder email has <%= "<b>not</b> " if !@delivery.email_reminder_sent %>been sent.</li>
   </ul>
 
-  <% form_tag :controller => "deliveries", :action => "send_emails" do %>
+  <%= form_tag :controller => "deliveries", :action => "send_emails" do %>
     <%= hidden_field_tag "farm_id", @farm.id %>
     <%= hidden_field_tag "id", @delivery.id %>
     <%= hidden_field_tag "email_template", @email_template.id %>

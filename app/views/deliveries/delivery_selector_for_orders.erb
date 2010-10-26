@@ -1,5 +1,5 @@
 <h2>For which delivery would you like to place an order?</h2>
 
-<% Delivery.find(:all).each do |p| %>
+<% Delivery.all.each do |p| %>
     <p><%= link_to "#{p.name} - #{p.pretty_date}", new_order_path(:delivery_id => p.id) %></p>
 <% end %>

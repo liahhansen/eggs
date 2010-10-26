@@ -1,6 +1,6 @@
 <h1>Feedback</h1>
 <p>We'd really appreciate any thoughts or suggestions you have about the EggBasket CSA application.  And please tell us about any bugs you find!</p>
-<% form_for :feedback, @feedback, :url => feedback_path, :html => {:id => "feedback_form"} do |f| -%>
+<%= form_for :feedback, @feedback, :url => feedback_path, :html => {:id => "feedback_form"} do |f| -%>
 <% unless @error_message.blank? %>
 <p class="error">
 	<%=h @error_message %>

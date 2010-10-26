@@ -5,7 +5,7 @@
 
 <div class="grid_6">
 
-  <% form_for(@user) do |f| %>
+  <%= form_for(@user) do |f| %>
     <%= hidden_field_tag :farm_id, @farm.id %>
 
     <%= f.error_messages :header_message => "Update failed",
@@ -20,7 +20,7 @@
       <%= f.text_field :email %>
     </p>
 
-    <% f.fields_for :member do |member_fields| %>
+    <%= f.fields_for :member do |member_fields| %>
 
       <p>
         <label>First Name</label>

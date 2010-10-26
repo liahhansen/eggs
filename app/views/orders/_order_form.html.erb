@@ -19,7 +19,7 @@
 <br/>
 
 
-<% form_for @order do |f| %>
+<%= form_for @order do |f| %>
   <%= hidden_field_tag :delivery_id, @delivery.id %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.hidden_field :delivery_id, :value => @delivery.id  %>
@@ -52,7 +52,7 @@
   <% @order.order_questions.each do |question| %>
 
   <div>
-      <% f.fields_for :order_questions, question do |builder| %>
+      <%= f.fields_for :order_questions, question do |builder| %>
 
         <% if question.delivery_question.visible? %>
           <% options_arr = question.delivery_question.options.split("\n") %>

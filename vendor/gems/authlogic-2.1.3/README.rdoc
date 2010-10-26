@@ -168,7 +168,7 @@ What if your user sessions controller could look just like your other controller
 
 As you can see, this fits nicely into the RESTful development pattern. What about the view...
 
-  <% form_for @user_session do |f| %>
+  <%= form_for @user_session do |f| %>
     <%= f.error_messages %>
     <%= f.label :login %><br />
     <%= f.text_field :login %><br />

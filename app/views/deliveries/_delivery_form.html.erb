@@ -5,7 +5,7 @@
   
 </script>
 
-<% form_for(@delivery) do |f| %>
+<%= form_for(@delivery) do |f| %>
   <%= hidden_field_tag :farm_id, @farm.id %>
   <%= f.error_messages %>
   <%= f.hidden_field :farm_id, :value => @farm.id  %>
@@ -83,7 +83,7 @@
     </tr>
   <% @delivery.stock_items.each do |item| %>
 
-        <% f.fields_for :stock_items, item do |builder| %>
+        <%= f.fields_for :stock_items, item do |builder| %>
         <tr>
           <%= builder.hidden_field :product_id, :value => item.product.id %>
           <td><%= builder.text_field :product_name, :size => "18" %></td>
@@ -109,7 +109,7 @@
     </tr>
   <% @delivery.delivery_questions.each do |question| %>
 
-        <% f.fields_for :delivery_questions, question do |builder| %>
+        <%= f.fields_for :delivery_questions, question do |builder| %>
         <tr>
           <%= builder.hidden_field :product_question_id, :value => question.product_question.id %>
           <td><%= builder.check_box :visible %></td>

@@ -17,7 +17,7 @@
     </p>
   <% end %>
 
-  <% form_tag :controller => "deliveries", :action => "customize_emails" do %>
+  <%= form_tag :controller => "deliveries", :action => "customize_emails" do %>
     <h5>Email template to send:</h5>
     <p>
     <%= select_tag "email_template", options_from_collection_for_select(@email_templates, 'id', 'name') %>

@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    members = Member.all :joins => :subscriptions, :conditions => {:subscriptions => {:farm_id => @farm.id}}
-    @users = User.all :conditions => ["member_id IN (?)", members]
+    members = Member.all.joins(:subscriptions).where(:subscriptions => {:farm_id => @farm.id})
+    @users = User.all.where(["member_id IN (?)", members])
 
     respond_to do |format|
       format.html # index.html.erb
